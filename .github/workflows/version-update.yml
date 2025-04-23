@@ -16,6 +16,12 @@ jobs:
         with:
           fetch-depth: 0
       -
+        name: Read version from config.yml
+        id: config-version
+        run: |
+          CONFIG_VERSION=$(yq ./smart-switches/config.yml '.version')
+          echo "version=$CONFIG_VERSION" | tee -a "$GITHUB_OUTPUT"
+      -
         name: Determine version format
         id: version-format
         env:
