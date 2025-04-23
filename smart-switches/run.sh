@@ -1,5 +1,7 @@
 #!/usr/bin/with-contenv bashio
 
+export PATH="/usr/local/go/bin:$PATH"
+
 env
 
 go version
