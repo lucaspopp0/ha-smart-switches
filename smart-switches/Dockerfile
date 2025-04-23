@@ -1,5 +1,6 @@
 ARG BUILD_FROM
-FROM $BUILD_FROM
+
+FROM $BUILD_FROM as homeassistant
 
 # Install requirements for add-on
 RUN \
