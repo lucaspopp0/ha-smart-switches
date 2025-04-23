@@ -1,32 +1,14 @@
 name: version-update
 
 on:
-  push:
-    branches:
-      - main
+  workflow_call:
 
 permissions:
   contents: write
 
 jobs:
-  
-  detect-changes:
-    runs-on: ubuntu-latest
-    outputs:
-      changes: ${{ steps.path-filters.outputs.changes }}
-    steps:
-      -
-        name: Detect changes
-        uses: dorny/paths-filter@v3
-        id: path-filters
-        with:
-          filters: |
-            smart-switches:
-              - 'smart-switches/**'
 
   version-update:
-    needs: detect-changes
-    if: ${{ contains(fromJson(needs.detect-changes.outputs.changes), 'smart-switches') }}
     runs-on: ubuntu-latest
     steps:
       -

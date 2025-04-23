@@ -1,0 +1,34 @@
+name: push
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      changes: ${{ steps.path-filters.outputs.changes }}
+    steps:
+      -
+        name: Detect changes
+        uses: dorny/paths-filter@v3
+        id: path-filters
+        with:
+          filters: |
+            smart-switches:
+              - 'smart-switches/**'
+
+  version-update:
+    needs: detect-changes
+    if: ${{ contains(fromJson(needs.detect-changes.outputs.changes), 'smart-switches') }}
+    uses: ./.github/workflows/version-update.yaml
+    secrets: inherit
