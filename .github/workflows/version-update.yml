@@ -16,10 +16,39 @@ jobs:
         with:
           fetch-depth: 0
       -
+        name: Determine version format
+        id: version-format
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+        run: |
+          VERSION_FORMAT='${major}.${minor}.${patch}-prerelease${increment}'
+          PRERELEASE_MODE=true
+          
+          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
+            VERSION_FORMAT='${major}.${minor}.${patch}'
+            PRERELEASE_MODE=false
+          elif [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
+            VERSION_FORMAT='${major}.${minor}.${patch}-'"${PR_NUMBER}"'${increment}'
+          fi
+
+          echo "version_format=$VERSION_FORMAT" | tee -a "$GITHUB_OUTPUT"
+          echo "prerelease_mode=$PRERELEASE_MODE" | tee -a "$GITHUB_OUTPUT"
+      -
         name: Bump version
         id: version
         uses: paulhatch/semantic-version@v5.4.0
         with:
           tag_prefix: ""
-          version_format: "${major}.${minor}.${patch}-prerelease${increment}"
-          enable_prerelease_mode: true
+          version_format: ${{ steps.version-format.outputs.version_format }}
+          enable_prerelease_mode: ${{ steps.version-format.outputs.prerelease_mode }}
+      -
+        name: Construct outputs
+        id: outputs
+        env:
+          LATEST_MAJOR: ${{ steps.version.outputs.major }}
+          LATEST_MINOR: ${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}
+          LATEST_PATCH: ${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}.${{ steps.version.outputs.patch }}
+        run: |
+          echo "major_tag=$LATEST_MAJOR" | tee -a "$GITHUB_OUTPUT"
+          echo "minor_tag=$LATEST_MINOR" | tee -a "$GITHUB_OUTPUT"
+          echo "patch_tag=$LATEST_PATCH" | tee -a "$GITHUB_OUTPUT"
