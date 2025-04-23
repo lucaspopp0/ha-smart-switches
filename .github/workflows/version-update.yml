@@ -1,0 +1,119 @@
+name: version-update
+
+on:
+  workflow_call:
+    secrets:
+      BOT_APP_ID:
+        required: true
+      BOT_APP_PRIVATE_KEY:
+        required: true
+    outputs:
+      current-version:
+        value: ${{ jobs.version-update.outputs.current-version }}
+      next-major-tag:
+        value: ${{ jobs.version-update.outputs.next-major-tag }}
+      next-minor-tag:
+        value: ${{ jobs.version-update.outputs.next-minor-tag }}
+      next-patch-tag:
+        value: ${{ jobs.version-update.outputs.next-patch-tag }}
+      change:
+        value: ${{ jobs.version-update.outputs.change }}
+
+permissions:
+  contents: write
+  id-token: write
+  pull-requests: read
+
+jobs:
+
+  version-update:
+    runs-on: ubuntu-latest
+    outputs:
+      current-version: ${{ steps.config-version.outputs.version }}
+      next-major-tag: ${{ steps.outputs.outputs.major_tag }}
+      next-minor-tag: ${{ steps.outputs.outputs.minor_tag }}
+      next-patch-tag: ${{ steps.outputs.outputs.patch_tag }}
+      change: ${{ steps.outputs.outputs.change }}
+    steps:
+      -
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      -
+        name: Read version from config.yml
+        id: config-version
+        run: |
+          CONFIG_VERSION=$(yq '.version' ./smart-switches/config.yml)
+          echo "version=$CONFIG_VERSION" | tee -a "$GITHUB_OUTPUT"
+      -
+        name: Determine version format
+        id: version-format
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+        run: |
+          VERSION_FORMAT='${major}.${minor}.${patch}-prerelease-${increment}'
+          PRERELEASE_MODE=true
+          
+          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
+            VERSION_FORMAT='${major}.${minor}.${patch}'
+            PRERELEASE_MODE=false
+          elif [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
+            VERSION_FORMAT='${major}.${minor}.${patch}-pr'"${PR_NUMBER}"'-${increment}'
+          fi
+
+          echo "version_format=$VERSION_FORMAT" | tee -a "$GITHUB_OUTPUT"
+          echo "prerelease_mode=$PRERELEASE_MODE" | tee -a "$GITHUB_OUTPUT"
+      -
+        name: Bump version
+        id: version
+        uses: paulhatch/semantic-version@v5.4.0
+        with:
+          tag_prefix: ""
+          version_format: ${{ steps.version-format.outputs.version_format }}
+          enable_prerelease_mode: ${{ steps.version-format.outputs.prerelease_mode }}
+      -
+        name: Construct outputs
+        id: outputs
+        env:
+          LATEST_MAJOR: ${{ steps.version.outputs.major }}
+          LATEST_MINOR: ${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}
+          LATEST_PATCH: ${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}.${{ steps.version.outputs.patch }}
+        run: |
+          echo "major_tag=$LATEST_MAJOR" | tee -a "$GITHUB_OUTPUT"
+          echo "minor_tag=$LATEST_MINOR" | tee -a "$GITHUB_OUTPUT"
+          echo "patch_tag=$LATEST_PATCH" | tee -a "$GITHUB_OUTPUT"
+
+          if [[ "$LATEST_PATCH" == "${{ steps.config-version.outputs.version }}" ]]; then
+            echo "change=true" | tee -a "$GITHUB_OUTPUT"
+          else
+            echo "change=true" | tee -a "$GITHUB_OUTPUT"
+          fi
+
+  update-config:
+    needs: version-update
+    if: ${{ needs.version-update.outputs.change == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      -
+        uses: actions/checkout@v4
+      -
+        name: Update config.yml
+        run: |
+          yq -i \
+            '.version = "${{ needs.version-update.outputs.next-patch-tag }}"' \
+            ./smart-switches/config.yml
+      -
+        uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
+      -
+        name: Update config file
+        uses: planetscale/ghcommit-action@v0.2.0
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        with:
+          commit_message: Update config.yml version to ${{ needs.version-update.outputs.next-patch-tag }}
+          repo: ${{ github.repository }}
+          branch: ${{ github.head_ref || github.ref_name }}

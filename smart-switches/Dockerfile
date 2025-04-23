@@ -1,5 +1,10 @@
 ARG BUILD_FROM
-FROM $BUILD_FROM
+
+FROM golang:1.24 as go
+
+FROM $BUILD_FROM as homeassistant
+
+COPY --from=go /usr/local/go /usr/local/go
 
 # Install requirements for add-on
 RUN \
