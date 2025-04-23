@@ -1,0 +1,43 @@
+name: version-update
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      changes: ${{ steps.path-filters.outputs.changes }}
+    steps:
+      -
+        name: Detect changes
+        uses: dorny/paths-filter@v3
+        id: path-filters
+        with:
+          filters: |
+            smart-switches:
+              - 'smart-switches/**'
+
+  version-update:
+    needs: detect-changes
+    if: ${{ contains(fromJson(needs.detect-changes.outputs.changes), 'smart-switches') }}
+    runs-on: ubuntu-latest
+    steps:
+      -
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      -
+        name: Bump version
+        id: version
+        uses: paulhatch/semantic-version@v5.4.0
+        with:
+          tag_prefix: ""
+          version_format: "${major}.${minor}.${patch}-prerelease${increment}"
+          enable_prerelease_mode: true
