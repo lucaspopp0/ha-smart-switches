@@ -109,5 +109,11 @@ jobs:
           app-id: ${{ secrets.BOT_APP_ID }}
           private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
       -
-        name: Print config file
-        run: cat ./smart-switches/config.yml
+        name: Update config file
+        uses: planetscale/ghcommit-action@v0.2.0
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        with:
+          commit_message: Update config.yml version to ${{ needs.version-update.outputs.next-patch-tag }}
+          repo: ${{ github.repository }}
+          branch: ${{ github.head_ref || github.ref_name }}
