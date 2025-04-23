@@ -21,14 +21,14 @@ jobs:
         env:
           PR_NUMBER: ${{ github.event.number }}
         run: |
-          VERSION_FORMAT='${major}.${minor}.${patch}-prerelease${increment}'
+          VERSION_FORMAT='${major}.${minor}.${patch}-prerelease-${increment}'
           PRERELEASE_MODE=true
           
           if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
             VERSION_FORMAT='${major}.${minor}.${patch}'
             PRERELEASE_MODE=false
           elif [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
-            VERSION_FORMAT='${major}.${minor}.${patch}-'"${PR_NUMBER}"'${increment}'
+            VERSION_FORMAT='${major}.${minor}.${patch}-pr'"${PR_NUMBER}"'-${increment}'
           fi
 
           echo "version_format=$VERSION_FORMAT" | tee -a "$GITHUB_OUTPUT"
