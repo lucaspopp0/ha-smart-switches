@@ -58,3 +58,9 @@ jobs:
           echo "major_tag=$LATEST_MAJOR" | tee -a "$GITHUB_OUTPUT"
           echo "minor_tag=$LATEST_MINOR" | tee -a "$GITHUB_OUTPUT"
           echo "patch_tag=$LATEST_PATCH" | tee -a "$GITHUB_OUTPUT"
+
+          if [[ "$LATEST_PATCH" == "${{ steps.config-version.outputs.version }}" ]]; then
+            echo "change=true" | tee -a "$GITHUB_OUTPUT"
+          else
+            echo "change=true" | tee -a "$GITHUB_OUTPUT"
+          fi
