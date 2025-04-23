@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write
   pull-requests: read
 
 defaults:
@@ -28,3 +29,4 @@ jobs:
     needs: detect-changes
     if: ${{ needs.detect-changes.outputs.version-update == 'true' }}
     uses: ./.github/workflows/version-update.yml
+    secrets: inherit
