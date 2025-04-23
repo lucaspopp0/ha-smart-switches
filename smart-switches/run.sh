@@ -2,6 +2,8 @@
 
 env
 
+go version
+
 SERVER_PORT=8000
 
 echo "Starting server on ${SERVER_PORT}"
