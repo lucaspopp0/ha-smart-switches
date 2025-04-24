@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/danielgtaylor/huma/v2"
@@ -23,6 +24,8 @@ type PutConfigRequest struct {
 }
 
 func main() {
+	fmt.Println("starting up")
+
 	// Create a new router & API.
 	router := chi.NewMux()
 	api := humachi.New(router, huma.DefaultConfig("Smart Switches", "1.0.0"))
