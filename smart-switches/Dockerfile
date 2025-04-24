@@ -10,7 +10,6 @@ WORKDIR /data
 RUN mkdir site
 
 ENV NODE_VERSION=23.11.0
-RUN apt install -y curl
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 ENV NVM_DIR=/root/.nvm
 RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
