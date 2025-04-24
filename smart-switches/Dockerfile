@@ -4,7 +4,7 @@ FROM node:23 as node
 
 WORKDIR /data
 
-COPY . /data/
+COPY site /data/
 
 WORKDIR /data/site
 
