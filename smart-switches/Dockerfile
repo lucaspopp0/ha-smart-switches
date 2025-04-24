@@ -6,6 +6,8 @@ WORKDIR /data
 
 COPY . /data/
 
+RUN ls .
+
 RUN npm install
 RUN npm run build
 
