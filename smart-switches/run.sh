@@ -7,4 +7,4 @@ export PATH="/usr/local/go/bin:$PATH"
 SWITCHES_JSON=/data/switches.json
 SITE_DIR=/data/site
 
-go run ./server/main.go
+go run /data/server/main.go
