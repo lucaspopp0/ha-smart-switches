@@ -5,6 +5,6 @@ set -x
 export PATH="/usr/local/go/bin:$PATH"
 
 SWITCHES_JSON=/data/switches.json
-SITE_DIR=/data/site/public
+SITE_DIR=/data/site
 
 go run .

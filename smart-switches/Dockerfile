@@ -6,7 +6,7 @@ FROM $BUILD_FROM as homeassistant
 
 COPY --from=go /usr/local/go /usr/local/go
 COPY server server
-COPY site site
+COPY site/public site
 
 # Persistent data directory
 WORKDIR /data
