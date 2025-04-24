@@ -2,7 +2,7 @@ ARG BUILD_FROM
 
 FROM node:23-alpine as node
 
-COPY server/* .
+COPY server/* ./
 
 RUN npm install
 RUN npm run build
@@ -16,10 +16,10 @@ WORKDIR /data
 
 RUN mkdir site
 
-COPY --from=node ./public ./site
+COPY --from=node ./public/* ./site/*
 COPY --from=go /usr/local/go /usr/local/go
 
-COPY server ./server
+COPY server/* ./server/
 
 # Copy data for add-on
 COPY run.sh /
