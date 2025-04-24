@@ -17,11 +17,11 @@ RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
 RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
 RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
 
-RUN ls "$NVM_DIR/versions/node/v${NODE_VERSION}/bin"
+ENV PATH "${NVM_DIR}/versions/node/v${NODE_VERSION}/bin:${PATH}"
 
 WORKDIR /data/site
-RUN "/root/.nvm/versions/node/v${NODE_VERSION}/bin/npm" install
-RUN "/root/.nvm/versions/node/v${NODE_VERSION}/bin/npm" run build
+RUN npm install
+RUN npm run build
 
 # Copy data for add-on
 COPY run.sh /
