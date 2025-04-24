@@ -1,6 +1,6 @@
 ARG BUILD_FROM
 
-FROM node:23-slim as node
+FROM node:23-alpine as node
 
 COPY server .
 
