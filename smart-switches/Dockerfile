@@ -11,6 +11,7 @@ COPY --from=go /usr/local/go /usr/local/go
 COPY . /smartswitches
 
 WORKDIR /smartswitches/server
+ENV PATH "/usr/local/go/bin:$PATH"
 RUN go build -o server .
 
 WORKDIR /data
