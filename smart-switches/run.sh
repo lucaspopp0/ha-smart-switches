@@ -7,5 +7,7 @@ export PATH="/usr/local/go/bin:$PATH"
 SWITCHES_JSON=/data/switches.json
 SITE_DIR=/smartswitches/site
 
+cd /smartswitches
+
 go get ./...
-go run /smartswitches/server/main.go
+go run main.go
