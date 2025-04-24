@@ -12,7 +12,7 @@ COPY . /smartswitches
 
 WORKDIR /smartswitches/server
 ENV PATH "/usr/local/go/bin:$PATH"
-RUN go build -o server .
+RUN CG_ENABLED=0 go build -o server .
 
 WORKDIR /data
 
