@@ -5,6 +5,7 @@ FROM golang:1.24 as go
 FROM $BUILD_FROM as homeassistant
 
 COPY --from=go /usr/local/go /usr/local/go
+COPY site site
 
 # Persistent data directory
 WORKDIR /data
@@ -18,10 +19,9 @@ RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
 
 RUN ls "$NVM_DIR/versions/node/v${NODE_VERSION}/bin"
 
-ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
-
-RUN node --version
-RUN npm --version
+WORKDIR /data/site
+RUN "/root/.nvm/versions/node/v${NODE_VERSION}/bin/npm" install
+RUN "/root/.nvm/versions/node/v${NODE_VERSION}/bin/npm" run build
 
 # Copy data for add-on
 COPY run.sh /
