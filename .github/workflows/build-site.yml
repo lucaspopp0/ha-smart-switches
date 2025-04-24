@@ -40,5 +40,30 @@ jobs:
         run: |
           npm run build
       -
-        name: git status
-        run: git status
+        name: Check for generated changes
+        id: detect-changes
+        run: |
+          git status
+
+          if [[ -n "$(git status -s)" ]]; then
+            echo "changes=true" | tee -a "$GITHUB_OUTPUT"
+          else
+            echo "changes=false" | tee -a "$GITHUB_OUTPUT"
+          fi
+      -
+        uses: actions/create-github-app-token@v1
+        if: ${{ steps.detect-changes.outputs.changes == 'true' }}
+        id: app-token
+        with:
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
+      -
+        name: Commit changes
+        if: ${{ steps.detect-changes.outputs.changes == 'true' }}
+        uses: planetscale/ghcommit-action@v0.2.0
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        with:
+          commit_message: Re-generate site
+          repo: ${{ github.repository }}
+          branch: ${{ github.head_ref || github.ref_name }}
