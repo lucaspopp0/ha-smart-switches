@@ -1,14 +1,14 @@
 ARG BUILD_FROM
 
+FROM golang:1.24 as go
+
 FROM $BUILD_FROM as homeassistant
 
-# Install requirements for add-on
-RUN \
-  apk add --no-cache \
-    python3
+COPY --from=go /usr/local/go /usr/local/go
+COPY server server
+COPY site site
 
-# Python 3 HTTP Server serves the current working dir
-# So let's set it to our add-on persistent data directory.
+# Persistent data directory
 WORKDIR /data
 
 # Copy data for add-on
