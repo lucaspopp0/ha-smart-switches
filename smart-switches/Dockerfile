@@ -4,11 +4,10 @@ FROM node:23 as node
 
 WORKDIR /data
 
-COPY site /data/
+COPY . /data/
 
-WORKDIR /data/site
+RUN ls /data/site
 
-RUN ls .
 RUN npm install
 RUN npm run build
 
