@@ -1,0 +1,43 @@
+name: build-site
+
+on:
+  workflow_call:
+    secrets:
+      BOT_APP_ID:
+        required: true
+      BOT_APP_PRIVATE_KEY:
+        required: true
+
+permissions:
+  contents: read
+  id-token: write
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+
+  build-site:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        uses: actions/checkout@v4
+      -
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: smart-switches/site/.nvmrc
+          cache-dependency-path: smart-switches/site/package-lock.json
+      -
+        name: Install dependencies
+        working-directory: smart-switches/site
+        run: |
+          npm ci
+      -
+        name: Build site
+        working-directory: smart-switches/site
+        run: |
+          npm run build
+      -
+        name: git status
+        run: git status

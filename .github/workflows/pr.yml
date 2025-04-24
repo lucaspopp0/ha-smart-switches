@@ -25,6 +25,12 @@ jobs:
   detect-changes:
     uses: ./.github/workflows/detect-changes.yml
 
+  build-site:
+    needs: detect-changes
+    if: ${{ needs.detect-changes.outputs.smart-switches == 'true' }}
+    uses: ./.github/workflows/build-site.yml
+    secrets: inherit
+
   preview-version-update:
     needs: detect-changes
     if: ${{ needs.detect-changes.outputs.version-update == 'true' }}
