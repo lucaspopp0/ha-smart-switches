@@ -10,8 +10,6 @@ COPY --from=go /usr/local/go /usr/local/go
 COPY site /data/site
 COPY server /data/server
 
-RUN find .
-
 # Persistent data directory
 
 # Copy data for add-on
