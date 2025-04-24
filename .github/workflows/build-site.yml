@@ -20,6 +20,9 @@ jobs:
 
   build-site:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: smart-switches/site
     steps:
       -
         uses: actions/checkout@v4
@@ -30,12 +33,10 @@ jobs:
           cache-dependency-path: smart-switches/site/package-lock.json
       -
         name: Install dependencies
-        working-directory: smart-switches/site
         run: |
           npm ci
       -
         name: Build site
-        working-directory: smart-switches/site
         run: |
           npm run build
       -
