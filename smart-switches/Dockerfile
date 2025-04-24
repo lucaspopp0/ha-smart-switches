@@ -6,7 +6,6 @@ FROM $BUILD_FROM as homeassistant
 
 RUN mkdir /smartswitches
 
-
 COPY --from=go /usr/local/go /usr/local/go
 COPY . /smartswitches
 
@@ -14,12 +13,12 @@ WORKDIR /smartswitches/server
 ENV PATH "/usr/local/go/bin:$PATH"
 RUN CG_ENABLED=0 go build -o server .
 
+# Persistent data directory
 WORKDIR /data
 
-# Persistent data directory
-
-# Copy data for add-on
 COPY run.sh /
 RUN chmod a+x /run.sh
 
+# Expose port
+EXPOSE 8000
 CMD [ "/run.sh" ]
