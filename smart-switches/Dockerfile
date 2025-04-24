@@ -4,7 +4,7 @@ FROM node:23 as node
 
 WORKDIR /data
 
-COPY server/* /data/
+COPY . /data/
 
 RUN npm install
 RUN npm run build
