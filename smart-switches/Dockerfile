@@ -6,7 +6,7 @@ WORKDIR /data
 
 COPY . /data/
 
-RUN ls .
+WORKDIR /data/site
 
 RUN npm install
 RUN npm run build
