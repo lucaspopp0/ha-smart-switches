@@ -2,6 +2,8 @@ ARG BUILD_FROM
 
 FROM node:23 as node
 
+WORKDIR /data
+
 COPY server/* ./
 
 RUN npm install
