@@ -4,6 +4,9 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"os"
+	"path"
+	"strings"
 
 	"github.com/danielgtaylor/huma/v2"
 	"github.com/danielgtaylor/huma/v2/adapters/humachi"
@@ -28,9 +31,31 @@ func main() {
 	fmt.Println("starting up")
 
 	cli := humacli.New(func(hooks humacli.Hooks, o *struct{}) {
-		// Create a new ro`uter & API.
+		// Create a new router & API.
 		router := chi.NewMux()
 		api := humachi.New(router, huma.DefaultConfig("Smart Switches", "1.0.0"))
+
+		router.Use(func(h http.Handler) http.Handler {
+			return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				if strings.HasPrefix(r.URL.Path, "/site") {
+					subpath := strings.TrimPrefix(r.URL.Path, "/site")
+					if subpath == "" || subpath == "/" {
+						subpath = "/index.html"
+					}
+
+					fileBytes, err := os.ReadFile(path.Join("/smartswitches/site", subpath))
+					if err != nil {
+						w.WriteHeader(http.StatusInternalServerError)
+						w.Write([]byte(err.Error()))
+					}
+
+					w.Write(fileBytes)
+					return
+				}
+
+				h.ServeHTTP(w, r)
+			})
+		})
 
 		huma.Register(api, huma.Operation{
 			Method:      http.MethodGet,
