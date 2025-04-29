@@ -33,7 +33,6 @@ func main() {
 	cli := humacli.New(func(hooks humacli.Hooks, o *struct{}) {
 		// Create a new router & API.
 		router := chi.NewMux()
-		api := humachi.New(router, huma.DefaultConfig("Smart Switches", "1.0.0"))
 
 		router.Use(func(h http.Handler) http.Handler {
 			return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -56,6 +55,8 @@ func main() {
 				h.ServeHTTP(w, r)
 			})
 		})
+
+		api := humachi.New(router, huma.DefaultConfig("Smart Switches", "1.0.0"))
 
 		huma.Register(api, huma.Operation{
 			Method:      http.MethodGet,
