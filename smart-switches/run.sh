@@ -4,7 +4,13 @@ set -x
 
 export PATH="/usr/local/go/bin:$PATH"
 
+mkdir /data
+
 SWITCHES_JSON=/data/switches.json
 SITE_DIR=/smartswitches/site
+
+if [[ ! -f "$SWITCHES_JSON" ]]; then
+    echo "{}" > "$SWITCHES_JSON"
+fi
 
 /smartswitches/server/server
