@@ -42,7 +42,7 @@ func main() {
 						subpath = "/index.html"
 					}
 
-					fileBytes, err := os.ReadFile(path.Join("/smartswitches/site", subpath))
+					fileBytes, err := os.ReadFile(path.Join("/smartswitches/site/public", subpath))
 					if err != nil {
 						w.WriteHeader(http.StatusInternalServerError)
 						w.Write([]byte(err.Error()))
