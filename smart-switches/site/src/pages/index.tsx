@@ -83,18 +83,23 @@ const IndexPage: React.FC<PageProps> = () => {
     if (loading) {
       return () => {}
     }
-
+    
+    let ignore = false
     setLoading(true)
 
     fetch('../config')
       .then(resp => {
         resp.json().then(json => {
           console.log('Switches: ', json)
-          setSwitches(json)
+          if (!ignore) {
+            setSwitches(json)
+          }
         })
       })
 
-    return () => {}
+    return () => {
+      ignore = true
+    }
   }, [loading, switches, setLoading, setSwitches])
 
   console.log(switches)
