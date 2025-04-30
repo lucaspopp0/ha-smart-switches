@@ -158,7 +158,7 @@ type WheelRoutine struct {
 }
 
 type WheelRoutines struct {
-	WheelRoutines []WheelRoutine `json:"wheel-routines"`
+	WheelRoutines []WheelRoutine `json:"wheel-routines,omitempty"`
 }
 
 func (c WheelRoutines) MatchesKey(key string) (string, bool) {
