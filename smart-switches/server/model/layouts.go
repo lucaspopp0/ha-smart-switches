@@ -28,6 +28,10 @@ func (l Layouts) GetLayout(name string) (Layout, error) {
 	}
 
 	if rval.Kind() == reflect.Pointer {
+		if rval.IsNil() {
+			return nil, nil
+		}
+
 		rval = rval.Elem()
 	}
 
@@ -63,6 +67,14 @@ func (l Layouts) GetCommand(layoutName string, keyName string) (string, error) {
 func (l Layouts) recurseForCommandMatchers(value reflect.Value, key string) (string, bool) {
 	if value.IsZero() {
 		return "", false
+	}
+
+	if value.Kind() == reflect.Pointer {
+		if value.IsNil() {
+			return "", false
+		}
+
+		value = value.Elem()
 	}
 
 	if value.CanInterface() {
