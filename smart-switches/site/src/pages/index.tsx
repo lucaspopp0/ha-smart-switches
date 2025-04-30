@@ -77,6 +77,8 @@ const IndexPage: React.FC<PageProps> = () => {
   let [loading, setLoading] = React.useState(false)
   let [switches, setSwitches] = React.useState<string | undefined>(undefined)
 
+  console.log('rendering')
+
   React.useEffect(() => {
     if (loading) {
       return
