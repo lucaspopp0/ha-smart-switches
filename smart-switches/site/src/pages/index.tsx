@@ -87,6 +87,7 @@ const IndexPage: React.FC<PageProps> = () => {
     fetch('../config')
       .then(resp => {
         resp.json().then(json => {
+          console.log('Switches: ', json)
           setSwitches(json)
         })
       })
