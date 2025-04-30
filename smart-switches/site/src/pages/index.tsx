@@ -68,7 +68,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   * Rooms
     * Switches
       *  Configuration
-  
+
   Sidebar for rooms and switches
   Main window for configuration?
  */
@@ -76,33 +76,14 @@ const styles: { [key: string]: React.CSSProperties } = {
 const IndexPage: React.FC<PageProps> = () => {
   let [loading, setLoading] = React.useState(false)
   let [switches, setSwitches] = React.useState<Record<string, Record<string, string>>>({})
+  let [helloName, setHelloName] = React.useState('')
+
+  let sayHello = (name: string) => {
+    console.log('Hello ', name)
+    setHelloName(name)
+  }
 
   console.log('rendering')
-
-  React.useEffect(() => {
-    if (loading) {
-      return () => {}
-    }
-    
-    let ignore = false
-    setLoading(true)
-
-    fetch('../config')
-      .then(resp => {
-        resp.json().then(json => {
-          console.log('Switches: ', json)
-          if (!ignore) {
-            setSwitches(json)
-          }
-        })
-      })
-
-    return () => {
-      ignore = true
-    }
-  }, [loading, switches, setLoading, setSwitches])
-
-  console.log(switches)
 
   let remotes = Object.keys(switches).map(name => (
     <Button key={name} style={styles.sidebarItem}>{name}</Button>
@@ -114,6 +95,7 @@ const IndexPage: React.FC<PageProps> = () => {
           <Navbar.Brand href="#home">Smart Switches</Navbar.Brand>
       </Navbar>
       <div style={styles.content}>
+        <button onClick={() => sayHello('Lucas')}>Hello {helloName}</button>
         <div style={styles.sidebar}>
           {/* {remotes} */}
           <pre>{JSON.stringify(switches, null, 4)}</pre>
