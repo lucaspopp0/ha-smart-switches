@@ -1,6 +1,6 @@
 name: "Smart Switches"
 description: "My first real add-on!"
-version: "1.0.1"
+version: "1.0.5"
 slug: "smart-switches"
 init: false
 arch:
@@ -12,3 +12,4 @@ arch:
 startup: services
 ports:
   8000/tcp: 8000
+homeassistant_api: true
