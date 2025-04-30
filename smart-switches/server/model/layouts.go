@@ -39,7 +39,7 @@ func (l Layouts) GetLayout(name string) (Layout, error) {
 		field := rval.Field(f)
 
 		if field.CanInterface() {
-			if layout, ok := field.Interface().(Layout); ok {
+			if layout, ok := field.Interface().(Layout); ok && layout != nil {
 				if layout.MatchesLayout(name) {
 					return layout, nil
 				}
@@ -78,7 +78,7 @@ func (l Layouts) recurseForCommandMatchers(value reflect.Value, key string) (str
 	}
 
 	if value.CanInterface() {
-		if matcher, ok := value.Interface().(commandMatcher); ok {
+		if matcher, ok := value.Interface().(commandMatcher); ok && matcher != nil {
 			if command, ok := matcher.MatchesKey(key); ok {
 				return command, true
 			}
