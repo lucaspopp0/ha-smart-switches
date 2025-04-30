@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"io"
 	"net/http"
 	"os"
 	"path"
@@ -13,6 +14,7 @@ import (
 	"github.com/danielgtaylor/huma/v2/humacli"
 	"github.com/go-chi/chi/v5"
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/config"
+	"github.com/lucaspopp0/ha-smart-switches/smart-switches/homeassistant"
 )
 
 type GetConfigResponse struct {
@@ -31,6 +33,10 @@ func main() {
 	fmt.Println("starting up")
 
 	cli := humacli.New(func(hooks humacli.Hooks, o *struct{}) {
+		haAPI := homeassistant.NewAPI(homeassistant.APIConfig{
+			SupervisorToken: os.Getenv("SUPERVISOR_TOKEN"),
+		})
+
 		// Create a new router & API.
 		router := chi.NewMux()
 
@@ -92,33 +98,24 @@ func main() {
 			return &struct{}{}, nil
 		})
 
-		// huma.Register(api, huma.Operation{
-		// 	Method:      http.MethodGet,
-		// 	OperationID: "get-site1",
-		// 	Path:        "/site",
-		// }, func(ctx context.Context, i *struct{}) (*GetSiteResponse, error) {
-		// 	return getSite(ctx, &GetSiteResponse{
-		// 		Path: "index.html",
-		// 	})
-		// })
-
-		// huma.Register(api, huma.Operation{
-		// 	Method:      http.MethodGet,
-		// 	OperationID: "get-site2",
-		// 	Path:        "/site/",
-		// }, func(ctx context.Context, i *struct{}) (*GetSiteResponse, error) {
-		// 	return getSite(ctx, &GetSiteRequest{
-		// 		Path: "index.html",
-		// 	})
-		// })
-
-		// huma.Register(api, huma.Operation{
-		// 	Method:      http.MethodGet,
-		// 	OperationID: "get-site3",
-		// 	Path:        "/site/*",
-		// }, getSite)
-
 		hooks.OnStart(func() {
+			fmt.Println("Testing home assistant connection...")
+			resp, err := haAPI.CallService("/script/turn_on", map[string]any{
+				"entity_id": "script.test_notification",
+			})
+
+			if err != nil {
+				fmt.Printf("Home assistant service call failed: %v", err.Error())
+			} else {
+				responseBody, err := io.ReadAll(resp.Body)
+				if err != nil {
+					fmt.Printf("error reading home assistant response body: %v", err.Error())
+				}
+
+				fmt.Printf("Home assistant response:\nStatus code: %v\n%s",
+					resp.StatusCode, string(responseBody))
+			}
+
 			fmt.Println("Starting server on port 8000...")
 			http.ListenAndServe(":8000", router)
 		})
