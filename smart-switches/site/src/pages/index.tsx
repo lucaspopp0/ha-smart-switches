@@ -76,7 +76,28 @@ const styles: { [key: string]: React.CSSProperties } = {
 const IndexPage: React.FC<PageProps> = () => {
   let [loading, setLoading] = React.useState(false)
   let [switches, setSwitches] = React.useState<Record<string, Record<string, string>>>({})
+
   let [helloName, setHelloName] = React.useState('')
+
+  React.useEffect(() => {
+    if (loading) {
+      return () => {}
+    }
+
+    let ignore = false
+    setLoading(true)
+
+    fetch('../api/config')
+      .then(res => {
+        res.json().then(json => {
+          console.log(json)
+        })
+      })
+
+    return () => {
+      ignore = true
+    }
+  }, [loading, setLoading, switches, setSwitches])
 
   let sayHello = (name: string) => {
     console.log('Hello ', name)
