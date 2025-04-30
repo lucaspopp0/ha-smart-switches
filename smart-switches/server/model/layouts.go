@@ -76,14 +76,6 @@ func (l Layouts) recurseForCommandMatchers(value reflect.Value, key string) (str
 		return "", false
 	}
 
-	if value.Kind() == reflect.Pointer {
-		if value.IsNil() {
-			return "", false
-		}
-
-		value = value.Elem()
-	}
-
 	if value.CanInterface() {
 		if matcher, ok := value.Interface().(commandMatcher); ok && matcher != nil {
 			if command, ok := matcher.MatchesKey(key); ok {
@@ -93,14 +85,26 @@ func (l Layouts) recurseForCommandMatchers(value reflect.Value, key string) (str
 		}
 	}
 
-	if value.Kind() == reflect.Pointer {
-		value = value.Elem()
-	}
-
-	for f := range value.NumField() {
-		field := value.Field(f)
-		if command, ok := l.recurseForCommandMatchers(field, key); ok {
-			return command, true
+	switch value.Kind() {
+	case reflect.Struct:
+		for f := range value.NumField() {
+			field := value.Field(f)
+			if command, ok := l.recurseForCommandMatchers(field, key); ok {
+				return command, true
+			}
+		}
+	case reflect.Array:
+		for field := range value.Seq() {
+			if command, ok := l.recurseForCommandMatchers(field, key); ok {
+				return command, true
+			}
+		}
+	case reflect.Map:
+		for _, mapKey := range value.MapKeys() {
+			field := value.MapIndex(mapKey)
+			if command, ok := l.recurseForCommandMatchers(field, key); ok {
+				return command, true
+			}
 		}
 	}
 
