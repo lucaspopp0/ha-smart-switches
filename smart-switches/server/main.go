@@ -36,6 +36,6 @@ func main() {
 
 	fmt.Printf("starting up... (%s)\n", version)
 
-	server := api.NewServer()
+	server := api.NewServer(version)
 	server.Run()
 }

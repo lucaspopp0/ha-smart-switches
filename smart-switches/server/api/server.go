@@ -55,7 +55,7 @@ func (s *server) onStart() {
 	http.ListenAndServe(":8000", s.router)
 }
 
-func NewServer() humacli.CLI {
+func NewServer(version string) humacli.CLI {
 	supervisorToken := os.Getenv("SUPERVISOR_TOKEN")
 
 	s := &server{}
@@ -72,7 +72,7 @@ func NewServer() humacli.CLI {
 
 		api := humachi.New(
 			s.router,
-			huma.DefaultConfig("Smart Switches", "1.0.0"),
+			huma.DefaultConfig("Smart Switches", version),
 		)
 
 		huma.AutoRegister(api, s)
