@@ -115,7 +115,8 @@ const IndexPage: React.FC<PageProps> = () => {
       </Navbar>
       <div style={styles.content}>
         <div style={styles.sidebar}>
-          {remotes}
+          {/* {remotes} */}
+          <pre>{JSON.stringify(switches, null, 4)}</pre>
         </div>
       </div>
     </main>
