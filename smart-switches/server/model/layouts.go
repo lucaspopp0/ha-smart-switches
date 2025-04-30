@@ -39,6 +39,12 @@ func (l Layouts) GetLayout(name string) (Layout, error) {
 		field := rval.Field(f)
 
 		if field.CanInterface() {
+			if field.Kind() == reflect.Pointer {
+				if field.IsNil() {
+					continue
+				}
+			}
+
 			if layout, ok := field.Interface().(Layout); ok && layout != nil {
 				if layout.MatchesLayout(name) {
 					return layout, nil
