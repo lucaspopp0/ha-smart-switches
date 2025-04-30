@@ -20,7 +20,7 @@ func (s *server) RegisterPutConfig(api huma.API) {
 	huma.Register(api, huma.Operation{
 		Method:      http.MethodPut,
 		OperationID: "put-config",
-		Path:        "/config",
+		Path:        "/api/config",
 		Errors: []int{
 			http.StatusInternalServerError,
 		},

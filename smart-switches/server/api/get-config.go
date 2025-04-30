@@ -16,7 +16,7 @@ func (s *server) RegisterGetConfig(api huma.API) {
 	huma.Register(api, huma.Operation{
 		Method:      http.MethodGet,
 		OperationID: "get-config",
-		Path:        "/config",
+		Path:        "/api/config",
 		Errors: []int{
 			http.StatusInternalServerError,
 		},

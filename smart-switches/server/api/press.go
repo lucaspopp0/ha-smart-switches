@@ -27,7 +27,7 @@ func (s *server) RegisterPostPress(api huma.API) {
 	huma.Register(api, huma.Operation{
 		Method:      http.MethodPost,
 		OperationID: "press",
-		Path:        "/press",
+		Path:        "/api/press",
 		Errors: []int{
 			http.StatusInternalServerError,
 		},
