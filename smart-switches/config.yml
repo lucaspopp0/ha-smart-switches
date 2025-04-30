@@ -1,6 +1,6 @@
 name: "Smart Switches"
 description: "My first real add-on!"
-version: "1.0.5"
+version: "1.1.0.0"
 slug: "smart-switches"
 init: false
 arch:
