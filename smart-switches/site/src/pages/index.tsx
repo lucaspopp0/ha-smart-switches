@@ -75,13 +75,13 @@ const styles: { [key: string]: React.CSSProperties } = {
 
 const IndexPage: React.FC<PageProps> = () => {
   let [loading, setLoading] = React.useState(false)
-  let [switches, setSwitches] = React.useState<string | undefined>(undefined)
+  let [switches, setSwitches] = React.useState<Record<string, Record<string, string>>>({})
 
   console.log('rendering')
 
   React.useEffect(() => {
     if (loading) {
-      return
+      return () => {}
     }
 
     setLoading(true)
@@ -93,11 +93,13 @@ const IndexPage: React.FC<PageProps> = () => {
           setSwitches(json)
         })
       })
+
+    return () => {}
   }, [loading, switches, setLoading, setSwitches])
 
   console.log(switches)
 
-  let remotes = ['one', 'two', 'three'].map(name => (
+  let remotes = Object.keys(switches).map(name => (
     <Button key={name} style={styles.sidebarItem}>{name}</Button>
   ))
 
