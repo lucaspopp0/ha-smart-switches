@@ -15,6 +15,10 @@ import (
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/homeassistant"
 )
 
+const (
+	envSupervisorToken = "SUPERVISOR_TOKEN"
+)
+
 type server struct {
 	humacli.CLI
 	router *chi.Mux
