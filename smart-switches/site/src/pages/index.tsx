@@ -87,7 +87,7 @@ const IndexPage: React.FC<PageProps> = () => {
     let ignore = false
     setLoading(true)
 
-    fetch('../api/config')
+    fetch('./api/config')
       .then(res => {
         res.json().then(json => {
           console.log(json)
