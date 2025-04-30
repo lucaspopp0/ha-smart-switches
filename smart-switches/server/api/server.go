@@ -43,7 +43,7 @@ func (s *server) onStart() {
 			fmt.Printf("error reading home assistant response body: %v", err.Error())
 		}
 
-		fmt.Printf("Home assistant response:\nStatus code: %v\n%s",
+		fmt.Printf("Home assistant response:\nStatus code: %v\n%s\n",
 			resp.StatusCode, string(responseBody))
 	}
 

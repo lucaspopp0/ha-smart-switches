@@ -47,6 +47,7 @@ func (l Layouts) GetLayout(name string) (Layout, error) {
 
 			if layout, ok := field.Interface().(Layout); ok && layout != nil {
 				if layout.MatchesLayout(name) {
+					fmt.Printf("matched layout %q\n", layout)
 					return layout, nil
 				}
 			}
@@ -86,6 +87,7 @@ func (l Layouts) recurseForCommandMatchers(value reflect.Value, key string) (str
 	if value.CanInterface() {
 		if matcher, ok := value.Interface().(commandMatcher); ok && matcher != nil {
 			if command, ok := matcher.MatchesKey(key); ok {
+				fmt.Printf("key %q matched command %q\n", key, command)
 				return command, true
 			}
 		}
