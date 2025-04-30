@@ -3,7 +3,16 @@ package model
 import (
 	"encoding/json"
 	"fmt"
+	"reflect"
 )
+
+type layoutMatcher interface {
+	MatchesLayout(key string) bool
+}
+
+type Layout interface {
+	layoutMatcher
+}
 
 type Layouts struct {
 	V4 *LayoutV4 `json:"v4,omitempty"`
@@ -13,36 +22,69 @@ type Layouts struct {
 }
 
 func (l Layouts) GetLayout(name string) (Layout, error) {
-	var layout Layout
-	switch name {
-	case "v4":
-		layout = l.V4
-	case "v5":
-		layout = l.V5
-	case "v6":
-		layout = l.V6
-	case "v7":
-		layout = l.V7
+	rval := reflect.ValueOf(l)
+	if rval.IsZero() {
+		return nil, nil
 	}
 
-	if layout == nil {
-		return nil, fmt.Errorf("layout %v not configured", name)
+	if rval.Kind() == reflect.Pointer {
+		rval = rval.Elem()
 	}
 
-	return layout, nil
+	for f := range rval.NumField() {
+		field := rval.Field(f)
+
+		if field.CanInterface() {
+			if layout, ok := field.Interface().(Layout); ok {
+				if layout.MatchesLayout(name) {
+					return layout, nil
+				}
+			}
+		}
+	}
+
+	return nil, fmt.Errorf("layout %v not configured", name)
 }
 
-func (l Layouts) GetMapping(layoutName string, key string) (*string, error) {
+func (l Layouts) GetCommand(layoutName string, keyName string) (string, error) {
 	layout, err := l.GetLayout(layoutName)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 
-	return layout.GetMapping(key)
+	command, ok := l.recurseForCommandMatchers(reflect.ValueOf(layout), keyName)
+	if !ok {
+		return "", fmt.Errorf("no commands found for %q", keyName)
+	}
+
+	return command, nil
 }
 
-type Layout interface {
-	GetMapping(key string) (*string, error)
+func (l Layouts) recurseForCommandMatchers(value reflect.Value, key string) (string, bool) {
+	if value.IsZero() {
+		return "", false
+	}
+
+	if value.CanInterface() {
+		if matcher, ok := value.Interface().(commandMatcher); ok {
+			if command, ok := matcher.MatchesKey(key); ok {
+				return command, true
+			}
+		}
+	}
+
+	if value.Kind() == reflect.Pointer {
+		value = value.Elem()
+	}
+
+	for f := range value.NumField() {
+		field := value.Field(f)
+		if command, ok := l.recurseForCommandMatchers(field, key); ok {
+			return command, true
+		}
+	}
+
+	return "", false
 }
 
 type LayoutV4 struct {
@@ -51,6 +93,10 @@ type LayoutV4 struct {
 }
 
 var _ Layout = (*LayoutV4)(nil)
+
+func (v4 LayoutV4) MatchesLayout(key string) bool {
+	return key == "v4"
+}
 
 func (v4 *LayoutV4) GetMapping(key string) (*string, error) {
 	jsonLayout, err := json.Marshal(v4)
@@ -80,12 +126,16 @@ type LayoutV5 struct {
 
 var _ Layout = (*LayoutV5)(nil)
 
-func (v6 *LayoutV6) GetMapping(key string) (*string, error) {
+func (v5 LayoutV5) MatchesLayout(key string) bool {
+	return key == "v5"
+}
+
+func (v5 *LayoutV5) GetMapping(key string) (*string, error) {
 	if key == "wheel-routines" {
 		return nil, fmt.Errorf("invalid key %q", key)
 	}
 
-	jsonLayout, err := json.Marshal(v6)
+	jsonLayout, err := json.Marshal(v5)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +150,7 @@ func (v6 *LayoutV6) GetMapping(key string) (*string, error) {
 		return &value, nil
 	}
 
-	for _, routine := range v6.WheelRoutines.WheelRoutines {
+	for _, routine := range v5.WheelRoutines.WheelRoutines {
 		if routine.Name == key {
 			return &routine.Command, nil
 		}
@@ -109,7 +159,13 @@ func (v6 *LayoutV6) GetMapping(key string) (*string, error) {
 	return nil, fmt.Errorf("unknown key %q", key)
 }
 
-type LayoutV6 = LayoutV5
+type LayoutV6 struct {
+	LayoutV5
+}
+
+func (v6 LayoutV6) MatchesLayout(key string) bool {
+	return key == "v6"
+}
 
 var _ Layout = (*LayoutV6)(nil)
 
@@ -142,4 +198,8 @@ func (v7 *LayoutV7) GetMapping(key string) (*string, error) {
 	}
 
 	return nil, fmt.Errorf("unknown key %q", key)
+}
+
+func (v7 LayoutV7) MatchesLayout(key string) bool {
+	return key == "v7"
 }

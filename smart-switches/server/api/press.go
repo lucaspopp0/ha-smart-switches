@@ -43,12 +43,12 @@ func (s *server) postPress(ctx context.Context, req *PostPressRequest) (*PostPre
 		return nil, huma.Error404NotFound(fmt.Sprintf("No switch named %q", req.Body.Switch))
 	}
 
-	command, err := s.cfg.Switches[req.Body.Switch].Layouts.GetMapping(req.Body.Layout, req.Body.Key)
+	command, err := s.cfg.Switches[req.Body.Switch].Layouts.GetCommand(req.Body.Layout, req.Body.Key)
 	if err != nil {
 		return nil, huma.Error400BadRequest(err.Error())
 	}
 
-	resp, err := s.ha.Execute(*command)
+	resp, err := s.ha.Execute(command)
 	if err != nil {
 		return nil, err
 	}
