@@ -47,6 +47,8 @@ func (c *apiClient) requestURL(path string) string {
 }
 
 func (c *apiClient) do(req *http.Request) (*http.Response, error) {
+	fmt.Printf("Sending %s %s\n", req.Method, req.URL.String())
+
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", c.cfg.SupervisorToken))
 
