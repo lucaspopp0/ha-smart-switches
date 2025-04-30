@@ -38,6 +38,7 @@ jobs:
       -
         name: Build site
         run: |
+          rm -rf smart-switches/site/public
           npm run build
       -
         name: Check for generated changes
