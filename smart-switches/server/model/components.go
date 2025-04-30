@@ -68,8 +68,9 @@ type Eight struct {
 }
 
 type WheelRoutine struct {
-	Name string `json:"name"`
-	RGB  []int  `json:"rgb"`
+	Name    string `json:"name"`
+	RGB     []int  `json:"rgb"`
+	Command string `json:"command"`
 }
 
 type WheelRoutines struct {

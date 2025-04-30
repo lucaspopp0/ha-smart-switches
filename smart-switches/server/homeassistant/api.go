@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/http"
 	"path"
+	"strings"
 )
 
 const (
@@ -19,6 +20,11 @@ type API interface {
 	CallService(
 		servicePath string,
 		payload map[string]any,
+	) (*http.Response, error)
+
+	// Tries to identify the service automatically and execute it
+	Execute(
+		entityID string,
 	) (*http.Response, error)
 }
 
@@ -72,4 +78,23 @@ func (c *apiClient) CallService(
 	}
 
 	return c.do(req)
+}
+
+func (c *apiClient) Execute(
+	entityID string,
+) (*http.Response, error) {
+	var servicePath string
+
+	switch {
+	case strings.HasPrefix(entityID, "script."):
+		servicePath = "script/turn_on"
+	case strings.HasPrefix(entityID, "scene."):
+		servicePath = "scene/turn_on"
+	default:
+		return nil, fmt.Errorf("could not infer service path for entityID %q", entityID)
+	}
+
+	return c.CallService(servicePath, map[string]any{
+		"entity_id": entityID,
+	})
 }

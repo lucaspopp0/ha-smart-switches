@@ -11,6 +11,7 @@ import (
 	"github.com/danielgtaylor/huma/v2/humacli"
 	"github.com/go-chi/chi/v5"
 
+	"github.com/lucaspopp0/ha-smart-switches/smart-switches/config"
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/homeassistant"
 )
 
@@ -18,9 +19,17 @@ type server struct {
 	humacli.CLI
 	router *chi.Mux
 	ha     homeassistant.API
+	cfg    config.Config
 }
 
 func (s *server) onStart() {
+	cfg, err := config.FromFile()
+	if err != nil {
+		fmt.Printf("Failed to load config: %v\n", err.Error())
+	} else {
+		s.cfg = *cfg
+	}
+
 	fmt.Println("Testing home assistant connection...")
 	resp, err := s.ha.CallService("/script/turn_on", map[string]any{
 		"entity_id": "script.test_notification",

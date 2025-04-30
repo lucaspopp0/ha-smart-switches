@@ -33,6 +33,8 @@ func (s *server) putConfig(ctx context.Context, req *PutConfigRequest) (*PutConf
 		return nil, err
 	}
 
+	s.cfg = req.Body
+
 	return &PutConfigResponse{
 		Body: req.Body,
 	}, nil
