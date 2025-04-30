@@ -56,7 +56,7 @@ func (s *server) onStart() {
 }
 
 func NewServer(version string) humacli.CLI {
-	supervisorToken := os.Getenv("SUPERVISOR_TOKEN")
+	supervisorToken := os.Getenv(envSupervisorToken)
 
 	s := &server{}
 
