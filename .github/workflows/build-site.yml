@@ -44,6 +44,7 @@ jobs:
         name: Check for generated changes
         id: detect-changes
         run: |
+          git add .
           git status
 
           if [[ -n "$(git status -s)" ]]; then
