@@ -8,7 +8,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Button, Tab, Tabs } from "react-bootstrap";
+import { Button, Dropdown, Tab, Tabs } from "react-bootstrap";
 
 import type { components } from '../sdk'
 import NewLayoutModal from "../components/modals/new-layout";
@@ -139,28 +139,37 @@ const IndexPage: React.FC<PageProps> = () => {
           </Button>
         </div>
         <div style={styles.mainContent}>
+          <div style={styles.sidebar}>
           {currentSwitch 
-            ? <Tabs
-                activeKey={currentLayout}
-                onSelect={(eventKey) => {
-                  if (eventKey == "add-layout") {
-                    setShowNewLayout(true)
-                    return
-                  }
-
-                  if (eventKey) {
-                    setCurrentLayout(eventKey)
-                  }
-                }}
-              >
+            ? <React.Fragment>
                 {Object
                   .keys(config?.switches[currentSwitch].layouts ?? {})
                   .map(layoutName => (
-                    <Tab eventKey={layoutName} title={layoutName}>Editing {layoutName}</Tab>
+                    <div key={layoutName} style={styles.sidebarItem}>
+                      {layoutName}
+                    </div>
                   ))}
+                  <div key="add-layout" style={styles.sidebarItem}>
+                    <Dropdown>
+                      <Dropdown.Toggle>
+                          Add layout...
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu>
+                          {['v4', 'v5', 'v6', 'v7'].map(layout => (
+                              config?.switches[currentSwitch]
+                              ? (layout in config.switches[currentSwitch].layouts
+                                  ? <Dropdown.Item key={layout} disabled>{layout} (already configured)</Dropdown.Item>
+                                  : <Dropdown.Item key={layout}>{layout}</Dropdown.Item>)
+                              : ''
+                          ))}
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </div>
                 <Tab eventKey="add-layout" title="Add layout..."></Tab>
-              </Tabs>
+              </React.Fragment>
             : "Select a switch"}
+          </div>
         </div>
       </div>
       <NewLayoutModal 
