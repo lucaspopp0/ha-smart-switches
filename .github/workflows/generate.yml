@@ -41,7 +41,6 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_TOKEN }}
       -
-        if: ${{ inputs.rebuild-server }}
         uses: actions/setup-go@v5
         with:
           go-version-file: smart-switches/server/go.mod
@@ -133,6 +132,14 @@ jobs:
           commit_message: "[bot] generate"
           repo: ${{ github.repository }}
           branch: ${{ github.head_ref || github.ref_name }}
+      -
+        name: go build
+        working-directory: smart-switches/server
+        env:
+          GOARCH: aarch64
+          CGO_ENABLED: 0
+        run: |
+          go build -o server .
       -
         name: Set version
         id: pick-version

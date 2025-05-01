@@ -1,25 +1,19 @@
 ARG BUILD_FROM
 
-FROM golang:1.24 as go
-
 FROM $BUILD_FROM as homeassistant
 
 RUN mkdir /smartswitches
 
-COPY --from=go /usr/local/go /usr/local/go
 COPY . /smartswitches
-
-WORKDIR /smartswitches/server
-ENV PATH "/usr/local/go/bin:$PATH"
-RUN CG_ENABLED=0 go build -o server .
-
-# Persistent data directory
-WORKDIR /data
 
 COPY run.sh /
 RUN chmod a+x /run.sh
 
 ENV IMAGE_NAME $BUILD_FROM
+
+# Persistent data directory
+WORKDIR /data
+
 
 # Expose port
 EXPOSE 8000
