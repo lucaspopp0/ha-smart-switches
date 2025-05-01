@@ -17,6 +17,8 @@ on:
         value: ${{ jobs.version-update.outputs.next-minor-tag }}
       next-patch-tag:
         value: ${{ jobs.version-update.outputs.next-patch-tag }}
+      next-tag:
+        value: ${{ jobs.version-update.outputs.next-tag }}
       change:
         value: ${{ jobs.version-update.outputs.change }}
 
@@ -34,6 +36,7 @@ jobs:
       next-major-tag: ${{ steps.outputs.outputs.major_tag }}
       next-minor-tag: ${{ steps.outputs.outputs.minor_tag }}
       next-patch-tag: ${{ steps.outputs.outputs.patch_tag }}
+      next-tag: ${{ steps.outputs.outputs.tag }}
       change: ${{ steps.outputs.outputs.change }}
     steps:
       -
@@ -69,7 +72,7 @@ jobs:
         id: version
         uses: paulhatch/semantic-version@v5.4.0
         with:
-          tag_prefix: ""
+          tag_prefix: v
           version_format: ${{ steps.version-format.outputs.version_format }}
           enable_prerelease_mode: ${{ steps.version-format.outputs.prerelease_mode }}
       -
@@ -80,6 +83,7 @@ jobs:
           LATEST_MINOR: ${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}
           LATEST_PATCH: ${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}.${{ steps.version.outputs.patch }}
         run: |
+          echo "tag=${{ steps.version.outputs.version_tag }}" | tee -a "$GITHUB_OUTPUT"
           echo "major_tag=$LATEST_MAJOR" | tee -a "$GITHUB_OUTPUT"
           echo "minor_tag=$LATEST_MINOR" | tee -a "$GITHUB_OUTPUT"
           echo "patch_tag=$LATEST_PATCH" | tee -a "$GITHUB_OUTPUT"
@@ -101,7 +105,7 @@ jobs:
         name: Update config.yml
         run: |
           yq -i \
-            '.version = "${{ needs.version-update.outputs.next-patch-tag }}"' \
+            '.version = "${{ needs.version-update.outputs.next-tag }}"' \
             ./smart-switches/config.yml
       -
         uses: actions/create-github-app-token@v1
@@ -116,7 +120,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         with:
-          commit_message: Update config.yml version to ${{ needs.version-update.outputs.next-patch-tag }}
+          commit_message: Update config.yml version to ${{ needs.version-update.outputs.next-tag }}
           repo: ${{ github.repository }}
           branch: ${{ github.head_ref || github.ref_name }}
       - 
@@ -133,8 +137,8 @@ jobs:
           git config user.email 'lucaspopp0[bot]@users.noreply.github.com'
 
           git tag \
-            -m "${{ needs.version-update.outputs.next-patch-tag }}" \
-            "v${{ needs.version-update.outputs.next-patch-tag }}" \
+            -m "${{ needs.version-update.outputs.next-tag }}" \
+            "v${{ needs.version-update.outputs.next-tag }}" \
             ${{ steps.commit.outputs.commit-hash }}
 
           git push --tags
