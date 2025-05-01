@@ -1,0 +1,42 @@
+name: detect-changes
+
+on:
+  workflow_call:
+    outputs:
+      changes:
+        description: "A JSON array of changed filters"
+        value: ${{ jobs.detect-changes.outputs.changes }}
+      smart-switches:
+        value: ${{ contains(fromJson(jobs.detect-changes.outputs.changes), 'smart-switches' )}}
+      workflows:
+        value: ${{ contains(fromJson(jobs.detect-changes.outputs.changes), 'workflows' )}}
+      version-update:
+        value: ${{ contains(fromJson(jobs.detect-changes.outputs.changes), 'version-update' )}}
+
+permissions:
+  contents: read
+  pull-requests: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      changes: ${{ steps.path-filters.outputs.changes }}
+    steps:
+      -
+        name: Detect changes
+        uses: dorny/paths-filter@v3
+        id: path-filters
+        with:
+          filters: |
+            smart-switches:
+              - 'smart-switches/**'
+            workflows:
+              - '.github/workflows/**'
+            version-update:
+              - '.github/workflows/version-update.yml'
