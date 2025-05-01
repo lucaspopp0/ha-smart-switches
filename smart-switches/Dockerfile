@@ -1,17 +1,26 @@
 ARG BUILD_FROM
-FROM $BUILD_FROM
 
-# Install requirements for add-on
-RUN \
-  apk add --no-cache \
-    python3
+FROM golang:1.24 as go
 
-# Python 3 HTTP Server serves the current working dir
-# So let's set it to our add-on persistent data directory.
+FROM $BUILD_FROM as homeassistant
+
+RUN mkdir /smartswitches
+
+COPY --from=go /usr/local/go /usr/local/go
+COPY . /smartswitches
+
+WORKDIR /smartswitches/server
+ENV PATH "/usr/local/go/bin:$PATH"
+RUN CG_ENABLED=0 go build -o server .
+
+# Persistent data directory
 WORKDIR /data
 
-# Copy data for add-on
 COPY run.sh /
 RUN chmod a+x /run.sh
 
+ENV IMAGE_NAME $BUILD_FROM
+
+# Expose port
+EXPOSE 8000
 CMD [ "/run.sh" ]
