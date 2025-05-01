@@ -120,7 +120,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         with:
-          commit_message: Update config.yml version to ${{ needs.version-update.outputs.next-tag }}
+          commit_message: |
+            [bot] ${{ needs.version-update.outputs.next-tag }}
           repo: ${{ github.repository }}
           branch: ${{ github.head_ref || github.ref_name }}
       -
