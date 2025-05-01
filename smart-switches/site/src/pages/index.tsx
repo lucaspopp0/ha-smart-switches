@@ -110,20 +110,6 @@ const IndexPage: React.FC<PageProps> = () => {
     }
   }, [loading, setLoading, config, setConfig])
 
-  let remotes = Object.keys(config?.switches ?? {}).map(name => (
-    <Button
-      key={name}
-      style={styles.sidebarItem}
-      onClick={() => {
-        console.log(`Selecting ${name}`, config?.switches[name])
-        setCurrentSwitch(name)
-        setCurrentLayout(Object.keys(config?.switches[name].layouts ?? {})[0])
-      }}
-    >
-      {name}
-    </Button>
-  ))
-
   return (
     <main style={styles.page}>
       <Navbar expand="lg" style={styles.header}>
@@ -131,7 +117,26 @@ const IndexPage: React.FC<PageProps> = () => {
       </Navbar>
       <div style={styles.content}>
         <div style={styles.sidebar}>
-          {remotes}
+          {Object.keys(config?.switches ?? {}).map(name => (
+            <Button
+              key={name}
+              style={styles.sidebarItem}
+              onClick={() => {
+                console.log(`Selecting ${name}`, config?.switches[name])
+                setCurrentSwitch(name)
+                setCurrentLayout(Object.keys(config?.switches[name].layouts ?? {})[0])
+              }}
+            >
+              {name}
+            </Button>
+          ))}
+          <Button
+            key="_"
+            style={styles.sidebarItem}
+            onClick={() => {}}
+          >
+            + New remote
+          </Button>
         </div>
         <div style={styles.mainContent}>
           {currentSwitch 
