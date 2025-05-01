@@ -94,11 +94,12 @@ jobs:
           commit_message: Re-generate site
           repo: ${{ github.repository }}
           branch: ${{ github.head_ref || github.ref_name }}
-      # -
-      #   name: Build and publish
-      #   uses: home-assistant/builder@master
-      #   with:
-      #     args: |
-      #       --version "pr${{ github.event.number }}-${{ github.sha }}" \
-      #       --docker-hub lucaspopp0/ha-smart-switches \
-      #       --all
+      -
+        name: Build and publish
+        uses: home-assistant/builder@master
+        with:
+          args: |
+            --addon \
+            --version "pr${{ github.event.number }}-${{ github.sha }}" \
+            --docker-hub lucaspopp0/ha-smart-switches \
+            --all
