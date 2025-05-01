@@ -166,7 +166,6 @@ const IndexPage: React.FC<PageProps> = () => {
                       </Dropdown.Menu>
                     </Dropdown>
                   </div>
-                <Tab eventKey="add-layout" title="Add layout..."></Tab>
               </React.Fragment>
             : "Select a switch"}
           </div>
