@@ -8,7 +8,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Button } from "react-bootstrap";
+import { Button, Tab, Tabs } from "react-bootstrap";
 
 import type { components } from '../sdk'
 
@@ -128,7 +128,17 @@ const IndexPage: React.FC<PageProps> = () => {
         <div style={styles.sidebar}>
           {remotes}
         </div>
-        <div style={styles.mainContent}></div>
+        <div style={styles.mainContent}>
+          {currentSwitch 
+            ? <Tabs>{
+                Object
+                  .keys(config?.switches[currentSwitch].layouts ?? {})
+                  .map(layoutName => (
+                    <Tab eventKey={layoutName} title={layoutName}>{layoutName}</Tab>
+                  ))
+              }</Tabs>
+            : "Select a switch"}
+        </div>
       </div>
     </main>
   )
