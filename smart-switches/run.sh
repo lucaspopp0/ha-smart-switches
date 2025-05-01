@@ -11,4 +11,6 @@ if [[ ! -f "$SWITCHES_JSON" ]]; then
     echo "{}" > "$SWITCHES_JSON"
 fi
 
+echo "Running image: $IMAGE_NAME"
+
 /smartswitches/server/server

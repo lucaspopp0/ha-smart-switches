@@ -19,6 +19,8 @@ WORKDIR /data
 COPY run.sh /
 RUN chmod a+x /run.sh
 
+ENV IMAGE_NAME $BUILD_FROM
+
 # Expose port
 EXPOSE 8000
 CMD [ "/run.sh" ]
