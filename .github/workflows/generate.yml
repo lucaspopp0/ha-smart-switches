@@ -83,6 +83,14 @@ jobs:
             ../server/spec/openapi.yaml \
             -o ./src/api/index.d.ts
       -
+        name: Restore Gatsby cache
+        if: ${{ inputs.rebuild-site }}
+        uses: actions/cache@v4
+        with:
+          path: smart-switches/site/.cache
+          key: ${{ github.sha }}
+      -
+        if: ${{ inputs.rebuild-site }}
         name: Build site
         working-directory: smart-switches/site
         run: |
