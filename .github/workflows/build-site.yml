@@ -100,5 +100,5 @@ jobs:
         with:
           args: |
             --version "pr${{ github.event.number }}-${{ github.sha }}" \
-            --docker-hub lucaspopp0/ha-smart-switches
-            --all \
+            --docker-hub lucaspopp0/ha-smart-switches \
+            --all
