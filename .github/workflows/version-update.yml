@@ -29,7 +29,7 @@ permissions:
 
 jobs:
 
-  version-update:
+  bump-version:
     runs-on: ubuntu-latest
     outputs:
       current-version: ${{ steps.config-version.outputs.version }}
@@ -72,7 +72,7 @@ jobs:
         id: version
         uses: paulhatch/semantic-version@v5.4.0
         with:
-          tag_prefix: v
+          tag_prefix: ""
           version_format: ${{ steps.version-format.outputs.version_format }}
           enable_prerelease_mode: ${{ steps.version-format.outputs.prerelease_mode }}
       -
@@ -83,7 +83,7 @@ jobs:
           LATEST_MINOR: ${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}
           LATEST_PATCH: ${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}.${{ steps.version.outputs.patch }}
         run: |
-          echo "tag=${{ steps.version.outputs.version_tag }}" | tee -a "$GITHUB_OUTPUT"
+          echo "tag=v${{ steps.version.outputs.version_tag }}" | tee -a "$GITHUB_OUTPUT"
           echo "major_tag=$LATEST_MAJOR" | tee -a "$GITHUB_OUTPUT"
           echo "minor_tag=$LATEST_MINOR" | tee -a "$GITHUB_OUTPUT"
           echo "patch_tag=$LATEST_PATCH" | tee -a "$GITHUB_OUTPUT"
@@ -93,19 +93,11 @@ jobs:
           else
             echo "change=true" | tee -a "$GITHUB_OUTPUT"
           fi
-
-  update-config:
-    needs: version-update
-    if: ${{ needs.version-update.outputs.change == 'true' }}
-    runs-on: ubuntu-latest
-    steps:
-      -
-        uses: actions/checkout@v4
       -
         name: Update config.yml
         run: |
           yq -i \
-            '.version = "${{ needs.version-update.outputs.next-tag }}"' \
+            '.version = "${{ steps.version.outputs.version_tag }}"' \
             ./smart-switches/config.yml
       -
         uses: actions/create-github-app-token@v1
@@ -120,8 +112,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         with:
-          commit_message: |
-            [bot] ${{ needs.version-update.outputs.next-tag }}
+          commit_message: "[bot] v${{ steps.version.outputs.version_tag }}"
           repo: ${{ github.repository }}
           branch: ${{ github.head_ref || github.ref_name }}
       -
@@ -142,7 +133,7 @@ jobs:
           git config user.email '208883573+lucaspopp0-bot[bot]@users.noreply.github.com'
 
           git tag \
-            -m "${{ needs.version-update.outputs.next-tag }}" \
-            "${{ needs.version-update.outputs.next-tag }}"
+            -m "${{ steps.outputs.outputs.tag }}" \
+            "${{ steps.outputs.outputs.tag }}"
 
           git push --tags
