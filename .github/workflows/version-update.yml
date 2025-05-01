@@ -10,17 +10,17 @@ on:
         required: true
     outputs:
       current-version:
-        value: ${{ jobs.version-update.outputs.current-version }}
+        value: ${{ jobs.bump-version.outputs.current-version }}
       next-major-tag:
-        value: ${{ jobs.version-update.outputs.next-major-tag }}
+        value: ${{ jobs.bump-version.outputs.next-major-tag }}
       next-minor-tag:
-        value: ${{ jobs.version-update.outputs.next-minor-tag }}
+        value: ${{ jobs.bump-version.outputs.next-minor-tag }}
       next-patch-tag:
-        value: ${{ jobs.version-update.outputs.next-patch-tag }}
+        value: ${{ jobs.bump-version.outputs.next-patch-tag }}
       next-tag:
-        value: ${{ jobs.version-update.outputs.next-tag }}
+        value: ${{ jobs.bump-version.outputs.next-tag }}
       change:
-        value: ${{ jobs.version-update.outputs.change }}
+        value: ${{ jobs.bump-version.outputs.change }}
 
 permissions:
   contents: write
