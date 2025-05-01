@@ -133,5 +133,6 @@ jobs:
           args: |
             --addon \
             --target smart-switches \
-            --docker-hub ha-smart-switches \
+            --docker-hub lucaspopp0 \
+            --image ha-smart-switches \
             --aarch64
