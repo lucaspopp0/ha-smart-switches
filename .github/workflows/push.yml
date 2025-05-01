@@ -19,6 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       changes: ${{ steps.path-filters.outputs.changes }}
+      smart-switches: ${{ contains(fromJson(steps.path-filters.outputs.changes), 'smart-switches') }}
+      version-update: ${{ contains(fromJson(steps.path-filters.outputs.changes), 'smart-switches') }}
     steps:
       -
         uses: actions/checkout@v4
@@ -30,9 +32,11 @@ jobs:
           filters: |
             smart-switches:
               - 'smart-switches/**'
+            version-update:
+              - './github/workflows/version-update.yml'
 
   version-update:
     needs: detect-changes
-    if: ${{ contains(fromJson(needs.detect-changes.outputs.changes), 'smart-switches') }}
+    if: ${{ needs.detect-changes.outputs.smart-switches == 'true' || needs.detect-changes.outputs.version-update == 'true' }}
     uses: ./.github/workflows/version-update.yml
     secrets: inherit
