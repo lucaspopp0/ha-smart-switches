@@ -33,6 +33,8 @@ jobs:
       changes: ${{ steps.path-filters.outputs.changes }}
     steps:
       -
+        uses: actions/checkout@v4
+      -
         name: Detect changes
         uses: dorny/paths-filter@v3
         id: path-filters
