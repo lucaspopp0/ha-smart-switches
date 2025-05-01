@@ -5,7 +5,7 @@ FROM $BUILD_FROM as homeassistant
 RUN mkdir -p /smartswitches/server
 RUN mkdir -p /smartswitches/site/public
 
-COPY ./server/server /smartswitches/server/server
+COPY ./server/server /smartswitches/server
 COPY ./site/public /smartswitches/site/public
 
 COPY run.sh /

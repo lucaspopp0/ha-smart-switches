@@ -111,9 +111,25 @@ jobs:
       -
         name: Update config file
         uses: planetscale/ghcommit-action@v0.2.0
+        id: commit
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         with:
           commit_message: Update config.yml version to ${{ needs.version-update.outputs.next-patch-tag }}
           repo: ${{ github.repository }}
           branch: ${{ github.head_ref || github.ref_name }}
+      - 
+        name: Tag commit
+        env:
+          TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          git config \
+            --global \
+              url."https://x-access-token:${TOKEN}@github.com/lucaspopp0".insteadOf \
+              "https://github.com/lucaspopp0"
+
+          git tag \
+            "-m ${{ needs.version-update.outputs.next-patch-tag }}" \
+            ${{ steps.commit.outputs.commit-hash }}
+
+          git push --tags

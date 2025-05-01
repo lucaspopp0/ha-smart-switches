@@ -25,17 +25,12 @@ jobs:
   detect-changes:
     uses: ./.github/workflows/detect-changes.yml
 
-  generate:
+  build-and-commit:
     needs: detect-changes
     if: ${{ needs.detect-changes.outputs.smart-switches == 'true' }}
-    uses: ./.github/workflows/generate.yml
+    uses: ./.github/workflows/docker-build.yml
     with:
       rebuild-server: ${{ needs.detect-changes.outputs.server == 'true' }}
       rebuild-site: ${{ needs.detect-changes.outputs.site == 'true' }}
-    secrets: inherit
-
-  preview-version-update:
-    needs: detect-changes
-    if: ${{ needs.detect-changes.outputs.version-update == 'true' }}
-    uses: ./.github/workflows/version-update.yml
+      push: false
     secrets: inherit
