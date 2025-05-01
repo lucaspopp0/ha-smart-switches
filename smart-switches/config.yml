@@ -1,6 +1,6 @@
 name: "Smart Switches"
 description: "Configure smart switches in your home"
-version: "1.0.6"
+version: "v1.0.7"
 slug: "smart-switches"
 init: false
 arch:
