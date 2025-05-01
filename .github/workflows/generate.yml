@@ -31,9 +31,6 @@ jobs:
 
   generate:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: smart-switches/site
     steps:
       -
         uses: actions/checkout@v4
