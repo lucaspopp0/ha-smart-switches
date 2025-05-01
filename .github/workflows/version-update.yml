@@ -72,7 +72,7 @@ jobs:
         id: version
         uses: paulhatch/semantic-version@v5.4.0
         with:
-          tag_prefix: ""
+          tag_prefix: v
           version_format: ${{ steps.version-format.outputs.version_format }}
           enable_prerelease_mode: ${{ steps.version-format.outputs.prerelease_mode }}
       -
@@ -83,7 +83,7 @@ jobs:
           LATEST_MINOR: ${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}
           LATEST_PATCH: ${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}.${{ steps.version.outputs.patch }}
         run: |
-          echo "tag=v${{ steps.version.outputs.version_tag }}" | tee -a "$GITHUB_OUTPUT"
+          echo "tag=${{ steps.version.outputs.version_tag }}" | tee -a "$GITHUB_OUTPUT"
           echo "major_tag=$LATEST_MAJOR" | tee -a "$GITHUB_OUTPUT"
           echo "minor_tag=$LATEST_MINOR" | tee -a "$GITHUB_OUTPUT"
           echo "patch_tag=$LATEST_PATCH" | tee -a "$GITHUB_OUTPUT"
@@ -95,9 +95,13 @@ jobs:
           fi
       -
         name: Update config.yml
+        env:
+          VERSION_TAG: ${{ steps.outputs.outputs.tag }}
         run: |
+          WITHOUT_PREFIX="${VERSION_TAG#v}"
+
           yq -i \
-            '.version = "${{ steps.version.outputs.version_tag }}"' \
+            '.version = env(WITHOUT_PREFIX)' \
             ./smart-switches/config.yml
       -
         uses: actions/create-github-app-token@v1
@@ -112,7 +116,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         with:
-          commit_message: "[bot] v${{ steps.version.outputs.version_tag }}"
+          commit_message: "[bot] ${{ steps.outputs.outputs.tag }}"
           repo: ${{ github.repository }}
           branch: ${{ github.head_ref || github.ref_name }}
       -
