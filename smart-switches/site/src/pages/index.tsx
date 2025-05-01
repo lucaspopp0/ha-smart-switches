@@ -11,6 +11,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Button, Tab, Tabs } from "react-bootstrap";
 
 import type { components } from '../sdk'
+import NewLayoutModal from "../components/modals/new-layout";
 
 const borderColor = 'rgb(224, 229, 229)';
 const backgroundColor = 'white';
@@ -81,6 +82,8 @@ const IndexPage: React.FC<PageProps> = () => {
   let [currentSwitch, setCurrentSwitch] = React.useState<string | undefined>(undefined)
   let [currentLayout, setCurrentLayout] = React.useState<string | undefined>(undefined)
 
+  let [showNewLayout, setShowNewLayout] = React.useState(false)
+
   React.useEffect(() => {
     if (loading) {
       return () => {}
@@ -136,7 +139,7 @@ const IndexPage: React.FC<PageProps> = () => {
                 activeKey={currentLayout}
                 onSelect={(eventKey) => {
                   if (eventKey == "add-layout") {
-                    console.log('Adding new layout')
+                    setShowNewLayout(true)
                     return
                   }
 
@@ -155,6 +158,12 @@ const IndexPage: React.FC<PageProps> = () => {
             : "Select a switch"}
         </div>
       </div>
+      <NewLayoutModal 
+        show={showNewLayout}
+        onHide={() => {
+          setShowNewLayout(false)
+        }}
+      />
     </main>
   )
 }
