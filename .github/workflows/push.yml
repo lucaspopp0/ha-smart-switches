@@ -33,7 +33,7 @@ jobs:
             smart-switches:
               - 'smart-switches/**'
             version-update:
-              - './.github/workflows/version-update.yml'
+              - '.github/workflows/version-update.yml'
 
   version-update:
     needs: detect-changes
