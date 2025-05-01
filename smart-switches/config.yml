@@ -1,5 +1,5 @@
 name: "Smart Switches"
-description: "My first real add-on!"
+description: "Configure smart switches in your home"
 version: "1.0.5"
 slug: "smart-switches"
 init: false
