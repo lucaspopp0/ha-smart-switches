@@ -1,0 +1,132 @@
+name: generate
+
+on:
+  workflow_call:
+    inputs:
+      rebuild-site:
+        type: boolean
+        default: false
+      rebuild-server:
+        type: boolean
+        default: false
+    secrets:
+      BOT_APP_ID:
+        required: true
+      BOT_APP_PRIVATE_KEY:
+        required: true
+      DOCKER_USER:
+        required: true
+      DOCKER_TOKEN:
+        required: true
+
+permissions:
+  contents: read
+  id-token: write
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+
+  generate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: smart-switches/site
+    steps:
+      -
+        uses: actions/checkout@v4
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      -
+        if: ${{ inputs.rebuild-server }}
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: smart-switches/server/go.mod
+          cache-dependency-path: smart-switches/server/go.sum
+      -
+        if: ${{ inputs.rebuild-server }}
+        name: Re-generate server openapi spec
+        working-directory: smart-switches/server
+        run: |
+          # Cleanup the spec folder
+          rm -rf spec
+          mkdir spec
+
+          go run . get-openapi \
+            | yq -o=yaml '.' \
+            > spec/openapi.yaml
+      -
+        if: ${{ inputs.rebuild-site }}
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: smart-switches/site/.nvmrc
+          cache-dependency-path: smart-switches/site/package-lock.json
+      -
+        if: ${{ inputs.rebuild-site }}
+        name: Install site dependencies
+        working-directory: smart-switches/site
+        run: |
+          npm ci
+      -
+        if: ${{ inputs.rebuild-site }}
+        name: Re-generate server sdk
+        working-directory: smart-switches/site
+        run: |
+          if [[ ! -d src/api ]]; then
+            mkdir src/api
+          fi
+
+          npx openapi-typescript \
+            ../server/spec/openapi.yaml \
+            -o ./src/api/index.d.ts
+      -
+        name: Build site
+        working-directory: smart-switches/site
+        run: |
+          rm -rf public
+          npm run build
+      -
+        name: Check for generated changes
+        id: detect-changes
+        run: |
+          git add .
+          git status
+
+          if [[ -n "$(git status -s)" ]]; then
+            echo "changes=true" | tee -a "$GITHUB_OUTPUT"
+          else
+            echo "changes=false" | tee -a "$GITHUB_OUTPUT"
+          fi
+      -
+        uses: actions/create-github-app-token@v1
+        if: ${{ steps.detect-changes.outputs.changes == 'true' }}
+        id: app-token
+        with:
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
+      -
+        name: Commit changes
+        if: ${{ steps.detect-changes.outputs.changes == 'true' }}
+        uses: planetscale/ghcommit-action@v0.2.0
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        with:
+          commit_message: "[bot] generate"
+          repo: ${{ github.repository }}
+          branch: ${{ github.head_ref || github.ref_name }}
+      -
+        name: Build and publish
+        uses: home-assistant/builder@master
+        with:
+          args: |
+            --addon \
+            --target smart-switches \
+            --version "pr${{ github.event.number }}-${{ github.sha }}" \
+            --docker-hub lucaspopp0/ha-smart-switches \
+            --all
