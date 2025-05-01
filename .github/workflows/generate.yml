@@ -89,7 +89,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: smart-switches/site/.cache
-          key: ${{ github.sha }}
+          key: gatsby-cache-${{ hashFiles('smart-switches/site/package-lock.json', 'smart-switches/site/src') }}
       -
         if: ${{ inputs.rebuild-site }}
         name: Build site
