@@ -67,7 +67,7 @@ type EntityState struct {
 func (c *apiClient) ListEntities(
 	domains ...string,
 ) ([]string, error) {
-	req, err := http.NewRequest(http.MethodGet, c.requestURL("/states"), http.NoBody)
+	req, err := http.NewRequest(http.MethodGet, c.requestURL("states"), http.NoBody)
 	if err != nil {
 		return nil, err
 	}

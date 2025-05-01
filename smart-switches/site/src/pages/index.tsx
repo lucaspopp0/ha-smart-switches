@@ -165,6 +165,7 @@ const IndexPage: React.FC<PageProps> = () => {
       </div>
       <NewLayoutModal 
         show={showNewLayout}
+        switch={currentSwitch ? config?.switches?.[currentSwitch] : undefined}
         onHide={() => {
           setShowNewLayout(false)
         }}
