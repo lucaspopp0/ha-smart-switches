@@ -137,8 +137,8 @@ jobs:
               url."https://x-access-token:${TOKEN}@github.com/lucaspopp0".insteadOf \
               "https://github.com/lucaspopp0"
           
-          git config user.name 'lucaspopp0-bot'
-          git config user.email 'lucaspopp0-bot@users.noreply.github.com'
+          git config user.name 'lucaspopp0-bot[bot]'
+          git config user.email '208883573+lucaspopp0-bot[bot]@users.noreply.github.com'
 
           git tag \
             -m "${{ needs.version-update.outputs.next-tag }}" \
