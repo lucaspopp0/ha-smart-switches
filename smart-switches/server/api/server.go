@@ -3,7 +3,6 @@ package api
 import (
 	"encoding/json"
 	"fmt"
-	"io"
 	"net/http"
 	"os"
 
@@ -39,20 +38,12 @@ func (s *server) onStart() {
 	}
 
 	fmt.Println("Testing home assistant connection...")
-	resp, err := s.ha.CallService("/script/turn_on", map[string]any{
-		"entity_id": "script.test_notification",
-	})
+	resp, err := s.ha.ListEntities("script")
 
 	if err != nil {
 		fmt.Printf("Home assistant service call failed: %v", err.Error())
 	} else {
-		responseBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			fmt.Printf("error reading home assistant response body: %v", err.Error())
-		}
-
-		fmt.Printf("Home assistant response:\nStatus code: %v\n%s\n",
-			resp.StatusCode, string(responseBody))
+		fmt.Printf("Home assistant response: %v\n", resp)
 	}
 
 	fmt.Println("Starting server on port 8000...")

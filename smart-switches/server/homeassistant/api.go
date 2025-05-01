@@ -15,6 +15,10 @@ const (
 )
 
 type API interface {
+	ListEntities(
+		domains ...string,
+	) ([]string, error)
+
 	// CallService executes POST /core/api/services/{servicePath}
 	// with the specified payload as the body if desired
 	CallService(
@@ -53,6 +57,51 @@ func (c *apiClient) do(req *http.Request) (*http.Response, error) {
 	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", c.cfg.SupervisorToken))
 
 	return http.DefaultClient.Do(req)
+}
+
+type EntityState struct {
+	EntityID string `json:"entity_id"`
+	State    string `json:"state"`
+}
+
+func (c *apiClient) ListEntities(
+	domains ...string,
+) ([]string, error) {
+	req, err := http.NewRequest(http.MethodGet, c.requestURL("/states"), http.NoBody)
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := c.do(req)
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading body: %w", err)
+	}
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("%v error: %s", resp.StatusCode, string(body))
+	}
+
+	states := []EntityState{}
+	err = json.Unmarshal(body, &states)
+	if err != nil {
+		return nil, err
+	}
+
+	entities := []string{}
+	for _, domain := range domains {
+		for _, state := range states {
+			if strings.HasPrefix(state.EntityID, domain) {
+				entities = append(entities, state.EntityID)
+			}
+		}
+	}
+
+	return entities, nil
 }
 
 func (c *apiClient) CallService(
