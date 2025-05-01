@@ -138,7 +138,7 @@ jobs:
 
           git tag \
             -m "${{ needs.version-update.outputs.next-tag }}" \
-            "v${{ needs.version-update.outputs.next-tag }}" \
+            "${{ needs.version-update.outputs.next-tag }}" \
             ${{ steps.commit.outputs.commit-hash }}
 
           git push --tags
