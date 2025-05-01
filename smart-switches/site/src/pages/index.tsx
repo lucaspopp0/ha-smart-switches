@@ -79,6 +79,7 @@ const IndexPage: React.FC<PageProps> = () => {
   let [loading, setLoading] = React.useState(false)
   let [config, setConfig] = React.useState<components["schemas"]["Config"] | undefined>(undefined)
   let [currentSwitch, setCurrentSwitch] = React.useState<string | undefined>(undefined)
+  let [currentLayout, setCurrentLayout] = React.useState<string | undefined>(undefined)
 
   React.useEffect(() => {
     if (loading) {
@@ -113,6 +114,7 @@ const IndexPage: React.FC<PageProps> = () => {
       onClick={() => {
         console.log(`Selecting ${name}`, config?.switches[name])
         setCurrentSwitch(name)
+        setCurrentLayout(Object.keys(config?.switches[name].layouts ?? {})[0])
       }}
     >
       {name}
@@ -130,13 +132,25 @@ const IndexPage: React.FC<PageProps> = () => {
         </div>
         <div style={styles.mainContent}>
           {currentSwitch 
-            ? <Tabs>{
-                Object
+            ? <Tabs
+                onSelect={(eventKey) => {
+                  if (eventKey == "add-layout") {
+                    console.log('Adding new layout')
+                    return
+                  }
+
+                  if (eventKey) {
+                    setCurrentLayout(eventKey)
+                  }
+                }}
+              >
+                {Object
                   .keys(config?.switches[currentSwitch].layouts ?? {})
                   .map(layoutName => (
-                    <Tab eventKey={layoutName} title={layoutName}>{layoutName}</Tab>
-                  ))
-              }</Tabs>
+                    <Tab eventKey={layoutName} title={layoutName}>Editing {layoutName}</Tab>
+                  ))}
+                <Tab eventKey="add-layout" title="Add layout..."></Tab>
+              </Tabs>
             : "Select a switch"}
         </div>
       </div>
