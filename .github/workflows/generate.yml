@@ -64,6 +64,7 @@ jobs:
         with:
           node-version-file: smart-switches/site/.nvmrc
           cache-dependency-path: smart-switches/site/package-lock.json
+          cache: npm
       -
         if: ${{ inputs.rebuild-site }}
         name: Install site dependencies
