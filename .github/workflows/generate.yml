@@ -136,7 +136,7 @@ jobs:
         name: go build
         working-directory: smart-switches/server
         env:
-          GOARCH: aarch64
+          GOARCH: arm64
           CGO_ENABLED: 0
         run: |
           go build -o server .
