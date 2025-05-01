@@ -133,6 +133,7 @@ const IndexPage: React.FC<PageProps> = () => {
         <div style={styles.mainContent}>
           {currentSwitch 
             ? <Tabs
+                activeKey={currentLayout}
                 onSelect={(eventKey) => {
                   if (eventKey == "add-layout") {
                     console.log('Adding new layout')
