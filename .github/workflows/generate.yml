@@ -132,6 +132,5 @@ jobs:
           args: |
             --addon \
             --target smart-switches \
-            --version "pr${{ github.event.number }}-${{ github.sha }}" \
             --docker-hub lucaspopp0/ha-smart-switches \
-            --all
+            --aarch64
