@@ -8,6 +8,10 @@ on:
         value: ${{ jobs.detect-changes.outputs.changes }}
       smart-switches:
         value: ${{ contains(fromJson(jobs.detect-changes.outputs.changes), 'smart-switches' )}}
+      server:
+        value: ${{ contains(fromJson(jobs.detect-changes.outputs.changes), 'server')}}
+      site:
+        value: ${{ contains(fromJson(jobs.detect-changes.outputs.changes), 'site')}}
       workflows:
         value: ${{ contains(fromJson(jobs.detect-changes.outputs.changes), 'workflows' )}}
       version-update:
@@ -36,6 +40,11 @@ jobs:
           filters: |
             smart-switches:
               - 'smart-switches/**'
+            server:
+              - 'smart-switches/server/**'
+            site:
+              - 'smart-switches/server/spec/**'
+              - 'smart-switches/site/**'
             workflows:
               - '.github/workflows/**'
             version-update:

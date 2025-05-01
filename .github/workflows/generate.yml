@@ -1,7 +1,14 @@
-name: build-site
+name: generate
 
 on:
   workflow_call:
+    inputs:
+      rebuild-site:
+        type: boolean
+        default: false
+      rebuild-server:
+        type: boolean
+        default: false
     secrets:
       BOT_APP_ID:
         required: true
@@ -22,7 +29,7 @@ defaults:
 
 jobs:
 
-  build-site:
+  generate:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -37,28 +44,47 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_TOKEN }}
       -
+        if: ${{ inputs.rebuild-server }}
         uses: actions/setup-go@v5
         with:
           go-version-file: smart-switches/server/go.mod
           cache-dependency-path: smart-switches/server/go.sum
       -
+        if: ${{ inputs.rebuild-server }}
+        name: Re-generate server openapi spec
+        working-directory: smart-switches/server
+        run: |
+          # Cleanup the spec folder
+          rm -rf spec
+          mkdir spec
+
+          go run . get-openapi \
+            | yq -o=yaml '.' \
+            > spec/openapi.yaml
+      -
+        if: ${{ inputs.rebuild-site }}
         uses: actions/setup-node@v4
         with:
           node-version-file: smart-switches/site/.nvmrc
           cache-dependency-path: smart-switches/site/package-lock.json
       -
-        name: Install dependencies
+        if: ${{ inputs.rebuild-site }}
+        name: Install site dependencies
         working-directory: smart-switches/site
         run: |
           npm ci
       -
-        name: Generate OpenAPI types for api
-        working-directory: smart-switches
+        if: ${{ inputs.rebuild-site }}
+        name: Re-generate server sdk
+        working-directory: smart-switches/site
         run: |
-          cd server
-          go run . get-openapi > ${{ runner.temp }}/openapi.json
-          cd ../site
-          npx openapi-typescript ${{ runner.temp }}/openapi.json -o ./src/sdk.d.ts
+          if [[ ! -d src/api ]]; then
+            mkdir src/api
+          fi
+
+          npx openapi-typescript \
+            ../server/spec/openapi.yaml \
+            -o ./src/api/index.d.ts
       -
         name: Build site
         working-directory: smart-switches/site
@@ -91,7 +117,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         with:
-          commit_message: Re-generate site
+          commit_message: "[bot] generate"
           repo: ${{ github.repository }}
           branch: ${{ github.head_ref || github.ref_name }}
       -

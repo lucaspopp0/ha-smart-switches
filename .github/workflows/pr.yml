@@ -25,10 +25,13 @@ jobs:
   detect-changes:
     uses: ./.github/workflows/detect-changes.yml
 
-  build-site:
+  generate:
     needs: detect-changes
     if: ${{ needs.detect-changes.outputs.smart-switches == 'true' }}
-    uses: ./.github/workflows/build-site.yml
+    uses: ./.github/workflows/generate.yml
+    with:
+      rebuild-server: ${{ needs.detect-changes.outputs.server == 'true' }}
+      rebuild-site: ${{ needs.detect-changes.outputs.site == 'true' }}
     secrets: inherit
 
   preview-version-update:
