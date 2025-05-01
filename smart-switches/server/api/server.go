@@ -1,6 +1,7 @@
 package api
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -10,6 +11,7 @@ import (
 	"github.com/danielgtaylor/huma/v2/adapters/humachi"
 	"github.com/danielgtaylor/huma/v2/humacli"
 	"github.com/go-chi/chi/v5"
+	"github.com/spf13/cobra"
 
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/config"
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/homeassistant"
@@ -60,6 +62,8 @@ func NewServer(version string) humacli.CLI {
 
 	s := &server{}
 
+	var api huma.API
+
 	s.CLI = humacli.New(func(hooks humacli.Hooks, o *struct{}) {
 		s.ha = homeassistant.NewAPI(homeassistant.APIConfig{
 			SupervisorToken: supervisorToken,
@@ -70,7 +74,7 @@ func NewServer(version string) humacli.CLI {
 
 		s.router.Use(SiteMiddleware)
 
-		api := humachi.New(
+		api = humachi.New(
 			s.router,
 			huma.DefaultConfig("Smart Switches", version),
 		)
@@ -79,6 +83,17 @@ func NewServer(version string) humacli.CLI {
 
 		hooks.OnStart(s.onStart)
 	})
+
+	// Add a command to print out the OpenAPI doc without starting the server.
+	s.CLI.Root().AddCommand(&cobra.Command{
+		Use:   "get-openapi",
+		Short: "Dump OpenAPI to stdout",
+		Long:  "Generate the OpenAPI spec and dump it to stdout without starting the server. Redirect the output to save to a file.",
+		Run: func(cmd *cobra.Command, args []string) {
+			b, _ := json.MarshalIndent(api.OpenAPI(), "", "  ")
+			fmt.Println(string(b))
+		}},
+	)
 
 	return s
 }

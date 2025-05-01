@@ -10,6 +10,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Button } from "react-bootstrap";
 
+import type { components } from '../sdk'
+
 const borderColor = 'rgb(224, 229, 229)';
 const backgroundColor = 'white';
 
@@ -75,9 +77,7 @@ const styles: { [key: string]: React.CSSProperties } = {
 
 const IndexPage: React.FC<PageProps> = () => {
   let [loading, setLoading] = React.useState(false)
-  let [switches, setSwitches] = React.useState<Record<string, Record<string, string>>>({})
-
-  let [helloName, setHelloName] = React.useState('')
+  let [config, setConfig] = React.useState<components["schemas"]["Config"] | undefined>(undefined)
 
   React.useEffect(() => {
     if (loading) {
@@ -90,23 +90,16 @@ const IndexPage: React.FC<PageProps> = () => {
     fetch('./api/config')
       .then(res => {
         res.json().then(json => {
-          console.log(json)
+          setConfig(json)
         })
       })
 
     return () => {
       ignore = true
     }
-  }, [loading, setLoading, switches, setSwitches])
+  }, [loading, setLoading, config, setConfig])
 
-  let sayHello = (name: string) => {
-    console.log('Hello ', name)
-    setHelloName(name)
-  }
-
-  console.log('rendering')
-
-  let remotes = Object.keys(switches).map(name => (
+  let remotes = Object.keys(config?.switches ?? {}).map(name => (
     <Button key={name} style={styles.sidebarItem}>{name}</Button>
   ))
 
@@ -116,10 +109,8 @@ const IndexPage: React.FC<PageProps> = () => {
           <Navbar.Brand href="#home">Smart Switches</Navbar.Brand>
       </Navbar>
       <div style={styles.content}>
-        <button onClick={() => sayHello('Lucas')}>Hello {helloName}</button>
         <div style={styles.sidebar}>
-          {/* {remotes} */}
-          <pre>{JSON.stringify(switches, null, 4)}</pre>
+          {remotes}
         </div>
       </div>
     </main>
