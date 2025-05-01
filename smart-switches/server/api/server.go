@@ -74,9 +74,13 @@ func NewServer(version string) humacli.CLI {
 
 		s.router.Use(SiteMiddleware)
 
+		cfg := huma.DefaultConfig("Smart Switches", version)
+		cfg.DocsPath = "/api/docs"
+		cfg.OpenAPIPath = "/api/openapi.json"
+
 		api = humachi.New(
 			s.router,
-			huma.DefaultConfig("Smart Switches", version),
+			cfg,
 		)
 
 		huma.AutoRegister(api, s)
