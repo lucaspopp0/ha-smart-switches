@@ -29,6 +29,8 @@ type server struct {
 }
 
 func (s *server) onStart() {
+	fmt.Println("Starting up...")
+
 	cfg, err := config.FromFile()
 	if err != nil {
 		fmt.Printf("Failed to load config: %v\n", err.Error())
@@ -57,7 +59,7 @@ func (s *server) onStart() {
 	http.ListenAndServe(":8000", s.router)
 }
 
-func NewServer(version string) humacli.CLI {
+func NewServer() humacli.CLI {
 	supervisorToken := os.Getenv(envSupervisorToken)
 
 	s := &server{}
@@ -74,7 +76,7 @@ func NewServer(version string) humacli.CLI {
 
 		s.router.Use(SiteMiddleware)
 
-		cfg := huma.DefaultConfig("Smart Switches", version)
+		cfg := huma.DefaultConfig("Smart Switches", "")
 		cfg.DocsPath = "/api/docs"
 		cfg.OpenAPIPath = "/api/openapi.json"
 
