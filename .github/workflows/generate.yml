@@ -134,6 +134,14 @@ jobs:
           repo: ${{ github.repository }}
           branch: ${{ github.head_ref || github.ref_name }}
       -
+        name: Set version
+        id: pick-version
+        run: |
+          yq \
+            -i \
+            '.version = "${{ github.sha }}"' \
+            smart-switches/config.yml
+      -
         name: Build and publish
         uses: home-assistant/builder@master
         with:
@@ -142,5 +150,5 @@ jobs:
             --target smart-switches \
             --docker-hub lucaspopp0 \
             --image ha-smart-switches \
-            --version "pr${{ github.event.number }}-${{ github.sha }}" \
+            --version "pr${{ github.event.number }}" \
             --aarch64
