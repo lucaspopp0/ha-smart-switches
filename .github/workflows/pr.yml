@@ -1,0 +1,41 @@
+name: pr
+
+on:
+  pull_request:
+    types:
+      - synchronize
+      - opened
+      - reopened
+
+permissions:
+  contents: write
+  id-token: write
+  pull-requests: read
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  detect-changes:
+    uses: ./.github/workflows/detect-changes.yml
+
+  generate:
+    needs: detect-changes
+    if: ${{ needs.detect-changes.outputs.smart-switches == 'true' }}
+    uses: ./.github/workflows/generate.yml
+    with:
+      rebuild-server: ${{ needs.detect-changes.outputs.server == 'true' }}
+      rebuild-site: ${{ needs.detect-changes.outputs.site == 'true' }}
+    secrets: inherit
+
+  preview-version-update:
+    needs: detect-changes
+    if: ${{ needs.detect-changes.outputs.version-update == 'true' }}
+    uses: ./.github/workflows/version-update.yml
+    secrets: inherit

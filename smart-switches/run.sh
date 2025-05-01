@@ -1,9 +1,14 @@
 #!/usr/bin/with-contenv bashio
 
-env
+set -x
 
-SERVER_PORT=8000
+SWITCHES_JSON=/data/switches.json
+SITE_DIR=/smartswitches/site
 
-echo "Starting server on ${SERVER_PORT}"
+if [[ ! -f "$SWITCHES_JSON" ]]; then
+    echo "{}" > "$SWITCHES_JSON"
+fi
 
-python3 -m http.server "$SERVER_PORT"
+echo "Running image: $IMAGE_NAME"
+
+/smartswitches/server/server

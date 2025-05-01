@@ -1,17 +1,21 @@
 ARG BUILD_FROM
-FROM $BUILD_FROM
 
-# Install requirements for add-on
-RUN \
-  apk add --no-cache \
-    python3
+FROM $BUILD_FROM as homeassistant
 
-# Python 3 HTTP Server serves the current working dir
-# So let's set it to our add-on persistent data directory.
-WORKDIR /data
+RUN mkdir -p /smartswitches/server
+RUN mkdir -p /smartswitches/site/public
 
-# Copy data for add-on
+COPY ./server/server /smartswitches/server/server
+COPY ./site/public /smartswitches/site/public
+
 COPY run.sh /
 RUN chmod a+x /run.sh
 
+ENV IMAGE_NAME $BUILD_FROM
+
+# Persistent data directory
+WORKDIR /data
+
+# Expose port
+EXPOSE 8000
 CMD [ "/run.sh" ]
