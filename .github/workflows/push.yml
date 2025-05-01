@@ -16,27 +16,11 @@ defaults:
 jobs:
 
   detect-changes:
-    runs-on: ubuntu-latest
-    outputs:
-      changes: ${{ steps.path-filters.outputs.changes }}
-      smart-switches: ${{ contains(fromJson(steps.path-filters.outputs.changes), 'smart-switches') }}
-      version-update: ${{ contains(fromJson(steps.path-filters.outputs.changes), 'smart-switches') }}
-    steps:
-      -
-        uses: actions/checkout@v4
-      -
-        name: Detect changes
-        uses: dorny/paths-filter@v3
-        id: path-filters
-        with:
-          filters: |
-            smart-switches:
-              - 'smart-switches/**'
-            version-update:
-              - '.github/workflows/version-update.yml'
+    uses: ./.github/workflows/detect-changes.yml
+    secrets: inherit
 
   version-update:
     needs: detect-changes
-    if: ${{ needs.detect-changes.outputs.smart-switches == 'true' || needs.detect-changes.outputs.version-update == 'true' }}
+    if: ${{ needs.detect-changes.outputs.smart-switches == 'true' || needs.detect-changes.outputs.workflows == 'true' }}
     uses: ./.github/workflows/version-update.yml
     secrets: inherit
