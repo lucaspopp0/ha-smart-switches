@@ -78,6 +78,7 @@ const styles: { [key: string]: React.CSSProperties } = {
 const IndexPage: React.FC<PageProps> = () => {
   let [loading, setLoading] = React.useState(false)
   let [config, setConfig] = React.useState<components["schemas"]["Config"] | undefined>(undefined)
+  let [currentSwitch, setCurrentSwitch] = React.useState<string | undefined>(undefined)
 
   React.useEffect(() => {
     if (loading) {
@@ -90,7 +91,13 @@ const IndexPage: React.FC<PageProps> = () => {
     fetch('./api/config')
       .then(res => {
         res.json().then(json => {
-          setConfig(json)
+          const configJSON = json as components["schemas"]["Config"]
+          const switches = configJSON.switches
+
+          setConfig(configJSON)
+          setCurrentSwitch(Object.keys(switches).length > 0
+            ? Object.keys(switches)[0]
+            : undefined)
         })
       })
 
@@ -100,7 +107,16 @@ const IndexPage: React.FC<PageProps> = () => {
   }, [loading, setLoading, config, setConfig])
 
   let remotes = Object.keys(config?.switches ?? {}).map(name => (
-    <Button key={name} style={styles.sidebarItem}>{name}</Button>
+    <Button
+      key={name}
+      style={styles.sidebarItem}
+      onClick={() => {
+        console.log(`Selecting ${name}`, config?.switches[name])
+        setCurrentSwitch(name)
+      }}
+    >
+      {name}
+    </Button>
   ))
 
   return (
@@ -112,6 +128,7 @@ const IndexPage: React.FC<PageProps> = () => {
         <div style={styles.sidebar}>
           {remotes}
         </div>
+        <div style={styles.mainContent}></div>
       </div>
     </main>
   )
