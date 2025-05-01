@@ -138,7 +138,7 @@ const IndexPage: React.FC<PageProps> = () => {
             + New remote
           </Button>
         </div>
-        <div style={styles.mainContent}>
+        <div style={styles.content}>
           <div style={styles.sidebar}>
           {currentSwitch 
             ? <React.Fragment>
@@ -170,6 +170,7 @@ const IndexPage: React.FC<PageProps> = () => {
               </React.Fragment>
             : "Select a switch"}
           </div>
+          <div style={styles.content}>Editing buttons</div>
         </div>
       </div>
       <NewLayoutModal 
