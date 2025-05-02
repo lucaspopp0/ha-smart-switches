@@ -141,6 +141,6 @@ jobs:
           fi
 
           gh release create \
-            ${{ steps.version.outputs.previous_version }} \
+            ${TAG} \
             --title "${RELEASE}" \
-            --generate-notes --notes-start-tag "${TAG}"
+            --generate-notes --notes-start-tag "${{ steps.version.outputs.previous_version }}"
