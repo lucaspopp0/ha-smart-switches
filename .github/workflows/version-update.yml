@@ -131,7 +131,15 @@ jobs:
           git push --tags
       -
         name: Release
+        env:
+          TAG: ${{ steps.outputs.outputs.incr_tag }}
+          RELEASE: ${{ steps.outputs.outputs.patch_tag }}
         run: |
+          if [[ gh release view "${RELEASE}" > /dev/null ]]; then
+            gh release delete "${RELEASE}" -y
+          fi
+
           gh release create \
-            ${{ steps.version.outputs.version_tag }} \
-            ${{ steps.version.outputs.previous_version }}
+            ${{ steps.version.outputs.previous_version }} \
+            --title "${RELEASE}" \
+            --generate-notes --notes-start-tag "${TAG}"
