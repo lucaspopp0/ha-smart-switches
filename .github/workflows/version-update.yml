@@ -110,6 +110,20 @@ jobs:
             echo "change=true" | tee -a "$GITHUB_OUTPUT"
           fi
       -
+        name: Configure git
+        run: |
+          git config --global \
+            user.name 'lucaspopp0-bot[bot]'
+
+          git config --global \
+            user.email 'lucaspopp0-bot[bot]@users.noreply.github.com'
+      -
+        name: Checkout ref for commit
+        run: |
+          # Checkout current ref
+          git fetch --all
+          git checkout "${{ github.head_ref || github.ref_name }}"
+      -
         name: Update config.yml
         env:
           VERSION_TAG: ${{ steps.output-tags.outputs.INCRM }}
@@ -119,21 +133,9 @@ jobs:
               '.version = env(WITHOUT_PREFIX)' \
               ./smart-switches/config.yml
       -
-        name: Configure git
-        run: |
-          git config --global \
-            user.name 'lucaspopp0-bot[bot]'
-
-          git config --global \
-            user.email 'lucaspopp0-bot[bot]@users.noreply.github.com'
-      -
         name: "Commit changes and push (DRY_RUN=${{ env.DRY_RUN }})"
         id: commit
         run: |
-          # Checkout current ref
-          git checkout "${{ github.head_ref || github.ref_name }}"
-
-          # Create commit
           git add .
           git commit -m "[bot] ${INCRM}"
           
