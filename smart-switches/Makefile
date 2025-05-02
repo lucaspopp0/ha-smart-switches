@@ -2,16 +2,16 @@ MF_PATH := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 
 IMAGE_NAME := ha-smart-switches
 
-local-build:
+build-server:
 	@cd $(MF_PATH); \
 	\
 	IMAGE_NAME=$(IMAGE_NAME) \
-		bash scripts/docker-build.sh
+		bash scripts/build-server.sh
 .PHONY: local-build
 
-local-run: local-build
+run-server: build-server
 	@cd $(MF_PATH)/local; \
 	\
 	IMAGE_NAME=$(IMAGE_NAME) \
-		bash ../scripts/docker-run.sh
+		bash ../scripts/run-server.sh
 .PHONY: local-run

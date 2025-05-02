@@ -69,6 +69,7 @@ func NewServer() humacli.CLI {
 
 		cfg := huma.DefaultConfig("Smart Switches", "")
 		cfg.DocsPath = "/api/docs"
+		cfg.SchemasPath = "/api/schemas"
 		cfg.OpenAPIPath = "/api/openapi.json"
 
 		api = humachi.New(
