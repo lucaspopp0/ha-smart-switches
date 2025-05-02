@@ -35,10 +35,19 @@ jobs:
       push: false
     secrets: inherit
 
+  preview-version-update:
+    needs: detect-changes
+    if: ${{ needs.detect-changes.outputs.version-update == 'true' }}
+    uses: ./.github/workflows/version-update.yml
+    with:
+      dry-run: true
+    secrets: inherit
+
   pr-ready:
     needs:
       - detect-changes
       - build-and-commit
+      - preview-version-update
     runs-on: ubuntu-latest
     if: always()
     steps:
