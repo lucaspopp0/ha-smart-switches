@@ -185,7 +185,7 @@ jobs:
             echo "::endgroup::"
           done
 
-          git push ${DRY_RUN_FLAG}
+          git push --tags ${DRY_RUN_FLAG}
       -
         name: Release
         if: ${{ github.event_name != 'pull_request' && !inputs.dry-run }}
