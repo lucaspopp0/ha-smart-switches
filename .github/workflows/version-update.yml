@@ -97,6 +97,8 @@ jobs:
           LATEST_PATCH="${LATEST_MINOR}.${{ steps.version.outputs.patch }}"
           LATEST_INCRM="${LATEST_PATCH}.${{ steps.version.outputs.increment }}"
 
+          echo "::notice::Detected version: ${LATEST_INCRM}"
+
           {
             echo "MAJOR=v$LATEST_MAJOR";
             echo "MINOR=v$LATEST_MINOR";
@@ -161,7 +163,7 @@ jobs:
 
           for tag in "${tags[@]}"; do
             echo "::group::Pointing tag ${tag} to ${{ steps.commit.outputs.commit-hash }}"
-            
+
             # Delete the remote tag
             git push \
               --delete \
