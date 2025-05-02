@@ -150,7 +150,7 @@ jobs:
           fi
 
           git push \
-            --force\
+            --force \
             ${DRY_RUN_FLAG}
       -
         name: "Update tags (DRY_RUN=${{ env.DRY_RUN }})"
