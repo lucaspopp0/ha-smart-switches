@@ -152,6 +152,7 @@ jobs:
             --addon \
             ${{ inputs.push && '' || '--test ' }} \
             --target smart-switches \
+            --cache-tag ${{ hashFiles('smart-switches/**') }} \
             --docker-hub lucaspopp0 \
             --image ha-smart-switches \
             --version "pr${{ github.event.number }}" \
