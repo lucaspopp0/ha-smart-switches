@@ -98,9 +98,10 @@ jobs:
         env:
           VERSION_TAG: ${{ steps.outputs.outputs.tag }}
         run: |
-          yq -i \
-            '.version = "'"${VERSION_TAG#v}"'")' \
-            ./smart-switches/config.yml
+          WITHOUT_PREFIX="${VERSION_TAG#v}" \
+            yq -i \
+              '.version = env(WITHOUT_PREFIX)' \
+              ./smart-switches/config.yml
       -
         uses: actions/create-github-app-token@v1
         id: app-token
