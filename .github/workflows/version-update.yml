@@ -125,14 +125,14 @@ jobs:
           git config user.email 'github-actions[bot]@users.noreply.github.com'
 
           git tag \
-            -m "${{ steps.outputs.outputs.incr_tag }}" \
-            "${{ steps.outputs.outputs.incr_tag }}"
+            -m "${{ steps.outputs.outputs.incrm_tag }}" \
+            "${{ steps.outputs.outputs.incrm_tag }}"
 
           git push --tags
       -
         name: Release
         env:
-          TAG: ${{ steps.outputs.outputs.incr_tag }}
+          TAG: ${{ steps.outputs.outputs.incrm_tag }}
           RELEASE: ${{ steps.outputs.outputs.patch_tag }}
         run: |
           if [[ gh release view "${RELEASE}" > /dev/null ]]; then
