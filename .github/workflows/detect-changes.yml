@@ -3,6 +3,8 @@ name: detect-changes
 on:
   workflow_call:
     outputs:
+      bot-change:
+        value: ${{ jobs.detect-changes.outputs.bot-change }}
       changes:
         description: "A JSON array of changed filters"
         value: ${{ jobs.detect-changes.outputs.changes }}
@@ -30,8 +32,14 @@ jobs:
   detect-changes:
     runs-on: ubuntu-latest
     outputs:
+      bot-change: ${{ steps.detect-bot.outputs.detected }}
       changes: ${{ steps.path-filters.outputs.changes }}
     steps:
+      -
+        name: Detect bot commit
+        id: detect-bot
+        run: |
+          echo "detected=${{ github.actor == 'lucaspopp0-bot[bot]' }}" | tee -a "$GITHUB_OUTPUT"
       -
         uses: actions/checkout@v4
       -

@@ -21,14 +21,14 @@ jobs:
 
   version-update:
     needs: detect-changes
-    if: ${{ needs.detect-changes.outputs.smart-switches == 'true' || needs.detect-changes.outputs.workflows == 'true' }}
+    if: ${{ needs.detect-changes.outputs.bot-change == 'false' && (needs.detect-changes.outputs.smart-switches == 'true' || needs.detect-changes.outputs.workflows == 'true') }}
     uses: ./.github/workflows/version-update.yml
     secrets: inherit
 
   build-and-push:
-    needs: version-update
+    needs: detect-changes
     uses: ./.github/workflows/docker-build.yml
+    if: ${{ needs.detect-changes.outputs.bot-change == 'true' }}
     with:
-      ref: ${{ needs.version-update.outputs.update-sha }}
       push: true
     secrets: inherit
