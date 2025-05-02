@@ -105,32 +105,34 @@ jobs:
               '.version = env(WITHOUT_PREFIX)' \
               ./smart-switches/config.yml
       -
-        name: Update config file
-        uses: planetscale/ghcommit-action@v0.2.0
-        id: commit
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          commit_message: "[bot] ${{ steps.outputs.outputs.incrm_tag }}"
-          repo: ${{ github.repository }}
-          branch: ${{ github.head_ref || github.ref_name }}
-      -
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ steps.commit.outputs.commit-hash }}
-      - 
-        name: Tag commit
+        name: Commit new version
+        if: ${{ github.event_name != 'pull_request '}}
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git config --global \
+            user.name 'github-actions[bot]'
 
+          git config --global \
+            user.email 'github-actions[bot]@users.noreply.github.com'
+
+          # Checkout current ref
+          git checkout "${{ github.ref_name }}"
+
+          # Create commit
+          git add .
+          git commit -m "[bot] ${{ steps.outputs.outputs.incrm_tag }}"
+
+          COMMIT_HASH=$(git show --no-patch --format="%H")
+          echo "commit-hash=$COMMIT_HASH" | tee -a "$GITHUB_OUTPUT"
+          
+          # Tag commit
           git tag \
             -m "${{ steps.outputs.outputs.incrm_tag }}" \
             "${{ steps.outputs.outputs.incrm_tag }}"
 
-          git push --tags
+          git push --tags --force
       -
         name: Release
+        if: ${{ github.event_name != 'pull_request '}}
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ steps.outputs.outputs.incrm_tag }}
