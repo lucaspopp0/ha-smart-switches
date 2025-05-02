@@ -88,8 +88,8 @@ jobs:
         id: outputs
         run: |
           LATEST_MAJOR="${{ steps.version.outputs.major }}"
-          LATEST_MINOR="${LATEST_MAJOR}.${{ steps.version.outputs.major }}"
-          LATEST_PATCH="${LATEST_MINOR}.${{ steps.version.outputs.major }}"
+          LATEST_MINOR="${LATEST_MAJOR}.${{ steps.version.outputs.minor }}"
+          LATEST_PATCH="${LATEST_MINOR}.${{ steps.version.outputs.patch }}"
           LATEST_INCRM="${LATEST_PATCH}.${{ steps.version.outputs.increment }}"
 
           echo "major_tag=v$LATEST_MAJOR" | tee -a "$GITHUB_OUTPUT"
