@@ -137,12 +137,12 @@ jobs:
           echo "commit-hash=$COMMIT_HASH" | tee -a "$GITHUB_OUTPUT"
           
           # Remove floating tags
-          git push --delete origin "$PATCH" > 2> /dev/null || true
-          git tag --delete "$PATCH" || true
-          git push --delete origin "$MINOR" || true
-          git tag --delete "$MINOR" || true
-          git push --delete origin "$MAJOR" || true
-          git tag --delete "$MAJOR" || true
+          git push --delete origin "$PATCH" 2> /dev/null || true
+          git tag --delete "$PATCH" 2> /dev/null || true
+          git push --delete origin "$MINOR" 2> /dev/null || true
+          git tag --delete "$MINOR" 2> /dev/null || true
+          git push --delete origin "$MAJOR" 2> /dev/null || true
+          git tag --delete "$MAJOR" 2> /dev/null || true
 
           # Create new tags
           git tag "$FULL"
