@@ -19,8 +19,6 @@ RUN CG_ENABLED=0 go build -o server .
 COPY run.sh /
 RUN chmod a+x /run.sh
 
-ENV IMAGE_NAME $BUILD_FROM
-
 # Persistent data directory
 WORKDIR /data
 
