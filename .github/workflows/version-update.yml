@@ -21,6 +21,8 @@ on:
         value: ${{ jobs.bump-version.outputs.next-incrm-tag }}
       change:
         value: ${{ jobs.bump-version.outputs.change }}
+      update-sha:
+        value: ${{ jobs.bump-version.outputs.update-sha }}
 
 permissions:
   contents: write
@@ -38,6 +40,7 @@ jobs:
       next-patch-tag: ${{ steps.outputs.outputs.patch_tag }}
       next-incrm-tag: ${{ steps.outputs.outputs.incrm_tag }}
       change: ${{ steps.outputs.outputs.change }}
+      update-sha: ${{ steps.commit.outputs.commit-hash }}
     steps:
       -
         uses: actions/checkout@v4

@@ -24,3 +24,11 @@ jobs:
     if: ${{ needs.detect-changes.outputs.smart-switches == 'true' || needs.detect-changes.outputs.workflows == 'true' }}
     uses: ./.github/workflows/version-update.yml
     secrets: inherit
+
+  build-and-push:
+    needs: version-update
+    uses: ./.github/workflows/docker-build.yml
+    with:
+      ref: ${{ needs.version-update.outputs.update-sha }}
+      push: true
+    secrets: inherit
