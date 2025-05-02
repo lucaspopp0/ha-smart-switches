@@ -97,11 +97,14 @@ const IndexPage: React.FC<PageProps> = () => {
       .then(res => {
         res.json().then(json => {
           const configJSON = json as components["schemas"]["Config"]
-          const switches = configJSON.switches
+
+          if (!configJSON.switches) {
+            configJSON.switches = {}
+          }
 
           setConfig(configJSON)
-          setCurrentSwitch(Object.keys(switches).length > 0
-            ? Object.keys(switches)[0]
+          setCurrentSwitch(Object.keys(configJSON.switches).length > 0
+            ? Object.keys(configJSON.switches)[0]
             : undefined)
         })
       })
