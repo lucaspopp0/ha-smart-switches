@@ -96,6 +96,12 @@ jobs:
             echo "change=true" | tee -a "$GITHUB_OUTPUT"
           fi
       -
+        uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
+      -
         name: Update config.yml
         env:
           VERSION_TAG: ${{ steps.outputs.outputs.incrm_tag }}
@@ -113,6 +119,10 @@ jobs:
           MINOR: ${{ steps.outputs.outputs.minor_tag }}
           MAJOR: ${{ steps.outputs.outputs.major_tag }}
         run: |
+          git config --global \
+            url."https://x-access-token:${{ steps.app-token.outputs.token }}@github.com/iStreamPlanet".insteadOf \
+            "https://github.com/iStreamPlanet"
+
           git config --global \
             user.name 'lucaspopp0-bot[bot]'
 
