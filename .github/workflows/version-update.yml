@@ -135,22 +135,16 @@ jobs:
 
           COMMIT_HASH=$(git show --no-patch --format="%H")
           echo "commit-hash=$COMMIT_HASH" | tee -a "$GITHUB_OUTPUT"
-          
-          # Remove floating tags
-          git push --delete origin "$PATCH" 2> /dev/null || true
-          git tag --delete "$PATCH" 2> /dev/null || true
-          git push --delete origin "$MINOR" 2> /dev/null || true
-          git tag --delete "$MINOR" 2> /dev/null || true
-          git push --delete origin "$MAJOR" 2> /dev/null || true
-          git tag --delete "$MAJOR" 2> /dev/null || true
 
-          # Create new tags
+          # Commit and tag
+          git push --force
+
           git tag "$FULL"
           git tag "$PATCH"
           git tag "$MINOR"
           git tag "$MAJOR"
 
-          git push --all --force
+          git push --tags
       -
         name: Release
         if: ${{ github.event_name != 'pull_request '}}
