@@ -129,7 +129,7 @@ jobs:
             -m "${{ steps.outputs.outputs.incrm_tag }}" \
             "${{ steps.outputs.outputs.incrm_tag }}"
 
-          git push --tags --force
+          git push --all --force
       -
         name: Release
         if: ${{ github.event_name != 'pull_request '}}
