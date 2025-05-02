@@ -124,7 +124,7 @@ jobs:
 
           # Create commit
           git add .
-          git commit -m "[bot] ${{ steps.outputs.outputs.incrm_tag }}"
+          git commit -m "[bot] ${FULL}"
 
           COMMIT_HASH=$(git show --no-patch --format="%H")
           echo "commit-hash=$COMMIT_HASH" | tee -a "$GITHUB_OUTPUT"
