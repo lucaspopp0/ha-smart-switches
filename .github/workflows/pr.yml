@@ -34,3 +34,18 @@ jobs:
       rebuild-site: ${{ needs.detect-changes.outputs.site == 'true' }}
       push: false
     secrets: inherit
+
+  pr-ready:
+    needs:
+      - detect-changes
+      - build-and-commit
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      -
+        name: Validate jobs
+        if: ${{ contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'failure') }}
+        run: |
+          echo "::error title=${{ github.workflow }}::at least one job failed or cancelled"
+          exit 1
+  

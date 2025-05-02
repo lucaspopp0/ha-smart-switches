@@ -51,6 +51,7 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_TOKEN }}
       -
+        if: ${{ inputs.rebuild-server }}
         uses: actions/setup-go@v5
         with:
           go-version-file: smart-switches/server/go.mod
@@ -144,21 +145,14 @@ jobs:
           repo: ${{ github.repository }}
           branch: ${{ github.head_ref || github.ref_name }}
       -
-        name: go build
-        working-directory: smart-switches/server
-        env:
-          GOARCH: arm64
-          CGO_ENABLED: 0
-        run: |
-          go build -o server .
-      -
         name: Build and publish
         uses: home-assistant/builder@master
         with:
           args: |
             --addon \
-            ${{ inputs.push && '' || '--test ' }} \
+            ${{ inputs.push && '' || '--test --no-latest ' }} \
             --target smart-switches \
+            --cache-tag ${{ github.ref }} \
             --docker-hub lucaspopp0 \
             --image ha-smart-switches \
             --version "pr${{ github.event.number }}" \
