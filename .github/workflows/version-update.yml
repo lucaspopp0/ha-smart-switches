@@ -131,7 +131,7 @@ jobs:
         id: commit
         run: |
           # Checkout current ref
-          git checkout "${{ github.ref_name }}"
+          git checkout "${{ github.head_ref || github.ref_name }}"
 
           # Create commit
           git add .
