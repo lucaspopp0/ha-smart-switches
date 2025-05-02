@@ -4,6 +4,7 @@ RUN mkdir -p /smartswitches/server
 COPY ./server /smartswitches/server
 
 WORKDIR /smartswitches/server
+RUN go get ./...
 RUN CG_ENABLED=0 go build -o server .
 
 COPY ./local/run.sh /

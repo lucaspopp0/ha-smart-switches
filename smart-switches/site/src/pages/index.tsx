@@ -85,6 +85,8 @@ const IndexPage: React.FC<PageProps> = () => {
 
   let [showNewRemote, setShowNewRemote] = React.useState(false)
 
+  let apiBase = process.env.GATSBY_API_BASE ?? '.'
+
   React.useEffect(() => {
     if (loading) {
       return () => {}
@@ -93,7 +95,7 @@ const IndexPage: React.FC<PageProps> = () => {
     let ignore = false
     setLoading(true)
 
-    fetch('./api/config')
+    fetch(`${apiBase}/api/config`)
       .then(res => {
         res.json().then(json => {
           const configJSON = json as components["schemas"]["Config"]

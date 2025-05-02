@@ -1,8 +1,8 @@
 ARG BUILD_FROM
 
-FROM golang:1.24 as go
+FROM golang:1.24 AS go
 
-FROM $BUILD_FROM as homeassistant
+FROM $BUILD_FROM AS homeassistant
 
 COPY --from=go /usr/local/go /usr/local/go
 ENV PATH "/usr/local/go/bin:$PATH"
@@ -14,6 +14,7 @@ COPY ./server /smartswitches/server
 COPY ./site/public /smartswitches/site/public
 
 WORKDIR /smartswitches/server
+RUN go get ./...
 RUN CG_ENABLED=0 go build -o server .
 
 COPY run.sh /

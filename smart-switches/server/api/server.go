@@ -76,6 +76,8 @@ func NewServer() humacli.CLI {
 			cfg,
 		)
 
+		api.UseMiddleware(AllowCORS)
+
 		huma.AutoRegister(api, s)
 
 		hooks.OnStart(s.onStart)
