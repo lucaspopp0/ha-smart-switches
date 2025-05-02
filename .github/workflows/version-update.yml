@@ -3,6 +3,10 @@ name: version-update
 on:
   workflow_dispatch:
   workflow_call:
+    inputs:
+      dry-run:
+        type: boolean
+        default: false
     secrets:
       BOT_APP_ID:
         required: true
@@ -109,6 +113,7 @@ jobs:
               ./smart-switches/config.yml
       -
         name: Commit new version
+        id: commit
         if: ${{ github.event_name != 'pull_request '}}
         env:
           FULL: ${{ steps.outputs.outputs.incrm_tag }}
@@ -155,13 +160,14 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ steps.outputs.outputs.incrm_tag }}
+          NOTES_START_TAG: v${{ steps.version.outputs.previous_version }}
           RELEASE: ${{ steps.outputs.outputs.patch_tag }}
         run: |
           if [[ $(gh release view "${RELEASE}" > /dev/null) ]]; then
             gh release delete "${RELEASE}" -y
           fi
 
-          gh release create \
-            ${TAG} \
+          gh release create ${TAG} \
             --title "${RELEASE}" \
-            --generate-notes --notes-start-tag "v${{ steps.version.outputs.previous_version }}"
+            --generate-notes \
+            --notes-start-tag "${NOTES_START_TAG}"
