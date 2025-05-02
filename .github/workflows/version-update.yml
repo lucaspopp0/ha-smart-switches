@@ -135,7 +135,7 @@ jobs:
           TAG: ${{ steps.outputs.outputs.incrm_tag }}
           RELEASE: ${{ steps.outputs.outputs.patch_tag }}
         run: |
-          if [[ gh release view "${RELEASE}" > /dev/null ]]; then
+          if [[ $(gh release view "${RELEASE}" > /dev/null) ]]; then
             gh release delete "${RELEASE}" -y
           fi
 
