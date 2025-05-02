@@ -132,16 +132,24 @@ jobs:
           # Create commit
           git add .
           git commit -m "[bot] ${FULL}"
-
+          
           COMMIT_HASH=$(git show --no-patch --format="%H")
           echo "commit-hash=$COMMIT_HASH" | tee -a "$GITHUB_OUTPUT"
-
-          # Commit and tag
           git push --force
-
+          
+          # Push tags
           git tag "$FULL"
+          
+          git push --delete origin "$PATCH" 2> /dev/null || true
+          git tag --delete "$PATCH" 2> /dev/null || true
           git tag "$PATCH"
+
+          git push --delete origin "$MINOR" 2> /dev/null || true
+          git tag --delete "$MINOR" 2> /dev/null || true
           git tag "$MINOR"
+
+          git push --delete origin "$MAJOR" 2> /dev/null || true
+          git tag --delete "$MAJOR" 2> /dev/null || true
           git tag "$MAJOR"
 
           git push --tags
