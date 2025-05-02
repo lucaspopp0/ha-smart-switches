@@ -114,10 +114,10 @@ jobs:
           MAJOR: ${{ steps.outputs.outputs.major_tag }}
         run: |
           git config --global \
-            user.name 'github-actions[bot]'
+            user.name 'lucaspopp0-bot[bot]'
 
           git config --global \
-            user.email 'github-actions[bot]@users.noreply.github.com'
+            user.email 'lucaspopp0-bot[bot]@users.noreply.github.com'
 
           # Checkout current ref
           git checkout "${{ github.ref_name }}"
