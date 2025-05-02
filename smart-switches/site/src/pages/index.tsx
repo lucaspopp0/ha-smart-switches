@@ -10,9 +10,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Button, Dropdown, Tab, Tabs } from "react-bootstrap";
 
-import type { components } from '../sdk'
 import NewLayoutModal from "../components/modals/new-layout";
-import NewRemoteModal from "../components/modals/new-remote";
+import NewSwitchModal from "../components/modals/new-switch";
+import { Config, Configuration, DefaultApi } from "../api";
 
 const borderColor = 'rgb(224, 229, 229)';
 const backgroundColor = 'white';
@@ -79,13 +79,17 @@ const styles: { [key: string]: React.CSSProperties } = {
 
 const IndexPage: React.FC<PageProps> = () => {
   let [loading, setLoading] = React.useState(false)
-  let [config, setConfig] = React.useState<components["schemas"]["Config"] | undefined>(undefined)
+  let [config, setConfig] = React.useState<Config | undefined>(undefined)
   let [currentSwitch, setCurrentSwitch] = React.useState<string | undefined>(undefined)
   let [currentLayout, setCurrentLayout] = React.useState<string | undefined>(undefined)
 
   let [showNewRemote, setShowNewRemote] = React.useState(false)
 
   let apiBase = process.env.GATSBY_API_BASE ?? '.'
+
+  const api = new DefaultApi(new Configuration({
+    basePath: apiBase,
+  }))
 
   React.useEffect(() => {
     if (loading) {
@@ -95,20 +99,17 @@ const IndexPage: React.FC<PageProps> = () => {
     let ignore = false
     setLoading(true)
 
-    fetch(`${apiBase}/api/config`)
-      .then(res => {
-        res.json().then(json => {
-          const configJSON = json as components["schemas"]["Config"]
+    api
+      .getConfig()
+      .then(response => {
+        if (!response.data.switches) {
+          response.data.switches = {}
+        }
 
-          if (!configJSON.switches) {
-            configJSON.switches = {}
-          }
-
-          setConfig(configJSON)
-          setCurrentSwitch(Object.keys(configJSON.switches).length > 0
-            ? Object.keys(configJSON.switches)[0]
+        setConfig(response.data)
+        setCurrentSwitch(Object.keys(response.data.switches).length > 0
+            ? Object.keys(response.data.switches)[0]
             : undefined)
-        })
       })
 
     return () => {
@@ -178,13 +179,28 @@ const IndexPage: React.FC<PageProps> = () => {
           <div style={styles.content}>Editing buttons</div>
         </div>
       </div>
-      <NewRemoteModal 
+      <NewSwitchModal 
         show={showNewRemote}
         onHide={() => {
           setShowNewRemote(false)
         }}
         onConfirm={remoteName => {
-          console.log('Add new remote:', remoteName)
+          if (!config) return
+
+          if (config.switches[remoteName]) {
+            console.error('Cannot add remote')
+            return
+          }
+          
+          config.switches[remoteName] = {
+            layouts: {},
+          },
+
+          setConfig(config)
+          api
+            .putConfig(config)
+            .then(console.log)
+            .catch(console.error)
         }}
       />
     </main>
