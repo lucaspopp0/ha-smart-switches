@@ -17,8 +17,8 @@ on:
         value: ${{ jobs.bump-version.outputs.next-minor-tag }}
       next-patch-tag:
         value: ${{ jobs.bump-version.outputs.next-patch-tag }}
-      next-tag:
-        value: ${{ jobs.bump-version.outputs.next-tag }}
+      next-incrm-tag:
+        value: ${{ jobs.bump-version.outputs.next-incrm-tag }}
       change:
         value: ${{ jobs.bump-version.outputs.change }}
 
@@ -36,7 +36,7 @@ jobs:
       next-major-tag: ${{ steps.outputs.outputs.major_tag }}
       next-minor-tag: ${{ steps.outputs.outputs.minor_tag }}
       next-patch-tag: ${{ steps.outputs.outputs.patch_tag }}
-      next-tag: ${{ steps.outputs.outputs.tag }}
+      next-incrm-tag: ${{ steps.outputs.outputs.incrm_tag }}
       change: ${{ steps.outputs.outputs.change }}
     steps:
       -
