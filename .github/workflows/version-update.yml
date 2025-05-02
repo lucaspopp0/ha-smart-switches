@@ -66,23 +66,19 @@ jobs:
           PR_NUMBER: ${{ github.event.number }}
         run: |
           VERSION_FORMAT='${major}.${minor}.${patch}.${increment}'
-          PRERELEASE_MODE=true
           
-          if [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
-            VERSION_FORMAT='${major}.${minor}.${patch}'
-            PRERELEASE_MODE=false
-          elif [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
+          if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
             VERSION_FORMAT='${major}.${minor}.${patch}-pr'"${PR_NUMBER}"'-${increment}'
           fi
 
           echo "version_format=$VERSION_FORMAT" | tee -a "$GITHUB_OUTPUT"
-          echo "prerelease_mode=$PRERELEASE_MODE" | tee -a "$GITHUB_OUTPUT"
       -
         name: Compute next version
         id: version
         uses: paulhatch/semantic-version@v5.4.0
         with:
           tag_prefix: v
+          enable_prerelease_mode: true
       -
         name: Construct outputs
         id: outputs
