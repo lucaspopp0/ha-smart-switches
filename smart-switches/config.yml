@@ -1,6 +1,10 @@
 name: "Smart Switches"
 description: "Configure smart switches in your home"
+<<<<<<< HEAD
 version: "1.1.2.0"
+=======
+version: "1.1.1.2"
+>>>>>>> 9635f763ffe58d3c4976b29cbfa7b6aefb01442b
 slug: "smart-switches"
 image: "hub.docker.com/lucaspopp0/ha-smart-switches"
 init: false
