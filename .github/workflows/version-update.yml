@@ -107,6 +107,11 @@ jobs:
       -
         name: Commit new version
         if: ${{ github.event_name != 'pull_request '}}
+        env:
+          FULL: ${{ steps.outputs.outputs.incrm_tag }}
+          PATCH: ${{ steps.outputs.outputs.patch_tag }}
+          MINOR: ${{ steps.outputs.outputs.minor_tag }}
+          MAJOR: ${{ steps.outputs.outputs.major_tag }}
         run: |
           git config --global \
             user.name 'github-actions[bot]'
@@ -124,10 +129,19 @@ jobs:
           COMMIT_HASH=$(git show --no-patch --format="%H")
           echo "commit-hash=$COMMIT_HASH" | tee -a "$GITHUB_OUTPUT"
           
-          # Tag commit
-          git tag \
-            -m "${{ steps.outputs.outputs.incrm_tag }}" \
-            "${{ steps.outputs.outputs.incrm_tag }}"
+          # Remove floating tags
+          git push --delete origin "$PATCH" || true
+          git tag --delete "$PATCH" || true
+          git push --delete origin "$MINOR" || true
+          git tag --delete "$MINOR" || true
+          git push --delete origin "$MAJOR" || true
+          git tag --delete "$MAJOR" || true
+
+          # Create new tags
+          git tag "$FULL"
+          git tag "$PATCH"
+          git tag "$MINOR"
+          git tag "$MAJOR"
 
           git push --all --force
       -
