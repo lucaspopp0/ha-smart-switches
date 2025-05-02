@@ -1,11 +1,9 @@
-version: "1.1.5.2"
+version: "1.1.6.0"
 name: "Smart Switches"
 description: "Configure smart switches in your home"
 slug: "smart-switches"
 url: "https://github.com/lucaspopp0/ha-smart-switches/blob/main/smart-switches"
-
 homeassistant_api: true
-
 startup: application
 init: false
 arch:
@@ -14,7 +12,6 @@ arch:
   - armhf
   - armv7
   - i386
-
 webui: http://[HOST]:[PORT:8000]
 ports:
   8000/tcp: 8000
