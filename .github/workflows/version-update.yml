@@ -120,8 +120,8 @@ jobs:
           MAJOR: ${{ steps.outputs.outputs.major_tag }}
         run: |
           git config --global \
-            url."https://x-access-token:${{ steps.app-token.outputs.token }}@github.com/iStreamPlanet".insteadOf \
-            "https://github.com/iStreamPlanet"
+            url."https://x-access-token:${{ steps.app-token.outputs.token }}@github.com/lucaspopp0".insteadOf \
+            "https://github.com/lucaspopp0"
 
           git config --global \
             user.name 'lucaspopp0-bot[bot]'
@@ -140,7 +140,7 @@ jobs:
           echo "commit-hash=$COMMIT_HASH" | tee -a "$GITHUB_OUTPUT"
           
           # Remove floating tags
-          git push --delete origin "$PATCH" || true
+          git push --delete origin "$PATCH" > 2> /dev/null || true
           git tag --delete "$PATCH" || true
           git push --delete origin "$MINOR" || true
           git tag --delete "$MINOR" || true
