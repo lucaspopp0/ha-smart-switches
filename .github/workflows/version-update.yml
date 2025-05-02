@@ -105,6 +105,8 @@ jobs:
         name: Update config file
         uses: planetscale/ghcommit-action@v0.2.0
         id: commit
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         with:
           commit_message: "[bot] ${{ steps.outputs.outputs.tag }}"
           repo: ${{ github.repository }}
