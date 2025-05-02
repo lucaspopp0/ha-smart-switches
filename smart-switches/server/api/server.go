@@ -41,7 +41,7 @@ func (s *server) onStart() {
 	resp, err := s.ha.ListEntities("script")
 
 	if err != nil {
-		fmt.Printf("Home assistant service call failed: %v", err.Error())
+		fmt.Printf("Home assistant service call failed: %v\n", err.Error())
 	} else {
 		fmt.Printf("Home assistant response: %v\n", resp)
 	}
@@ -65,16 +65,19 @@ func NewServer() humacli.CLI {
 		// Create a new router & API.
 		s.router = chi.NewMux()
 
-		s.router.Use(SiteMiddleware)
+		s.router.Use(SiteMiddleware(true))
 
 		cfg := huma.DefaultConfig("Smart Switches", "")
 		cfg.DocsPath = "/api/docs"
+		cfg.SchemasPath = "/api/schemas"
 		cfg.OpenAPIPath = "/api/openapi.json"
 
 		api = humachi.New(
 			s.router,
 			cfg,
 		)
+
+		api.UseMiddleware(AllowCORS)
 
 		huma.AutoRegister(api, s)
 

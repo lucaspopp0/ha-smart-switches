@@ -1,23 +1,13 @@
-ARG BUILD_FROM
-
-FROM golang:1.24 AS go
-
-FROM $BUILD_FROM AS homeassistant
-
-COPY --from=go /usr/local/go /usr/local/go
-ENV PATH "/usr/local/go/bin:$PATH"
+FROM golang:1.24
 
 RUN mkdir -p /smartswitches/server
-RUN mkdir -p /smartswitches/site/public
-
 COPY ./server /smartswitches/server
-COPY ./site/public /smartswitches/site/public
 
 WORKDIR /smartswitches/server
 RUN go get ./...
 RUN CG_ENABLED=0 go build -o server .
 
-COPY run.sh /
+COPY ./local/run.sh /
 RUN chmod a+x /run.sh
 
 # Persistent data directory

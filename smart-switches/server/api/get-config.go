@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/danielgtaylor/huma/v2"
@@ -23,7 +24,8 @@ func (s *server) RegisterGetConfig(api huma.API) {
 	}, s.getConfig)
 }
 
-func (s *server) getConfig(ctx context.Context, _ *struct{}) (*GetConfigResponse, error) {
+func (s *server) getConfig(ctx context.Context, response *struct{}) (*GetConfigResponse, error) {
+	fmt.Println("Fetching config from file...")
 	cfg, err := config.FromFile()
 	if err != nil {
 		return nil, err
