@@ -150,7 +150,7 @@ jobs:
         with:
           args: |
             --addon \
-            ${{ inputs.push && '' || '--test ' }} \
+            ${{ inputs.push && '' || '--test --no-latest ' }} \
             --target smart-switches \
             --cache-tag ${{ hashFiles('smart-switches/**') }} \
             --docker-hub lucaspopp0 \
