@@ -1,6 +1,6 @@
 ARG BUILD_FROM
 
-FROM go:1.24 as go
+FROM golang:1.24 as go
 
 FROM $BUILD_FROM as homeassistant
 
