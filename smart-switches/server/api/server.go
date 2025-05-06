@@ -14,6 +14,7 @@ import (
 
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/config"
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/homeassistant"
+	"github.com/lucaspopp0/ha-smart-switches/smart-switches/model"
 )
 
 const (
@@ -25,6 +26,8 @@ type server struct {
 	router *chi.Mux
 	ha     homeassistant.API
 	cfg    config.Config
+
+	scripts []string
 }
 
 func (s *server) onStart() {
@@ -35,6 +38,15 @@ func (s *server) onStart() {
 		fmt.Printf("Failed to load config: %v\n", err.Error())
 	} else {
 		s.cfg = *cfg
+	}
+
+	if cfg.Switches == nil {
+		cfg.Switches = map[string]model.Switch{}
+
+		err = cfg.WriteFile()
+		if err != nil {
+			fmt.Printf("Failed to init config: %v\n", err.Error())
+		}
 	}
 
 	fmt.Println("Testing home assistant connection...")
