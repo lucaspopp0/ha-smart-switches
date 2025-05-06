@@ -1,13 +1,15 @@
 package api
 
-import "github.com/danielgtaylor/huma/v2"
+import (
+	"net/http"
+)
 
-func AllowCORS(ctx huma.Context, next func(huma.Context)) {
-	ctx.SetHeader("Access-Control-Allow-Origin", "*")
-	ctx.SetHeader("Access-Control-Allow-Methods", "*")
-	ctx.SetHeader("Access-Control-Allow-Headers", "*")
-	ctx.SetHeader("Access-Control-Allow-Credentials", "true")
-	ctx.SetHeader("Access-Control-Expose-Headers", "*")
+func AllowCORS(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", r.Header.Get("Origin"))
+		w.Header().Set("Access-Control-Allow-Methods", "GET, PUT, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "*")
 
-	next(ctx)
+		next.ServeHTTP(w, r)
+	})
 }

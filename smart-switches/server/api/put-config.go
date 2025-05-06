@@ -18,7 +18,7 @@ type PutConfigResponse struct {
 
 func (s *server) RegisterPutConfig(api huma.API) {
 	huma.Register(api, huma.Operation{
-		Method:      http.MethodPut,
+		Method:      http.MethodPost,
 		OperationID: "put-config",
 		Path:        "/api/config",
 		Errors: []int{

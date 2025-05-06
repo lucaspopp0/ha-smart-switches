@@ -65,6 +65,7 @@ func NewServer() humacli.CLI {
 		// Create a new router & API.
 		s.router = chi.NewMux()
 
+		s.router.Use(AllowCORS)
 		s.router.Use(SiteMiddleware(true))
 
 		cfg := huma.DefaultConfig("Smart Switches", "")
@@ -76,8 +77,6 @@ func NewServer() humacli.CLI {
 			s.router,
 			cfg,
 		)
-
-		api.UseMiddleware(AllowCORS)
 
 		huma.AutoRegister(api, s)
 

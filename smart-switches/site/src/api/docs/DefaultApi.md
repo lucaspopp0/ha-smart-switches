@@ -6,7 +6,7 @@ All URIs are relative to *http://localhost*
 |------------- | ------------- | -------------|
 |[**getConfig**](#getconfig) | **GET** /api/config | |
 |[**press**](#press) | **POST** /api/press | |
-|[**putConfig**](#putconfig) | **PUT** /api/config | |
+|[**putConfig**](#putconfig) | **POST** /api/config | |
 
 # **getConfig**
 > Config getConfig()
