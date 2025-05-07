@@ -183,4 +183,4 @@ jobs:
             --version "pr${{ github.event.number }}" \
             -r ${{ github.server_url }}/${{ github.repository }} \
             -b ${{ github.head_ref || github.ref_name }} \
-            --docker-hub "ghcr.io/lucaspopp0"
+            -d "ghcr.io/${{ github.repository }}"
