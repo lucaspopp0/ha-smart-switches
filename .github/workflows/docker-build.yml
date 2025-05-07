@@ -70,19 +70,28 @@ jobs:
             > spec/openapi.yaml
       -
         if: ${{ inputs.rebuild-site }}
+        name: Restore site cache
+        id: restore-gatsby-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: smart-switches/site/.cache
+          key: gatsby-cache-${{ hashFiles('smart-switches/server/spec/openapi.yaml', 'smart-switches/site/package-lock.json', 'smart-switches/site/src') }}
+      -
+        if: ${{ steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}
         uses: actions/setup-node@v4
         with:
           node-version-file: smart-switches/site/.nvmrc
           cache-dependency-path: smart-switches/site/package-lock.json
           cache: npm
       -
-        if: ${{ inputs.rebuild-site }}
+        if: ${{ steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}
         name: Install site dependencies
         working-directory: smart-switches/site
-        run: |
+        run: |]
           npm ci
       -
-        if: ${{ inputs.rebuild-site }}
+
+        if: ${{ steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}
         name: Re-generate server sdk
         working-directory: smart-switches/site
         run: |
@@ -94,15 +103,7 @@ jobs:
             ../server/spec/openapi.yaml \
             -o ./src/api/index.d.ts
       -
-        if: ${{ inputs.rebuild-site }}
-        name: Restore Gatsby cache
-        id: restore-gatsby-cache
-        uses: actions/cache/restore@v4
-        with:
-          path: smart-switches/site/.cache
-          key: gatsby-cache-${{ hashFiles('smart-switches/site/package-lock.json', 'smart-switches/site/src') }}
-      -
-        if: ${{ inputs.rebuild-site && steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}
         name: Build site
         working-directory: smart-switches/site
         run: |
@@ -119,10 +120,10 @@ jobs:
             echo "changes=true" | tee -a "$GITHUB_OUTPUT"
           else
             echo "changes=false" | tee -a "$GITHUB_OUTPUT"
-          fi      
+          fi
       -
         name: Save Gatsby cache
-        if: ${{ always() && steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}
+        if: ${{ always() && steps.restore-gatsby-cache.outputs.cache-hit == 'false' }}
         uses: actions/cache/save@v4
         with:
           key: ${{ steps.restore-gatsby-cache.outputs.cache-primary-key }}
