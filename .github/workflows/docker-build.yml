@@ -77,6 +77,12 @@ jobs:
             | yq -o=yaml '.' \
             > spec/openapi.yaml
       -
+        name: Save server cache
+        uses: actions/cache/save@v4
+        with:
+          path: smart-switches/server/spec
+          key: server-spec-${{ hashFiles('smart-switches/server/**/*.go') }}
+      -
         if: ${{ inputs.rebuild-site }}
         name: Restore site cache
         id: restore-gatsby-cache
