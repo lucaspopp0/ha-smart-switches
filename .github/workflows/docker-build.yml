@@ -171,7 +171,7 @@ jobs:
             --target smart-switches \
             --image "smart-switches-{arch}" \
             --addon \
-            --all \
+            --aarch64 \
             ${{ inputs.push && '' || '--test --no-latest ' }} \
             --cache-tag ${{ github.ref }} \
             --version "pr${{ github.event.number }}" \
