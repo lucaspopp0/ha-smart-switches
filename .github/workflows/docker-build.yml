@@ -179,7 +179,7 @@ jobs:
             --image "smart-switches-{arch}" \
             --addon \
             --aarch64 \
-            ${{ inputs.push && '' || '--test --no-latest ' }} \
+            ${{ inputs.push && '' || '--no-latest ' }} \
             --cache-tag ${{ github.ref }} \
             --version "pr${{ github.event.number }}" \
             -r ${{ github.server_url }}/${{ github.repository }} \
