@@ -150,13 +150,13 @@ jobs:
           docker run \
             --rm \
             --privileged \
-            -v ~/.docker:/root/.docker \
+            -v $(pwd)/smart-switches:/data \
+            -v /var/run/docker.sock:/var/run/docker.sock:ro \
             ghcr.io/home-assistant/amd64-builder:latest \
+            --target smart-switches \
             --addon \
             --all \
             ${{ inputs.push && '' || '--test --no-latest ' }} \
-            --target smart-switches \
-            --all
             --cache-tag ${{ github.ref }} \
             --version "pr${{ github.event.number }}" \
             -r ${{ github.server_url }}/${{ github.repository }} \
