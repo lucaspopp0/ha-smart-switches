@@ -78,6 +78,7 @@ jobs:
             > spec/openapi.yaml
       -
         name: Save server cache
+        if: ${{ steps.restore-server-cache.outputs.cache-hit == 'false' }}
         uses: actions/cache/save@v4
         with:
           path: smart-switches/server/spec
