@@ -45,7 +45,7 @@ jobs:
         name: Parse architectures from config
         id: architectures
         run: |
-          ARCHITECTURES=$(cat smart-switches/config.yml | yq -o=json '.arch')
+          ARCHITECTURES=$(cat smart-switches/config.yml | yq -I0 -o=json '.arch')
           echo "architectures=$ARCHITECTURES" | tee -a "$GITHUB_OUTPUT"
       -
         name: Read version from config.yml
