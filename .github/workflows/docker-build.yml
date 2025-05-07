@@ -44,12 +44,12 @@ jobs:
           CONFIG_VERSION=$(yq '.version' ./smart-switches/config.yml)
           echo "version=$CONFIG_VERSION" | tee -a "$GITHUB_OUTPUT"
       -
-        if: ${{ inputs.push }}
         name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_TOKEN }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       -
         if: ${{ inputs.rebuild-server }}
         uses: actions/setup-go@v5
@@ -145,15 +145,19 @@ jobs:
           repo: ${{ github.repository }}
           branch: ${{ github.head_ref || github.ref_name }}
       -
-        name: Build and publish
-        uses: home-assistant/builder@master
-        with:
-          args: |
+        name: docker build
+        run: |
+          docker run \
+            --rm \
+            --privileged \
+            -v ~/.docker:/root/.docker \
+            ghcr.io/home-assistant/amd64-builder:latest \
             --addon \
+            --all \
             ${{ inputs.push && '' || '--test --no-latest ' }} \
             --target smart-switches \
+            --all
             --cache-tag ${{ github.ref }} \
-            --docker-hub lucaspopp0 \
-            --image ha-smart-switches \
             --version "pr${{ github.event.number }}" \
-            --aarch64
+            -r ${{ github.server_url }}/${{ github.repository }} \
+            -b ${{ github.head_ref || github.ref_name }}
