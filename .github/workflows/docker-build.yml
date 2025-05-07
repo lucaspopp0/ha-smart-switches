@@ -154,6 +154,7 @@ jobs:
             -v /var/run/docker.sock:/var/run/docker.sock:ro \
             ghcr.io/home-assistant/amd64-builder:latest \
             --target smart-switches \
+            --image "smart-switches-{arch}" \
             --addon \
             --all \
             ${{ inputs.push && '' || '--test --no-latest ' }} \
