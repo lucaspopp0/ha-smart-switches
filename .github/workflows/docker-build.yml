@@ -101,7 +101,7 @@ jobs:
             > spec/openapi.yaml
       -
         name: Save server cache
-        if: ${{ steps.restore-server-cache.outputs.cache-hit == 'false' }}
+        if: ${{ steps.restore-server-cache.outputs.cache-hit != 'true' }}
         uses: actions/cache/save@v4
         with:
           path: smart-switches/server/spec
@@ -161,7 +161,7 @@ jobs:
           fi
       -
         name: Save Gatsby cache
-        if: ${{ always() && steps.restore-gatsby-cache.outputs.cache-hit == 'false' }}
+        if: ${{ always() && steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}
         uses: actions/cache/save@v4
         with:
           key: ${{ steps.restore-gatsby-cache.outputs.cache-primary-key }}
