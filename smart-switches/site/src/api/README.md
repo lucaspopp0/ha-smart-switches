@@ -53,7 +53,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *DefaultApi* | [**getConfig**](docs/DefaultApi.md#getconfig) | **GET** /api/config | 
 *DefaultApi* | [**press**](docs/DefaultApi.md#press) | **POST** /api/press | 
-*DefaultApi* | [**putConfig**](docs/DefaultApi.md#putconfig) | **POST** /api/config | 
+*DefaultApi* | [**putConfig**](docs/DefaultApi.md#putconfig) | **PUT** /api/config | 
 
 
 ### Documentation For Models
