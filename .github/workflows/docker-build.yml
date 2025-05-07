@@ -202,7 +202,7 @@ jobs:
           elif [[ "${{ matrix.architecture }}" = "i386" ]]; then
             echo "platform=linux/386" | tee -a "$GITHUB_OUTPUT"
           elif [[ "${{ matrix.architecture }}" = "armhf" ]]; then
-            go_base="docker.elastic.co/beats-dev/golang-crossbuild:1.24-armhf"
+            go_base="docker.elastic.co/beats-dev/golang-crossbuild:1.24.1-armhf"
             echo "platform=linux/arm/v6" | tee -a "$GITHUB_OUTPUT"
           elif [[ "${{ matrix.architecture }}" = "armv7" ]]; then
             echo "platform=linux/arm/v7" | tee -a "$GITHUB_OUTPUT"
