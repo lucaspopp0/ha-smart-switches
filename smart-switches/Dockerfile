@@ -15,6 +15,7 @@ COPY ./server /smartswitches/server
 COPY ./site/public /smartswitches/site/public
 
 WORKDIR /smartswitches/server
+RUN go get ./...
 RUN CG_ENABLED=0 go build -o server .
 
 COPY run.sh /

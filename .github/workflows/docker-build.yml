@@ -127,9 +127,15 @@ jobs:
             mkdir src/api
           fi
 
-          npx openapi-typescript \
-            ../server/spec/openapi.yaml \
-            -o ./src/api/index.d.ts
+          docker run --rm \
+            --user $(id -u) \
+            -v .:/local \
+            -v $(pwd)/../server/spec:/spec \
+            openapitools/openapi-generator-cli:latest generate \
+            -i /spec/openapi.yaml \
+            -g typescript-axios \
+            -o /local/src/api \
+            --additional-properties="npmName=@smart-switches/server,npmVersion=0.0.0,paramNaming=original,modelPropertyNaming=original"
       -
         if: ${{ steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}
         name: Build site
