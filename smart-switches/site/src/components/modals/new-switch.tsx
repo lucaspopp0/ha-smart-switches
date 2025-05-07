@@ -1,5 +1,5 @@
 import React from "react"
-import { Button, InputGroup, Modal } from "react-bootstrap";
+import { Button, Form, InputGroup, Modal } from "react-bootstrap";
 import { components } from "../../sdk";
 
 export type NewSwitchModalProps = {
@@ -9,18 +9,19 @@ export type NewSwitchModalProps = {
 }
 
 const NewSwitchModal: React.FC<NewSwitchModalProps> = (props) => {
-    console.log(props.show)
+    const [name, setName] = React.useState('')
     return (
         <Modal show={props.show} onHide={props.onHide}>
             <Modal.Header closeButton>
                 <Modal.Title>Add Layout</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <InputGroup>
-                    <InputGroup.Text>
-                        Remote Name
-                    </InputGroup.Text>
-                </InputGroup>
+                <Form.Control
+                    type="text"
+                    placeholder="Remote Name"
+                    value={name}
+                    onChange={event => setName(event.target.value)}
+                />
             </Modal.Body>
 
             <Modal.Footer>
