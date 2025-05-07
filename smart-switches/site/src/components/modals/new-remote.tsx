@@ -9,6 +9,7 @@ export type NewRemoteModalProps = {
 }
 
 const NewRemoteModal: React.FC<NewRemoteModalProps> = (props) => {
+    console.log(props.show)
     return (
         <Modal show={props.show} onHide={props.onHide}>
             <Modal.Header closeButton>
