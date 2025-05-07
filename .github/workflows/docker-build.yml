@@ -161,6 +161,11 @@ jobs:
           repo: ${{ github.repository }}
           branch: ${{ github.head_ref || github.ref_name }}
       -
+        name: Fail job if changes committed
+        if: ${{ steps.detect-changes.outputs.changes == 'true' }}
+        run: |
+          exit 1
+      -
         name: docker build
         run: |
           docker run \
