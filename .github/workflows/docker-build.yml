@@ -150,7 +150,8 @@ jobs:
         with:
           args: |
             --addon \
+            --all
             ${{ inputs.push && '' || '--test --no-latest ' }} \
             --target smart-switches \
             --cache-tag ${{ github.ref }} \
-            --version "pr${{ github.event.number }}"
+            --version "pr${{ github.event.number }}" \
