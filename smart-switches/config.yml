@@ -11,7 +11,7 @@ arch:
   - i386
 startup: application
 init: false
-panel_icon: 'mdi:light-switch-off'
+panel_icon: 'mdi:puzzle'
 webui: http://[HOST]:[PORT:8000]
 ports:
   8000/tcp: 8000
