@@ -8,7 +8,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Button, Dropdown, Tab, Tabs } from "react-bootstrap";
+import { Button, Dropdown, Tab, Tabs, Toast } from "react-bootstrap";
 
 import NewLayoutModal from "../components/modals/new-layout";
 import NewSwitchModal from "../components/modals/new-switch";
@@ -142,7 +142,7 @@ const IndexPage: React.FC<PageProps> = () => {
             style={styles.sidebarItem}
             onClick={() => setShowNewSwitch(true)}
           >
-            + New remote
+            + New switch
           </Button>
         </div>
         <div style={styles.content}>
@@ -184,23 +184,31 @@ const IndexPage: React.FC<PageProps> = () => {
         onHide={() => {
           setShowNewSwitch(false)
         }}
-        onConfirm={remoteName => {
-          if (!config) return
+        onConfirm={async remoteName => {
+          if (!config) {
+            config = {
+              switches: {}
+            }
+          }
+
+          if (!config.switches) {
+            config = {
+              switches: {}
+            }
+          }
 
           if (config.switches[remoteName]) {
-            console.error('Cannot add remote')
-            return
+            throw new Error('Cannot add remote')
           }
           
           config.switches[remoteName] = {
             layouts: {},
-          },
+          }
 
-          setConfig(config)
-          api
-            .putConfig(config)
-            .then(console.log)
-            .catch(console.error)
+          const res = await api.putConfig(config)
+          setConfig(res.data)
+
+          return res.data
         }}
       />
     </main>
