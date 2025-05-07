@@ -57,6 +57,7 @@ jobs:
   build-image:
     needs: setup
     strategy:
+      fail-fast: false
       matrix:
         architecture: ${{ fromJson(needs.setup.outputs.architectures) }}
     runs-on: ${{ contains(fromJson('["armhf", "armv7", "aarch64"]'), matrix.architecture) && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
