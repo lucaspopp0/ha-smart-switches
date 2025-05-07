@@ -219,7 +219,7 @@ jobs:
         name: docker build
         uses: docker/build-push-action@v6.16.0
         with:
-          push: true
+          push: ${{ inputs.push }}
           context: smart-switches
           file: smart-switches/Dockerfile
           platforms: ${{ steps.flags.outputs.platform }}
