@@ -102,7 +102,7 @@ jobs:
           path: smart-switches/site/.cache
           key: gatsby-cache-${{ hashFiles('smart-switches/site/package-lock.json', 'smart-switches/site/src') }}
       -
-        if: ${{ inputs.rebuild-site }}
+        if: ${{ inputs.rebuild-site && steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}
         name: Build site
         working-directory: smart-switches/site
         run: |
