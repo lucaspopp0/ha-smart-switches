@@ -1,0 +1,10 @@
+services:
+  server:
+    container_name: smart-switches-server
+    image: ha-smart-switches-server
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "7125:8000"
+    volumes:
+      - ./data:/data

@@ -8,7 +8,7 @@
     "gatsby"
   ],
   "scripts": {
-    "develop": "gatsby develop",
+    "develop": "GATSBY_API_BASE='http://127.0.0.1:7125' gatsby develop -p 7128",
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.5",
+    "dotenv": "^16.5.0",
     "gatsby": "^5.14.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.9",
