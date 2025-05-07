@@ -50,8 +50,10 @@ jobs:
           filters: |
             smart-switches:
               - 'smart-switches/**'
+              - '.github/workflows/docker-build.yml'
             server:
               - 'smart-switches/server/**'
+              - '.github/workflows/docker-build.yml'
             site:
               - 'smart-switches/server/spec/**'
               - 'smart-switches/site/**'

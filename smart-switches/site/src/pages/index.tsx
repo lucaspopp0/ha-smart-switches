@@ -83,7 +83,7 @@ const IndexPage: React.FC<PageProps> = () => {
   let [currentSwitch, setCurrentSwitch] = React.useState<string | undefined>(undefined)
   let [currentLayout, setCurrentLayout] = React.useState<string | undefined>(undefined)
 
-  let [showNewRemote, setShowNewRemote] = React.useState(false)
+  let [showNewSwitch, setShowNewSwitch] = React.useState(false)
 
   let apiBase = process.env.GATSBY_API_BASE ?? '.'
 
@@ -140,7 +140,7 @@ const IndexPage: React.FC<PageProps> = () => {
           <Button
             key="_"
             style={styles.sidebarItem}
-            onClick={() => setShowNewRemote(true)}
+            onClick={() => setShowNewSwitch(true)}
           >
             + New remote
           </Button>
@@ -180,9 +180,9 @@ const IndexPage: React.FC<PageProps> = () => {
         </div>
       </div>
       <NewSwitchModal 
-        show={showNewRemote}
+        show={showNewSwitch}
         onHide={() => {
-          setShowNewRemote(false)
+          setShowNewSwitch(false)
         }}
         onConfirm={remoteName => {
           if (!config) return

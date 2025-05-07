@@ -1,6 +1,5 @@
 import React from "react"
 import { Button, Form, InputGroup, Modal } from "react-bootstrap";
-import { components } from "../../sdk";
 
 export type NewSwitchModalProps = {
     show?: boolean,

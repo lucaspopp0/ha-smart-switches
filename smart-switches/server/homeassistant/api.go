@@ -14,17 +14,26 @@ const (
 	baseURL = "http://supervisor/core/api/"
 )
 
-type API interface {
-	ListEntities(
-		domains ...string,
-	) ([]string, error)
+type EntityState struct {
+	EntityID string `json:"entity_id"`
+	State    string `json:"state"`
+}
+
+type homeassistantAPI interface {
+	GetStates() ([]EntityState, error)
+	GetEntityStates(entityID string) ([]EntityState, error)
 
 	// CallService executes POST /core/api/services/{servicePath}
 	// with the specified payload as the body if desired
-	CallService(
-		servicePath string,
-		payload map[string]any,
-	) (*http.Response, error)
+	CallService(servicePath string, payload any) (*http.Response, error)
+}
+
+type API interface {
+	homeassistantAPI
+
+	ListEntities(
+		domains ...string,
+	) ([]string, error)
 
 	// Tries to identify the service automatically and execute it
 	Execute(
@@ -59,14 +68,27 @@ func (c *apiClient) do(req *http.Request) (*http.Response, error) {
 	return http.DefaultClient.Do(req)
 }
 
-type EntityState struct {
-	EntityID string `json:"entity_id"`
-	State    string `json:"state"`
-}
-
 func (c *apiClient) ListEntities(
 	domains ...string,
 ) ([]string, error) {
+	entityStates, err := c.GetStates()
+	if err != nil {
+		return nil, err
+	}
+
+	entityIDs := []string{}
+	for _, es := range entityStates {
+		for _, domain := range domains {
+			if strings.HasPrefix(es.EntityID, domain) {
+				entityIDs = append(entityIDs, es.EntityID)
+			}
+		}
+	}
+
+	return entityIDs, nil
+}
+
+func (c *apiClient) GetStates() ([]EntityState, error) {
 	req, err := http.NewRequest(http.MethodGet, c.requestURL("states"), http.NoBody)
 	if err != nil {
 		return nil, err
@@ -92,21 +114,41 @@ func (c *apiClient) ListEntities(
 		return nil, err
 	}
 
-	entities := []string{}
-	for _, domain := range domains {
-		for _, state := range states {
-			if strings.HasPrefix(state.EntityID, domain) {
-				entities = append(entities, state.EntityID)
-			}
-		}
+	return states, nil
+}
+
+func (c *apiClient) GetEntityStates(entityID string) ([]EntityState, error) {
+	req, err := http.NewRequest(http.MethodGet, c.requestURL(fmt.Sprintf("states/%s", entityID)), http.NoBody)
+	if err != nil {
+		return nil, err
 	}
 
-	return entities, nil
+	resp, err := c.do(req)
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading body: %w", err)
+	}
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("%v error: %s", resp.StatusCode, string(body))
+	}
+
+	states := []EntityState{}
+	err = json.Unmarshal(body, &states)
+	if err != nil {
+		return nil, err
+	}
+
+	return states, nil
 }
 
 func (c *apiClient) CallService(
 	servicePath string,
-	payload map[string]any,
+	payload any,
 ) (*http.Response, error) {
 	var body io.Reader = http.NoBody
 	if payload != nil {
