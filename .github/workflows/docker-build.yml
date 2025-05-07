@@ -162,4 +162,5 @@ jobs:
             --cache-tag ${{ github.ref }} \
             --version "pr${{ github.event.number }}" \
             -r ${{ github.server_url }}/${{ github.repository }} \
-            -b ${{ github.head_ref || github.ref_name }}
+            -b ${{ github.head_ref || github.ref_name }} \
+            --docker-hub "ghcr.io/lucaspopp0"
