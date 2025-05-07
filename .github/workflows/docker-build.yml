@@ -51,13 +51,21 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       -
+        name: Restore server cache
+        id: restore-server-cache
         if: ${{ inputs.rebuild-server }}
+        uses: actions/cache/restore@v4
+        with:
+          path: smart-switches/server/spec
+          key: server-spec-${{ hashFiles('smart-switches/server/**/*.go') }}
+      -
+        if: ${{ steps.restore-server-cache.outputs.cache-hit == 'false' }}
         uses: actions/setup-go@v5
         with:
           go-version-file: smart-switches/server/go.mod
           cache-dependency-path: smart-switches/server/go.sum
       -
-        if: ${{ inputs.rebuild-server }}
+        if: ${{ steps.restore-server-cache.outputs.cache-hit == 'false' }}
         name: Re-generate server openapi spec
         working-directory: smart-switches/server
         run: |
