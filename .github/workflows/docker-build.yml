@@ -111,8 +111,8 @@ jobs:
         id: restore-gatsby-cache
         uses: actions/cache/restore@v4
         with:
+          key: gatsby-cache-${{ hashFiles('smart-switches/server/spec/openapi.yaml')}}-${{ hashFiles('smart-switches/site/package-lock.json') }}-${{ hashFiles('smart-switches/site/src/**') }}
           path: smart-switches/site/.cache
-          key: gatsby-cache-${{ hashFiles('smart-switches/server/spec/openapi.yaml', 'smart-switches/site/package-lock.json', 'smart-switches/site/src/**') }}
       -
         if: ${{ steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}
         uses: actions/setup-node@v4
