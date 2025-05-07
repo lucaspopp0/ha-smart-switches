@@ -23,6 +23,7 @@ on:
 
 permissions:
   contents: read
+  packages: write
 
 defaults:
   run:
@@ -30,34 +31,64 @@ defaults:
 
 jobs:
 
-  docker-build:
+  setup:
     runs-on: ubuntu-latest
+    outputs:
+      architectures: ${{ steps.architectures.outputs.architectures }}
+      config-version: ${{ steps.config-version.outputs.version }}
     steps:
       -
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.ref || github.ref }}
       -
+        name: Parse architectures from config
+        id: architectures
+        run: |
+          ARCHITECTURES=$(cat smart-switches/config.yml | yq -I0 -o=json '.arch')
+          echo "architectures=$ARCHITECTURES" | tee -a "$GITHUB_OUTPUT"
+      -
         name: Read version from config.yml
         id: config-version
         run: |
           CONFIG_VERSION=$(yq '.version' ./smart-switches/config.yml)
           echo "version=$CONFIG_VERSION" | tee -a "$GITHUB_OUTPUT"
+
+  build:
+    needs: setup
+    strategy:
+      fail-fast: false
+      matrix:
+        architecture: ${{ fromJson(needs.setup.outputs.architectures) }}
+    runs-on: ${{ contains(fromJson('["armhf", "armv7", "aarch64"]'), matrix.architecture) && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
+    steps:
       -
-        if: ${{ inputs.push }}
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+      -
         name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_TOKEN }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
       -
+        name: Restore server cache
+        id: restore-server-cache
         if: ${{ inputs.rebuild-server }}
+        uses: actions/cache/restore@v4
+        with:
+          path: smart-switches/server/spec
+          key: server-spec-${{ hashFiles('smart-switches/server/**/*.go') }}
+      -
+        if: ${{ steps.restore-server-cache.outputs.cache-hit == 'false' }}
         uses: actions/setup-go@v5
         with:
           go-version-file: smart-switches/server/go.mod
           cache-dependency-path: smart-switches/server/go.sum
       -
-        if: ${{ inputs.rebuild-server }}
+        if: ${{ steps.restore-server-cache.outputs.cache-hit == 'false' }}
         name: Re-generate server openapi spec
         working-directory: smart-switches/server
         run: |
@@ -69,20 +100,36 @@ jobs:
             | yq -o=yaml '.' \
             > spec/openapi.yaml
       -
+        name: Save server cache
+        if: ${{ steps.restore-server-cache.outputs.cache-hit == 'false' }}
+        uses: actions/cache/save@v4
+        with:
+          path: smart-switches/server/spec
+          key: server-spec-${{ hashFiles('smart-switches/server/**/*.go') }}
+      -
         if: ${{ inputs.rebuild-site }}
+        name: Restore site cache
+        id: restore-gatsby-cache
+        uses: actions/cache/restore@v4
+        with:
+          key: gatsby-cache-${{ hashFiles('smart-switches/server/spec/openapi.yaml')}}-${{ hashFiles('smart-switches/site/package-lock.json') }}-${{ hashFiles('smart-switches/site/src/**') }}
+          path: smart-switches/site/.cache
+      -
+        if: ${{ steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}
         uses: actions/setup-node@v4
         with:
           node-version-file: smart-switches/site/.nvmrc
           cache-dependency-path: smart-switches/site/package-lock.json
           cache: npm
       -
-        if: ${{ inputs.rebuild-site }}
+        if: ${{ steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}
         name: Install site dependencies
         working-directory: smart-switches/site
         run: |
           npm ci
       -
-        if: ${{ inputs.rebuild-site }}
+
+        if: ${{ steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}
         name: Re-generate server sdk
         working-directory: smart-switches/site
         run: |
@@ -94,15 +141,7 @@ jobs:
             ../server/spec/openapi.yaml \
             -o ./src/api/index.d.ts
       -
-        if: ${{ inputs.rebuild-site }}
-        name: Restore Gatsby cache
-        id: restore-gatsby-cache
-        uses: actions/cache/restore@v4
-        with:
-          path: smart-switches/site/.cache
-          key: gatsby-cache-${{ hashFiles('smart-switches/site/package-lock.json', 'smart-switches/site/src') }}
-      -
-        if: ${{ inputs.rebuild-site }}
+        if: ${{ steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}
         name: Build site
         working-directory: smart-switches/site
         run: |
@@ -119,10 +158,10 @@ jobs:
             echo "changes=true" | tee -a "$GITHUB_OUTPUT"
           else
             echo "changes=false" | tee -a "$GITHUB_OUTPUT"
-          fi      
+          fi
       -
         name: Save Gatsby cache
-        if: ${{ always() && steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}
+        if: ${{ always() && steps.restore-gatsby-cache.outputs.cache-hit == 'false' }}
         uses: actions/cache/save@v4
         with:
           key: ${{ steps.restore-gatsby-cache.outputs.cache-primary-key }}
@@ -145,15 +184,44 @@ jobs:
           repo: ${{ github.repository }}
           branch: ${{ github.head_ref || github.ref_name }}
       -
-        name: Build and publish
-        uses: home-assistant/builder@master
+        name: Fail job if changes committed
+        if: ${{ steps.detect-changes.outputs.changes == 'true' }}
+        run: |
+          exit 1
+      -
+        name: Docker build flags
+        id: flags
+        run: |
+          from=$(yq --no-colors eval ".build_from.${{ matrix.architecture }}" "smart-switches/build.yaml")
+          echo "from=${from}" | tee -a "$GITHUB_OUTPUT"
+
+          if [[ "${{ matrix.architecture}}" = "amd64" ]]; then
+            echo "platform=linux/amd64" | tee -a "$GITHUB_OUTPUT"
+          elif [[ "${{ matrix.architecture }}" = "i386" ]]; then
+            echo "platform=linux/386" | tee -a "$GITHUB_OUTPUT"
+          elif [[ "${{ matrix.architecture }}" = "armhf" ]]; then
+            echo "platform=linux/arm/v6" | tee -a "$GITHUB_OUTPUT"
+          elif [[ "${{ matrix.architecture }}" = "armv7" ]]; then
+            echo "platform=linux/arm/v7" | tee -a "$GITHUB_OUTPUT"
+          elif [[ "${{ matrix.architecture }}" = "aarch64" ]]; then
+            echo "platform=linux/arm64/v8" | tee -a "$GITHUB_OUTPUT"
+          else
+            echo "::error ::Could not determine platform for architecture ${{ matrix.architecture }}"
+            exit 1
+          fi
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3.10.0
+      -
+        name: docker build
+        uses: docker/build-push-action@v6.16.0
         with:
-          args: |
-            --addon \
-            ${{ inputs.push && '' || '--test --no-latest ' }} \
-            --target smart-switches \
-            --cache-tag ${{ github.ref }} \
-            --docker-hub lucaspopp0 \
-            --image ha-smart-switches \
-            --version "pr${{ github.event.number }}" \
-            --aarch64
+          context: smart-switches
+          file: smart-switches/Dockerfile
+          platforms: ${{ steps.flags.outputs.platform }}
+          build-args: |
+            BUILD_ARCH=${{ matrix.architecture }}
+            BUILD_FROM=${{ steps.flags.outputs.from }}
