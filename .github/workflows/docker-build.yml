@@ -195,11 +195,14 @@ jobs:
           from=$(yq --no-colors eval ".build_from.${{ matrix.architecture }}" "smart-switches/build.yaml")
           echo "from=${from}" | tee -a "$GITHUB_OUTPUT"
 
+          go_base="golang:1.24"
+
           if [[ "${{ matrix.architecture}}" = "amd64" ]]; then
             echo "platform=linux/amd64" | tee -a "$GITHUB_OUTPUT"
           elif [[ "${{ matrix.architecture }}" = "i386" ]]; then
             echo "platform=linux/386" | tee -a "$GITHUB_OUTPUT"
           elif [[ "${{ matrix.architecture }}" = "armhf" ]]; then
+            go_base="docker.elastic.co/beats-dev/golang-crossbuild:1.24-armhf"
             echo "platform=linux/arm/v6" | tee -a "$GITHUB_OUTPUT"
           elif [[ "${{ matrix.architecture }}" = "armv7" ]]; then
             echo "platform=linux/arm/v7" | tee -a "$GITHUB_OUTPUT"
@@ -209,6 +212,8 @@ jobs:
             echo "::error ::Could not determine platform for architecture ${{ matrix.architecture }}"
             exit 1
           fi
+
+          echo "go-base=$go_base" | tee -a "$GITHUB_OUTPUT"
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -227,3 +232,4 @@ jobs:
           build-args: |
             BUILD_ARCH=${{ matrix.architecture }}
             BUILD_FROM=${{ steps.flags.outputs.from }}
+            GO_BASE=${{ steps.flags.outputs.go-base }}
