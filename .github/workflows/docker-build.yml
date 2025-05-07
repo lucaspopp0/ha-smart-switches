@@ -153,7 +153,4 @@ jobs:
             ${{ inputs.push && '' || '--test --no-latest ' }} \
             --target smart-switches \
             --cache-tag ${{ github.ref }} \
-            --docker-hub lucaspopp0 \
-            --image ha-smart-switches \
-            --version "pr${{ github.event.number }}" \
-            --aarch64
+            --version "pr${{ github.event.number }}"
