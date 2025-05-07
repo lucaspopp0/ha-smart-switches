@@ -1,8 +1,9 @@
 ARG BUILD_FROM
+ARG GO_BASE
 
-FROM golang:1.24 as go
+FROM golang:1.24 AS go
 
-FROM $BUILD_FROM as homeassistant
+FROM $BUILD_FROM AS homeassistant
 
 COPY --from=go /usr/local/go /usr/local/go
 ENV PATH "/usr/local/go/bin:$PATH"
@@ -25,3 +26,7 @@ WORKDIR /data
 # Expose port
 EXPOSE 8000
 CMD [ "/run.sh" ]
+
+LABEL org.opencontainers.image.source=https://github.com/lucaspopp0/ha-smart-switches
+LABEL org.opencontainers.image.description="Add-on for home assistant"
+LABEL org.opencontainers.image.licenses=MIT
