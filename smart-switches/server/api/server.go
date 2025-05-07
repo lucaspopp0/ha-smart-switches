@@ -78,7 +78,7 @@ func NewServer() humacli.CLI {
 		s.router = chi.NewMux()
 
 		s.router.Use(AllowCORS)
-		s.router.Use(SiteMiddleware(true))
+		s.router.Use(SiteMiddleware(false))
 
 		cfg := huma.DefaultConfig("Smart Switches", "")
 		cfg.DocsPath = "/api/docs"
