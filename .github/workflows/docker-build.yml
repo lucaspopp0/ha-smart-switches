@@ -223,7 +223,7 @@ jobs:
           context: smart-switches
           file: smart-switches/Dockerfile
           platforms: ${{ steps.flags.outputs.platform }}
-          tags: ${{ github.repository_owner }}/smart-switches:${{ needs.setup.outputs.config-version }}
+          tags: ghcr.io/${{ github.repository_owner }}/smart-switches:${{ needs.setup.outputs.config-version }}
           build-args: |
             BUILD_ARCH=${{ matrix.architecture }}
             BUILD_FROM=${{ steps.flags.outputs.from }}
