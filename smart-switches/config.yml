@@ -3,6 +3,7 @@ name: "Smart Switches"
 description: "Configure smart switches in your home"
 slug: "smart-switches"
 url: "https://github.com/lucaspopp0/ha-smart-switches/blob/main/smart-switches"
+image: ghcr.io/lucaspopp0/smart-switches
 arch:
   - aarch64
   - amd64
