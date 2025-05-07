@@ -54,7 +54,7 @@ jobs:
           CONFIG_VERSION=$(yq '.version' ./smart-switches/config.yml)
           echo "version=$CONFIG_VERSION" | tee -a "$GITHUB_OUTPUT"
 
-  build-image:
+  build:
     needs: setup
     strategy:
       fail-fast: false
