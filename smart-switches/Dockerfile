@@ -25,3 +25,7 @@ WORKDIR /data
 # Expose port
 EXPOSE 8000
 CMD [ "/run.sh" ]
+
+LABEL org.opencontainers.image.source=https://github.com/lucaspopp0/ha-smart-switches
+LABEL org.opencontainers.image.description="Add-on for home assistant"
+LABEL org.opencontainers.image.licenses=MIT
