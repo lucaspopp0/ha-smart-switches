@@ -87,7 +87,7 @@ jobs:
         if: ${{ steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}
         name: Install site dependencies
         working-directory: smart-switches/site
-        run: |]
+        run: |
           npm ci
       -
 
