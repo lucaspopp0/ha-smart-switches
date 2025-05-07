@@ -2,13 +2,13 @@ import React from "react"
 import { Button, InputGroup, Modal } from "react-bootstrap";
 import { components } from "../../sdk";
 
-export type NewRemoteModalProps = {
+export type NewSwitchModalProps = {
     show?: boolean,
     onHide?: () => void,
     onConfirm?: (remoteName: string) => void,
 }
 
-const NewRemoteModal: React.FC<NewRemoteModalProps> = (props) => {
+const NewSwitchModal: React.FC<NewSwitchModalProps> = (props) => {
     console.log(props.show)
     return (
         <Modal show={props.show} onHide={props.onHide}>
@@ -31,4 +31,4 @@ const NewRemoteModal: React.FC<NewRemoteModalProps> = (props) => {
     )
 }
 
-export default NewRemoteModal;
+export default NewSwitchModal;

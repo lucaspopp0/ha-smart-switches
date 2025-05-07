@@ -12,7 +12,7 @@ import { Button, Dropdown, Tab, Tabs } from "react-bootstrap";
 
 import type { components } from '../sdk'
 import NewLayoutModal from "../components/modals/new-layout";
-import NewRemoteModal from "../components/modals/new-remote";
+import NewSwitchModal from "../components/modals/new-switch";
 
 const borderColor = 'rgb(224, 229, 229)';
 const backgroundColor = 'white';
@@ -83,7 +83,7 @@ const IndexPage: React.FC<PageProps> = () => {
   let [currentSwitch, setCurrentSwitch] = React.useState<string | undefined>(undefined)
   let [currentLayout, setCurrentLayout] = React.useState<string | undefined>(undefined)
 
-  let [showNewRemote, setShowNewRemote] = React.useState(false)
+  let [showNewSwitch, setShowNewSwitch] = React.useState(false)
 
   React.useEffect(() => {
     if (loading) {
@@ -134,7 +134,7 @@ const IndexPage: React.FC<PageProps> = () => {
           <Button
             key="_"
             style={styles.sidebarItem}
-            onClick={() => setShowNewRemote(true)}
+            onClick={() => setShowNewSwitch(true)}
           >
             + New remote
           </Button>
@@ -173,10 +173,10 @@ const IndexPage: React.FC<PageProps> = () => {
           <div style={styles.content}>Editing buttons</div>
         </div>
       </div>
-      <NewRemoteModal 
-        show={showNewRemote}
+      <NewSwitchModal 
+        show={showNewSwitch}
         onHide={() => {
-          setShowNewRemote(false)
+          setShowNewSwitch(false)
         }}
         onConfirm={remoteName => {
           console.log('Add new remote:', remoteName)
