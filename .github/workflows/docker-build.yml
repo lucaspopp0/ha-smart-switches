@@ -56,11 +56,13 @@ jobs:
     steps:
       -
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref }}
       -
         name: Check for bot commit
         id: check-bot
         run: |
-          COMMIT_MSG=$(git show --format='%s' --no-patch "${{ github.sha }}")
+          COMMIT_MSG=$(git show --format='%s' --no-patch)
           echo "$COMMIT_MSG"
 
           BOT=false
