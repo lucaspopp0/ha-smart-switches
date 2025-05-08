@@ -14,7 +14,7 @@ type ListExecutablesResponse struct {
 }
 
 type ListExecutablesResponseBody struct {
-	Executables homeassistant.Executables
+	Executables homeassistant.Executables `json:"executables"`
 }
 
 func (s *server) RegisterListExecutables(api huma.API) {

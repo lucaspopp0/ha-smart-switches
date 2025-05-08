@@ -31,8 +31,8 @@ jobs:
     if: ${{ needs.detect-changes.outputs.smart-switches == 'true' }}
     uses: ./.github/workflows/docker-build.yml
     with:
-      rebuild-server: ${{ needs.detect-changes.outputs.server == 'true' }}
-      rebuild-site: ${{ needs.detect-changes.outputs.site == 'true' }}
+      rebuild-server: ${{ needs.detect-changes.outputs.bot-change != 'true' && needs.detect-changes.outputs.server == 'true' }}
+      rebuild-site: ${{ needs.detect-changes.outputs.bot-change != 'true' && needs.detect-changes.outputs.site == 'true' }}
       push: false
     secrets: inherit
 
@@ -58,4 +58,9 @@ jobs:
         run: |
           echo "::error title=${{ github.workflow }}::at least one job failed or cancelled"
           exit 1
-  
+      -
+        name: Fail if changes generated
+        if: ${{ needs.build-and-commit.outputs.pushed-changes == 'true' }}
+        run: |
+          echo "::error title=${{ github.workflow }}::changes pushed, not ready"
+          exit 1

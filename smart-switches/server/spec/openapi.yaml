@@ -210,12 +210,12 @@ components:
           format: uri
           readOnly: true
           type: string
-        Executables:
+        executables:
           additionalProperties:
             $ref: '#/components/schemas/Executable'
           type: object
       required:
-        - Executables
+        - executables
       type: object
     PostPressRequestBody:
       additionalProperties: false
