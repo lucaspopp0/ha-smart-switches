@@ -165,6 +165,8 @@ const IndexPage: React.FC<PageProps> = () => {
             <LayoutPicker
               switch={sw}
               onPick={async (key, layout) => {
+                console.log('selected', key)
+
                 if (!sw) return
 
                 sw.layouts[key] = layout
