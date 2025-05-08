@@ -12,7 +12,7 @@ import { Button, Dropdown, Tab, Tabs, Toast } from "react-bootstrap";
 
 import NewLayoutModal from "../components/modals/new-layout";
 import NewSwitchModal from "../components/modals/new-switch";
-import { Config, Configuration, DefaultApi } from "../api";
+import { Config, Configuration, DefaultApi, Layouts } from "../api";
 import LayoutPicker from "../components/inputs/layout-picker";
 
 const borderColor = 'rgb(224, 229, 229)';
@@ -150,6 +150,18 @@ const IndexPage: React.FC<PageProps> = () => {
         </div>
         <div style={styles.content}>
           <div style={styles.sidebar}>
+          {Object.keys(sw?.layouts ?? {}).map(name => (
+            <Button
+              key={name}
+              style={styles.sidebarItem}
+              onClick={() => {
+                console.log(`Selecting ${name}`, sw?.layouts[name as keyof Layouts])
+                setCurrentLayout(name)
+              }}
+            >
+              {name}
+            </Button>
+          ))}
             <LayoutPicker
               switch={sw}
               onPick={async (key, layout) => {
