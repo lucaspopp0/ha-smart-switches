@@ -1,7 +1,7 @@
 import * as React from "react"
 import { ListExecutablesResponseBody, Executable } from "../../api"
 import { Form, InputGroup } from "react-bootstrap"
-import { Select } from "antd"
+import { Select, Space, Typography } from "antd"
 import { late } from "zod"
 
 export type ExecuablePickerProps = {
@@ -40,10 +40,15 @@ const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
                         label: '--',
                         disabled: true,
                     },
-                    ...Object.entries(props.executables ?? {}).map(([entityID, { friendlyName }]) => (
+                    ...Object.entries(props.executables ?? {}).map(([entityId, { friendlyName }]) => (
                         {
-                            value: entityID,
-                            label: friendlyName,
+                            value: entityId,
+                            label: (
+                                <Space>
+                                    <Typography.Text italic type="secondary">{entityId}</Typography.Text>
+                                    <Typography.Text>{friendlyName}</Typography.Text>
+                                </Space>
+                            ),
                         }
                     )),
                 ]
