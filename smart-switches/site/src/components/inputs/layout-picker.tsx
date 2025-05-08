@@ -14,28 +14,34 @@ const allLayouts = ['v4', 'v5', 'v6', 'v7']
 const LayoutPicker: React.FC<LayoutPickerProps> = (props) => {
     const sw = props.switch ?? { layouts: {} }
 
+    const pickLayout = (layout: keyof Layouts) => {
+        console.log(layout)
+
+        if (layout == null) {
+            return
+        }
+
+        const key = layout as keyof Layouts
+
+        props.onPick(key, {} as AnyLayout)
+    }
+
     return (
-        <Dropdown
-            onSelect={(layout) => {
-                console.log(layout)
-                
-                if (layout == null) {
-                    return
-                }
-
-                const key = layout as keyof Layouts
-
-                props.onPick(key, {} as AnyLayout)
-            }}
-        >
+        <Dropdown>
             <Dropdown.Toggle>
                 Add layout...
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
                 { allLayouts.map(layout => (layout in sw.layouts
-                        ? <Dropdown.Item key={layout} disabled>{layout} (already configured)</Dropdown.Item>
-                        : <Dropdown.Item key={layout}>{layout}</Dropdown.Item>))
+                        ? <Dropdown.Item
+                            key={layout}
+                            disabled
+                            >{layout} (already configured)</Dropdown.Item>
+                        : <Dropdown.Item
+                            key={layout}
+                            onClick={() => pickLayout(layout as keyof Layouts)}
+                            >{layout}</Dropdown.Item>))
                 }
             </Dropdown.Menu>
         </Dropdown>
