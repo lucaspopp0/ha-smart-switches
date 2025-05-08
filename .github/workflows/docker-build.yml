@@ -3,9 +3,6 @@ name: docker-build
 on:
   workflow_call:
     inputs:
-      ref:
-        type: string
-        default: ""
       push:
         type: boolean
         default: false
@@ -39,8 +36,6 @@ jobs:
     steps:
       -
         uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.ref || github.ref }}
       -
         name: Parse architectures from config
         id: architectures
@@ -61,8 +56,6 @@ jobs:
     steps:
       -
         uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.ref || github.ref }}
       -
         name: Check for bot commit
         id: check-bot
@@ -110,21 +103,21 @@ jobs:
           path: smart-switches/server/spec
           key: server-spec-${{ hashFiles('smart-switches/server/**/*.go') }}
       -
-        if: ${{ inputs.rebuild-site && steps.check-author.outputs.bot != 'true' }}
+        if: ${{ inputs.rebuild-site && steps.check-bot.outputs.bot != 'true' }}
         uses: actions/setup-node@v4
         with:
           node-version-file: smart-switches/site/.nvmrc
           cache-dependency-path: smart-switches/site/package-lock.json
           cache: npm
       -
-        if: ${{ inputs.rebuild-site && steps.check-author.outputs.bot != 'true' }}
+        if: ${{ inputs.rebuild-site && steps.check-bot.outputs.bot != 'true' }}
         name: Install site dependencies
         working-directory: smart-switches/site
         run: |
           npm ci
       -
 
-        if: ${{ inputs.rebuild-site && steps.check-author.outputs.bot != 'true' }}
+        if: ${{ inputs.rebuild-site && steps.check-bot.outputs.bot != 'true' }}
         name: Re-generate server sdk
         working-directory: smart-switches/site
         run: |
@@ -142,7 +135,7 @@ jobs:
             -o /local/src/api \
             --additional-properties="npmName=@smart-switches/server,npmVersion=0.0.0,paramNaming=original,modelPropertyNaming=original"
       -
-        if: ${{ inputs.rebuild-site && steps.check-author.outputs.bot != 'true' }}
+        if: ${{ inputs.rebuild-site && steps.check-bot.outputs.bot != 'true' }}
         name: Build site
         working-directory: smart-switches/site
         run: |
