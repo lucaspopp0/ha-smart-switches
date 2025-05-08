@@ -17,6 +17,10 @@ on:
         required: false
       DOCKER_TOKEN:
         required: false
+    outputs:
+      pushed-changes:
+        value: ${{ jobs.generate.outputs.changes == 'true' }}
+        description: true if changes generated
 
 permissions:
   contents: read
@@ -53,6 +57,8 @@ jobs:
     needs: setup
     if: ${{ github.event_name != 'push' }}
     runs-on: ubuntu-latest
+    outputs:
+      changes: ${{ steps.detect-changes.outputs.changes == 'true' }}
     steps:
       -
         uses: actions/checkout@v4
@@ -173,17 +179,12 @@ jobs:
           commit_message: "[bot] generate"
           repo: ${{ github.repository }}
           branch: ${{ github.head_ref || github.ref_name }}
-      -
-        name: Fail job if changes committed
-        if: ${{ steps.detect-changes.outputs.changes == 'true' }}
-        run: |
-          exit 1
 
   build-and-push:
     needs:
       - setup
       - generate
-    if: ${{ !failure() && !cancelled() }}
+    if: ${{ !failure() && !cancelled() && needs.generate.outputs.changes != 'true' }}
     strategy:
       fail-fast: false
       matrix:
