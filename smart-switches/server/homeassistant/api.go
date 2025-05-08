@@ -15,9 +15,9 @@ const (
 )
 
 type EntityState struct {
-	EntityID   string            `json:"entity_id"`
-	State      string            `json:"state"`
-	Attributes map[string]string `json:"attributes,omitempty"`
+	EntityID   string         `json:"entity_id"`
+	State      string         `json:"state"`
+	Attributes map[string]any `json:"attributes,omitempty"`
 }
 
 type homeassistantAPI interface {

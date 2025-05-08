@@ -29,6 +29,6 @@ func isExecutable(state EntityState) (Executable, bool) {
 	return Executable{
 		Domain:       domain,
 		EntityID:     state.EntityID,
-		FriendlyName: state.Attributes["friendly_name"],
+		FriendlyName: state.Attributes["friendly_name"].(string),
 	}, true
 }
