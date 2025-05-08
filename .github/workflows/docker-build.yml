@@ -81,15 +81,9 @@ jobs:
       -
         if: ${{ steps.restore-server-cache.outputs.cache-hit != 'true' }}
         name: Re-generate server openapi spec
-        working-directory: smart-switches/server
+        working-directory: smart-switches
         run: |
-          # Cleanup the spec folder
-          rm -rf spec
-          mkdir spec
-
-          go run . get-openapi \
-            | yq -o=yaml '.' \
-            > spec/openapi.yaml
+          make generate-server-spec
       -
         name: Save server cache
         if: ${{ steps.restore-server-cache.outputs.cache-hit != 'true' }}
@@ -114,21 +108,13 @@ jobs:
 
         if: ${{ inputs.rebuild-site }}
         name: Re-generate server sdk
-        working-directory: smart-switches/site
+        working-directory: smart-switches
         run: |
-          if [[ ! -d src/api ]]; then
-            mkdir src/api
+          if [[ ! -d site/src/api ]]; then
+            mkdir -p site/src/api
           fi
 
-          docker run --rm \
-            --user $(id -u) \
-            -v .:/local \
-            -v $(pwd)/../server/spec:/spec \
-            openapitools/openapi-generator-cli:latest generate \
-            -i /spec/openapi.yaml \
-            -g typescript-axios \
-            -o /local/src/api \
-            --additional-properties="npmName=@smart-switches/server,npmVersion=0.0.0,paramNaming=original,modelPropertyNaming=original"
+          make generate-server-sdk
       -
         if: ${{ inputs.rebuild-site }}
         name: Build site
