@@ -47,7 +47,7 @@ func (l Layouts) GetLayout(name string) (Layout, error) {
 
 			if layout, ok := field.Interface().(Layout); ok && layout != nil {
 				if layout.MatchesLayout(name) {
-					fmt.Printf("matched layout %q\n", layout)
+					fmt.Printf("matched layout %#v\n", layout)
 					return layout, nil
 				}
 			}
