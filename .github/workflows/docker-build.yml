@@ -63,7 +63,7 @@ jobs:
         id: commit-message
         run: |
           {
-            echo 'message<EOT';
+            echo 'message<<EOT';
             git show --format='%s' --no-patch;
             echo 'EOT';
           } | tee -a "$GITHUB_OUTPUT"
