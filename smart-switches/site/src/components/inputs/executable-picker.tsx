@@ -14,26 +14,16 @@ const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
 
     const executables = props.executables
         ?  Object.entries(props.executables).map(([_, executable]) => (
-            <p>{executable.friendlyName}</p>
+            <option key={executable.entityId}>{executable.friendlyName}</option>
         ))
         : <></>
 
     return (
-        <InputGroup>
-            <Form.Control
-                type="text"
-                value={textInput}
-                onFocus={(event) => {
-                    console.log(event)
-                }}
-                onChange={event => {
-                    setTextInput(event.target.value)
-                }}
-            />
-            <div>
-                {executables}
-            </div>
-        </InputGroup>
+        <select onChange={event => {
+            setTextInput(event.target.value)
+        }}>
+            {executables}
+        </select>
     )
 }
 
