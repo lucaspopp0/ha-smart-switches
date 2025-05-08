@@ -102,7 +102,7 @@ jobs:
         id: restore-gatsby-cache
         uses: actions/cache/restore@v4
         with:
-          key: gatsby-cache-${{ hashFiles('smart-switches/server/spec/openapi.yaml')}}-${{ hashFiles('smart-switches/site/package-lock.json') }}-${{ hashFiles('smart-switches/site/src/**') }}
+          key: gatsby-cache-${{ github.head_ref || github.ref_name }}
           path: smart-switches/site/.cache
       -
         if: ${{ steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}

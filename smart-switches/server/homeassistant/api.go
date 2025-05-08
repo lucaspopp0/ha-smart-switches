@@ -15,8 +15,9 @@ const (
 )
 
 type EntityState struct {
-	EntityID string `json:"entity_id"`
-	State    string `json:"state"`
+	EntityID   string            `json:"entity_id"`
+	State      string            `json:"state"`
+	Attributes map[string]string `json:"attributes,omitempty"`
 }
 
 type homeassistantAPI interface {
@@ -31,9 +32,7 @@ type homeassistantAPI interface {
 type API interface {
 	homeassistantAPI
 
-	ListEntities(
-		domains ...string,
-	) ([]string, error)
+	ListExecutables() (Executables, error)
 
 	// Tries to identify the service automatically and execute it
 	Execute(
@@ -68,24 +67,20 @@ func (c *apiClient) do(req *http.Request) (*http.Response, error) {
 	return http.DefaultClient.Do(req)
 }
 
-func (c *apiClient) ListEntities(
-	domains ...string,
-) ([]string, error) {
+func (c *apiClient) ListExecutables() (Executables, error) {
 	entityStates, err := c.GetStates()
 	if err != nil {
 		return nil, err
 	}
 
-	entityIDs := []string{}
+	executables := Executables{}
 	for _, es := range entityStates {
-		for _, domain := range domains {
-			if strings.HasPrefix(es.EntityID, domain) {
-				entityIDs = append(entityIDs, es.EntityID)
-			}
+		if executable, ok := isExecutable(es); ok {
+			executables[es.EntityID] = executable
 		}
 	}
 
-	return entityIDs, nil
+	return executables, nil
 }
 
 func (c *apiClient) GetStates() ([]EntityState, error) {
