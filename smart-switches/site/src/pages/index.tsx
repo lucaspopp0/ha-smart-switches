@@ -229,7 +229,7 @@ const IndexPage: React.FC<PageProps> = () => {
                   icon={<DeleteOutlined />}
                   onClick={async () => {
                     if (config?.switches && currentSwitch && sw) {
-                      delete sw.layouts[name as keyof Layouts]
+                      sw.layouts[name as keyof Layouts] = undefined
 
                       config.switches[currentSwitch] = sw
 
