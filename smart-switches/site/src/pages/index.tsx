@@ -226,7 +226,8 @@ const IndexPage: React.FC<PageProps> = () => {
           }
         />
         <div style={styles.content}>
-          <div style={styles.sidebar}>
+          <div style={{ display: 'flex', flexGrow: 2, }} />
+          <div style={{ ...styles.sidebar, width: 400 }}>
             {currentButtons.map(buttonName => (
               <div style={styles.sidebarItem}>
                 {buttonName}
@@ -239,6 +240,8 @@ const IndexPage: React.FC<PageProps> = () => {
                       if (layout) {
                         layout[buttonName as keyof typeof layout] = picked?.entityId
                       }
+
+                      sw.layouts[currentLayout as keyof Layouts] = layout
 
                       config.switches[currentSwitch].layouts[currentLayout as keyof Layouts] = layout
                       setConfig(config)

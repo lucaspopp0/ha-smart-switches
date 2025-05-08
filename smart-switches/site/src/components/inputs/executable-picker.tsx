@@ -14,7 +14,7 @@ const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
     return (
         <Select
             showSearch
-            placeholder="Select a person"
+            value={props.value}
             optionFilterProp="label"
             onChange={value => {
                 console.log('executable picker changed to:', value)
