@@ -4,7 +4,8 @@ import { Form, InputGroup } from "react-bootstrap"
 
 export type ExecuablePickerProps = {
     executables?: ListExecutablesResponseBody['executables'],
-    onPick?: (executable: Executable) => Promise<void>
+    value?: string
+    onPick?: (executable: Executable | undefined) => Promise<void>
 }
 
 const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
@@ -19,9 +20,20 @@ const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
         : <></>
 
     return (
-        <select onChange={event => {
-            setTextInput(event.target.value)
-        }}>
+        <select
+            value={props.value ?? "none"}
+        onChange={event => {
+                if (props.onPick && props.executables){
+                    if (event.target.value == "none") {
+                        props.onPick(undefined)
+                    } else {
+                        props.onPick(props.executables[event.target.value])
+                    }
+                }
+            }}
+        >
+            <option key="none">none</option>
+            <option disabled key="--">----</option>
             {executables}
         </select>
     )
