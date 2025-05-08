@@ -64,14 +64,14 @@ jobs:
         with:
           ref: ${{ inputs.ref || github.ref }}
       -
-        name: Check author
-        id: check-author
+        name: Check for bot commit
+        id: check-bot
         run: |
-          LAST_AUTHOR=$(git show --format='%an' --no-patch)
-          echo "author=$LAST_AUTHOR" | tee -a "$GITHUB_OUTPUT"
-          
+          COMMIT_MSG=$(git show --format='%as' --no-patch)
+          echo "$COMMIT_MSG"
+
           BOT=false
-          if [[ "$LAST_AUTHOR" == 'lucaspopp0-bot[bot]' ]]; then
+          if [[ "$COMMIT_MSG" == *[bot]* ]]; then
             BOT=true
           fi
 
@@ -181,6 +181,7 @@ jobs:
         name: Fail job if changes committed
         if: ${{ steps.detect-changes.outputs.changes == 'true' }}
         run: |
+          exit 1
 
   build-and-push:
     needs:
