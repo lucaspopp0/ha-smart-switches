@@ -43,16 +43,19 @@ const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
                     ...Object.entries(props.executables ?? {}).map(([entityId, { friendlyName }]) => (
                         {
                             value: entityId,
-                            label: (
-                                <Space direction="vertical">
-                                    <Typography.Text italic type="secondary">{entityId}</Typography.Text>
-                                    <Typography.Text>{friendlyName}</Typography.Text>
-                                </Space>
-                            ),
+                            label: friendlyName,
                         }
                     )),
                 ]
             }
+            optionRender={option => (
+                option.value ? 
+                    <Space direction="vertical">
+                        <Typography.Text italic type="secondary">{option.value}</Typography.Text>
+                        <Typography.Text>{option.label}</Typography.Text>
+                    </Space> :
+                    option.label
+            )}
         />
     )
 }
