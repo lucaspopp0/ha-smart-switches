@@ -38,7 +38,7 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
         <div style={styles.flexRow}>
           <div style={styles.flexRow} />
           <div style={{ display: 'flex', flexDirection: 'column', width: 400 }}>
-            {Object.keys(ButtonsByLayout[props.currentLayout]).map(buttonName => (
+            {ButtonsByLayout[props.currentLayout].map(buttonName => (
               <div style={{ ...styles.flexRow, padding: 12, }}>
                 {buttonName}
                 <div style={styles.flexRow} />

@@ -33,8 +33,8 @@ const LayoutPicker: React.FC<LayoutPickerProps> = (props) => {
                     label: layout,
                     disabled: !!sw.layouts[layout as keyof Layouts],
                 })),
-                onSelect: keys => {
-                    pickLayout(keys.selectedKeys[0] as keyof Layouts)
+                onClick: (event) => {
+                    pickLayout(event.key as keyof Layouts)
                 }
             }}
         >
