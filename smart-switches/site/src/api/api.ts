@@ -119,6 +119,31 @@ export interface ErrorModel {
 /**
  * 
  * @export
+ * @interface Executable
+ */
+export interface Executable {
+    /**
+     * 
+     * @type {string}
+     * @memberof Executable
+     */
+    'domain': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Executable
+     */
+    'entityId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Executable
+     */
+    'friendlyName': string;
+}
+/**
+ * 
+ * @export
  * @interface LayoutV4
  */
 export interface LayoutV4 {
@@ -400,6 +425,25 @@ export interface Layouts {
 /**
  * 
  * @export
+ * @interface ListExecutablesResponseBody
+ */
+export interface ListExecutablesResponseBody {
+    /**
+     * A URL to the JSON Schema for this object.
+     * @type {string}
+     * @memberof ListExecutablesResponseBody
+     */
+    '$schema'?: string;
+    /**
+     * 
+     * @type {{ [key: string]: Executable; }}
+     * @memberof ListExecutablesResponseBody
+     */
+    'Executables': { [key: string]: Executable; };
+}
+/**
+ * 
+ * @export
  * @interface PostPressRequestBody
  */
 export interface PostPressRequestBody {
@@ -480,6 +524,35 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          */
         getConfig: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/config`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listExecutables: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/executables`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -595,6 +668,17 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listExecutables(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListExecutablesResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listExecutables(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DefaultApi.listExecutables']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {PostPressRequestBody} PostPressRequestBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -637,6 +721,14 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listExecutables(options?: RawAxiosRequestConfig): AxiosPromise<ListExecutablesResponseBody> {
+            return localVarFp.listExecutables(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {PostPressRequestBody} PostPressRequestBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -671,6 +763,16 @@ export class DefaultApi extends BaseAPI {
      */
     public getConfig(options?: RawAxiosRequestConfig) {
         return DefaultApiFp(this.configuration).getConfig(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public listExecutables(options?: RawAxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).listExecutables(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

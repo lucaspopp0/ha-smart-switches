@@ -64,6 +64,19 @@ jobs:
         with:
           ref: ${{ inputs.ref || github.ref }}
       -
+        name: Check author
+        id: check-author
+        run: |
+          LAST_AUTHOR=$(git show --format='%an' --no-patch)
+          echo "author=$LAST_AUTHOR" | tee -a "$GITHUB_OUTPUT"
+          
+          BOT=false
+          if [[ "$LAST_AUTHOR" == 'lucaspopp0-bot[bot]' ]]; then
+            BOT=true
+          fi
+
+          echo "bot=$BOT" | tee -a "$GITHUB_OUTPUT"
+      -
         name: Restore server cache
         id: restore-server-cache
         if: ${{ inputs.rebuild-server }}
@@ -97,29 +110,21 @@ jobs:
           path: smart-switches/server/spec
           key: server-spec-${{ hashFiles('smart-switches/server/**/*.go') }}
       -
-        if: ${{ inputs.rebuild-site }}
-        name: Restore site cache
-        id: restore-gatsby-cache
-        uses: actions/cache/restore@v4
-        with:
-          key: gatsby-cache-${{ hashFiles('smart-switches/server/spec/openapi.yaml')}}-${{ hashFiles('smart-switches/site/package-lock.json') }}-${{ hashFiles('smart-switches/site/src/**') }}
-          path: smart-switches/site/.cache
-      -
-        if: ${{ steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}
+        if: ${{ inputs.rebuild-site && steps.check-author.outputs.bot != 'true' }}
         uses: actions/setup-node@v4
         with:
           node-version-file: smart-switches/site/.nvmrc
           cache-dependency-path: smart-switches/site/package-lock.json
           cache: npm
       -
-        if: ${{ steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}
+        if: ${{ inputs.rebuild-site && steps.check-author.outputs.bot != 'true' }}
         name: Install site dependencies
         working-directory: smart-switches/site
         run: |
           npm ci
       -
 
-        if: ${{ steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}
+        if: ${{ inputs.rebuild-site && steps.check-author.outputs.bot != 'true' }}
         name: Re-generate server sdk
         working-directory: smart-switches/site
         run: |
@@ -137,7 +142,7 @@ jobs:
             -o /local/src/api \
             --additional-properties="npmName=@smart-switches/server,npmVersion=0.0.0,paramNaming=original,modelPropertyNaming=original"
       -
-        if: ${{ steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}
+        if: ${{ inputs.rebuild-site && steps.check-author.outputs.bot != 'true' }}
         name: Build site
         working-directory: smart-switches/site
         run: |
@@ -155,13 +160,6 @@ jobs:
           else
             echo "changes=false" | tee -a "$GITHUB_OUTPUT"
           fi
-      -
-        name: Save Gatsby cache
-        if: ${{ always() && steps.restore-gatsby-cache.outputs.cache-hit != 'true' }}
-        uses: actions/cache/save@v4
-        with:
-          key: ${{ steps.restore-gatsby-cache.outputs.cache-primary-key }}
-          path: smart-switches/site/.cache
       -
         uses: actions/create-github-app-token@v1
         if: ${{ steps.detect-changes.outputs.changes == 'true' }}
