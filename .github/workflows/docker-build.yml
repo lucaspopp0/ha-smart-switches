@@ -110,8 +110,8 @@ jobs:
         name: Re-generate server sdk
         working-directory: smart-switches
         run: |
-          if [[ ! -d src/api ]]; then
-            mkdir src/api
+          if [[ ! -d site/src/api ]]; then
+            mkdir -p site/src/api
           fi
 
           make generate-server-sdk
