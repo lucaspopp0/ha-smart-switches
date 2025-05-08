@@ -68,6 +68,8 @@ jobs:
         id: check-bot
         run: |
           COMMIT_MSG=$(git show --format='%as' --no-patch)
+          echo "$COMMIT_MSG"
+          
           BOT=false
           if [[ "$COMMIT_MSG" == *[bot]* ]]; then
             BOT=true
