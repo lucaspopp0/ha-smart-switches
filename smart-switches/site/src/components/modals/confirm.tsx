@@ -46,3 +46,5 @@ const ConfirmModal: React.FC<ConfirmProps> = props => {
         </Modal>
     )
 }
+
+export default ConfirmModal;

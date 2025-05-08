@@ -17,6 +17,7 @@ import ExecutablePicker from "../components/inputs/executable-picker";
 import { Button, Menu } from "antd";
 import { ItemType, MenuItemGroupType, MenuItemType } from "antd/lib/menu/interface";
 import { DeleteOutlined } from "@ant-design/icons";
+import ConfirmModal from "../components/modals/confirm";
 
 const borderColor = 'rgb(224, 229, 229)';
 const backgroundColor = 'white';
@@ -95,6 +96,40 @@ const IndexPage: React.FC<PageProps> = () => {
   let [config, setConfig] = React.useState<Config | undefined>(undefined)
   let [currentSwitch, setCurrentSwitch] = React.useState<string | undefined>(undefined)
   let [currentLayout, setCurrentLayout] = React.useState<string | undefined>(undefined)
+
+  let [showConfirm, setShowConfirm] = React.useState(false)
+
+  const deleteSwitch = async (name: string) => {
+    if (config?.switches) {
+      delete config.switches[name]
+
+      try {
+        await api.putConfig(config)
+        setConfig(config)
+        forceRefresh()
+      } catch(e) {
+        console.error(e)
+      }
+    }
+  }
+
+  const deleteLayout = async (name: string) => {
+    if (config?.switches && currentSwitch && sw) {
+      sw.layouts[name as keyof Layouts] = undefined
+
+      config.switches[currentSwitch] = sw
+
+      try {
+        api.putConfig(config)
+        setConfig(config)
+        forceRefresh()
+      } catch(e) {
+        console.error(e)
+      }
+    }
+  }
+
+  var onConfirm: () => Promise<void> = async () => {}
 
   const forceRefresh = () => setRefresh(!refresh)
 
@@ -187,16 +222,8 @@ const IndexPage: React.FC<PageProps> = () => {
                   variant="text"
                   icon={<DeleteOutlined />}
                   onClick={async () => {
-                    if (config?.switches) {
-                      delete config.switches[name]
-
-                      api.putConfig(config).
-                        then(() => {
-                          setConfig(config)
-                          forceRefresh()
-                        })
-                        .catch(console.error)
-                    }
+                    onConfirm = () => deleteSwitch(name)
+                    setShowConfirm(true)
                   }}
                 />,
               })),
@@ -232,18 +259,8 @@ const IndexPage: React.FC<PageProps> = () => {
                   variant="text"
                   icon={<DeleteOutlined />}
                   onClick={async () => {
-                    if (config?.switches && currentSwitch && sw) {
-                      sw.layouts[name as keyof Layouts] = undefined
-
-                      config.switches[currentSwitch] = sw
-
-                      api.putConfig(config).
-                        then(() => {
-                          setConfig(config)
-                          forceRefresh()
-                        })
-                        .catch(console.error)
-                    }
+                    onConfirm = () => deleteLayout(name)
+                    setShowConfirm(true)
                   }}
                 />,
               })),
@@ -302,6 +319,15 @@ const IndexPage: React.FC<PageProps> = () => {
           </div>
         </div>
       </div>
+      <ConfirmModal
+        title={""}
+        body={undefined}
+        open={false}
+        onOk={onConfirm}
+        onCancel={() => {
+          setShowConfirm(false)
+        }}
+      />
       <NewSwitchModal 
         show={showNewSwitch}
         onHide={() => {
