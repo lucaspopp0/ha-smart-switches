@@ -17,6 +17,8 @@ const LayoutPicker: React.FC<LayoutPickerProps> = (props) => {
     return (
         <Dropdown
             onSelect={(layout) => {
+                console.log(layout)
+                
                 if (layout == null) {
                     return
                 }
