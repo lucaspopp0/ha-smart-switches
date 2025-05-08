@@ -28,18 +28,17 @@ export type LayoutEditorProps = {
 
 const LayoutEditor: React.FC<LayoutEditorProps> = props => {
     if (!props.config || !props.currentSwitch || !props.currentLayout) {
-        return <div style={styles.content} />
+        return <div style={styles.flexRow} />
     }
 
     const currentSwitch = props.config.switches[props.currentSwitch]
     const currentLayout = currentSwitch.layouts[props.currentLayout] as AnyLayout;
-    const currentButtons = ButtonsByLayout[props.currentLayout]
 
     return (
         <div style={styles.flexRow}>
           <div style={styles.flexRow} />
           <div style={{ display: 'flex', flexDirection: 'column', width: 400 }}>
-            {currentButtons.map(buttonName => (
+            {Object.keys(ButtonsByLayout[props.currentLayout]).map(buttonName => (
               <div style={{ ...styles.flexRow, padding: 12, }}>
                 {buttonName}
                 <div style={styles.flexRow} />
