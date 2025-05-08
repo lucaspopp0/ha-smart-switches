@@ -4,6 +4,7 @@ import { Form, InputGroup } from "react-bootstrap"
 import { Select, Space, Typography } from "antd"
 import { late } from "zod"
 import { monospace } from "../../styles"
+import { exec } from "child_process"
 
 export type ExecuablePickerProps = {
     api: DefaultApi,
@@ -72,16 +73,15 @@ const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
                     ...Object.entries(executables ?? {}).map(([entityId, { friendlyName }]) => (
                         {
                             value: entityId,
-                            label: friendlyName,
                         }
                     )),
                 ]
             }
             optionRender={option => (
-                option.value ? 
+                executables && option.value ? 
                     <Space direction="vertical">
-                        <Typography.Text italic type="secondary" style={monospace}>{option.value}</Typography.Text>
-                        <Typography.Text>{option.label}</Typography.Text>
+                        <Typography.Text italic type="secondary" style={monospace}>{executables[option.value].entityId}</Typography.Text>
+                        <Typography.Text>{executables[option.value].friendlyName}</Typography.Text>
                     </Space> :
                     option.label
             )}
