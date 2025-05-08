@@ -16,7 +16,18 @@ const NewSwitchModal: React.FC<NewSwitchModalProps> = (props) => {
 
     const onShow = props.onShow ?? (() => {})
     const onHide = props.onHide ?? (() => {})
-    const onConfirm = props.onConfirm ?? (async () => {})
+    const onConfirm = () => {
+        let f = props.onConfirm ?? (async (_: string) => {})
+
+        f(name)
+            .then(() => {
+                onHide()
+            })
+            .catch(error => {
+                setError(error)
+                setShowErrorToast(true)
+            })
+    }
 
     return (
         <>
@@ -40,7 +51,9 @@ const NewSwitchModal: React.FC<NewSwitchModalProps> = (props) => {
                             setName(element.target.value)
                         }}
                         onKeyDownCapture={event => {
-                            console.log(event)
+                            if (event.code == "Enter") {
+                                onConfirm()
+                            }
                         }}
                     />
                 </Modal.Body>
@@ -54,14 +67,7 @@ const NewSwitchModal: React.FC<NewSwitchModalProps> = (props) => {
                     <Button
                         variant="primary"
                         onClick={() => {
-                            onConfirm(name)
-                                .then(() => {
-                                    onHide()
-                                })
-                                .catch(error => {
-                                    setError(error)
-                                    setShowErrorToast(true)
-                                })
+                            onConfirm()
                         }}
                     >Save changes</Button>
                 </Modal.Footer>
