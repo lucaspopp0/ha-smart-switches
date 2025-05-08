@@ -65,19 +65,16 @@ jobs:
         with:
           ref: ${{ github.head_ref || github.ref }}
       -
-        name: Get commit message
-        id: commit-message
+        name: Get commit author
+        id: commit-author
         run: |
-          {
-            echo 'message<<EOT';
-            git show --format='%s' --no-patch;
-            echo 'EOT';
-          } | tee -a "$GITHUB_OUTPUT"
+          GIT_AUTHOR=$(git show --format='%an' --no-patch)
+          echo "author=$GIT_AUTHOR" | tee -a "$GITHUB_OUTPUT"
       -
         name: Check for bot commit
         id: check-bot
         run: |
-          echo "bot=${{ contains(steps.commit-message.outputs.message, '[bot]') }}" | tee -a "$GITHUB_OUTPUT"
+          echo "bot=${{ contains(steps.commit-author.outputs.author, '[bot]') }}" | tee -a "$GITHUB_OUTPUT"
       -
         name: Restore server cache
         id: restore-server-cache
