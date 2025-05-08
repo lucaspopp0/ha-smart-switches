@@ -67,7 +67,7 @@ jobs:
         name: Check for bot commit
         id: check-bot
         run: |
-          COMMIT_MSG=$(git show --format='%s' --no-patch)
+          COMMIT_MSG=$(git show --format='%s' --no-patch HEAD)
           echo "$COMMIT_MSG"
 
           BOT=false
