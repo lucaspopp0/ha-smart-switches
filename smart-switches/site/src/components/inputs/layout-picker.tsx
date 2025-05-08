@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Layouts, LayoutV4, LayoutV5, LayoutV6, LayoutV7, Switch } from "../../api"
-import { Dropdown } from "react-bootstrap"
+import { Button, Dropdown, Space } from "antd"
 
 type AnyLayout = Layouts[keyof Layouts]
 
@@ -27,23 +27,24 @@ const LayoutPicker: React.FC<LayoutPickerProps> = (props) => {
     }
 
     return (
-        <Dropdown>
-            <Dropdown.Toggle>
-                Add layout...
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-                { allLayouts.map(layout => (layout in sw.layouts
-                        ? <Dropdown.Item
-                            key={layout}
-                            disabled
-                            >{layout} (already configured)</Dropdown.Item>
-                        : <Dropdown.Item
-                            key={layout}
-                            onClick={() => pickLayout(layout as keyof Layouts)}
-                            >{layout}</Dropdown.Item>))
-                }
-            </Dropdown.Menu>
+        <Dropdown
+            menu={{
+                items: allLayouts.map(layout => (layout in sw.layouts ? {
+                    key: layout,
+                    label: `${layout} (already configured)`,
+                    disabled: true,
+                } : {
+                    key: layout,
+                    label: layout,
+                })),
+                onClick: console.log,
+            }}
+        >
+            <Button>
+                <Space>
+                Button
+                </Space>
+            </Button>
         </Dropdown>
     )
 }
