@@ -8,16 +8,15 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Button, Dropdown, Tab, Tabs, Toast } from "react-bootstrap";
-
 import NewLayoutModal from "../components/modals/new-layout";
 import NewSwitchModal from "../components/modals/new-switch";
 import { Config, Configuration, DefaultApi, Layouts, LayoutV4, ListExecutablesResponseBody, Switch } from "../api";
 import LayoutPicker from "../components/inputs/layout-picker";
 import { ButtonsByLayout } from "../api/convenience";
 import ExecutablePicker from "../components/inputs/executable-picker";
-import { Menu } from "antd";
+import { Button, Menu } from "antd";
 import { ItemType, MenuItemGroupType, MenuItemType } from "antd/lib/menu/interface";
+import { DeleteOutlined } from "@ant-design/icons";
 
 const borderColor = 'rgb(224, 229, 229)';
 const backgroundColor = 'white';
@@ -184,10 +183,27 @@ const IndexPage: React.FC<PageProps> = () => {
               ...Object.keys(config?.switches ?? {}).map((name: string): MenuItemType => ({
                 key: name,
                 label: name,
+                extra: <Button
+                  color="danger"
+                  variant="text"
+                  icon={<DeleteOutlined />}
+                  onClick={async () => {
+                    if (config?.switches) {
+                      delete config.switches[name]
+
+                      api.putConfig(config).
+                        then(() => {
+                          setConfig(config)
+                          forceRefresh()
+                        })
+                        .catch(console.error)
+                    }
+                  }}
+                />,
               })),
               {
                 key: 'add-new',
-                label: '+ New switch'
+                label: '+ New switch',
               }
             ]
           }
@@ -207,6 +223,25 @@ const IndexPage: React.FC<PageProps> = () => {
               ...Object.keys(sw?.layouts ?? {}).map((name: string): MenuItemType => ({
                 key: name,
                 label: name,
+                extra: <Button
+                  color="danger"
+                  variant="text"
+                  icon={<DeleteOutlined />}
+                  onClick={async () => {
+                    if (config?.switches && currentSwitch && sw) {
+                      delete sw.layouts[name as keyof Layouts]
+
+                      config.switches[currentSwitch] = sw
+
+                      api.putConfig(config).
+                        then(() => {
+                          setConfig(config)
+                          forceRefresh()
+                        })
+                        .catch(console.error)
+                    }
+                  }}
+                />,
               })),
               {
                 key: 'add-new',
