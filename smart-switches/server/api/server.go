@@ -25,7 +25,9 @@ type server struct {
 	humacli.CLI
 	router *chi.Mux
 	ha     homeassistant.API
-	cfg    config.Config
+
+	cfg         config.Config
+	executables homeassistant.Executables
 
 	scripts []string
 }
@@ -50,12 +52,10 @@ func (s *server) onStart() {
 	}
 
 	fmt.Println("Testing home assistant connection...")
-	resp, err := s.ha.ListEntities("script")
+	s.executables, err = s.ha.ListExecutables()
 
 	if err != nil {
 		fmt.Printf("Home assistant service call failed: %v\n", err.Error())
-	} else {
-		fmt.Printf("Home assistant response: %v\n", resp)
 	}
 
 	fmt.Println("Starting server on port 8000...")

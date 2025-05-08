@@ -16,10 +16,22 @@ run-server: build-server
 		bash ../scripts/run-server.sh
 .PHONY: local-run
 
-generate-server-sdk:
-	@rm -rf ./site/src/api; \
+generate-server-spec:
+	@set -e; \
 	\
-	docker run --rm \
+	cd server; \
+	rm -rf spec; \
+	mkdir spec; \
+	\
+	go run . get-openapi \
+		| yq -P -I2 -o=yaml '.' \
+		> spec/openapi.yaml; \
+	\
+	git status -s -- spec
+.PHONY: generate-server-spec
+
+generate-server-sdk:
+	@docker run --rm \
 		--user $$(id -u) \
 		-v $$(pwd)/site/src/api:/local \
 		-v $$(pwd)/server/spec:/spec \
