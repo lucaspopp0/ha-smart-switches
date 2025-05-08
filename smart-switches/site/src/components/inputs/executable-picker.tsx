@@ -44,7 +44,7 @@ const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
                         {
                             value: entityId,
                             label: (
-                                <Space>
+                                <Space direction="vertical">
                                     <Typography.Text italic type="secondary">{entityId}</Typography.Text>
                                     <Typography.Text>{friendlyName}</Typography.Text>
                                 </Space>
