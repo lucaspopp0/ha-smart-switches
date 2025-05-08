@@ -211,6 +211,10 @@ const IndexPage: React.FC<PageProps> = () => {
         <Menu
           style={styles.sidebar}
           onSelect={({ key }) => {
+            if (key == 'add-new') {
+              return
+            }
+
             console.log(`Selecting ${key}`, sw?.layouts[key as keyof Layouts])
             setCurrentLayout(key)
           }}
