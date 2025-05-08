@@ -65,17 +65,6 @@ jobs:
         with:
           ref: ${{ github.head_ref || github.ref }}
       -
-        name: Get commit author
-        id: commit-author
-        run: |
-          GIT_AUTHOR=$(git show --format='%an' --no-patch)
-          echo "author=$GIT_AUTHOR" | tee -a "$GITHUB_OUTPUT"
-      -
-        name: Check for bot commit
-        id: check-bot
-        run: |
-          echo "bot=${{ contains(steps.commit-author.outputs.author, '[bot]') }}" | tee -a "$GITHUB_OUTPUT"
-      -
         name: Restore server cache
         id: restore-server-cache
         if: ${{ inputs.rebuild-server }}
@@ -109,21 +98,21 @@ jobs:
           path: smart-switches/server/spec
           key: server-spec-${{ hashFiles('smart-switches/server/**/*.go') }}
       -
-        if: ${{ inputs.rebuild-site && steps.check-bot.outputs.bot != 'true' }}
+        if: ${{ inputs.rebuild-site }}
         uses: actions/setup-node@v4
         with:
           node-version-file: smart-switches/site/.nvmrc
           cache-dependency-path: smart-switches/site/package-lock.json
           cache: npm
       -
-        if: ${{ inputs.rebuild-site && steps.check-bot.outputs.bot != 'true' }}
+        if: ${{ inputs.rebuild-site }}
         name: Install site dependencies
         working-directory: smart-switches/site
         run: |
           npm ci
       -
 
-        if: ${{ inputs.rebuild-site && steps.check-bot.outputs.bot != 'true' }}
+        if: ${{ inputs.rebuild-site }}
         name: Re-generate server sdk
         working-directory: smart-switches/site
         run: |
@@ -141,7 +130,7 @@ jobs:
             -o /local/src/api \
             --additional-properties="npmName=@smart-switches/server,npmVersion=0.0.0,paramNaming=original,modelPropertyNaming=original"
       -
-        if: ${{ inputs.rebuild-site && steps.check-bot.outputs.bot != 'true' }}
+        if: ${{ inputs.rebuild-site }}
         name: Build site
         working-directory: smart-switches/site
         run: |
@@ -190,8 +179,6 @@ jobs:
     steps:
       -
         uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.ref || github.ref }}
       -
         name: docker login
         uses: docker/login-action@v3

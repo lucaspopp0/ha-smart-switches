@@ -36,7 +36,7 @@ jobs:
       changes: ${{ steps.path-filters.outputs.changes }}
     steps:
       -
-        name: Detect bot commit
+        name: Detect bot
         id: detect-bot
         run: |
           echo "detected=${{ github.actor == 'lucaspopp0-bot[bot]' }}" | tee -a "$GITHUB_OUTPUT"
