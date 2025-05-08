@@ -3,6 +3,7 @@ import { ListExecutablesResponseBody, Executable, DefaultApi } from "../../api"
 import { Form, InputGroup } from "react-bootstrap"
 import { Select, Space, Typography } from "antd"
 import { late } from "zod"
+import { monospace } from "../../styles"
 
 export type ExecuablePickerProps = {
     api: DefaultApi,
@@ -13,6 +14,8 @@ export type ExecuablePickerProps = {
 const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
     let [executables, setExecutables] = React.useState<ListExecutablesResponseBody['executables'] | undefined>(undefined)
     let [fetchingExecutables, setFetchingExecutables] = React.useState(false)
+
+    console.log('executables: ', executables)
     
     React.useEffect(() => {
         if (fetchingExecutables) {
@@ -77,7 +80,7 @@ const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
             optionRender={option => (
                 option.value ? 
                     <Space direction="vertical">
-                        <Typography.Text italic type="secondary">{option.value}</Typography.Text>
+                        <Typography.Text italic type="secondary" style={monospace}>{option.value}</Typography.Text>
                         <Typography.Text>{option.label}</Typography.Text>
                     </Space> :
                     option.label
