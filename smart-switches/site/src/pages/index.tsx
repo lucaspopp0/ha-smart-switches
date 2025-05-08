@@ -80,10 +80,13 @@ const styles: { [key: string]: React.CSSProperties } = {
  */
 
 const IndexPage: React.FC<PageProps> = () => {
+  let [refresh, setRefresh] = React.useState(false)
   let [loading, setLoading] = React.useState(false)
   let [config, setConfig] = React.useState<Config | undefined>(undefined)
   let [currentSwitch, setCurrentSwitch] = React.useState<string | undefined>(undefined)
   let [currentLayout, setCurrentLayout] = React.useState<string | undefined>(undefined)
+
+  const forceRefresh = () => setRefresh(!refresh)
 
   let [showNewSwitch, setShowNewSwitch] = React.useState(false)
 
@@ -160,6 +163,7 @@ const IndexPage: React.FC<PageProps> = () => {
               onClick={() => {
                 console.log(`Selecting ${name}`, sw?.layouts[name as keyof Layouts])
                 setCurrentLayout(name)
+                forceRefresh()
               }}
             >
               {name}
