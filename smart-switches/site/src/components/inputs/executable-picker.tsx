@@ -3,7 +3,7 @@ import { ListExecutablesResponseBody, Executable } from "../../api"
 import { Form, InputGroup } from "react-bootstrap"
 
 export type ExecuablePickerProps = {
-    executables?: ListExecutablesResponseBody['Executables'],
+    executables?: ListExecutablesResponseBody['executables'],
     onPick?: (executable: Executable) => Promise<void>
 }
 

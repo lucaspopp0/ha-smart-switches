@@ -12,9 +12,10 @@ import { Button, Dropdown, Tab, Tabs, Toast } from "react-bootstrap";
 
 import NewLayoutModal from "../components/modals/new-layout";
 import NewSwitchModal from "../components/modals/new-switch";
-import { Config, Configuration, DefaultApi, Layouts, LayoutV4 } from "../api";
+import { Config, Configuration, DefaultApi, Layouts, LayoutV4, ListExecutablesResponseBody } from "../api";
 import LayoutPicker from "../components/inputs/layout-picker";
 import { ButtonsByLayout } from "../api/convenience";
+import ExecutablePicker from "../components/inputs/executable-picker";
 
 const borderColor = 'rgb(224, 229, 229)';
 const backgroundColor = 'white';
@@ -82,6 +83,10 @@ const styles: { [key: string]: React.CSSProperties } = {
 const IndexPage: React.FC<PageProps> = () => {
   let [refresh, setRefresh] = React.useState(false)
   let [loading, setLoading] = React.useState(false)
+
+  let [executables, setExecutables] = React.useState({} as ListExecutablesResponseBody['executables'])
+  let [fetchingExecutables, setFetchingExecutables] = React.useState(false)
+
   let [config, setConfig] = React.useState<Config | undefined>(undefined)
   let [currentSwitch, setCurrentSwitch] = React.useState<string | undefined>(undefined)
   let [currentLayout, setCurrentLayout] = React.useState<string | undefined>(undefined)
@@ -124,6 +129,25 @@ const IndexPage: React.FC<PageProps> = () => {
     }
   }, [loading, setLoading, config, setConfig])
 
+  React.useEffect(() => {
+    if (fetchingExecutables) {
+      return () => {}
+    }
+
+    let ignore = false
+    setFetchingExecutables(true)
+
+    api
+      .listExecutables()
+      .then(response => {
+        setExecutables(response.data.executables ?? {})
+      })
+
+    return () => {
+      ignore = true
+    }
+  }, [fetchingExecutables, setFetchingExecutables, executables, setExecutables])
+
   const currentButtons = currentLayout ? ButtonsByLayout[currentLayout as keyof Layouts] : []
 
   return (
@@ -155,7 +179,7 @@ const IndexPage: React.FC<PageProps> = () => {
           </Button>
         </div>
         <div style={styles.content}>
-          <div style={styles.sidebar}>
+          <div style={{ ...styles.sidebar, width: '200px' }}>
           {Object.keys(sw?.layouts ?? {}).map(name => (
             <Button
               key={name}
@@ -187,7 +211,10 @@ const IndexPage: React.FC<PageProps> = () => {
           <div style={styles.content}>
             <div style={styles.sidebar}>
               {currentButtons.map(buttonName => (
-                <div style={styles.sidebarItem}>{buttonName}</div>
+                <div style={styles.sidebarItem}>
+                  {buttonName}
+                  <ExecutablePicker executables={executables} />
+                  </div>
               ))}
             </div>
           </div>

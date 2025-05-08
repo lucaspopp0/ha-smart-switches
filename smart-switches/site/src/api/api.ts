@@ -439,7 +439,7 @@ export interface ListExecutablesResponseBody {
      * @type {{ [key: string]: Executable; }}
      * @memberof ListExecutablesResponseBody
      */
-    'Executables': { [key: string]: Executable; };
+    'executables': { [key: string]: Executable; };
 }
 /**
  * 
