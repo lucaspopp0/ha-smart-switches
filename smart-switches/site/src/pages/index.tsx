@@ -187,7 +187,6 @@ const IndexPage: React.FC<PageProps> = () => {
               onClick={() => {
                 console.log(`Selecting ${name}`, sw?.layouts[name as keyof Layouts])
                 setCurrentLayout(name)
-                forceRefresh()
               }}
             >
               {name}
@@ -196,14 +195,13 @@ const IndexPage: React.FC<PageProps> = () => {
             <LayoutPicker
               switch={sw}
               onPick={async (key, layout) => {
-                console.log('selected', key)
-
                 if (!sw) return
 
                 sw.layouts[key] = layout
                 if (!!config?.switches && !!currentSwitch) {
                   config.switches[currentSwitch] = sw
                   await api.putConfig(config)
+                  setCurrentLayout(key)
                 }
               }}
             />
