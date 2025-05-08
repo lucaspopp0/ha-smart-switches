@@ -228,7 +228,107 @@ const IndexPage: React.FC<PageProps> = () => {
     }}
   />)
 
-  const currentButtons = currentLayout ? ButtonsByLayout[currentLayout as keyof Layouts] : []
+  const switchesMenu = (
+    <Menu
+      style={styles.sidebar}
+      onSelect={({ key }) => {
+        if (key == "add-new") {
+          return
+        }
+
+        setCurrentSwitch(key)
+        setCurrentLayout(Object.keys(config?.switches[key].layouts ?? {})[0] as keyof Layouts)
+      }}
+      items={[
+        ...(Object.keys(config?.switches ?? {}).length
+          ? Object.keys(config?.switches ?? {}).map((name: string): MenuItemType => (
+            {
+              key: name,
+              label: name,
+              extra: <Button
+                color="danger"
+                variant="text"
+                icon={<DeleteOutlined />}
+                onClick={async () => {
+                  setShowConfirmDeleteSwitch(true)
+                }}
+              />,
+            } ))
+          : [{
+            key: 'none',
+            disabled: true,
+            label: 'Add a switch to get started'
+          }]),
+        {
+          key: 'add-new',
+          disabled: true,
+          label: <Button
+            onClick={() => {
+              setShowNewSwitch(true)
+            }}
+          >Add switch</Button>,
+        }
+      ]}
+    />
+  )
+
+  const layoutsMenu = (
+    <Menu
+      style={styles.sidebar}
+      onSelect={({ key }) => {
+        if (key == 'add-new') {
+          return
+        }
+
+        console.log(`Selecting ${key}`, sw?.layouts[key as keyof Layouts])
+        setCurrentLayout(key as keyof Layouts)
+      }}
+      items={
+        sw ? [
+          ...(Object.keys(sw.layouts).length
+            ? Object.keys(sw.layouts).map((name: string): MenuItemType => (
+              {
+                key: name,
+                label: name,
+                extra: <Button
+                  color="danger"
+                  variant="text"
+                  icon={<DeleteOutlined />}
+                  onClick={async () => {
+                    setShowConfirmDeleteLayout(true)
+                  }}
+                />,
+              }))
+            : [
+              {
+                key: 'helptext',
+                disabled: true,
+                label: 'Add a layout set up commands'
+              }
+            ]),
+          {
+            key: 'add-new',
+            disabled: true,
+            label: (
+              <LayoutPicker
+                switch={sw}
+                onPick={async (key, layout) => {
+                  if (!sw) return
+  
+                  sw.layouts[key] = layout
+                  if (!!config?.switches && !!currentSwitch) {
+                    config.switches[currentSwitch] = sw
+                    await api.putConfig(config)
+                    setCurrentLayout(key)
+                  }
+                }}
+              />
+            )
+          }
+        ] : []
+      }
+    />
+  )
 
   return (
     <main style={styles.page}>
@@ -236,105 +336,8 @@ const IndexPage: React.FC<PageProps> = () => {
           <Navbar.Brand href="#home">Smart Switches</Navbar.Brand>
       </Navbar>
       <div style={styles.content}>
-        <Menu
-          style={styles.sidebar}
-          onSelect={({ key }) => {
-            if (key == "add-new") {
-              return
-            }
-
-            console.log(`Selecting ${key}`, config?.switches[key])
-            setCurrentSwitch(key)
-            setCurrentLayout(Object.keys(config?.switches[key].layouts ?? {})[0] as keyof Layouts)
-          }}
-          items={
-            [
-              ...(config?.switches?.length
-                ? Object.keys(config.switches).map((name: string): MenuItemType => (
-                  {
-                    key: name,
-                    label: name,
-                    extra: <Button
-                      color="danger"
-                      variant="text"
-                      icon={<DeleteOutlined />}
-                      onClick={async () => {
-                        setShowConfirmDeleteSwitch(true)
-                      }}
-                    />,
-                  } ))
-                : [{
-                  key: 'none',
-                  disabled: true,
-                  label: 'Add a switch to get started'
-                }]),
-              {
-                key: 'add-new',
-                disabled: true,
-                label: <Button
-                  onClick={() => {
-                    setShowNewSwitch(true)
-                  }}
-                >Add switch</Button>,
-              }
-            ]
-          }
-        />
-        <Menu
-          style={styles.sidebar}
-          onSelect={({ key }) => {
-            if (key == 'add-new') {
-              return
-            }
-
-            console.log(`Selecting ${key}`, sw?.layouts[key as keyof Layouts])
-            setCurrentLayout(key as keyof Layouts)
-          }}
-          items={
-            sw ? [
-              ...(Object.keys(sw.layouts).length
-                ? Object.keys(sw.layouts).map((name: string): MenuItemType => (
-                  {
-                    key: name,
-                    label: name,
-                    extra: <Button
-                      color="danger"
-                      variant="text"
-                      icon={<DeleteOutlined />}
-                      onClick={async () => {
-                        setShowConfirmDeleteLayout(true)
-                      }}
-                    />,
-                  }))
-                : [
-                  {
-                    key: 'helptext',
-                    disabled: true,
-                    label: 'Add a layout set up commands'
-                  }
-                ]),
-              {
-                key: 'add-new',
-                disabled: true,
-                label: (
-                  <LayoutPicker
-                    switch={sw}
-                    onPick={async (key, layout) => {
-                      if (!sw) return
-      
-                      sw.layouts[key] = layout
-                      if (!!config?.switches && !!currentSwitch) {
-                        config.switches[currentSwitch] = sw
-                        await api.putConfig(config)
-                        setCurrentLayout(key)
-                      }
-                    }}
-                  />
-                )
-              }
-            ] : []
-          }
-        />
+        {switchesMenu}
+        {layoutsMenu}
         <LayoutEditor
         api={api}
         config={config}
