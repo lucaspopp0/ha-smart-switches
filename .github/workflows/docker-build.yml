@@ -55,7 +55,7 @@ jobs:
   
   generate:
     needs: setup
-    if: ${{ github.event_name != 'push' }}
+    if: ${{ github.event_name != 'push' && (inputs.rebuild-server == 'true' || inputs.rebuild-site == 'true') }}
     runs-on: ubuntu-latest
     outputs:
       changes: ${{ steps.detect-changes.outputs.changes == 'true' }}
