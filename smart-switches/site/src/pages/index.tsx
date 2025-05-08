@@ -226,6 +226,7 @@ const IndexPage: React.FC<PageProps> = () => {
           }
         />
         <div style={styles.content}>
+          <div style={{ display: 'flex', flexGrow: 2, }} />
           <div style={styles.sidebar}>
             {currentButtons.map(buttonName => (
               <div style={styles.sidebarItem}>
