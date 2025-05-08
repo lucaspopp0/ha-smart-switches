@@ -27,6 +27,7 @@ const LayoutPicker: React.FC<LayoutPickerProps> = (props) => {
 
     return (
         <Dropdown
+            trigger={['click']}
             menu={{
                 items: LayoutNames.map(layout => (layout in sw.layouts ? {
                     key: layout,
@@ -36,7 +37,9 @@ const LayoutPicker: React.FC<LayoutPickerProps> = (props) => {
                     key: layout,
                     label: layout,
                 })),
-                onClick: console.log,
+                onClick: event => {
+                    pickLayout(event.key as keyof Layouts)
+                },
             }}
         >
             <Button>
