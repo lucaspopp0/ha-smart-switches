@@ -26,7 +26,8 @@
     "uniforms": "^4.0.0",
     "uniforms-antd": "^4.0.0",
     "uniforms-bridge-json-schema": "^4.0.0",
-    "uniforms-bridge-zod": "^4.0.0"
+    "uniforms-bridge-zod": "^4.0.0",
+    "zod": "^3.24.4"
   },
   "devDependencies": {
     "@types/node": "^20.11.19",
