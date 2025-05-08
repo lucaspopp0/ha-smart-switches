@@ -214,19 +214,26 @@ const IndexPage: React.FC<PageProps> = () => {
           }}
           items={
             [
-              ...Object.keys(config?.switches ?? {}).map((name: string): MenuItemType => ({
-                key: name,
-                label: name,
-                extra: <Button
-                  color="danger"
-                  variant="text"
-                  icon={<DeleteOutlined />}
-                  onClick={async () => {
-                    onConfirm = () => deleteSwitch(name)
-                    setShowConfirm(true)
-                  }}
-                />,
-              })),
+              ...(config?.switches?.length
+                ? Object.keys(config.switches).map((name: string): MenuItemType => (
+                  {
+                    key: name,
+                    label: name,
+                    extra: <Button
+                      color="danger"
+                      variant="text"
+                      icon={<DeleteOutlined />}
+                      onClick={async () => {
+                        onConfirm = () => deleteSwitch(name)
+                        setShowConfirm(true)
+                      }}
+                    />,
+                  } ))
+                : [{
+                  key: 'none',
+                  disabled: true,
+                  label: 'Add a switch to get started'
+                }]),
               {
                 key: 'add-new',
                 disabled: true,
@@ -250,20 +257,29 @@ const IndexPage: React.FC<PageProps> = () => {
             setCurrentLayout(key as keyof Layouts)
           }}
           items={
-            [
-              ...Object.keys(sw?.layouts ?? {}).map((name: string): MenuItemType => ({
-                key: name,
-                label: name,
-                extra: <Button
-                  color="danger"
-                  variant="text"
-                  icon={<DeleteOutlined />}
-                  onClick={async () => {
-                    onConfirm = () => deleteLayout(name)
-                    setShowConfirm(true)
-                  }}
-                />,
-              })),
+            sw ? [
+              ...(Object.keys(sw.layouts).length
+                ? Object.keys(sw.layouts).map((name: string): MenuItemType => (
+                  {
+                    key: name,
+                    label: name,
+                    extra: <Button
+                      color="danger"
+                      variant="text"
+                      icon={<DeleteOutlined />}
+                      onClick={async () => {
+                        onConfirm = () => deleteLayout(name)
+                        setShowConfirm(true)
+                      }}
+                    />,
+                  }))
+                : [
+                  {
+                    key: 'helptext',
+                    disabled: true,
+                    label: 'Add a layout set up commands'
+                  }
+                ]),
               {
                 key: 'add-new',
                 disabled: true,
@@ -283,7 +299,7 @@ const IndexPage: React.FC<PageProps> = () => {
                   />
                 )
               }
-            ]
+            ] : []
           }
         />
         <div style={styles.content}>
