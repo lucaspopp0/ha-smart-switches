@@ -240,6 +240,8 @@ const IndexPage: React.FC<PageProps> = () => {
                         layout[buttonName as keyof typeof layout] = picked?.entityId
                       }
 
+                      sw.layouts[currentLayout as keyof Layouts] = layout
+
                       config.switches[currentSwitch].layouts[currentLayout as keyof Layouts] = layout
                       setConfig(config)
                       
