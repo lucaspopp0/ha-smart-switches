@@ -16,7 +16,7 @@ const LayoutPicker: React.FC<LayoutPickerProps> = (props) => {
     const pickLayout = (layout: keyof Layouts) => {
         console.log(layout)
 
-        if (layout == null) {
+        if (!layout) {
             return
         }
 
@@ -27,24 +27,20 @@ const LayoutPicker: React.FC<LayoutPickerProps> = (props) => {
 
     return (
         <Dropdown
-            trigger={['click']}
             menu={{
-                items: LayoutNames.map(layout => (layout in sw.layouts ? {
-                    key: layout,
-                    label: `${layout} (already configured)`,
-                    disabled: true,
-                } : {
+                items: LayoutNames.map(layout => ({
                     key: layout,
                     label: layout,
+                    disabled: !!sw.layouts[layout as keyof Layouts],
                 })),
-                onClick: event => {
-                    pickLayout(event.key as keyof Layouts)
-                },
+                onSelect: keys => {
+                    pickLayout(keys.selectedKeys[0] as keyof Layouts)
+                }
             }}
         >
             <Button>
                 <Space>
-                Button
+                Add layout
                 </Space>
             </Button>
         </Dropdown>

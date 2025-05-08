@@ -170,7 +170,6 @@ const IndexPage: React.FC<PageProps> = () => {
           style={styles.sidebar}
           onSelect={({ key }) => {
             if (key == "add-new") {
-              setShowNewSwitch(true)
               return
             }
 
@@ -203,7 +202,13 @@ const IndexPage: React.FC<PageProps> = () => {
               })),
               {
                 key: 'add-new',
-                label: '+ New switch',
+                disabled: true,
+                label: <Button
+                  title="Add switch"
+                  onClick={() => {
+                    setShowNewSwitch(true)
+                  }}
+                />,
               }
             ]
           }
@@ -245,6 +250,7 @@ const IndexPage: React.FC<PageProps> = () => {
               })),
               {
                 key: 'add-new',
+                disabled: true,
                 label: (
                   <LayoutPicker
                     switch={sw}
