@@ -12,8 +12,9 @@ import { Button, Dropdown, Tab, Tabs, Toast } from "react-bootstrap";
 
 import NewLayoutModal from "../components/modals/new-layout";
 import NewSwitchModal from "../components/modals/new-switch";
-import { Config, Configuration, DefaultApi, Layouts } from "../api";
+import { Config, Configuration, DefaultApi, Layouts, LayoutV4 } from "../api";
 import LayoutPicker from "../components/inputs/layout-picker";
+import { ButtonsByLayout } from "../api/convenience";
 
 const borderColor = 'rgb(224, 229, 229)';
 const backgroundColor = 'white';
@@ -120,6 +121,8 @@ const IndexPage: React.FC<PageProps> = () => {
     }
   }, [loading, setLoading, config, setConfig])
 
+  const currentButtons = currentLayout ? ButtonsByLayout[currentLayout as keyof Layouts] : []
+
   return (
     <main style={styles.page}>
       <Navbar expand="lg" style={styles.header}>
@@ -177,7 +180,13 @@ const IndexPage: React.FC<PageProps> = () => {
               }}
             />
           </div>
-          <div style={styles.content}>Editing buttons</div>
+          <div style={styles.content}>
+            <div style={styles.sidebar}>
+              {currentButtons.map(buttonName => (
+                <div style={styles.sidebarItem}>{buttonName}</div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
       <NewSwitchModal 

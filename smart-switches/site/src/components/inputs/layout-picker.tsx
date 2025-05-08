@@ -14,19 +14,6 @@ const allLayouts = ['v4', 'v5', 'v6', 'v7']
 const LayoutPicker: React.FC<LayoutPickerProps> = (props) => {
     const sw = props.switch ?? { layouts: {} }
 
-    const newLayout = (layout: keyof Layouts): AnyLayout => {
-        switch (layout) {
-            case "v4":
-                return {} as LayoutV4
-            case "v5":
-                return {} as LayoutV5
-            case "v6":
-                return {} as LayoutV6
-            case "v7":
-                return {} as LayoutV7
-        }
-    }
-
     return (
         <Dropdown
             onSelect={(layout) => {
@@ -36,7 +23,7 @@ const LayoutPicker: React.FC<LayoutPickerProps> = (props) => {
 
                 const key = layout as keyof Layouts
 
-                props.onPick(key, newLayout(key))
+                props.onPick(key, {} as AnyLayout)
             }}
         >
             <Dropdown.Toggle>

@@ -52,6 +52,7 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *DefaultApi* | [**getConfig**](docs/DefaultApi.md#getconfig) | **GET** /api/config | 
+*DefaultApi* | [**listExecutables**](docs/DefaultApi.md#listexecutables) | **GET** /api/executables | 
 *DefaultApi* | [**press**](docs/DefaultApi.md#press) | **POST** /api/press | 
 *DefaultApi* | [**putConfig**](docs/DefaultApi.md#putconfig) | **PUT** /api/config | 
 
@@ -61,11 +62,13 @@ Class | Method | HTTP request | Description
  - [Config](docs/Config.md)
  - [ErrorDetail](docs/ErrorDetail.md)
  - [ErrorModel](docs/ErrorModel.md)
+ - [Executable](docs/Executable.md)
  - [LayoutV4](docs/LayoutV4.md)
  - [LayoutV5](docs/LayoutV5.md)
  - [LayoutV6](docs/LayoutV6.md)
  - [LayoutV7](docs/LayoutV7.md)
  - [Layouts](docs/Layouts.md)
+ - [ListExecutablesResponseBody](docs/ListExecutablesResponseBody.md)
  - [PostPressRequestBody](docs/PostPressRequestBody.md)
  - [Switch](docs/Switch.md)
  - [WheelRoutine](docs/WheelRoutine.md)
