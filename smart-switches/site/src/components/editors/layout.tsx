@@ -1,6 +1,6 @@
 import React from 'react';
 import { Config, DefaultApi, Layouts, ListExecutablesResponseBody, Switch } from '../../api';
-import { AnyButton, AnyLayout, LayoutKey } from '../../api/convenience';
+import { AnyButton, AnyLayout, ButtonsByLayout, LayoutKey } from '../../api/convenience';
 import ConfirmModal from '../modals/confirm';
 import { CaretRightFilled } from '@ant-design/icons';
 import { Button } from 'antd';
@@ -33,7 +33,7 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
 
     const currentSwitch = props.config.switches[props.currentSwitch]
     const currentLayout = currentSwitch.layouts[props.currentLayout] as AnyLayout;
-    const currentButtons = Object.keys(currentLayout) as (keyof typeof currentLayout)[]
+    const currentButtons = ButtonsByLayout[props.currentLayout]
 
     return (
         <div style={styles.flexRow}>
@@ -44,10 +44,10 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
                 {buttonName}
                 <div style={styles.flexRow} />
                 <ExecutablePicker
-                  value={currentLayout[buttonName]}
+                  value={currentLayout[buttonName as keyof typeof currentLayout]}
                   api={props.api}
                   onPick={async picked => {
-                    currentLayout[buttonName] = picked?.entityId
+                    currentLayout[buttonName as keyof typeof currentLayout] = picked?.entityId
                     currentSwitch.layouts[props.currentLayout as LayoutKey] = currentLayout
                     
                     props.onUpdate({
@@ -60,7 +60,7 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
                 />
                 <Button
                   icon={<CaretRightFilled />}
-                  disabled={!currentLayout[buttonName]}
+                  disabled={!currentLayout[buttonName as keyof typeof currentLayout]}
                   onClick={() => {
                     props.api.press({
                       switch: props.currentSwitch as string,
