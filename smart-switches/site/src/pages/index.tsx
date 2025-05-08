@@ -231,6 +231,7 @@ const IndexPage: React.FC<PageProps> = () => {
             {currentButtons.map(buttonName => (
               <div style={styles.sidebarItem}>
                 {buttonName}
+                <div style={{ display: 'flex', flexGrow: 2, }} />
                 <ExecutablePicker
                   value={sw?.layouts[currentLayout as keyof Layouts]?.[buttonName as keyof Layouts[keyof Layouts]]}
                   executables={executables}
