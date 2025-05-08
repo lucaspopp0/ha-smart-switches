@@ -1,6 +1,8 @@
 import * as React from "react"
 import { ListExecutablesResponseBody, Executable } from "../../api"
 import { Form, InputGroup } from "react-bootstrap"
+import { Select } from "antd"
+import { late } from "zod"
 
 export type ExecuablePickerProps = {
     executables?: ListExecutablesResponseBody['executables'],
@@ -9,33 +11,43 @@ export type ExecuablePickerProps = {
 }
 
 const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
-    let [textInput, setTextInput] = React.useState('')
-    let [focused, setFocused] = React.useState(false)
-    let [textFocused, setTextFocused] = React.useState(false)
-
-    const executables = props.executables
-        ?  Object.entries(props.executables).map(([_, executable]) => (
-            <option key={executable.entityId}>{executable.friendlyName}</option>
-        ))
-        : <></>
-
     return (
-        <select
-            value={props.value ?? "none"}
-        onChange={event => {
+        <Select
+            showSearch
+            placeholder="Select a person"
+            optionFilterProp="label"
+            onChange={value => {
+                console.log('executable picker changed to:', value)
+
                 if (props.onPick && props.executables){
-                    if (event.target.value == "none") {
-                        props.onPick(undefined)
+                    if (value) {
+                        props.onPick(props.executables[value])
                     } else {
-                        props.onPick(props.executables[event.target.value])
+                        props.onPick(undefined)
                     }
                 }
             }}
-        >
-            <option key="none">none</option>
-            <option disabled key="--">----</option>
-            {executables}
-        </select>
+            options={
+                [
+                    {
+                        value: undefined,
+                        label: 'none',
+                        disabled: true,
+                    },
+                    {
+                        value: undefined,
+                        label: '--',
+                        disabled: true,
+                    },
+                    ...Object.entries(props.executables ?? {}).map(([entityID, { friendlyName }]) => (
+                        {
+                            value: entityID,
+                            label: friendlyName,
+                        }
+                    )),
+                ]
+            }
+        />
     )
 }
 
