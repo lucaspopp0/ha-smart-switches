@@ -16,6 +16,8 @@ import { Config, Configuration, DefaultApi, Layouts, LayoutV4, ListExecutablesRe
 import LayoutPicker from "../components/inputs/layout-picker";
 import { ButtonsByLayout } from "../api/convenience";
 import ExecutablePicker from "../components/inputs/executable-picker";
+import { Menu } from "antd";
+import { ItemType, MenuItemGroupType, MenuItemType } from "antd/lib/menu/interface";
 
 const borderColor = 'rgb(224, 229, 229)';
 const backgroundColor = 'white';
@@ -165,89 +167,90 @@ const IndexPage: React.FC<PageProps> = () => {
           <Navbar.Brand href="#home">Smart Switches</Navbar.Brand>
       </Navbar>
       <div style={styles.content}>
-        <div style={styles.sidebar}>
-          {Object.keys(config?.switches ?? {}).map(name => (
-            <Button
-              key={name}
-              style={{
-                ...styles.sidebarItem,
-                ...(name == currentSwitch ? styles.selectedItem  : {}),
-              }}
-              onClick={() => {
-                console.log(`Selecting ${name}`, config?.switches[name])
-                setCurrentSwitch(name)
-                setCurrentLayout(Object.keys(config?.switches[name].layouts ?? {})[0])
-              }}
-            >
-              {name}
-            </Button>
-          ))}
-          <Button
-            key="_"
-            style={styles.sidebarItem}
-            onClick={() => setShowNewSwitch(true)}
-          >
-            + New switch
-          </Button>
-        </div>
-        <div style={styles.content}>
-          <div style={{ ...styles.sidebar, width: '200px' }}>
-          {Object.keys(sw?.layouts ?? {}).map(name => (
-            <Button
-              key={name}
-              style={{
-                ...styles.sidebarItem,
-                ...(name == currentLayout ? styles.selectedItem  : {}),
-              }}
-              onClick={() => {
-                console.log(`Selecting ${name}`, sw?.layouts[name as keyof Layouts])
-                setCurrentLayout(name)
-              }}
-            >
-              {name}
-            </Button>
-          ))}
-            <LayoutPicker
-              switch={sw}
-              onPick={async (key, layout) => {
-                if (!sw) return
+        <Menu
+          style={styles.sidebar}
+          onSelect={({ key }) => {
+            if (key == "add-new") {
+              setShowNewSwitch(true)
+              return
+            }
 
-                sw.layouts[key] = layout
-                if (!!config?.switches && !!currentSwitch) {
-                  config.switches[currentSwitch] = sw
-                  await api.putConfig(config)
-                  setCurrentLayout(key)
-                }
-              }}
-            />
-          </div>
-          <div style={styles.content}>
-            <div style={styles.sidebar}>
-              {currentButtons.map(buttonName => (
-                <div style={styles.sidebarItem}>
-                  {buttonName}
-                  <ExecutablePicker
-                    value={sw?.layouts[currentLayout as keyof Layouts]?.[buttonName as keyof Layouts[keyof Layouts]]}
-                    executables={executables}
-                    onPick={async picked => {
-                      if (sw && currentLayout && buttonName && config && currentSwitch) {
-                        const layout = sw.layouts[currentLayout as keyof Layouts]
-                        if (layout) {
-                          layout[buttonName as keyof typeof layout] = picked?.entityId
-                        }
-
-                        config.switches[currentSwitch].layouts[currentLayout as keyof Layouts] = layout
-                        setConfig(config)
-                        
-                        api.putConfig(config).
-                          then(() => forceRefresh()).
-                          catch(console.error)
+            console.log(`Selecting ${key}`, config?.switches[key])
+            setCurrentSwitch(key)
+            setCurrentLayout(Object.keys(config?.switches[key].layouts ?? {})[0])
+          }}
+          items={
+            [
+              ...Object.keys(config?.switches ?? {}).map((name: string): MenuItemType => ({
+                key: name,
+                label: name,
+              })),
+              {
+                key: 'add-new',
+                label: '+ New switch'
+              }
+            ]
+          }
+        />
+        <Menu
+          style={styles.sidebar}
+          onSelect={({ key }) => {
+            console.log(`Selecting ${key}`, sw?.layouts[key as keyof Layouts])
+            setCurrentLayout(key)
+          }}
+          items={
+            [
+              ...Object.keys(sw?.layouts ?? {}).map((name: string): MenuItemType => ({
+                key: name,
+                label: name,
+              })),
+              {
+                key: 'add-new',
+                label: (
+                  <LayoutPicker
+                    switch={sw}
+                    onPick={async (key, layout) => {
+                      if (!sw) return
+      
+                      sw.layouts[key] = layout
+                      if (!!config?.switches && !!currentSwitch) {
+                        config.switches[currentSwitch] = sw
+                        await api.putConfig(config)
+                        setCurrentLayout(key)
                       }
                     }}
                   />
-                  </div>
-              ))}
-            </div>
+                )
+              }
+            ]
+          }
+        />
+        <div style={styles.content}>
+          <div style={styles.sidebar}>
+            {currentButtons.map(buttonName => (
+              <div style={styles.sidebarItem}>
+                {buttonName}
+                <ExecutablePicker
+                  value={sw?.layouts[currentLayout as keyof Layouts]?.[buttonName as keyof Layouts[keyof Layouts]]}
+                  executables={executables}
+                  onPick={async picked => {
+                    if (sw && currentLayout && buttonName && config && currentSwitch) {
+                      const layout = sw.layouts[currentLayout as keyof Layouts]
+                      if (layout) {
+                        layout[buttonName as keyof typeof layout] = picked?.entityId
+                      }
+
+                      config.switches[currentSwitch].layouts[currentLayout as keyof Layouts] = layout
+                      setConfig(config)
+                      
+                      api.putConfig(config).
+                        then(() => forceRefresh()).
+                        catch(console.error)
+                    }
+                  }}
+                />
+                </div>
+            ))}
           </div>
         </div>
       </div>
