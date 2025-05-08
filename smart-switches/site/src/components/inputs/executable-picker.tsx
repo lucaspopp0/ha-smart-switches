@@ -18,6 +18,8 @@ const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
     console.log('executables: ', executables)
     
     React.useEffect(() => {
+        console.log(fetchingExecutables)
+
         if (fetchingExecutables) {
             return () => {}
         }
