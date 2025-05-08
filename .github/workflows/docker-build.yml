@@ -69,7 +69,7 @@ jobs:
         run: |
           COMMIT_MSG=$(git show --format='%as' --no-patch)
           echo "$COMMIT_MSG"
-          
+
           BOT=false
           if [[ "$COMMIT_MSG" == *[bot]* ]]; then
             BOT=true
@@ -181,6 +181,7 @@ jobs:
         name: Fail job if changes committed
         if: ${{ steps.detect-changes.outputs.changes == 'true' }}
         run: |
+          exit 1
 
   build-and-push:
     needs:
