@@ -73,13 +73,13 @@ jobs:
           path: smart-switches/server/spec
           key: server-spec-${{ hashFiles('smart-switches/server/**/*.go') }}
       -
-        if: ${{ steps.restore-server-cache.outputs.cache-hit == 'false' }}
+        if: ${{ steps.restore-server-cache.outputs.cache-hit != 'true' }}
         uses: actions/setup-go@v5
         with:
           go-version-file: smart-switches/server/go.mod
           cache-dependency-path: smart-switches/server/go.sum
       -
-        if: ${{ steps.restore-server-cache.outputs.cache-hit == 'false' }}
+        if: ${{ steps.restore-server-cache.outputs.cache-hit != 'true' }}
         name: Re-generate server openapi spec
         working-directory: smart-switches/server
         run: |
