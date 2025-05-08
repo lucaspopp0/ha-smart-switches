@@ -47,7 +47,7 @@ func (l Layouts) GetLayout(name string) (Layout, error) {
 
 			if layout, ok := field.Interface().(Layout); ok && layout != nil {
 				if layout.MatchesLayout(name) {
-					fmt.Printf("matched layout %#v\n", layout)
+					fmt.Printf("matched layout %q\n", name)
 					return layout, nil
 				}
 			}
@@ -80,46 +80,6 @@ func (l Layouts) GetCommand(layoutName string, keyName string) (string, error) {
 	}
 
 	return command, nil
-}
-
-func (l Layouts) recurseForCommandMatchers(value reflect.Value, key string) (string, bool) {
-	if value.IsZero() {
-		return "", false
-	}
-
-	if value.CanInterface() {
-		if matcher, ok := value.Interface().(commandMatcher); ok && matcher != nil {
-			if command, ok := matcher.MatchesKey(key); ok {
-				fmt.Printf("key %q matched command %q\n", key, command)
-				return command, true
-			}
-		}
-	}
-
-	switch value.Kind() {
-	case reflect.Struct:
-		for f := range value.NumField() {
-			field := value.Field(f)
-			if command, ok := l.recurseForCommandMatchers(field, key); ok {
-				return command, true
-			}
-		}
-	case reflect.Array:
-		for field := range value.Seq() {
-			if command, ok := l.recurseForCommandMatchers(field, key); ok {
-				return command, true
-			}
-		}
-	case reflect.Map:
-		for _, mapKey := range value.MapKeys() {
-			field := value.MapIndex(mapKey)
-			if command, ok := l.recurseForCommandMatchers(field, key); ok {
-				return command, true
-			}
-		}
-	}
-
-	return "", false
 }
 
 type LayoutV4 struct {

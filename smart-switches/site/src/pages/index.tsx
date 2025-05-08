@@ -16,7 +16,7 @@ import { ButtonsByLayout } from "../api/convenience";
 import ExecutablePicker from "../components/inputs/executable-picker";
 import { Button, Menu } from "antd";
 import { ItemType, MenuItemGroupType, MenuItemType } from "antd/lib/menu/interface";
-import { DeleteOutlined } from "@ant-design/icons";
+import { CaretRightFilled, DeleteOutlined } from "@ant-design/icons";
 import ConfirmModal from "../components/modals/confirm";
 
 const borderColor = 'rgb(224, 229, 229)';
@@ -95,7 +95,7 @@ const IndexPage: React.FC<PageProps> = () => {
 
   let [config, setConfig] = React.useState<Config | undefined>(undefined)
   let [currentSwitch, setCurrentSwitch] = React.useState<string | undefined>(undefined)
-  let [currentLayout, setCurrentLayout] = React.useState<string | undefined>(undefined)
+  let [currentLayout, setCurrentLayout] = React.useState<keyof Layouts | undefined>(undefined)
 
   let [showConfirm, setShowConfirm] = React.useState(false)
 
@@ -164,7 +164,7 @@ const IndexPage: React.FC<PageProps> = () => {
           setCurrentSwitch(Object.keys(response.data.switches)[0])
 
           if (Object.keys(response.data.switches[0].layouts).length > 0) {
-            setCurrentLayout(Object.keys(response.data.switches[0].layouts)[0])
+            setCurrentLayout(Object.keys(response.data.switches[0].layouts)[0] as keyof Layouts)
           }
         }
       })
@@ -210,7 +210,7 @@ const IndexPage: React.FC<PageProps> = () => {
 
             console.log(`Selecting ${key}`, config?.switches[key])
             setCurrentSwitch(key)
-            setCurrentLayout(Object.keys(config?.switches[key].layouts ?? {})[0])
+            setCurrentLayout(Object.keys(config?.switches[key].layouts ?? {})[0] as keyof Layouts)
           }}
           items={
             [
@@ -247,7 +247,7 @@ const IndexPage: React.FC<PageProps> = () => {
             }
 
             console.log(`Selecting ${key}`, sw?.layouts[key as keyof Layouts])
-            setCurrentLayout(key)
+            setCurrentLayout(key as keyof Layouts)
           }}
           items={
             [
@@ -312,6 +312,17 @@ const IndexPage: React.FC<PageProps> = () => {
                         then(() => forceRefresh()).
                         catch(console.error)
                     }
+                  }}
+                />
+                <Button
+                  icon={<CaretRightFilled />}
+                  disabled={currentLayout ? !sw?.layouts[currentLayout]?.[buttonName as keyof Layouts[keyof Layouts]] : true}
+                  onClick={() => {
+                    api.press({
+                      switch: currentSwitch as string,
+                      key: buttonName,
+                      layout: currentLayout as string,
+                    }).finally(console.log)
                   }}
                 />
                 </div>
