@@ -8,3 +8,5 @@ services:
       - "7125:8000"
     volumes:
       - ./data:/data
+    environment:
+      LOCAL: true

@@ -24,22 +24,17 @@ const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
             return () => {}
         }
 
-        let ignore = false
+
         setFetchingExecutables(true)
 
         props.api
             .listExecutables()
             .then(response => {
-                if (ignore) {
-                    return
-                }
-
                 setExecutables(response.data.executables)
                 forceRefresh()
             })
 
         return () => {
-            ignore = true
         }
     }, [fetchingExecutables, setFetchingExecutables, executables, setExecutables])
 

@@ -28,11 +28,11 @@ func SiteMiddleware(local bool) func(next http.Handler) http.Handler {
 			}
 
 			if local {
-				localSite := "http://host.docker.internal:8000"
+				localSite := "http://host.docker.internal:7128"
 
 				proxyRequest, err := http.NewRequest(
 					r.Method,
-					path.Join(localSite, subpath),
+					localSite+subpath,
 					r.Body,
 				)
 

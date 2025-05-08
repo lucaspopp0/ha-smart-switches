@@ -19,6 +19,7 @@ import (
 
 const (
 	envSupervisorToken = "SUPERVISOR_TOKEN"
+	envLocal           = "LOCAL"
 )
 
 type server struct {
@@ -78,7 +79,7 @@ func NewServer() humacli.CLI {
 		s.router = chi.NewMux()
 
 		s.router.Use(AllowCORS)
-		s.router.Use(SiteMiddleware(false))
+		s.router.Use(SiteMiddleware(os.Getenv(envLocal) == "true"))
 
 		cfg := huma.DefaultConfig("Smart Switches", "")
 		cfg.DocsPath = "/api/docs"
