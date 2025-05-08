@@ -63,7 +63,18 @@ func (l Layouts) GetCommand(layoutName string, keyName string) (string, error) {
 		return "", err
 	}
 
-	command, ok := l.recurseForCommandMatchers(reflect.ValueOf(layout), keyName)
+	jsonBytes, err := json.Marshal(layout)
+	if err != nil {
+		return "", err
+	}
+
+	mappings := map[string]string{}
+	err = json.Unmarshal(jsonBytes, &mappings)
+	if err != nil {
+		return "", err
+	}
+
+	command, ok := mappings[keyName]
 	if !ok {
 		return "", fmt.Errorf("no commands found for %q", keyName)
 	}
