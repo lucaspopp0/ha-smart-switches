@@ -123,9 +123,14 @@ const IndexPage: React.FC<PageProps> = () => {
         }
 
         setConfig(response.data)
-        setCurrentSwitch(Object.keys(response.data.switches).length > 0
-            ? Object.keys(response.data.switches)[0]
-            : undefined)
+
+        if (response.data.switches?.length) {
+          setCurrentSwitch(Object.keys(response.data.switches)[0])
+
+          if (Object.keys(response.data.switches[0].layouts).length > 0) {
+            setCurrentLayout(Object.keys(response.data.switches[0].layouts)[0])
+          }
+        }
       })
 
     return () => {
