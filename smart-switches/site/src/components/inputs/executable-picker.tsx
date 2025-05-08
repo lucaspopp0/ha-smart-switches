@@ -1,16 +1,42 @@
 import * as React from "react"
-import { ListExecutablesResponseBody, Executable } from "../../api"
+import { ListExecutablesResponseBody, Executable, DefaultApi } from "../../api"
 import { Form, InputGroup } from "react-bootstrap"
 import { Select, Space, Typography } from "antd"
 import { late } from "zod"
 
 export type ExecuablePickerProps = {
-    executables?: ListExecutablesResponseBody['executables'],
+    api: DefaultApi,
     value?: string
     onPick?: (executable: Executable | undefined) => Promise<void>
 }
 
 const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
+    let [executables, setExecutables] = React.useState<ListExecutablesResponseBody['executables'] | undefined>(undefined)
+    let [fetchingExecutables, setFetchingExecutables] = React.useState(false)
+    
+    React.useEffect(() => {
+        if (fetchingExecutables) {
+            return () => {}
+        }
+
+        let ignore = false
+        setFetchingExecutables(true)
+
+        props.api
+            .listExecutables()
+            .then(response => {
+                if (ignore) {
+                return
+                }
+
+                setExecutables(response.data.executables)
+            })
+
+        return () => {
+            ignore = true
+        }
+    }, [fetchingExecutables, setFetchingExecutables, executables, setExecutables])
+
     return (
         <Select
             showSearch
@@ -21,9 +47,9 @@ const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
             onChange={value => {
                 console.log('executable picker changed to:', value)
 
-                if (props.onPick && props.executables){
+                if (props.onPick && executables){
                     if (value) {
-                        props.onPick(props.executables[value])
+                        props.onPick(executables[value])
                     } else {
                         props.onPick(undefined)
                     }
@@ -40,7 +66,7 @@ const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
                         label: '--',
                         disabled: true,
                     },
-                    ...Object.entries(props.executables ?? {}).map(([entityId, { friendlyName }]) => (
+                    ...Object.entries(executables ?? {}).map(([entityId, { friendlyName }]) => (
                         {
                             value: entityId,
                             label: friendlyName,

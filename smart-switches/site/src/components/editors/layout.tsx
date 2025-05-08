@@ -27,30 +27,6 @@ export type LayoutEditorProps = {
 }
 
 const LayoutEditor: React.FC<LayoutEditorProps> = props => {
-    let [executables, setExecutables] = React.useState({} as ListExecutablesResponseBody['executables'])
-    let [fetchingExecutables, setFetchingExecutables] = React.useState(false)
-    
-    React.useEffect(() => {
-        if (fetchingExecutables) {
-            return () => {}
-        }
-
-        let ignore = false
-        setFetchingExecutables(true)
-
-        props.api
-            .listExecutables()
-            .then(response => {
-                if (!ignore) {
-                    setExecutables(response.data.executables ?? {})
-                }
-            })
-
-        return () => {
-            ignore = true
-        }
-    }, [fetchingExecutables, setFetchingExecutables, executables, setExecutables])
-
     if (!props.config || !props.currentSwitch || !props.currentLayout) {
         return <div style={styles.content} />
     }
@@ -60,16 +36,16 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
     const currentButtons = Object.keys(currentLayout) as (keyof typeof currentLayout)[]
 
     return (
-        <div style={styles.content}>
-          <div style={{ display: 'flex', flexGrow: 2, }} />
-          <div style={{ ...styles.sidebar, width: 400 }}>
+        <div style={styles.flexRow}>
+          <div style={styles.flexRow} />
+          <div style={{ display: 'flex', flexDirection: 'column', width: 400 }}>
             {currentButtons.map(buttonName => (
-              <div style={styles.sidebarItem}>
+              <div style={{ ...styles.flexRow, padding: 12, }}>
                 {buttonName}
-                <div style={{ display: 'flex', flexGrow: 2, }} />
+                <div style={styles.flexRow} />
                 <ExecutablePicker
                   value={currentLayout[buttonName]}
-                  executables={executables}
+                  api={props.api}
                   onPick={async picked => {
                     currentLayout[buttonName] = picked?.entityId
                     currentSwitch.layouts[props.currentLayout as LayoutKey] = currentLayout

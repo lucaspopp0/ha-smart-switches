@@ -339,19 +339,19 @@ const IndexPage: React.FC<PageProps> = () => {
         {switchesMenu}
         {layoutsMenu}
         <LayoutEditor
-        api={api}
-        config={config}
-        currentSwitch={currentSwitch}
-        currentLayout={currentLayout}
-        onUpdate={async (latestConfig) => {
-          try {
-            await api.putConfig(latestConfig)
-            setConfig(latestConfig)
-            forceRefresh()
-          } catch (err) {
-            console.error(err)
-          }
-        }}        
+          api={api}
+          config={config}
+          currentSwitch={currentSwitch}
+          currentLayout={currentLayout}
+          onUpdate={async (latestConfig) => {
+            try {
+              await api.putConfig(latestConfig)
+              setConfig(latestConfig)
+              forceRefresh()
+            } catch (err) {
+              console.error(err)
+            }
+          }}        
         />
       </div>
       {confirmDeleteSwitchModal}
