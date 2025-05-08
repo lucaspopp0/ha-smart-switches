@@ -12,12 +12,13 @@ import NewLayoutModal from "../components/modals/new-layout";
 import NewSwitchModal from "../components/modals/new-switch";
 import { Config, Configuration, DefaultApi, Layouts, LayoutV4, ListExecutablesResponseBody, Switch } from "../api";
 import LayoutPicker from "../components/inputs/layout-picker";
-import { ButtonsByLayout } from "../api/convenience";
+import { AnyLayout, ButtonsByLayout } from "../api/convenience";
 import ExecutablePicker from "../components/inputs/executable-picker";
 import { Button, Menu } from "antd";
 import { ItemType, MenuItemGroupType, MenuItemType } from "antd/lib/menu/interface";
 import { CaretRightFilled, DeleteOutlined } from "@ant-design/icons";
 import ConfirmModal from "../components/modals/confirm";
+import LayoutEditor from "../components/editors/layout";
 
 const borderColor = 'rgb(224, 229, 229)';
 const backgroundColor = 'white';
@@ -334,49 +335,21 @@ const IndexPage: React.FC<PageProps> = () => {
             ] : []
           }
         />
-        <div style={styles.content}>
-          <div style={{ display: 'flex', flexGrow: 2, }} />
-          <div style={{ ...styles.sidebar, width: 400 }}>
-            {currentButtons.map(buttonName => (
-              <div style={styles.sidebarItem}>
-                {buttonName}
-                <div style={{ display: 'flex', flexGrow: 2, }} />
-                <ExecutablePicker
-                  value={sw?.layouts[currentLayout as keyof Layouts]?.[buttonName as keyof Layouts[keyof Layouts]]}
-                  executables={executables}
-                  onPick={async picked => {
-                    if (sw && currentLayout && buttonName && config && currentSwitch) {
-                      const layout = sw.layouts[currentLayout as keyof Layouts]
-                      if (layout) {
-                        layout[buttonName as keyof typeof layout] = picked?.entityId
-                      }
-
-                      sw.layouts[currentLayout as keyof Layouts] = layout
-
-                      config.switches[currentSwitch].layouts[currentLayout as keyof Layouts] = layout
-                      setConfig(config)
-                      
-                      api.putConfig(config).
-                        then(() => forceRefresh()).
-                        catch(console.error)
-                    }
-                  }}
-                />
-                <Button
-                  icon={<CaretRightFilled />}
-                  disabled={currentLayout ? !sw?.layouts[currentLayout]?.[buttonName as keyof Layouts[keyof Layouts]] : true}
-                  onClick={() => {
-                    api.press({
-                      switch: currentSwitch as string,
-                      key: buttonName,
-                      layout: currentLayout as string,
-                    }).finally(console.log)
-                  }}
-                />
-                </div>
-            ))}
-          </div>
-        </div>
+        <LayoutEditor
+        api={api}
+        config={config}
+        currentSwitch={currentSwitch}
+        currentLayout={currentLayout}
+        onUpdate={async (latestConfig) => {
+          try {
+            await api.putConfig(latestConfig)
+            setConfig(latestConfig)
+            forceRefresh()
+          } catch (err) {
+            console.error(err)
+          }
+        }}        
+        />
       </div>
       {confirmDeleteSwitchModal}
       {confirmDeleteLayoutModal}

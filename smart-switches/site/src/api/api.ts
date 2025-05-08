@@ -797,6 +797,3 @@ export class DefaultApi extends BaseAPI {
         return DefaultApiFp(this.configuration).putConfig(Config, options).then((request) => request(this.axios, this.basePath));
     }
 }
-
-
-

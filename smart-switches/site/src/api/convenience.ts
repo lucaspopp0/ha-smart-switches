@@ -58,6 +58,11 @@ const buttonsByLayout: Record<keyof Layouts, string[]> = {
     v7: Object.keys(v7)
 }
 
+export type LayoutKey = keyof Layouts;
+
+export type AnyLayout = LayoutV4 | LayoutV5 | LayoutV6 | LayoutV7;
+export type AnyButton = keyof (LayoutV4 & LayoutV5 & LayoutV6 & LayoutV7)
+
 export const LayoutNames = Object.keys(buttonsByLayout)
 
 export const ButtonsByLayout = buttonsByLayout;
