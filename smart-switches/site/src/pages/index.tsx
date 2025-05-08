@@ -19,6 +19,7 @@ import ExecutablePicker from "../components/inputs/executable-picker";
 
 const borderColor = 'rgb(224, 229, 229)';
 const backgroundColor = 'white';
+const selectedColor = 'rgb(0, 255, 255)';
 
 const styles: { [key: string]: React.CSSProperties } = {
   page: {
@@ -68,6 +69,9 @@ const styles: { [key: string]: React.CSSProperties } = {
     borderRadius: 0,
     background: backgroundColor,
     color: 'inherit',
+  },
+  selectedItem: {
+    background: selectedColor,
   },
 }
 
@@ -160,7 +164,10 @@ const IndexPage: React.FC<PageProps> = () => {
           {Object.keys(config?.switches ?? {}).map(name => (
             <Button
               key={name}
-              style={styles.sidebarItem}
+              style={{
+                ...styles.sidebarItem,
+                ...(name == currentSwitch ? styles.selectedItem  : {}),
+              }}
               onClick={() => {
                 console.log(`Selecting ${name}`, config?.switches[name])
                 setCurrentSwitch(name)
@@ -183,7 +190,10 @@ const IndexPage: React.FC<PageProps> = () => {
           {Object.keys(sw?.layouts ?? {}).map(name => (
             <Button
               key={name}
-              style={styles.sidebarItem}
+              style={{
+                ...styles.sidebarItem,
+                ...(name == currentLayout ? styles.selectedItem  : {}),
+              }}
               onClick={() => {
                 console.log(`Selecting ${name}`, sw?.layouts[name as keyof Layouts])
                 setCurrentLayout(name)
