@@ -13,6 +13,7 @@ import { Button, Dropdown, Tab, Tabs, Toast } from "react-bootstrap";
 import NewLayoutModal from "../components/modals/new-layout";
 import NewSwitchModal from "../components/modals/new-switch";
 import { Config, Configuration, DefaultApi } from "../api";
+import LayoutPicker from "../components/inputs/layout-picker";
 
 const borderColor = 'rgb(224, 229, 229)';
 const backgroundColor = 'white';
@@ -91,6 +92,8 @@ const IndexPage: React.FC<PageProps> = () => {
     basePath: apiBase,
   }))
 
+  let sw = currentSwitch ? config?.switches[currentSwitch] : undefined
+
   React.useEffect(() => {
     if (loading) {
       return () => {}
@@ -147,34 +150,18 @@ const IndexPage: React.FC<PageProps> = () => {
         </div>
         <div style={styles.content}>
           <div style={styles.sidebar}>
-          {currentSwitch 
-            ? <React.Fragment>
-                {Object
-                  .keys(config?.switches[currentSwitch].layouts ?? {})
-                  .map(layoutName => (
-                    <div key={layoutName} style={styles.sidebarItem}>
-                      {layoutName}
-                    </div>
-                  ))}
-                  <div key="add-layout" style={styles.sidebarItem}>
-                    <Dropdown>
-                      <Dropdown.Toggle>
-                          Add layout...
-                      </Dropdown.Toggle>
+            <LayoutPicker
+              switch={sw}
+              onPick={async (key, layout) => {
+                if (!sw) return
 
-                      <Dropdown.Menu>
-                          {['v4', 'v5', 'v6', 'v7'].map(layout => (
-                              config?.switches[currentSwitch]
-                              ? (layout in config.switches[currentSwitch].layouts
-                                  ? <Dropdown.Item key={layout} disabled>{layout} (already configured)</Dropdown.Item>
-                                  : <Dropdown.Item key={layout}>{layout}</Dropdown.Item>)
-                              : ''
-                          ))}
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </div>
-              </React.Fragment>
-            : "Select a switch"}
+                sw.layouts[key] = layout
+                if (!!config?.switches && !!currentSwitch) {
+                  config.switches[currentSwitch] = sw
+                  await api.putConfig(config)
+                }
+              }}
+            />
           </div>
           <div style={styles.content}>Editing buttons</div>
         </div>

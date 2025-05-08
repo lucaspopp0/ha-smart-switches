@@ -1,11 +1,11 @@
 import React from "react"
 import { Button, Dropdown, Modal } from "react-bootstrap";
-import { components } from "../../sdk";
+import { Switch } from "../../api";
 
 export type NewLayoutModalProps = {
     show?: boolean,
     onHide?: () => void,
-    switch: components["schemas"]["Switch"] | undefined,
+    switch?: Switch,
 }
 
 const NewLayoutModal: React.FC<NewLayoutModalProps> = (props) => {
