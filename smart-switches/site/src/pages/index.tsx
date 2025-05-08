@@ -12,7 +12,7 @@ import { Button, Dropdown, Tab, Tabs, Toast } from "react-bootstrap";
 
 import NewLayoutModal from "../components/modals/new-layout";
 import NewSwitchModal from "../components/modals/new-switch";
-import { Config, Configuration, DefaultApi, Layouts, LayoutV4, ListExecutablesResponseBody } from "../api";
+import { Config, Configuration, DefaultApi, Layouts, LayoutV4, ListExecutablesResponseBody, Switch } from "../api";
 import LayoutPicker from "../components/inputs/layout-picker";
 import { ButtonsByLayout } from "../api/convenience";
 import ExecutablePicker from "../components/inputs/executable-picker";
@@ -221,7 +221,25 @@ const IndexPage: React.FC<PageProps> = () => {
               {currentButtons.map(buttonName => (
                 <div style={styles.sidebarItem}>
                   {buttonName}
-                  <ExecutablePicker executables={executables} />
+                  <ExecutablePicker
+                    value={sw?.layouts[currentLayout as keyof Layouts]?.[buttonName as keyof Layouts[keyof Layouts]]}
+                    executables={executables}
+                    onPick={async picked => {
+                      if (sw && currentLayout && buttonName && config && currentSwitch) {
+                        const layout = sw.layouts[currentLayout as keyof Layouts]
+                        if (layout) {
+                          layout[buttonName as keyof typeof layout] = picked?.entityId
+                        }
+
+                        config.switches[currentSwitch].layouts[currentLayout as keyof Layouts] = layout
+                        setConfig(config)
+                        
+                        api.putConfig(config).
+                          then(() => forceRefresh()).
+                          catch(console.error)
+                      }
+                    }}
+                  />
                   </div>
               ))}
             </div>
