@@ -34,7 +34,6 @@ const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
                     {
                         value: undefined,
                         label: 'none',
-                        disabled: true,
                     },
                     {
                         value: undefined,
