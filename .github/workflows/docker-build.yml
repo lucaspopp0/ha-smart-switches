@@ -59,18 +59,17 @@ jobs:
         with:
           ref: ${{ github.head_ref || github.ref }}
       -
+        name: Get commit message
+        id: commit-message
+        run: |
+          echo 'message<EOT'
+          git show --format='%s' --no-patch
+          echo 'EOT'
+      -
         name: Check for bot commit
         id: check-bot
         run: |
-          COMMIT_MSG=$(git show --format='%s' --no-patch)
-          echo "$COMMIT_MSG"
-
-          BOT=false
-          if [[ "$COMMIT_MSG" == *[bot]* ]]; then
-            BOT=true
-          fi
-
-          echo "bot=$BOT" | tee -a "$GITHUB_OUTPUT"
+          echo "bot=${{ contains(steps.commit-message.outputs.message, '[bot]') }}" | tee -a "$GITHUB_OUTPUT"
       -
         name: Restore server cache
         id: restore-server-cache
