@@ -1,10 +1,8 @@
 import * as React from "react"
 import { ListExecutablesResponseBody, Executable, DefaultApi } from "../../api"
-import { Form, InputGroup } from "react-bootstrap"
 import { Select, Space, Typography } from "antd"
-import { late } from "zod"
 import { monospace } from "../../styles"
-import { exec } from "child_process"
+import useForceRefresh from "../../hooks/useForceRefresh"
 
 export type ExecuablePickerProps = {
     api: DefaultApi,
@@ -15,6 +13,7 @@ export type ExecuablePickerProps = {
 const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
     let [executables, setExecutables] = React.useState<ListExecutablesResponseBody['executables'] | undefined>(undefined)
     let [fetchingExecutables, setFetchingExecutables] = React.useState(false)
+    let forceRefresh = useForceRefresh()
 
     console.log('executables: ', executables)
     
@@ -30,10 +29,11 @@ const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
             .listExecutables()
             .then(response => {
                 if (ignore) {
-                return
+                    return
                 }
 
                 setExecutables(response.data.executables)
+                forceRefresh()
             })
 
         return () => {
@@ -70,7 +70,7 @@ const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
                         label: '--',
                         disabled: true,
                     },
-                    ...Object.entries(executables ?? {}).map(([entityId, { friendlyName }]) => (
+                    ...Object.keys(executables ?? {}).map(entityId => (
                         {
                             value: entityId,
                         }
