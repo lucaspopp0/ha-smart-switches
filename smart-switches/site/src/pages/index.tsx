@@ -204,11 +204,10 @@ const IndexPage: React.FC<PageProps> = () => {
                 key: 'add-new',
                 disabled: true,
                 label: <Button
-                  title="Add switch"
                   onClick={() => {
                     setShowNewSwitch(true)
                   }}
-                />,
+                >Add switch</Button>,
               }
             ]
           }

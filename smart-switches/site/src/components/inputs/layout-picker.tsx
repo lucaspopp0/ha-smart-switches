@@ -39,9 +39,7 @@ const LayoutPicker: React.FC<LayoutPickerProps> = (props) => {
             }}
         >
             <Button>
-                <Space>
                 Add layout
-                </Space>
             </Button>
         </Dropdown>
     )
