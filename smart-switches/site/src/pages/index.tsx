@@ -97,8 +97,6 @@ const IndexPage: React.FC<PageProps> = () => {
   let [currentSwitch, setCurrentSwitch] = React.useState<string | undefined>(undefined)
   let [currentLayout, setCurrentLayout] = React.useState<keyof Layouts | undefined>(undefined)
 
-  let [showConfirm, setShowConfirm] = React.useState(false)
-
   const deleteSwitch = async (name: string) => {
     if (config?.switches) {
       delete config.switches[name]
@@ -128,8 +126,6 @@ const IndexPage: React.FC<PageProps> = () => {
       }
     }
   }
-
-  var onConfirm: () => Promise<void> = async () => {}
 
   const forceRefresh = () => setRefresh(!refresh)
 
@@ -193,6 +189,44 @@ const IndexPage: React.FC<PageProps> = () => {
     }
   }, [fetchingExecutables, setFetchingExecutables, executables, setExecutables])
 
+  const [showConfirmDeleteSwitch, setShowConfirmDeleteSwitch] = React.useState(false)
+  const confirmDeleteSwitchModal = (<ConfirmModal
+    title={"Confirm deletion"}
+    body={<>
+      {`Are you sure you want to delete ${currentSwitch}?`}
+      <br/>
+      {`This cannot be undone.`}
+    </>}
+    open={showConfirmDeleteSwitch}
+    okButtonProps={{
+      color: 'danger',
+      title: 'Delete'
+    }}
+    onOk={() => deleteSwitch(currentSwitch as string)}
+    onCancel={() => {
+      setShowConfirmDeleteSwitch(false)
+    }}
+  />)
+
+  const [showConfirmDeleteLayout, setShowConfirmDeleteLayout] = React.useState(false)
+  const confirmDeleteLayoutModal = (<ConfirmModal
+    title={"Confirm deletion"}
+    body={<>
+      {`Are you sure you want to delete ${currentLayout} of ${currentSwitch}?`}
+      <br/>
+      {`This cannot be undone.`}
+    </>}
+    open={showConfirmDeleteLayout}
+    okButtonProps={{
+      color: 'danger',
+      title: 'Delete'
+    }}
+    onOk={() => deleteLayout(currentLayout as keyof Layouts)}
+    onCancel={() => {
+      setShowConfirmDeleteLayout(false)
+    }}
+  />)
+
   const currentButtons = currentLayout ? ButtonsByLayout[currentLayout as keyof Layouts] : []
 
   return (
@@ -224,8 +258,7 @@ const IndexPage: React.FC<PageProps> = () => {
                       variant="text"
                       icon={<DeleteOutlined />}
                       onClick={async () => {
-                        onConfirm = () => deleteSwitch(name)
-                        setShowConfirm(true)
+                        setShowConfirmDeleteSwitch(true)
                       }}
                     />,
                   } ))
@@ -268,8 +301,7 @@ const IndexPage: React.FC<PageProps> = () => {
                       variant="text"
                       icon={<DeleteOutlined />}
                       onClick={async () => {
-                        onConfirm = () => deleteLayout(name)
-                        setShowConfirm(true)
+                        setShowConfirmDeleteLayout(true)
                       }}
                     />,
                   }))
@@ -346,15 +378,8 @@ const IndexPage: React.FC<PageProps> = () => {
           </div>
         </div>
       </div>
-      <ConfirmModal
-        title={""}
-        body={undefined}
-        open={false}
-        onOk={onConfirm}
-        onCancel={() => {
-          setShowConfirm(false)
-        }}
-      />
+      {confirmDeleteSwitchModal}
+      {confirmDeleteLayoutModal}
       <NewSwitchModal 
         show={showNewSwitch}
         onHide={() => {

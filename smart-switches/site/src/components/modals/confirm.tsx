@@ -1,4 +1,4 @@
-import { Modal } from "antd"
+import { Modal, ModalProps } from "antd"
 import React from "react"
 
 export type ConfirmProps = {
@@ -7,6 +7,7 @@ export type ConfirmProps = {
     open: boolean,
     onOk: () => Promise<void>,
     onCancel: () => void,
+    okButtonProps?: ModalProps['okButtonProps']
 }
 
 const ConfirmModal: React.FC<ConfirmProps> = props => {
@@ -41,6 +42,7 @@ const ConfirmModal: React.FC<ConfirmProps> = props => {
             onOk={onOk}
             confirmLoading={loading}
             onCancel={props.onCancel}
+            okButtonProps={props.okButtonProps}
         >
             {props.body}
         </Modal>
