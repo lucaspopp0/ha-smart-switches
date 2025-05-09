@@ -112,15 +112,23 @@ const IndexPage: React.FC<PageProps> = () => {
     }
   }
 
-  const deleteLayout = async (name: string) => {
+  const deleteLayout = async (name: keyof Layouts) => {
     if (config?.switches && currentSwitch && sw) {
-      sw.layouts[name as keyof Layouts] = undefined
-
-      config.switches[currentSwitch] = sw
+      let newConfig = {
+        switches: {
+          ...(config?.switches ?? {}),
+          [currentSwitch as string]: {
+            layouts: {
+              ...sw.layouts,
+              [name]: undefined,
+            }
+          }
+        }
+      }
 
       try {
-        api.putConfig(config)
-        setConfig(config)
+        await api.putConfig(newConfig)
+        setConfig(newConfig)
         forceRefresh()
       } catch(e) {
         console.error(e)
