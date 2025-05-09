@@ -66,6 +66,7 @@ const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
                     ...Object.keys(executables ?? {}).map(entityId => (
                         {
                             value: entityId,
+                            label: (executables ?? {})[entityId]?.friendlyName
                         }
                     )),
                 ]

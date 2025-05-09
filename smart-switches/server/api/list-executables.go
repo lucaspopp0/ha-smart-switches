@@ -31,7 +31,7 @@ func (s *server) RegisterListExecutables(api huma.API) {
 }
 
 func (s *server) listExecutables(ctx context.Context, request *struct{}) (*ListExecutablesResponse, error) {
-	if os.Getenv("LOCAL") == "true" {
+	if false {
 		fmt.Println("Fetching executables from /data/executables.json")
 		jsonBytes, err := os.ReadFile("/data/executables.json")
 		if err != nil {

@@ -8,10 +8,16 @@ import (
 	"net/http"
 	"path"
 	"strings"
+
+	"github.com/lucaspopp0/ha-smart-switches/smart-switches/util"
 )
 
-const (
-	baseURL = "http://supervisor/core/api/"
+var (
+	envSupervisorHost = "SUPERVISOR_HOST"
+	baseURL           = fmt.Sprintf(
+		"http://%s/api/",
+		util.GetEnv(envSupervisorHost, "supervisor/core"),
+	)
 )
 
 type EntityState struct {

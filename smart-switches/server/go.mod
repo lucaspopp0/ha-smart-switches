@@ -2,6 +2,8 @@ module github.com/lucaspopp0/ha-smart-switches/smart-switches
 
 go 1.24.2
 
+replace github.com/lucaspopp0/ha-smart-switches/smart-switches => ./
+
 require (
 	github.com/go-chi/chi v1.5.5
 	github.com/go-chi/chi/v5 v5.2.1

@@ -13,6 +13,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/spf13/cobra"
 
+	"github.com/lucaspopp0/ha-smart-switches/smart-switches/api/middleware"
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/config"
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/homeassistant"
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/model"
@@ -102,7 +103,7 @@ func NewServer() humacli.CLI {
 			cfg,
 		)
 
-		api.UseMiddleware(Logger)
+		api.UseMiddleware(middleware.Logger)
 
 		huma.AutoRegister(api, s)
 
