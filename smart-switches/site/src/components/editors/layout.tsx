@@ -70,6 +70,7 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
                 />
                 </div>
             ))}
+            <div style={{ display: 'flex', flexGrow: 2, }}/>
           </div>
         </div>
     )
