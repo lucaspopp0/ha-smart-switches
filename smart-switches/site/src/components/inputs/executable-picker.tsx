@@ -14,12 +14,8 @@ const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
     let [executables, setExecutables] = React.useState<ListExecutablesResponseBody['executables'] | undefined>(undefined)
     let [fetchingExecutables, setFetchingExecutables] = React.useState(false)
     let forceRefresh = useForceRefresh()
-
-    console.log('executables: ', executables)
     
     React.useEffect(() => {
-        console.log(fetchingExecutables)
-
         if (fetchingExecutables) {
             return () => {}
         }
