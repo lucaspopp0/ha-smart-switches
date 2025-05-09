@@ -37,7 +37,7 @@ generate-server-sdk:
 		-v $$(pwd)/server/spec:/spec \
 		openapitools/openapi-generator-cli:latest generate \
 		-i /spec/openapi.yaml \
-		-g typescript-axios \
+		-g typescript \
 		-o /local/ \
 		--additional-properties="npmName=@smart-switches/server,npmVersion=0.0.0,paramNaming=original,modelPropertyNaming=original"
 .PHONY: generate-server-sdk

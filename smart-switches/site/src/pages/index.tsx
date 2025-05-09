@@ -1,28 +1,20 @@
 import * as React from "react"
-import type { HeadFC, PageProps } from "gatsby"
+import type { PageProps } from "gatsby"
 
 // Importing the Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import NewLayoutModal from "../components/modals/new-layout";
 import NewSwitchModal from "../components/modals/new-switch";
-import { Config, Configuration, DefaultApi, Layouts, LayoutV4, ListExecutablesResponseBody, Switch } from "../api";
 import LayoutPicker from "../components/inputs/layout-picker";
-import { AnyLayout, ButtonsByLayout } from "../api/convenience";
-import ExecutablePicker from "../components/inputs/executable-picker";
 import { Button, Menu } from "antd";
-import { ItemType, MenuItemGroupType, MenuItemType } from "antd/lib/menu/interface";
-import { CaretRightFilled, DeleteOutlined } from "@ant-design/icons";
+import { MenuItemType } from "antd/lib/menu/interface";
+import { DeleteOutlined } from "@ant-design/icons";
 import ConfirmModal from "../components/modals/confirm";
 import LayoutEditor from "../components/editors/layout";
+import { Config, createConfiguration, DefaultApi, Layouts, ListExecutablesResponseBody, server1 } from "../api";
 
 const borderColor = 'rgb(224, 229, 229)';
 const backgroundColor = 'white';
-const selectedColor = 'rgb(0, 255, 255)';
 
 const styles: { [key: string]: React.CSSProperties } = {
   page: {
@@ -72,9 +64,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     borderRadius: 0,
     background: backgroundColor,
     color: 'inherit',
-  },
-  selectedItem: {
-    background: selectedColor,
   },
 }
 
@@ -140,11 +129,7 @@ const IndexPage: React.FC<PageProps> = () => {
 
   let [showNewSwitch, setShowNewSwitch] = React.useState(false)
 
-  let apiBase = process.env.GATSBY_API_BASE ?? '.'
-
-  const api = new DefaultApi(new Configuration({
-    basePath: apiBase,
-  }))
+  const api = new DefaultApi(createConfiguration({}))
 
   let sw = currentSwitch ? config?.switches[currentSwitch] : undefined
 
@@ -159,17 +144,17 @@ const IndexPage: React.FC<PageProps> = () => {
     api
       .getConfig()
       .then(response => {
-        if (!response.data.switches) {
-          response.data.switches = {}
+        if (!response.switches) {
+          response.switches = {}
         }
 
-        setConfig(response.data)
+        setConfig(response)
 
-        if (response.data.switches?.length) {
-          setCurrentSwitch(Object.keys(response.data.switches)[0])
+        if (response.switches?.length) {
+          setCurrentSwitch(Object.keys(response.switches)[0])
 
-          if (Object.keys(response.data.switches[0].layouts).length > 0) {
-            setCurrentLayout(Object.keys(response.data.switches[0].layouts)[0] as keyof Layouts)
+          if (Object.keys(response.switches[0].layouts).length > 0) {
+            setCurrentLayout(Object.keys(response.switches[0].layouts)[0] as keyof Layouts)
           }
         }
       })
@@ -190,7 +175,7 @@ const IndexPage: React.FC<PageProps> = () => {
     api
       .listExecutables()
       .then(response => {
-        setExecutables(response.data.executables ?? {})
+        setExecutables(response.executables ?? {})
       })
 
     return () => {
@@ -323,11 +308,11 @@ const IndexPage: React.FC<PageProps> = () => {
                 onPick={async (key, layout) => {
                   if (!sw) return
   
-                  sw.layouts[key] = layout
+                  sw.layouts[key as keyof Layouts] = layout
                   if (!!config?.switches && !!currentSwitch) {
                     config.switches[currentSwitch] = sw
                     await api.putConfig(config)
-                    setCurrentLayout(key)
+                    setCurrentLayout(key as keyof Layouts)
                   }
                 }}
               />
@@ -391,9 +376,9 @@ const IndexPage: React.FC<PageProps> = () => {
           }
 
           const res = await api.putConfig(config)
-          setConfig(res.data)
+          setConfig(res)
 
-          return res.data
+          return res
         }}
       />
     </main>

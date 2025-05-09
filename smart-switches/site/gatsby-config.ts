@@ -1,6 +1,12 @@
 import type { GatsbyConfig } from "gatsby"
 
 const config: GatsbyConfig = {
+  proxy: [
+    {
+      prefix: '/api',
+      url: 'http://localhost:7125'
+    }
+  ],
   siteMetadata: {
     title: `Smart Switches`,
     siteUrl: `https://www.yourdomain.tld`,

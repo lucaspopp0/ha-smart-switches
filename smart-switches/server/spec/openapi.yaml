@@ -356,3 +356,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorModel'
           description: Internal Server Error
+servers:
+  - description: Site
+    url: ""

@@ -1,11 +1,11 @@
 import React from 'react';
-import { Config, DefaultApi, Layouts, ListExecutablesResponseBody, Switch } from '../../api';
-import { AnyButton, AnyLayout, ButtonsByLayout, LayoutKey } from '../../api/convenience';
 import ConfirmModal from '../modals/confirm';
 import { CaretRightFilled } from '@ant-design/icons';
 import { Button } from 'antd';
 import { config } from 'process';
 import ExecutablePicker from '../inputs/executable-picker';
+import { DefaultApi, Config, Layouts } from '../../api';
+import { ButtonsByLayout, LayoutKey } from '../../api/convenience';
 
 
 const styles: { [key: string]: React.CSSProperties } = {
@@ -22,7 +22,7 @@ export type LayoutEditorProps = {
     api: DefaultApi,
     config?: Config,
     currentSwitch?: string,
-    currentLayout?: LayoutKey,
+    currentLayout?: keyof Layouts,
     onUpdate: (latestConfig: Config) => Promise<void>,
 }
 
@@ -32,16 +32,20 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
     }
 
     const currentSwitch = props.config.switches[props.currentSwitch]
-    const currentLayout = currentSwitch.layouts[props.currentLayout] as AnyLayout;
+    const currentLayout = currentSwitch.layouts[props.currentLayout];
+
+    if (currentSwitch == undefined || currentLayout == undefined) {
+        return <div style={styles.flexRow} />
+    }
 
     return (
         <div style={styles.flexRow}>
           <div style={styles.flexRow} />
           <div style={{ display: 'flex', flexDirection: 'column', width: 400 }}>
             {ButtonsByLayout[props.currentLayout].map(buttonName => (
-              <div style={{ ...styles.flexRow, padding: 12, }}>
+              <div key={buttonName} style={{ display: 'flex', padding: 12, }}>
                 {buttonName}
-                <div style={styles.flexRow} />
+                <div style={{ display: 'flex', height: 0, flexGrow: 2, }} />
                 <ExecutablePicker
                   value={currentLayout[buttonName as keyof typeof currentLayout]}
                   api={props.api}
@@ -61,11 +65,15 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
                   icon={<CaretRightFilled />}
                   disabled={!currentLayout[buttonName as keyof typeof currentLayout]}
                   onClick={() => {
-                    props.api.press({
-                      switch: props.currentSwitch as string,
-                      layout: props.currentLayout as string,
-                      key: buttonName,
-                    }).finally(console.log)
+                    props.api
+                      .press({
+                        _switch: props.currentSwitch as string,
+                        layout: props.currentLayout as string,
+                        key: buttonName,
+                      })
+                      .catch(err => {
+                        console.error(err)
+                      })
                   }}
                 />
                 </div>

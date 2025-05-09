@@ -8,7 +8,7 @@
     "gatsby"
   ],
   "scripts": {
-    "develop": "GATSBY_API_BASE='http://127.0.0.1:7125' gatsby develop -p 7128",
+    "develop": "gatsby develop -p 7128",
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
@@ -36,5 +36,6 @@
     "@types/react-dom": "^18.2.19",
     "typescript": "^5.3.3"
   },
-  "target": "node"
+  "target": "node",
+  "workspaces": ["src/api"]
 }

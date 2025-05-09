@@ -26,7 +26,7 @@ const ExecutablePicker: React.FC<ExecuablePickerProps> = (props) => {
         props.api
             .listExecutables()
             .then(response => {
-                setExecutables(response.data.executables)
+                setExecutables(response.executables)
                 forceRefresh()
             })
 

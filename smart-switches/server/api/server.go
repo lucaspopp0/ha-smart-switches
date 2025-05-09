@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"sync"
 
 	"github.com/danielgtaylor/huma/v2"
 	"github.com/danielgtaylor/huma/v2/adapters/humachi"
@@ -27,8 +28,11 @@ type server struct {
 	router *chi.Mux
 	ha     homeassistant.API
 
-	cfg         config.Config
-	executables homeassistant.Executables
+	mCfg sync.Mutex
+	cfg  config.Config
+
+	mExecutables sync.Mutex
+	executables  homeassistant.Executables
 
 	scripts []string
 }
@@ -86,10 +90,19 @@ func NewServer() humacli.CLI {
 		cfg.SchemasPath = "/api/schemas"
 		cfg.OpenAPIPath = "/api/openapi.json"
 
+		cfg.Servers = []*huma.Server{
+			{
+				URL:         "",
+				Description: "Site",
+			},
+		}
+
 		api = humachi.New(
 			s.router,
 			cfg,
 		)
+
+		api.UseMiddleware(Logger)
 
 		huma.AutoRegister(api, s)
 

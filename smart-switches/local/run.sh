@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+. /run.env
+
 set -x
 
 SWITCHES_JSON=/data/switches.json
