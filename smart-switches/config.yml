@@ -13,6 +13,7 @@ arch:
 startup: application
 init: false
 panel_icon: 'mdi:puzzle'
+panel_admin: false
 webui: http://[HOST]:[PORT:8000]
 ports:
   8000/tcp: 8000
