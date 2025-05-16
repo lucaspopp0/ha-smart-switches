@@ -148,7 +148,7 @@ jobs:
       -
         name: Commit changes
         if: ${{ steps.detect-changes.outputs.changes == 'true' }}
-        uses: planetscale/ghcommit-action@v0.2.0
+        uses: planetscale/ghcommit-action@v0.2.13
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         with:
@@ -207,7 +207,7 @@ jobs:
         uses: docker/setup-buildx-action@v3.10.0
       -
         name: docker build
-        uses: docker/build-push-action@v6.16.0
+        uses: docker/build-push-action@v6.17.0
         with:
           push: ${{ inputs.push }}
           context: smart-switches
