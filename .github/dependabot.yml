@@ -8,6 +8,8 @@ updates:
   schedule:
     interval: "daily"
   open-pull-requests-limit: 10
+  allow:
+    - dependency-type: direct
   groups:
     security-updates:
       applies-to: security-updates
