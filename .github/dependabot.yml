@@ -1,0 +1,28 @@
+version: 2
+
+# https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference
+
+updates:
+- package-ecosystem: "npm"
+  directory: "/smart-switches/site"
+  schedule:
+    interval: "daily"
+  open-pull-requests-limit: 10
+  groups:
+    security-updates:
+      applies-to: security-updates
+      patterns:
+       - '*'
+    major-versions:
+      applies-to: version-updates
+      patterns:
+       - '*'
+      update-types:
+        - major
+    version-bumps:
+      applies-to: version-updates
+      patterns:
+       - '*'
+      update-types:
+        - minor
+        - patch
