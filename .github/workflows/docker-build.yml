@@ -144,7 +144,7 @@ jobs:
       -
         name: Commit changes
         if: ${{ steps.detect-changes.outputs.changes == 'true' }}
-        uses: planetscale/ghcommit-action@v0.2.13
+        uses: planetscale/ghcommit-action@v0.2
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         with:
