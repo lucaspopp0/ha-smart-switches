@@ -4,5 +4,30 @@
     "config:recommended",
     ":automergePr",
     ":automergeStableNonMajor"
+  ],
+  "packageRules": [
+    {
+      "groupName": "go-server",
+      "matchDatasources": ["go"],
+      "matchFileNames": ["smart-switches/server/**"]
+    },
+    {
+      "groupName": "docker",
+      "matchDatasources": ["docker"],
+      "matchFileNames": ["smart-switches/**"]
+    },
+    {
+      "groupName": "github-actions",
+      "matchFileNames": [
+        ".github/workflows/**",
+        ".github/actions/**"
+      ]
+    },
+    {
+      "groupName": "site",
+      "matchFileNames": [
+        "smart-switches/site/**"
+      ]
+    }
   ]
 }
