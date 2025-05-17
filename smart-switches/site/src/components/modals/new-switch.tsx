@@ -3,8 +3,7 @@ import { Config } from "../../api";
 import { Modal, Button, message } from "antd";
 import { z } from "zod";
 import { AutoForm } from "uniforms-antd";
-import { zodToJsonSchema } from "uniforms-bridge-zod";
-import { JSONSchemaBridge } from "uniforms-bridge-json-schema";
+import { zod } from "uniforms-bridge-zod";
 
 // Define the schema using zod
 const switchSchema = z.object({
@@ -13,49 +12,8 @@ const switchSchema = z.object({
     .max(50, "Name must be 50 characters or less")
 });
 
-// Convert to JSON schema for uniforms
-const jsonSchema = zodToJsonSchema(switchSchema);
-
-// Create the bridge for uniforms
-const bridge = new JSONSchemaBridge({
-  schema: jsonSchema,
-  validator: {
-    clean: (model: any) => model,
-    validate: (model: any) => {
-      try {
-        switchSchema.parse(model);
-        return null;
-      } catch (error) {
-        if (error instanceof z.ZodError) {
-          return { details: error.errors.map(err => ({
-            name: err.path.join('.'),
-            message: err.message,
-          }))};
-        }
-        return { details: [{ name: '_error', message: 'Unknown error' }] };
-      }
-    },
-    validateOne: (model: any, field: string) => {
-      try {
-        const fieldSchema = switchSchema.shape[field];
-        if (fieldSchema) {
-          fieldSchema.parse(model[field]);
-        } else {
-          switchSchema.parse(model);
-        }
-        return null;
-      } catch (error) {
-        if (error instanceof z.ZodError) {
-          const fieldError = error.errors.find(err => 
-            err.path[0] === field || err.path.join('.') === field
-          );
-          return fieldError?.message || null;
-        }
-        return 'Unknown error';
-      }
-    }
-  }
-});
+// Create the bridge using the simplified zod helper
+const bridge = zod(switchSchema);
 
 export type NewSwitchModalProps = {
   show?: boolean,
