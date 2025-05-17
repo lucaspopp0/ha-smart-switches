@@ -3,7 +3,7 @@ import { Config } from "../../api";
 import { Modal, Button, message } from "antd";
 import { z } from "zod";
 import { AutoForm } from "uniforms-antd";
-import { zod } from "uniforms-bridge-zod";
+import ZodBridge from "uniforms-bridge-zod";
 
 // Define the schema using zod
 const switchSchema = z.object({
@@ -13,7 +13,7 @@ const switchSchema = z.object({
 });
 
 // Create the bridge using the simplified zod helper
-const bridge = zod(switchSchema);
+const bridge = new ZodBridge({ schema: switchSchema });
 
 export type NewSwitchModalProps = {
   show?: boolean,
@@ -67,17 +67,8 @@ const NewSwitchModal: React.FC<NewSwitchModalProps> = (props) => {
       ]}
     >
       <AutoForm
-        ref={formRef}
         schema={bridge}
         onSubmit={handleSubmit}
-        onKeyDown={(event: React.KeyboardEvent) => {
-          if (event.key === "Enter") {
-            event.preventDefault();
-            if (formRef.current) {
-              formRef.current.submit();
-            }
-          }
-        }}
       />
     </Modal>
   );
