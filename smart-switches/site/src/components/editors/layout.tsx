@@ -1,7 +1,7 @@
 import React from 'react';
 import ConfirmModal from '../modals/confirm';
 import { CaretRightFilled } from '@ant-design/icons';
-import { Button, Switch } from 'antd';
+import { Button, Space, Switch } from 'antd';
 import { config } from 'process';
 import ExecutablePicker from '../inputs/executable-picker';
 import { DefaultApi, Config, Layouts } from '../../api';
@@ -15,6 +15,12 @@ const styles: { [key: string]: React.CSSProperties } = {
     flexGrow: 2,
     margin: 0,
     padding: 0,
+  },
+  editorRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 12,
   },
 }
 
@@ -68,7 +74,7 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
       })
 
     const row = (key: string, title: string, accessory: React.ReactNode) => (
-      <div key={key} style={{ display: 'flex', padding: 12, }}>
+      <div key={key} style={styles.editorRow}>
         {title}
         <div style={{ display: 'flex', height: 0, flexGrow: 2, }} />
         {accessory}
@@ -80,7 +86,7 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
           <div style={styles.flexRow} />
           <div style={{ display: 'flex', flexDirection: 'column', width: 400 }}>
             {basicButtons.map(buttonName => (
-              row(buttonName, buttonName, <>
+              row(buttonName, buttonName, <Space direction='horizontal'>
                 <ExecutablePicker
                     value={currentLayout[buttonName as keyof typeof currentLayout]}
                     api={props.api}
@@ -111,15 +117,15 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
                         })
                     }}
                   />
-                </>,
+                </Space>,
               )
             ))}
             {canFlip
               ? row('flipped', 'Flipped?', <Switch
-                  value={'flipped' in currentLayout ? currentLayout.flipped : false}
+                  value={canFlip ? (currentLayout as { flipped?: boolean }).flipped : false}
                   onChange={checked => {
-                    if ('flipped' in currentLayout) {
-                      currentLayout.flipped = checked
+                    if (canFlip) {
+                      (currentLayout as { flipped?: boolean }).flipped = checked
 
                       currentSwitch.layouts[props.currentLayout as LayoutKey] = currentLayout
 
