@@ -337,6 +337,8 @@ const IndexPage: React.FC<PageProps> = () => {
           currentSwitch={currentSwitch}
           currentLayout={currentLayout}
           onUpdate={async (latestConfig) => {
+            console.log('Updating config:', latestConfig)
+
             try {
               await api.putConfig(latestConfig)
               setConfig(latestConfig)
