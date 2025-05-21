@@ -83,6 +83,11 @@ jobs:
           go-version-file: smart-switches/server/go.mod
           cache-dependency-path: smart-switches/server/go.sum
       -
+        name: go mod tidy
+        working-directory: smart-switches
+        run: |
+          make tidy-server
+      -
         if: ${{ steps.restore-server-cache.outputs.cache-hit != 'true' }}
         name: Re-generate server openapi spec
         working-directory: smart-switches
