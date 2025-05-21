@@ -63,6 +63,15 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
           fetch-depth: 0
       -
+        name: Store commit message
+        id: commit-message
+        run: |
+          {
+            echo 'message<<EOT';
+            git show --format='%s' --no-patch;
+            echo 'EOT';
+          } | tee -a "$GITHUB_OUTPUT"
+      -
         name: Read version from config.yml
         id: config-version
         run: |
