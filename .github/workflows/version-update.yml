@@ -144,6 +144,20 @@ jobs:
               '.version = env(WITHOUT_PREFIX)' \
               ./smart-switches/config.yml
       -
+        name: Update CHANGELOG.md
+        env:
+          VERSION_TAG: ${{ steps.output-tags.outputs.INCRM }}
+          COMMIT_MESSAGE: ${{ steps.commit-message.outputs.message }}
+        run: |
+          CHANGELOG=$(cat smart-switches/CHANGELOG.md)
+
+          {
+            echo "# ${VERSION_TAG}";
+            echo "$COMMIT_MESSAGE";
+            echo "";
+            echo "";
+          } > smart-switches/CHANGELOG.md
+      -
         name: "Commit changes and push (DRY_RUN=${{ env.DRY_RUN }})"
         id: commit
         run: |
