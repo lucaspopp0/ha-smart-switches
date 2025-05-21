@@ -157,82 +157,88 @@ export const WheelRoutinesEditor: React.FC<WheelRoutinesEditorProps> = props => 
 
     return (
         <div style={styles.container}>
-          <Typography.Text
-            type="secondary"
-            style={{ textTransform: 'uppercase' }}
-            strong
-          >
-            Wheel Options
-          </Typography.Text>
-          {(wheelRoutines ?? []).map((routine, i) => (
-            row(
-                "" + i,
-                routine.name,
-                <Space direction="horizontal">
-                    <ExecutablePicker
-                        api={api}
-                        value={routine.command}
-                        onPick={async picked => {
-                            if (wheelRoutines) {
-                                wheelRoutines[i].command = picked?.entityId ?? ''
-                                await onUpdate(wheelRoutines)
-                            }
-                        }}
-                    />
-                    <Button 
-                            icon={<DeleteOutlined />} 
-                            danger 
-                            onClick={() => handleDeleteClick(i)}
-                        />
-                </Space>)
-          ))}
-          {row(
-            "new", <Button>Add option</Button>, <></>)}
-            
-            <Card title="Add New Routine" style={styles.addRoutineForm}>
-                <div style={styles.formItem}>
-                    <Text>Name</Text>
-                    <Input 
-                        placeholder="Routine Name" 
-                        value={newRoutine.name}
-                        onChange={(e) => handleNameChange(e.target.value)}
-                    />
-                </div>
-
-                <div style={styles.formItem}>
-                    <Text>Command</Text>
-                    <ExecutablePicker
-                        api={api}
-                        value={newRoutine.command}
-                        onPick={handleExecutableChange}
-                    />
-                </div>
-
-                <div style={styles.formItem}>
-                    <Text>Color</Text>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <div 
-                            style={{
-                                ...styles.colorPreview,
-                                backgroundColor: rgb2color(newRoutine.rgb as number[] | null)
-                            }} 
-                        />
+            <Typography.Text
+                type="secondary"
+                style={{ textTransform: 'uppercase' }}
+                strong
+            >
+                Wheel Options
+            </Typography.Text>
+            {(wheelRoutines ?? []).map((routine, i) => (
+                row(
+                    "" + i,
+                    <Space direction='horizontal'>
                         <ColorPicker
-                            defaultValue={rgb2color(newRoutine.rgb as number[] | null)}
-                            onChange={handleColorChange}
+                                defaultValue={rgb2color(newRoutine.rgb as number[] | null)}
+                                disabled
+                            />
+                        <Typography.Text>{routine.name}</Typography.Text>
+                    </Space>,
+                    <Space direction="horizontal">
+                        <ExecutablePicker
+                            api={api}
+                            value={routine.command}
+                            onPick={async picked => {
+                                if (wheelRoutines) {
+                                    wheelRoutines[i].command = picked?.entityId ?? ''
+                                    await onUpdate(wheelRoutines)
+                                }
+                            }}
                         />
-                    </div>
-                </div>
-
-                <Button 
-                    type="primary" 
-                    icon={<PlusOutlined />}
-                    style={styles.addRoutineButton}
-                    onClick={handleAddRoutine}
-                >
-                    Add Routine
-                </Button>
-            </Card>
+                        <Button 
+                                icon={<DeleteOutlined />} 
+                                danger 
+                                onClick={() => handleDeleteClick(i)}
+                            />
+                    </Space>)
+            ))}
+            {row(
+                "new",
+                addingNewRoutine
+                    ? <Space direction='vertical' style={{ display: 'flex', width: '100%' }}>
+                        <Space direction='horizontal' style={{ display: 'flex', width: '100%' }}>
+                            <ColorPicker
+                                defaultValue={rgb2color(newRoutine.rgb as number[] | null)}
+                                onChange={handleColorChange}
+                            />
+                            <Input 
+                                placeholder="Routine Name" 
+                                value={newRoutine.name}
+                                onChange={(e) => handleNameChange(e.target.value)}
+                            />
+                            <div style={{ display: 'flex', flexGrow: 2 }} />
+                            <ExecutablePicker
+                                api={api}
+                                value={newRoutine.command}
+                                onPick={handleExecutableChange}
+                            />
+                        </Space>
+                        <Space
+                            direction='horizontal'
+                            style={{ display: 'flex', width: '100%', justifyContent: 'flex-end' }}
+                        >
+                            <Button 
+                                type="primary" 
+                                icon={<PlusOutlined />}
+                                style={styles.addRoutineButton}
+                                onClick={handleAddRoutine}
+                            >
+                                Add Routine
+                            </Button>
+                            <Button 
+                                onClick={() => {
+                                    setAddingNewRoutine(false)
+                                    setNewRoutine({})
+                                }}
+                            >
+                                Cancel
+                            </Button>
+                        </Space>
+                    </Space>
+                    : <Button onClick={() => setAddingNewRoutine(true)}>Add option</Button>,
+                <></>,
+            )
+            }
 
             <ConfirmModal
                 title={`You are about to delete "${(wheelRoutines ?? []).length && routineToDelete >= 0 ? (wheelRoutines ?? [])[routineToDelete].name : ""}"`}
