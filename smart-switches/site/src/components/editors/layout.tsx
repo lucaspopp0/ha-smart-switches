@@ -4,8 +4,9 @@ import { CaretRightFilled } from '@ant-design/icons';
 import { Button, Space, Switch } from 'antd';
 import { config } from 'process';
 import ExecutablePicker from '../inputs/executable-picker';
-import { DefaultApi, Config, Layouts } from '../../api';
+import { DefaultApi, Config, Layouts, WheelRoutine } from '../../api';
 import { ButtonsByLayout, LayoutKey } from '../../api/convenience';
+import { WheelRoutinesEditor } from './wheel-routines';
 
 
 const styles: { [key: string]: React.CSSProperties } = {
@@ -42,6 +43,17 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
 
     if (currentSwitch == undefined || currentLayout == undefined) {
         return <div style={styles.flexRow} />
+    }
+
+    const onUpdate = async () => {
+      currentSwitch.layouts[props.currentLayout as LayoutKey] = currentLayout
+      
+      return props.onUpdate({
+        switches: {
+          ...(props.config?.switches ?? {}),
+          [props.currentSwitch as string]: currentSwitch,
+        }
+      })
     }
 
     const hasWheelRoutines = ButtonsByLayout[props.currentLayout].includes('wheel-routines');
@@ -92,14 +104,7 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
                     api={props.api}
                     onPick={async picked => {
                       currentLayout[buttonName as keyof typeof currentLayout] = picked?.entityId
-                      currentSwitch.layouts[props.currentLayout as LayoutKey] = currentLayout
-                      
-                      props.onUpdate({
-                          switches: {
-                              ...(props.config?.switches ?? {}),
-                              [props.currentSwitch as string]: currentSwitch,
-                          }
-                      })
+                      return onUpdate()
                     }}
                   />
                   <Button
@@ -126,20 +131,22 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
                   onChange={checked => {
                     if (canFlip) {
                       (currentLayout as { flipped?: boolean }).flipped = checked
-
-                      currentSwitch.layouts[props.currentLayout as LayoutKey] = currentLayout
-
-                      props.onUpdate({
-                        switches: {
-                            ...(props.config?.switches ?? {}),
-                            [props.currentSwitch as string]: currentSwitch,
-                        }
-                      })
+                      return onUpdate()
                     }
                   }} 
                 />)
               : <></>
             }
+            {hasWheelRoutines
+              ? <WheelRoutinesEditor
+                  api={props.api}
+                  wheelRoutines={(currentLayout as { 'wheel_routines': WheelRoutine[] })['wheel_routines']}
+                  onUpdate={async newRoutines => {
+                    (currentLayout as { 'wheel_routines': WheelRoutine[] })['wheel_routines'] = newRoutines
+                    return onUpdate()
+                  }}
+                />
+              : <></>}
             <div style={{ display: 'flex', flexGrow: 2, }}/>
           </div>
         </div>
