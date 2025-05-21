@@ -144,7 +144,7 @@ jobs:
             echo "changes=false" | tee -a "$GITHUB_OUTPUT"
           fi
       -
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@v2
         if: ${{ steps.detect-changes.outputs.changes == 'true' }}
         id: app-token
         with:
