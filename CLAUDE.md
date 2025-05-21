@@ -9,3 +9,5 @@
 # The frontend uses React and Gatsby to build the site. antd is the main UI framework, and a package called uniforms is used for simple form generation
 
 # After any change to 'smart-switches/server/go.mod' or 'server/go.sum', be sure to tidy those files by running `make -C smart-switches tidy-server` before committing changes to git
+
+# Concise answers are preferred
