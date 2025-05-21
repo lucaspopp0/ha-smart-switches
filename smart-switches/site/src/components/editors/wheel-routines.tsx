@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import ConfirmModal from '../modals/confirm';
 import { CaretRightFilled, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Space, Switch, List, Input, Card, ColorPicker, Typography, Divider, message } from 'antd';
+import { Button, Space, Switch, List, Input, Card, ColorPicker, Typography, Divider, message, ColorPickerProps } from 'antd';
 import ExecutablePicker from '../inputs/executable-picker';
 import { DefaultApi, Config, Layouts, Executable } from '../../api';
 import { ButtonsByLayout, LayoutKey } from '../../api/convenience';
 import { WheelRoutine } from '../../api';
+import { AggregationColor } from 'antd/es/color-picker/color';
 
 const { Text, Title } = Typography;
 
@@ -64,8 +65,8 @@ export const WheelRoutinesEditor: React.FC<WheelRoutinesEditorProps> = props => 
     const [routineToDelete, setRoutineToDelete] = useState<number>(-1);
     
     // For color picker
-    const handleColorChange = (color: any) => {
-        const { r, g, b } = color.metaColor.rgb;
+    const handleColorChange: ColorPickerProps['onChange'] = color => {
+        const { r, g, b } = color.toRgb();
         setNewRoutine({
             ...newRoutine,
             rgb: [r, g, b]
@@ -169,7 +170,7 @@ export const WheelRoutinesEditor: React.FC<WheelRoutinesEditorProps> = props => 
                     "" + i,
                     <Space direction='horizontal'>
                         <ColorPicker
-                                defaultValue={rgb2color(newRoutine.rgb as number[] | null)}
+                                defaultValue={rgb2color(routine.rgb)}
                                 disabled
                             />
                         <Typography.Text>{routine.name}</Typography.Text>

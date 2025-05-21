@@ -85,7 +85,7 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
         }
       })
 
-    const row = (key: string, title: string, accessory: React.ReactNode) => (
+    const row = (key: string, title: React.ReactNode, accessory: React.ReactNode) => (
       <div key={key} style={styles.editorRow}>
         {title}
         <div style={{ display: 'flex', height: 0, flexGrow: 2, }} />
@@ -125,7 +125,10 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
                 Basic Buttons
             </Typography.Text>
             {basicButtons.map(buttonName => (
-              row(buttonName, buttonName, <Space direction='horizontal'>
+              row(
+                buttonName,
+                <Typography.Text code>{buttonName}</Typography.Text>,
+                <Space direction='horizontal'>
                 <ExecutablePicker
                     value={currentLayout[buttonName as keyof typeof currentLayout]}
                     api={props.api}
