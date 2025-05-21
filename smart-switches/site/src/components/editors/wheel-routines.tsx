@@ -159,7 +159,7 @@ export const WheelRoutinesEditor: React.FC<WheelRoutinesEditorProps> = props => 
         <div style={styles.container}>
             <Typography.Text
                 type="secondary"
-                style={{ textTransform: 'uppercase' }}
+                style={{ textTransform: 'uppercase', paddingLeft: 12, paddingTop: 12, }}
                 strong
             >
                 Wheel Options

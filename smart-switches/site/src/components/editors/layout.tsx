@@ -1,7 +1,7 @@
 import React from 'react';
 import ConfirmModal from '../modals/confirm';
 import { CaretRightFilled } from '@ant-design/icons';
-import { Button, Space, Switch } from 'antd';
+import { Button, Space, Switch, Typography } from 'antd';
 import { config } from 'process';
 import ExecutablePicker from '../inputs/executable-picker';
 import { DefaultApi, Config, Layouts, WheelRoutine } from '../../api';
@@ -97,6 +97,33 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
         <div style={styles.flexRow}>
           <div style={styles.flexRow} />
           <div style={{ display: 'flex', flexDirection: 'column', width: 400 }}>
+            {canFlip
+              ? <>
+                <Typography.Text
+                    type="secondary"
+                    style={{ textTransform: 'uppercase', paddingLeft: 12, paddingTop: 12, }}
+                    strong
+                >Layout</Typography.Text>
+              {
+                row('flipped', 'Flipped?', <Switch
+                  value={canFlip ? (currentLayout as { flipped?: boolean }).flipped : false}
+                  onChange={checked => {
+                    if (canFlip) {
+                      (currentLayout as { flipped?: boolean }).flipped = checked
+                      return onUpdate()
+                    }
+                  }} 
+                />
+              )}</>
+              : <></>
+            }
+            <Typography.Text
+                type="secondary"
+                style={{ textTransform: 'uppercase', paddingLeft: 12, paddingTop: 12, }}
+                strong
+            >
+                Basic Buttons
+            </Typography.Text>
             {basicButtons.map(buttonName => (
               row(buttonName, buttonName, <Space direction='horizontal'>
                 <ExecutablePicker
@@ -125,18 +152,6 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
                 </Space>,
               )
             ))}
-            {canFlip
-              ? row('flipped', 'Flipped?', <Switch
-                  value={canFlip ? (currentLayout as { flipped?: boolean }).flipped : false}
-                  onChange={checked => {
-                    if (canFlip) {
-                      (currentLayout as { flipped?: boolean }).flipped = checked
-                      return onUpdate()
-                    }
-                  }} 
-                />)
-              : <></>
-            }
             {hasWheelRoutines
               ? <WheelRoutinesEditor
                   api={props.api}
