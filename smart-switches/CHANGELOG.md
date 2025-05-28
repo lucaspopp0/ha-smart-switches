@@ -1,4 +1,4 @@
-# v1.1.73.1
-chore: Claude memories (#56)
+# v1.1.74.0
+panel title
 
 
