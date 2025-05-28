@@ -25,7 +25,7 @@ const (
 	envLocal           = "LOCAL"
 	envPort            = "PORT"
 
-	defaultServerPort = "8123"
+	defaultServerPort = "8124"
 )
 
 type server struct {
