@@ -20,3 +20,5 @@ ports:
   8123/tcp: 8123
 hassio_api: true
 homeassistant_api: true
+environment:
+  PORT: 8123
