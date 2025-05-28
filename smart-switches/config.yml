@@ -15,8 +15,10 @@ init: false
 panel_title: 'Smart Switches'
 panel_icon: 'mdi:puzzle'
 panel_admin: false
-webui: http://[HOST]:[PORT:8000]
+
+webui: http://[HOST]:[PORT:8123]
 ports:
-  8000/tcp: 8000
+  8000/tcp: 8123
+
 hassio_api: true
 homeassistant_api: true
