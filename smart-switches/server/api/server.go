@@ -24,6 +24,8 @@ const (
 	envSupervisorToken = "SUPERVISOR_TOKEN"
 	envLocal           = "LOCAL"
 	envPort            = "PORT"
+
+	defaultServerPort = "8123"
 )
 
 type server struct {
@@ -66,7 +68,7 @@ func (s *server) onStart() {
 		fmt.Printf("Home assistant service call failed: %v\n", err.Error())
 	}
 
-	port := util.GetEnv(envPort, "8000")
+	port := util.GetEnv(envPort, defaultServerPort)
 
 	fmt.Printf("Starting server on port %v...\n", port)
 	http.ListenAndServe(fmt.Sprintf(":%s", port), s.router)
