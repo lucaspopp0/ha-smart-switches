@@ -18,4 +18,6 @@ panel_admin: false
 webui: http://[HOST]:[PORT:8000]
 ports:
   8000/tcp: 8000
+
+hassio_api: true
 homeassistant_api: true
