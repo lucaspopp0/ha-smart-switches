@@ -17,11 +17,13 @@ import (
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/config"
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/homeassistant"
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/model"
+	"github.com/lucaspopp0/ha-smart-switches/smart-switches/util"
 )
 
 const (
 	envSupervisorToken = "SUPERVISOR_TOKEN"
 	envLocal           = "LOCAL"
+	envPort            = "PORT"
 )
 
 type server struct {
@@ -64,8 +66,10 @@ func (s *server) onStart() {
 		fmt.Printf("Home assistant service call failed: %v\n", err.Error())
 	}
 
-	fmt.Println("Starting server on port 8000...")
-	http.ListenAndServe(":8000", s.router)
+	port := util.GetEnv(envPort, "8000")
+
+	fmt.Printf("Starting server on port %v...\n", port)
+	http.ListenAndServe(fmt.Sprintf(":%s", port), s.router)
 }
 
 func NewServer() humacli.CLI {
