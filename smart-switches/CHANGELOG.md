@@ -1,4 +1,4 @@
-# v1.1.76.0
-remove ingress
+# v1.1.77.0
+add supervisor access
 
 
