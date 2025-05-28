@@ -13,7 +13,7 @@ arch:
 startup: application
 init: false
 panel_title: 'Smart Switches'
-panel_icon: 'mdi:puzzle'
+panel_icon: 'mdi:switch'
 panel_admin: false
 webui: http://[HOST]:[PORT:8123]
 ports:
