@@ -1,4 +1,4 @@
-# v1.1.94.0
-show add on info on startup
+# v1.1.95.0
+list add ons
 
 
