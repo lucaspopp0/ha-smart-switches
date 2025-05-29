@@ -23,3 +23,6 @@ hassio_api: true
 homeassistant_api: true
 hassio_role: manager
 host_dbus: true
+privileged:
+  - NET_ADMIN
+  - NET_RAW
