@@ -26,7 +26,9 @@ type EntityState struct {
 	Attributes map[string]any `json:"attributes,omitempty"`
 }
 
-type AddOn = map[string]any
+type AddOn struct {
+	Slug string `json:"slug"`
+}
 
 type addonsAPI interface {
 	ListAddOns() ([]AddOn, error)
