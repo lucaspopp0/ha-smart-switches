@@ -4,6 +4,7 @@ import type { Middleware } from '../middleware';
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { Config } from '../models/Config';
+import { Device } from '../models/Device';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ErrorModel } from '../models/ErrorModel';
 import { Executable } from '../models/Executable';
@@ -12,8 +13,12 @@ import { LayoutV5 } from '../models/LayoutV5';
 import { LayoutV6 } from '../models/LayoutV6';
 import { LayoutV7 } from '../models/LayoutV7';
 import { Layouts } from '../models/Layouts';
+import { ListBLEDevicesResponseBody } from '../models/ListBLEDevicesResponseBody';
 import { ListExecutablesResponseBody } from '../models/ListExecutablesResponseBody';
 import { PostPressRequestBody } from '../models/PostPressRequestBody';
+import { StartBLEScanRequestBody } from '../models/StartBLEScanRequestBody';
+import { StartBLEScanResponseBody } from '../models/StartBLEScanResponseBody';
+import { StopBLEScanResponseBody } from '../models/StopBLEScanResponseBody';
 import { Switch } from '../models/Switch';
 import { WheelRoutine } from '../models/WheelRoutine';
 
@@ -59,6 +64,38 @@ export class ObservableDefaultApi {
      */
     public getConfig(_options?: ConfigurationOptions): Observable<Config> {
         return this.getConfigWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<Config>) => apiResponse.data));
+    }
+
+    /**
+     * Get a list of all BLE devices discovered during scanning
+     * List discovered BLE devices
+     */
+    public listBleDevicesWithHttpInfo(_options?: ConfigurationOptions): Observable<HttpInfo<ListBLEDevicesResponseBody>> {
+        const _config = mergeConfiguration(this.configuration, _options);
+
+        const requestContextPromise = this.requestFactory.listBleDevices(_config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of _config.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => _config.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of _config.middleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listBleDevicesWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Get a list of all BLE devices discovered during scanning
+     * List discovered BLE devices
+     */
+    public listBleDevices(_options?: ConfigurationOptions): Observable<ListBLEDevicesResponseBody> {
+        return this.listBleDevicesWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<ListBLEDevicesResponseBody>) => apiResponse.data));
     }
 
     /**
@@ -147,6 +184,72 @@ export class ObservableDefaultApi {
      */
     public putConfig(Config: Config, _options?: ConfigurationOptions): Observable<Config> {
         return this.putConfigWithHttpInfo(Config, _options).pipe(map((apiResponse: HttpInfo<Config>) => apiResponse.data));
+    }
+
+    /**
+     * Start scanning for BLE devices that can act as peripherals
+     * Start BLE device scan
+     * @param StartBLEScanRequestBody
+     */
+    public startBleScanWithHttpInfo(StartBLEScanRequestBody: StartBLEScanRequestBody, _options?: ConfigurationOptions): Observable<HttpInfo<StartBLEScanResponseBody>> {
+        const _config = mergeConfiguration(this.configuration, _options);
+
+        const requestContextPromise = this.requestFactory.startBleScan(StartBLEScanRequestBody, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of _config.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => _config.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of _config.middleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.startBleScanWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Start scanning for BLE devices that can act as peripherals
+     * Start BLE device scan
+     * @param StartBLEScanRequestBody
+     */
+    public startBleScan(StartBLEScanRequestBody: StartBLEScanRequestBody, _options?: ConfigurationOptions): Observable<StartBLEScanResponseBody> {
+        return this.startBleScanWithHttpInfo(StartBLEScanRequestBody, _options).pipe(map((apiResponse: HttpInfo<StartBLEScanResponseBody>) => apiResponse.data));
+    }
+
+    /**
+     * Stop the current BLE device scan
+     * Stop BLE device scan
+     */
+    public stopBleScanWithHttpInfo(_options?: ConfigurationOptions): Observable<HttpInfo<StopBLEScanResponseBody>> {
+        const _config = mergeConfiguration(this.configuration, _options);
+
+        const requestContextPromise = this.requestFactory.stopBleScan(_config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of _config.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => _config.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of _config.middleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.stopBleScanWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Stop the current BLE device scan
+     * Stop BLE device scan
+     */
+    public stopBleScan(_options?: ConfigurationOptions): Observable<StopBLEScanResponseBody> {
+        return this.stopBleScanWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<StopBLEScanResponseBody>) => apiResponse.data));
     }
 
 }

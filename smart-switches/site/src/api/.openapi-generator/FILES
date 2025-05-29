@@ -13,6 +13,7 @@ http/isomorphic-fetch.ts
 index.ts
 middleware.ts
 models/Config.ts
+models/Device.ts
 models/ErrorDetail.ts
 models/ErrorModel.ts
 models/Executable.ts
@@ -21,9 +22,13 @@ models/LayoutV5.ts
 models/LayoutV6.ts
 models/LayoutV7.ts
 models/Layouts.ts
+models/ListBLEDevicesResponseBody.ts
 models/ListExecutablesResponseBody.ts
 models/ObjectSerializer.ts
 models/PostPressRequestBody.ts
+models/StartBLEScanRequestBody.ts
+models/StartBLEScanResponseBody.ts
+models/StopBLEScanResponseBody.ts
 models/Switch.ts
 models/WheelRoutine.ts
 models/all.ts
