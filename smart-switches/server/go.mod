@@ -4,7 +4,10 @@ go 1.24.2
 
 replace github.com/lucaspopp0/ha-smart-switches/smart-switches => ./
 
-require github.com/go-chi/chi/v5 v5.2.1
+require (
+	github.com/go-chi/chi/v5 v5.2.1
+	tinygo.org/x/bluetooth v0.11.0
+)
 
 require (
 	github.com/go-ole/go-ole v1.2.6 // indirect
@@ -17,7 +20,6 @@ require (
 	github.com/tinygo-org/pio v0.0.0-20231216154340-cd888eb58899 // indirect
 	golang.org/x/exp v0.0.0-20230728194245-b0cb94b80691 // indirect
 	golang.org/x/sys v0.28.0 // indirect
-	tinygo.org/x/bluetooth v0.11.0 // indirect
 )
 
 require (
