@@ -18,5 +18,6 @@ panel_admin: false
 ingress: true
 ingress_port: 8124
 ingress_stream: true
+ingress_path: /
 hassio_api: true
 homeassistant_api: true
