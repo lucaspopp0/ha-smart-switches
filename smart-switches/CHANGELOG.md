@@ -1,4 +1,4 @@
-# v1.1.91.1
-update panel title
+# v1.1.97.1
+Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
 
 

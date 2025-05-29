@@ -4,9 +4,9 @@ go 1.24.2
 
 replace github.com/lucaspopp0/ha-smart-switches/smart-switches => ./
 
-require github.com/go-chi/chi/v5 v5.2.1
-
 require (
+	github.com/gabriel-vasile/mimetype v1.4.9
+	github.com/go-chi/chi/v5 v5.2.1
 	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/godbus/dbus/v5 v5.1.0 // indirect
 	github.com/saltosystems/winrt-go v0.0.0-20240509164145-4f7860a3bd2b // indirect
@@ -16,9 +16,11 @@ require (
 	github.com/tinygo-org/cbgo v0.0.4 // indirect
 	github.com/tinygo-org/pio v0.0.0-20231216154340-cd888eb58899 // indirect
 	golang.org/x/exp v0.0.0-20230728194245-b0cb94b80691 // indirect
-	golang.org/x/sys v0.28.0 // indirect
-	tinygo.org/x/bluetooth v0.11.0 // indirect
+	golang.org/x/sys v0.32.0 // indirect
+	tinygo.org/x/bluetooth v0.11.0
 )
+
+require golang.org/x/net v0.39.0 // indirect
 
 require (
 	github.com/danielgtaylor/huma/v2 v2.32.0

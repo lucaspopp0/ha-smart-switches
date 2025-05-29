@@ -64,7 +64,6 @@ func (s *server) onStart() {
 		}
 	}
 
-	fmt.Println("Testing home assistant connection...")
 	s.executables, err = s.ha.ListExecutables()
 
 	if err != nil {
@@ -75,6 +74,13 @@ func (s *server) onStart() {
 	s.bleService, err = ble.NewService()
 	if err != nil {
 		fmt.Printf("Failed to initialize BLE service: %v\n", err.Error())
+	}
+
+	addonInfo, err := s.ha.GetAddOnInfo("self")
+	if err != nil {
+		fmt.Printf("Failed to fetch add-on info: %v\n", err.Error())
+	} else {
+		fmt.Printf("Add-on info: %v\n", addonInfo)
 	}
 
 	port := util.GetEnv(envPort, defaultServerPort)

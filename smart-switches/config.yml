@@ -1,4 +1,4 @@
-version: "1.1.91.1"
+version: "1.1.97.1"
 name: "Smart Switches"
 description: "Configure smart switches in your home"
 slug: "smart-switches"
@@ -12,13 +12,6 @@ arch:
   - i386
 startup: application
 init: false
-panel_title: 'Smart Switches'
-panel_icon: 'mdi:light-switch'
-panel_admin: false
-ingress: true
-ingress_port: 8124
-ingress_stream: true
-ingress_path: /
 hassio_api: true
 homeassistant_api: true
 hassio_role: manager
@@ -28,3 +21,16 @@ privileged:
   - NET_RAW
 devices:
   - vhci
+# Ingress configuration
+# panel_title: 'Smart Switches'
+# panel_icon: 'mdi:light-switch'
+# panel_admin: false
+# ingress: true
+# ingress_port: 8124
+# ingress_stream: true
+# ingress_path: /
+# 
+# Direct network configuration
+ports:
+  8124/tcp: 8124
+webui: http://[HOST]:[PORT:8124]
