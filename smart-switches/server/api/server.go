@@ -67,7 +67,7 @@ func (s *server) onStart() {
 		fmt.Printf("Home assistant service call failed: %v\n", err.Error())
 	}
 
-	addonInfo, err := s.ha.ListAddOns()
+	addonInfo, err := s.ha.GetAddOnInfo("self")
 	if err != nil {
 		fmt.Printf("Failed to fetch add-on info: %v\n", err.Error())
 	} else {
