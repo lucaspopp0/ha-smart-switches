@@ -26,3 +26,5 @@ host_dbus: true
 privileged:
   - NET_ADMIN
   - NET_RAW
+devices:
+  - vhci
