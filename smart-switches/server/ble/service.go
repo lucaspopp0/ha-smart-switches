@@ -19,11 +19,11 @@ type Device struct {
 }
 
 type Service struct {
-	mu        sync.RWMutex
-	devices   map[string]*Device
-	scanning  bool
-	adapter   *bluetooth.Adapter
-	scanCtx   context.Context
+	mu         sync.RWMutex
+	devices    map[string]*Device
+	scanning   bool
+	adapter    *bluetooth.Adapter
+	scanCtx    context.Context
 	cancelScan context.CancelFunc
 }
 
@@ -99,11 +99,7 @@ func (s *Service) scanForDevices() {
 	}()
 
 	err := s.adapter.Scan(func(adapter *bluetooth.Adapter, result bluetooth.ScanResult) {
-		select {
-		case <-s.scanCtx.Done():
-			return
-		default:
-		}
+		fmt.Printf("bluetooth result found: %v\n", result.LocalName())
 
 		s.mu.Lock()
 		defer s.mu.Unlock()
@@ -124,7 +120,7 @@ func (s *Service) scanForDevices() {
 		// Update device info
 		device.RSSI = result.RSSI
 		device.LastSeen = time.Now()
-		
+
 		// Update name if we got a better one
 		if localName := result.LocalName(); localName != "" && device.Name == "" {
 			device.Name = localName
