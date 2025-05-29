@@ -7,6 +7,8 @@ import (
 	"os"
 	"path"
 	"strings"
+
+	"github.com/gabriel-vasile/mimetype"
 )
 
 const (
@@ -61,7 +63,17 @@ func SiteMiddleware(local bool) func(next http.Handler) http.Handler {
 				w.Write(responseBody)
 				return
 			} else {
-				fileBytes, err := os.ReadFile(path.Join(siteFolder, subpath))
+				filePath := path.Join(siteFolder, subpath)
+				mtype, err := mimetype.DetectFile(filePath)
+
+				if err != nil {
+					w.WriteHeader(http.StatusInternalServerError)
+					w.Write([]byte(err.Error()))
+				}
+
+				w.Header().Add("Content-Type", mtype.String())
+
+				fileBytes, err := os.ReadFile(filePath)
 				if err != nil {
 					w.WriteHeader(http.StatusInternalServerError)
 					w.Write([]byte(err.Error()))
