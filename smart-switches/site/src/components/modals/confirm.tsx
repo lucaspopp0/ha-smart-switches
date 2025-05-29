@@ -37,7 +37,7 @@ const ConfirmModal: React.FC<ConfirmProps> = props => {
 
     return (
         <Modal
-            title="Title"
+            title={props.title}
             open={props.open}
             onOk={onOk}
             confirmLoading={loading}

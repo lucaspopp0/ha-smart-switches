@@ -14,14 +14,19 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/api/middleware"
+	"github.com/lucaspopp0/ha-smart-switches/smart-switches/ble"
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/config"
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/homeassistant"
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/model"
+	"github.com/lucaspopp0/ha-smart-switches/smart-switches/util"
 )
 
 const (
 	envSupervisorToken = "SUPERVISOR_TOKEN"
 	envLocal           = "LOCAL"
+	envPort            = "PORT"
+
+	defaultServerPort = "8124"
 )
 
 type server struct {
@@ -34,6 +39,8 @@ type server struct {
 
 	mExecutables sync.Mutex
 	executables  homeassistant.Executables
+
+	bleService *ble.Service
 
 	scripts []string
 }
@@ -57,15 +64,29 @@ func (s *server) onStart() {
 		}
 	}
 
-	fmt.Println("Testing home assistant connection...")
 	s.executables, err = s.ha.ListExecutables()
 
 	if err != nil {
 		fmt.Printf("Home assistant service call failed: %v\n", err.Error())
 	}
 
-	fmt.Println("Starting server on port 8000...")
-	http.ListenAndServe(":8000", s.router)
+	fmt.Println("Initializing BLE service...")
+	s.bleService, err = ble.NewService()
+	if err != nil {
+		fmt.Printf("Failed to initialize BLE service: %v\n", err.Error())
+	}
+
+	addonInfo, err := s.ha.GetAddOnInfo("self")
+	if err != nil {
+		fmt.Printf("Failed to fetch add-on info: %v\n", err.Error())
+	} else {
+		fmt.Printf("Add-on info: %v\n", addonInfo)
+	}
+
+	port := util.GetEnv(envPort, defaultServerPort)
+
+	fmt.Printf("Starting server on port %v...\n", port)
+	http.ListenAndServe(fmt.Sprintf(":%s", port), s.router)
 }
 
 func NewServer() humacli.CLI {

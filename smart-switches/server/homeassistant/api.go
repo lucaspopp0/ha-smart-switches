@@ -15,8 +15,8 @@ import (
 var (
 	envSupervisorHost = "SUPERVISOR_HOST"
 	baseURL           = fmt.Sprintf(
-		"http://%s/api/",
-		util.GetEnv(envSupervisorHost, "supervisor/core"),
+		"http://%s/",
+		util.GetEnv(envSupervisorHost, "supervisor"),
 	)
 )
 
@@ -26,7 +26,16 @@ type EntityState struct {
 	Attributes map[string]any `json:"attributes,omitempty"`
 }
 
-type homeassistantAPI interface {
+type AddOn struct {
+	Slug string `json:"slug"`
+}
+
+type addonsAPI interface {
+	ListAddOns() ([]AddOn, error)
+	GetAddOnInfo(addon string) (*AddOn, error)
+}
+
+type coreAPI interface {
 	GetStates() ([]EntityState, error)
 	GetEntityStates(entityID string) ([]EntityState, error)
 
@@ -36,7 +45,8 @@ type homeassistantAPI interface {
 }
 
 type API interface {
-	homeassistantAPI
+	coreAPI
+	addonsAPI
 
 	ListExecutables() (Executables, error)
 
@@ -90,7 +100,7 @@ func (c *apiClient) ListExecutables() (Executables, error) {
 }
 
 func (c *apiClient) GetStates() ([]EntityState, error) {
-	req, err := http.NewRequest(http.MethodGet, c.requestURL("states"), http.NoBody)
+	req, err := http.NewRequest(http.MethodGet, c.requestURL("core/api/states"), http.NoBody)
 	if err != nil {
 		return nil, err
 	}
@@ -119,7 +129,7 @@ func (c *apiClient) GetStates() ([]EntityState, error) {
 }
 
 func (c *apiClient) GetEntityStates(entityID string) ([]EntityState, error) {
-	req, err := http.NewRequest(http.MethodGet, c.requestURL(fmt.Sprintf("states/%s", entityID)), http.NoBody)
+	req, err := http.NewRequest(http.MethodGet, c.requestURL(fmt.Sprintf("core/api/states/%s", entityID)), http.NoBody)
 	if err != nil {
 		return nil, err
 	}
@@ -163,7 +173,7 @@ func (c *apiClient) CallService(
 
 	req, err := http.NewRequest(
 		http.MethodPost,
-		c.requestURL(path.Join("services/", servicePath)),
+		c.requestURL(path.Join("core/api/services/", servicePath)),
 		body,
 	)
 
@@ -191,4 +201,57 @@ func (c *apiClient) Execute(
 	return c.CallService(servicePath, map[string]any{
 		"entity_id": entityID,
 	})
+}
+
+func (c *apiClient) ListAddOns() ([]AddOn, error) {
+	req, err := http.NewRequest(http.MethodGet, c.requestURL("addons"), http.NoBody)
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := c.do(req)
+	if err != nil {
+		return nil, err
+	}
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("%s", resp.Status)
+	}
+
+	info := &struct {
+		AddOns []AddOn `json:"addons"`
+	}{}
+
+	decoder := json.NewDecoder(resp.Body)
+	err = decoder.Decode(&info)
+	if err != nil {
+		return nil, err
+	}
+
+	return info.AddOns, nil
+}
+
+func (c *apiClient) GetAddOnInfo(addon string) (*AddOn, error) {
+	req, err := http.NewRequest(http.MethodGet, c.requestURL(fmt.Sprintf("addons/%s/info", addon)), http.NoBody)
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := c.do(req)
+	if err != nil {
+		return nil, err
+	}
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("%s", resp.Status)
+	}
+
+	info := &AddOn{}
+	decoder := json.NewDecoder(resp.Body)
+	err = decoder.Decode(&info)
+	if err != nil {
+		return nil, err
+	}
+
+	return info, nil
 }
