@@ -98,6 +98,8 @@ func (s *Service) scanForDevices() {
 		s.mu.Unlock()
 	}()
 
+	fmt.Println("ble scanning...")
+
 	err := s.adapter.Scan(func(adapter *bluetooth.Adapter, result bluetooth.ScanResult) {
 		fmt.Printf("bluetooth result found: %v\n", result.LocalName())
 
@@ -139,6 +141,9 @@ func (s *Service) scanForDevices() {
 
 	if err != nil {
 		// Log error but don't crash
+		fmt.Printf("scanning error: %v", err.Error())
 		return
 	}
+
+	fmt.Println("ble scan stopping...")
 }
