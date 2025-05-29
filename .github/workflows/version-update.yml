@@ -186,29 +186,43 @@ jobs:
 
           for tag in "${tags[@]}"; do
             echo "::group::Pointing tag ${tag} to ${{ steps.commit.outputs.commit-hash }}"
-
+            
             # Delete the remote tag
-            git push \
-              --delete \
-              ${DRY_RUN_FLAG} \
-              origin "$tag" \
-              2> /dev/null \
-            || true
+            if [[ "${DRY_RUN}" == "true" ]]; then
+              echo "Skipping deleting remote tag origin/$tag, due to dry run"
+            else
+              git push \
+                --delete \
+                origin "$tag" \
+              || true
+            fi
 
             # Delete the local tag
-            git tag \
-              --delete \
-              "$tag" \
-              2> /dev/null \
-            || true
+            if [[ "${DRY_RUN}" == "true" ]]; then
+              echo "Skipping deleting local tag $tag, due to dry run"
+            else
+              git tag \
+                --delete \
+                "$tag" \
+                2> /dev/null \
+              || true
+            fi
             
             # Create a new tag :)
-            git tag "$tag"
+            if [[ "${DRY_RUN}" == "true" ]]; then
+              echo "Skipping creating a new tag $tag, due to dry run"
+            else
+              git tag "$tag"
+            fi
 
             echo "::endgroup::"
           done
 
-          git push --tags ${DRY_RUN_FLAG}
+          if [[ "${DRY_RUN}" == "true" ]]; then
+            echo "Skipping pushing updates, due to dry run"
+          else
+            git push --tags
+          fi
       -
         name: Release
         if: ${{ github.event_name != 'pull_request' && !inputs.dry-run }}
