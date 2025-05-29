@@ -21,3 +21,5 @@ ingress_stream: true
 ingress_path: /
 hassio_api: true
 homeassistant_api: true
+hassio_role: manager
+host_dbus: true
