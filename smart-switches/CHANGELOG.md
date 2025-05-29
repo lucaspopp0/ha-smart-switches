@@ -1,4 +1,4 @@
-# v1.1.91.1
-update panel title
+# v1.1.92.0
+Update github-actions (#51)
 
 
