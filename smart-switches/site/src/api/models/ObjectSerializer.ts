@@ -1,4 +1,5 @@
 export * from '../models/Config';
+export * from '../models/Device';
 export * from '../models/ErrorDetail';
 export * from '../models/ErrorModel';
 export * from '../models/Executable';
@@ -7,12 +8,17 @@ export * from '../models/LayoutV5';
 export * from '../models/LayoutV6';
 export * from '../models/LayoutV7';
 export * from '../models/Layouts';
+export * from '../models/ListBLEDevicesResponseBody';
 export * from '../models/ListExecutablesResponseBody';
 export * from '../models/PostPressRequestBody';
+export * from '../models/StartBLEScanRequestBody';
+export * from '../models/StartBLEScanResponseBody';
+export * from '../models/StopBLEScanResponseBody';
 export * from '../models/Switch';
 export * from '../models/WheelRoutine';
 
 import { Config } from '../models/Config';
+import { Device } from '../models/Device';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ErrorModel } from '../models/ErrorModel';
 import { Executable } from '../models/Executable';
@@ -21,8 +27,12 @@ import { LayoutV5 } from '../models/LayoutV5';
 import { LayoutV6 } from '../models/LayoutV6';
 import { LayoutV7 } from '../models/LayoutV7';
 import { Layouts } from '../models/Layouts';
+import { ListBLEDevicesResponseBody } from '../models/ListBLEDevicesResponseBody';
 import { ListExecutablesResponseBody } from '../models/ListExecutablesResponseBody';
 import { PostPressRequestBody } from '../models/PostPressRequestBody';
+import { StartBLEScanRequestBody } from '../models/StartBLEScanRequestBody';
+import { StartBLEScanResponseBody } from '../models/StartBLEScanResponseBody';
+import { StopBLEScanResponseBody } from '../models/StopBLEScanResponseBody';
 import { Switch } from '../models/Switch';
 import { WheelRoutine } from '../models/WheelRoutine';
 
@@ -43,6 +53,7 @@ let enumsMap: Set<string> = new Set<string>([
 
 let typeMap: {[index: string]: any} = {
     "Config": Config,
+    "Device": Device,
     "ErrorDetail": ErrorDetail,
     "ErrorModel": ErrorModel,
     "Executable": Executable,
@@ -51,8 +62,12 @@ let typeMap: {[index: string]: any} = {
     "LayoutV6": LayoutV6,
     "LayoutV7": LayoutV7,
     "Layouts": Layouts,
+    "ListBLEDevicesResponseBody": ListBLEDevicesResponseBody,
     "ListExecutablesResponseBody": ListExecutablesResponseBody,
     "PostPressRequestBody": PostPressRequestBody,
+    "StartBLEScanRequestBody": StartBLEScanRequestBody,
+    "StartBLEScanResponseBody": StartBLEScanResponseBody,
+    "StopBLEScanResponseBody": StopBLEScanResponseBody,
     "Switch": Switch,
     "WheelRoutine": WheelRoutine,
 }
