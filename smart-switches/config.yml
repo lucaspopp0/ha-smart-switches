@@ -16,6 +16,11 @@ hassio_api: true
 homeassistant_api: true
 hassio_role: manager
 host_dbus: true
+privileged:
+  - NET_ADMIN
+  - NET_RAW
+devices:
+  - vhci
 # Ingress configuration
 # panel_title: 'Smart Switches'
 # panel_icon: 'mdi:light-switch'
