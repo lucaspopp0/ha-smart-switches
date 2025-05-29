@@ -67,6 +67,7 @@ jobs:
         id: commit-message
         run: |
           {
+            echo "hash=$(git show ${{ github.sha }} --no-patch --format='%h')"
             echo 'message<<EOT';
             git show --format='%s' --no-patch;
             echo 'EOT';
@@ -147,7 +148,7 @@ jobs:
         name: Update CHANGELOG.md
         env:
           VERSION_TAG: ${{ steps.output-tags.outputs.INCRM }}
-          COMMIT_MESSAGE: ${{ steps.commit-message.outputs.message }}
+          COMMIT_MESSAGE: '${{ steps.commit-message.outputs.hash }} ${{ steps.commit-message.outputs.message }}'
         run: |
           ./smart-switches/scripts/changelog.sh \
             | tee CHANGELOG.md
