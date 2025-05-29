@@ -15,7 +15,6 @@ init: false
 panel_title: 'Smart Switches'
 panel_icon: 'mdi:puzzle'
 panel_admin: false
-webui: http://[HOST]:[PORT:8124]
 ports:
   8124/tcp: 8124
 ingress: true
