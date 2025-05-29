@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 if [[ -n "$VERSION_TAG" ]]; then
     echo "# ${VERSION_TAG}";
 fi
@@ -18,9 +20,6 @@ if [[ -n "$COMMIT_MESSAGE" ]]; then
     echo ""
 fi
 
-git log \
-    HEAD...v1.0.5 \
-    --format='%s' \
-    | sed -nE 's/(.+)/*  \1/p' \
-    | sed -E 's/.+\[bot\] (.+)/\n# \1/' \
-    | less
+git log HEAD~1...v1.0.5 --format='%s' \
+    | sed -nE 's/(.+)/ * \1/p' \
+    | sed -E 's/.*\[bot\] (.+)/\n# \1/'
