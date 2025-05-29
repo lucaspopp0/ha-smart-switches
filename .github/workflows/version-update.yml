@@ -151,7 +151,7 @@ jobs:
           COMMIT_MESSAGE: '${{ steps.commit-message.outputs.hash }} ${{ steps.commit-message.outputs.message }}'
         run: |
           ./smart-switches/scripts/changelog.sh \
-            | tee CHANGELOG.md
+            | tee smart-switches/CHANGELOG.md
       -
         name: "Commit changes and push (DRY_RUN=${{ env.DRY_RUN }})"
         id: commit
