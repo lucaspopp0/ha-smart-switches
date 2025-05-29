@@ -1,0 +1,26 @@
+#!/bin/bash
+
+if [[ -n "$VERSION_TAG" ]]; then
+    echo "# ${VERSION_TAG}";
+fi
+
+if [[ -n "$COMMIT_MESSAGE" ]]; then
+    first=true
+    while IFS='' read -r line || [[ -n "$line" ]]; do
+        if [[ "$first" == "true" ]]; then
+            first=false
+            echo " * $line"
+        else
+            echo "   $line"
+        fi
+    done <<< "$COMMIT_MESSAGE"
+
+    echo ""
+fi
+
+git log \
+    HEAD...v1.0.5 \
+    --format='%s' \
+    | sed -nE 's/(.+)/*  \1/p' \
+    | sed -E 's/.+\[bot\] (.+)/\n# \1/' \
+    | less

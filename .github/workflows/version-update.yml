@@ -149,14 +149,8 @@ jobs:
           VERSION_TAG: ${{ steps.output-tags.outputs.INCRM }}
           COMMIT_MESSAGE: ${{ steps.commit-message.outputs.message }}
         run: |
-          CHANGELOG=$(cat smart-switches/CHANGELOG.md)
-
-          {
-            echo "# ${VERSION_TAG}";
-            echo "$COMMIT_MESSAGE";
-            echo "";
-            echo "";
-          } > smart-switches/CHANGELOG.md
+          ./smart-switches/scripts/changelog.sh \
+            | tee CHANGELOG.md
       -
         name: "Commit changes and push (DRY_RUN=${{ env.DRY_RUN }})"
         id: commit
