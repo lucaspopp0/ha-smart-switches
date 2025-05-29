@@ -13,7 +13,7 @@ arch:
 startup: application
 init: false
 panel_title: 'Smart Switches'
-panel_icon: 'mdi:puzzle'
+panel_icon: 'mdi:light-switch'
 panel_admin: false
 ingress: true
 ingress_port: 8124
