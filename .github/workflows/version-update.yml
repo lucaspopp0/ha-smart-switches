@@ -67,6 +67,7 @@ jobs:
         id: commit-message
         run: |
           {
+            echo "hash=$(git show ${{ github.sha }} --no-patch --format='%h')"
             echo 'message<<EOT';
             git show --format='%s' --no-patch;
             echo 'EOT';
@@ -147,16 +148,10 @@ jobs:
         name: Update CHANGELOG.md
         env:
           VERSION_TAG: ${{ steps.output-tags.outputs.INCRM }}
-          COMMIT_MESSAGE: ${{ steps.commit-message.outputs.message }}
+          COMMIT_MESSAGE: '${{ steps.commit-message.outputs.hash }} ${{ steps.commit-message.outputs.message }}'
         run: |
-          CHANGELOG=$(cat smart-switches/CHANGELOG.md)
-
-          {
-            echo "# ${VERSION_TAG}";
-            echo "$COMMIT_MESSAGE";
-            echo "";
-            echo "";
-          } > smart-switches/CHANGELOG.md
+          ./smart-switches/scripts/changelog.sh \
+            | tee CHANGELOG.md
       -
         name: "Commit changes and push (DRY_RUN=${{ env.DRY_RUN }})"
         id: commit
@@ -165,18 +160,16 @@ jobs:
           git commit -m "[bot] ${INCRM}"
           
           # Output commit hash
-          COMMIT_HASH=$(git show --no-patch --format="%H")
+          COMMIT_HASH=$(git show --no-patch --format="%h")
           echo "commit-hash=$COMMIT_HASH" | tee -a "$GITHUB_OUTPUT"
 
           # push commit
-          PUSH_ARGS="push --force"
           if [[ "${DRY_RUN}" == "true" ]]; then
-            PUSH_ARGS="${PUSH_ARGS} --dry-run"
+            echo "Skipping pushing changes, due to dry run"
+          else
+            git push --force
           fi
 
-          git push \
-            --force \
-            ${DRY_RUN_FLAG}
       -
         name: "Update tags (DRY_RUN=${{ env.DRY_RUN }})"
         run: |
