@@ -1,6 +1,9 @@
+# v1.1.107.0
+ * d0aea65 fix(deps): update dependency zod to v3.25.36 (#61)
+
+
 # v1.1.106.0
  * 0f41b73 fix openapi path
-
 
 # v1.1.105.0
  * daf8ee1 fix(deps): update module github.com/spf13/cobra to v1.9.1 (#57)
