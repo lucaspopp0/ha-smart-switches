@@ -61,11 +61,17 @@ func (s *server) onStart() {
 		}
 	}
 
-	fmt.Println("Testing home assistant connection...")
 	s.executables, err = s.ha.ListExecutables()
 
 	if err != nil {
 		fmt.Printf("Home assistant service call failed: %v\n", err.Error())
+	}
+
+	addonInfo, err := s.ha.GetAddOnInfo("smart-switches")
+	if err != nil {
+		fmt.Printf("Failed to fetch add-on info: %v\n", err.Error())
+	} else {
+		fmt.Printf("Add-on info: %v\n", addonInfo)
 	}
 
 	port := util.GetEnv(envPort, defaultServerPort)
