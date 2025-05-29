@@ -1,6 +1,9 @@
+# v1.1.106.0
+ * 0f41b73 fix openapi path
+
+
 # v1.1.105.0
  * daf8ee1 fix(deps): update module github.com/spf13/cobra to v1.9.1 (#57)
-
 
 # v1.1.104.0
  * c4a1dff changelog fix
