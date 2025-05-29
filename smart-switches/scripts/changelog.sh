@@ -20,6 +20,5 @@ if [[ -n "$COMMIT_MESSAGE" ]]; then
     echo ""
 fi
 
-git log HEAD~1...v1.0.5 --format='%s' \
-    | sed -nE 's/(.+)/ * \1/p' \
+git log HEAD~1...v1.0.5 --format=' * %h %s' \
     | sed -E 's/.*\[bot\] (.+)/\n# \1/'
