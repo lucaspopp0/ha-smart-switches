@@ -1,4 +1,4 @@
-# v1.1.98.2
-use direct network
+# v1.1.99.0
+feat: BLE scanning (#58)
 
 
