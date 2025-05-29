@@ -1,4 +1,4 @@
-# v1.1.97.1
-Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+# v1.1.98.2
+use direct network
 
 
