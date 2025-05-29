@@ -160,18 +160,16 @@ jobs:
           git commit -m "[bot] ${INCRM}"
           
           # Output commit hash
-          COMMIT_HASH=$(git show --no-patch --format="%H")
+          COMMIT_HASH=$(git show --no-patch --format="%h")
           echo "commit-hash=$COMMIT_HASH" | tee -a "$GITHUB_OUTPUT"
 
           # push commit
-          PUSH_ARGS="push --force"
           if [[ "${DRY_RUN}" == "true" ]]; then
-            PUSH_ARGS="${PUSH_ARGS} --dry-run"
+            echo "Skipping pushing changes, due to dry run"
+          else
+            git push --force
           fi
 
-          git push \
-            --force \
-            ${DRY_RUN_FLAG}
       -
         name: "Update tags (DRY_RUN=${{ env.DRY_RUN }})"
         run: |
