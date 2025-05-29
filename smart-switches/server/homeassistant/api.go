@@ -15,7 +15,7 @@ import (
 var (
 	envSupervisorHost = "SUPERVISOR_HOST"
 	baseURL           = fmt.Sprintf(
-		"http://%s/api/",
+		"http://%s/",
 		util.GetEnv(envSupervisorHost, "supervisor"),
 	)
 )
@@ -98,7 +98,7 @@ func (c *apiClient) ListExecutables() (Executables, error) {
 }
 
 func (c *apiClient) GetStates() ([]EntityState, error) {
-	req, err := http.NewRequest(http.MethodGet, c.requestURL("core/states"), http.NoBody)
+	req, err := http.NewRequest(http.MethodGet, c.requestURL("core/api/states"), http.NoBody)
 	if err != nil {
 		return nil, err
 	}
@@ -127,7 +127,7 @@ func (c *apiClient) GetStates() ([]EntityState, error) {
 }
 
 func (c *apiClient) GetEntityStates(entityID string) ([]EntityState, error) {
-	req, err := http.NewRequest(http.MethodGet, c.requestURL(fmt.Sprintf("core/states/%s", entityID)), http.NoBody)
+	req, err := http.NewRequest(http.MethodGet, c.requestURL(fmt.Sprintf("core/api/states/%s", entityID)), http.NoBody)
 	if err != nil {
 		return nil, err
 	}
@@ -171,7 +171,7 @@ func (c *apiClient) CallService(
 
 	req, err := http.NewRequest(
 		http.MethodPost,
-		c.requestURL(path.Join("core/services/", servicePath)),
+		c.requestURL(path.Join("core/api/services/", servicePath)),
 		body,
 	)
 
