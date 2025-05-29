@@ -16,7 +16,7 @@ var (
 	envSupervisorHost = "SUPERVISOR_HOST"
 	baseURL           = fmt.Sprintf(
 		"http://%s/api/",
-		util.GetEnv(envSupervisorHost, "supervisor/"),
+		util.GetEnv(envSupervisorHost, "supervisor"),
 	)
 )
 
@@ -26,8 +26,11 @@ type EntityState struct {
 	Attributes map[string]any `json:"attributes,omitempty"`
 }
 
+type AddOn = map[string]any
+
 type addonsAPI interface {
-	GetAddOnInfo(addon string) (map[string]any, error)
+	ListAddOns() ([]AddOn, error)
+	GetAddOnInfo(addon string) (*AddOn, error)
 }
 
 type coreAPI interface {
@@ -198,7 +201,35 @@ func (c *apiClient) Execute(
 	})
 }
 
-func (c *apiClient) GetAddOnInfo(addon string) (map[string]any, error) {
+func (c *apiClient) ListAddOns() ([]AddOn, error) {
+	req, err := http.NewRequest(http.MethodGet, c.requestURL("addons"), http.NoBody)
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := c.do(req)
+	if err != nil {
+		return nil, err
+	}
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("%s", resp.Status)
+	}
+
+	info := &struct {
+		AddOns []AddOn `json:"addons"`
+	}{}
+
+	decoder := json.NewDecoder(resp.Body)
+	err = decoder.Decode(&info)
+	if err != nil {
+		return nil, err
+	}
+
+	return info.AddOns, nil
+}
+
+func (c *apiClient) GetAddOnInfo(addon string) (*AddOn, error) {
 	req, err := http.NewRequest(http.MethodGet, c.requestURL(fmt.Sprintf("addons/%s/info", addon)), http.NoBody)
 	if err != nil {
 		return nil, err
@@ -213,7 +244,7 @@ func (c *apiClient) GetAddOnInfo(addon string) (map[string]any, error) {
 		return nil, fmt.Errorf("%s", resp.Status)
 	}
 
-	info := map[string]any{}
+	info := &AddOn{}
 	decoder := json.NewDecoder(resp.Body)
 	err = decoder.Decode(&info)
 	if err != nil {
