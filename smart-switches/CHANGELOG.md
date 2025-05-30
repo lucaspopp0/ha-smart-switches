@@ -1,7 +1,15 @@
-# v1.1.111.1
- * e57268f Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+# v1.1.112.0
+ * [`c07d3ec`](https://github.com/lucaspopp0/ha-smart-switches/commit/c07d3ec) script improvement
 
+
+# v1.1.111.1
+ * [e57268f](https://github.com/lucaspopp0/ha-smart-switches/commit/e57268f) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
  * [a887163](https://github.com/lucaspopp0/ha-smart-switches/commit/a887163) add links to changelog
+
+# v1.1.110.0
+ * [8f5ee6a](https://github.com/lucaspopp0/ha-smart-switches/commit/8f5ee6a) fix(deps): update site (#62)
+
+# v1.1.109.0
  * [e40eb8f](https://github.com/lucaspopp0/ha-smart-switches/commit/e40eb8f) scanner logs
 
 # v1.1.108.0
