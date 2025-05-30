@@ -1,6 +1,9 @@
+# v1.1.115.0
+ * [`6443e77`](https://github.com/lucaspopp0/ha-smart-switches/commit/6443e77) fix(deps): update dependency zod to v3.25.42 (#64)
+
+
 # v1.1.114.0
  * [`2aee00c`](https://github.com/lucaspopp0/ha-smart-switches/commit/2aee00c) fix(deps): update site (#63)
-
 
 # v1.1.113.0
  * [`a2225d9`](https://github.com/lucaspopp0/ha-smart-switches/commit/a2225d9) final script improvement
