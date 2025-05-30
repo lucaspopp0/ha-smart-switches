@@ -1,6 +1,9 @@
+# v1.1.116.0
+ * [`5252a2b`](https://github.com/lucaspopp0/ha-smart-switches/commit/5252a2b) chore(deps): update dependency @types/node to v20.17.56 (#65)
+
+
 # v1.1.115.0
  * [`6443e77`](https://github.com/lucaspopp0/ha-smart-switches/commit/6443e77) fix(deps): update dependency zod to v3.25.42 (#64)
-
 
 # v1.1.114.0
  * [`2aee00c`](https://github.com/lucaspopp0/ha-smart-switches/commit/2aee00c) fix(deps): update site (#63)
