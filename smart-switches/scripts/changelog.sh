@@ -22,4 +22,4 @@ fi
 
 git log HEAD~1...v1.0.5 --format=' * %h %s' \
     | sed -E 's/.*\[bot\] (.+)/\n# \1/' \
-    | sed -E 's| \* ([a-z0-9]+) (.+)| * [\1](https://github.com/lucaspopp0/ha-smart-switches/commit/\1) \2|'
+    | sed -E 's| \* ([a-z0-9]+) (.+)| * [`\1`](https://github.com/lucaspopp0/ha-smart-switches/commit/\1) \2|'
