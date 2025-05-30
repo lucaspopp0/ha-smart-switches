@@ -1,6 +1,12 @@
+# v1.1.110.0
+ * 8f5ee6a fix(deps): update site (#62)
+
+
+# v1.1.109.0
+ * e40eb8f scanner logs
+
 # v1.1.108.0
  * 37ad57b ble scan logs
-
 
 # v1.1.107.0
  * d0aea65 fix(deps): update dependency zod to v3.25.36 (#61)
