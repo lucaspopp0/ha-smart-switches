@@ -106,6 +106,7 @@ func NewServer() humacli.CLI {
 
 		s.router.Use(AllowCORS)
 		s.router.Use(SiteMiddleware(os.Getenv(envLocal) == "true"))
+		s.router.Use(middleware.BodyAppender)
 
 		cfg := huma.DefaultConfig("Smart Switches", "")
 		cfg.DocsPath = "/api/docs"
