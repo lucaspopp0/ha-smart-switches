@@ -5,7 +5,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     ports:
-      - "7125:8000"
+      - "8124:8124"
     volumes:
       - ./data:/data
     environment:

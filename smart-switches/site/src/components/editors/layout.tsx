@@ -1,7 +1,7 @@
 import React from 'react';
 import ConfirmModal from '../modals/confirm';
 import { CaretRightFilled } from '@ant-design/icons';
-import { Button, Space, Switch, Typography } from 'antd';
+import { Button, Space, Switch, Typography, ColorPicker } from 'antd';
 import { config } from 'process';
 import ExecutablePicker from '../inputs/executable-picker';
 import { DefaultApi, Config, Layouts, WheelRoutine } from '../../api';
@@ -124,34 +124,56 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
             >
                 Basic Buttons
             </Typography.Text>
-            {basicButtons.map(buttonName => (
-              row(buttonName, buttonName, <Space direction='horizontal'>
-                <ExecutablePicker
-                    value={currentLayout[buttonName as keyof typeof currentLayout]}
-                    api={props.api}
-                    onPick={async picked => {
-                      currentLayout[buttonName as keyof typeof currentLayout] = picked?.entityId
-                      return onUpdate()
-                    }}
-                  />
-                  <Button
-                    icon={<CaretRightFilled />}
-                    disabled={!currentLayout[buttonName as keyof typeof currentLayout]}
-                    onClick={() => {
-                      props.api
-                        .press({
-                          _switch: props.currentSwitch as string,
-                          layout: props.currentLayout as string,
-                          key: buttonName,
-                        })
-                        .catch(err => {
-                          console.error(err)
-                        })
-                    }}
-                  />
-                </Space>,
-              )
-            ))}
+            {
+              (basicButtons as ((keyof typeof currentLayout)[]))
+                .map(buttonName => {
+                  const command = currentLayout[buttonName]
+                  if (!command) return <></>
+
+                  return row(buttonName, buttonName, <Space direction='horizontal'>
+                    <ColorPicker
+                      value={currentLayout[buttonName] ? `rgb(${command.color?.[0]},${command.color?.[1]},${command.color?.[2]})` : 'rgb(50, 100, 255)'}
+                      onChange={color => {
+                        const { r, g, b } = color.toRgb()
+                        command.color = [r, g, b]
+                        currentLayout[buttonName] = command
+
+                        return onUpdate()
+                      }}
+                    />
+                    <ExecutablePicker
+                        value={currentLayout[buttonName]?.cmd}
+                        api={props.api}
+                        onPick={async picked => {
+                          let currentButton = currentLayout[buttonName]
+
+                          if (currentButton && picked) {
+                            currentButton.cmd = picked.entityId
+                            currentLayout[buttonName] = currentButton
+                          }
+
+                          return onUpdate()
+                        }}
+                      />
+                      <Button
+                        icon={<CaretRightFilled />}
+                        disabled={!currentLayout[buttonName]}
+                        onClick={() => {
+                          props.api
+                            .press({
+                              _switch: props.currentSwitch as string,
+                              layout: props.currentLayout as string,
+                              key: buttonName,
+                            })
+                            .catch(err => {
+                              console.error(err)
+                            })
+                        }}
+                      />
+                    </Space>,
+                  )
+                })
+            }
             {hasWheelRoutines
               ? <WheelRoutinesEditor
                   api={props.api}

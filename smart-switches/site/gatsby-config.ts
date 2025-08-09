@@ -5,7 +5,7 @@ const config: GatsbyConfig = {
   proxy: [
     {
       prefix: '/api',
-      url: 'http://localhost:7125'
+      url: 'http://localhost:8124'
     }
   ],
   siteMetadata: {

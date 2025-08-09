@@ -2,6 +2,7 @@ import { ResponseContext, RequestContext, HttpFile, HttpInfo } from '../http/htt
 import { Configuration, PromiseConfigurationOptions, wrapOptions } from '../configuration'
 import { PromiseMiddleware, Middleware, PromiseMiddlewareWrapper } from '../middleware';
 
+import { Command } from '../models/Command';
 import { Config } from '../models/Config';
 import { Device } from '../models/Device';
 import { ErrorDetail } from '../models/ErrorDetail';
