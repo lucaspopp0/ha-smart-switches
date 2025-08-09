@@ -130,9 +130,13 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
                   const command = currentLayout[buttonName]
                   if (!command) return <></>
 
+                  const r = Math.round(command.color?.[0] ?? 50)
+                  const g = Math.round(command.color?.[1] ?? 100)
+                  const b = Math.round(command.color?.[2] ?? 255)
+
                   return row(buttonName, buttonName, <Space direction='horizontal'>
                     <ColorPicker
-                      value={currentLayout[buttonName] ? `rgb(${command.color?.[0]},${command.color?.[1]},${command.color?.[2]})` : 'rgb(50, 100, 255)'}
+                      value={`rgb(${r},${g},${b})`}
                       onChange={color => {
                         const { r, g, b } = color.toRgb()
                         command.color = [r, g, b]
