@@ -1,3 +1,4 @@
+export * from '../models/Command';
 export * from '../models/Config';
 export * from '../models/Device';
 export * from '../models/ErrorDetail';
@@ -17,6 +18,7 @@ export * from '../models/StopBLEScanResponseBody';
 export * from '../models/Switch';
 export * from '../models/WheelRoutine';
 
+import { Command } from '../models/Command';
 import { Config } from '../models/Config';
 import { Device } from '../models/Device';
 import { ErrorDetail } from '../models/ErrorDetail';
@@ -52,6 +54,7 @@ let enumsMap: Set<string> = new Set<string>([
 ]);
 
 let typeMap: {[index: string]: any} = {
+    "Command": Command,
     "Config": Config,
     "Device": Device,
     "ErrorDetail": ErrorDetail,

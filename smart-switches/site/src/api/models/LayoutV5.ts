@@ -10,17 +10,18 @@
  * Do not edit the class manually.
  */
 
+import { Command } from '../models/Command';
 import { WheelRoutine } from '../models/WheelRoutine';
 import { HttpFile } from '../http/http';
 
 export class LayoutV5 {
-    '_5'?: string;
-    '_6'?: string;
-    '_7'?: string;
-    '_8'?: string;
+    '_5'?: Command;
+    '_6'?: Command;
+    '_7'?: Command;
+    '_8'?: Command;
     'flipped'?: boolean;
-    'off'?: string;
-    'on'?: string;
+    'off'?: Command;
+    'on'?: Command;
     'wheel_routines'?: Array<WheelRoutine> | null;
 
     static readonly discriminator: string | undefined = undefined;
@@ -31,25 +32,25 @@ export class LayoutV5 {
         {
             "name": "_5",
             "baseName": "5",
-            "type": "string",
+            "type": "Command",
             "format": ""
         },
         {
             "name": "_6",
             "baseName": "6",
-            "type": "string",
+            "type": "Command",
             "format": ""
         },
         {
             "name": "_7",
             "baseName": "7",
-            "type": "string",
+            "type": "Command",
             "format": ""
         },
         {
             "name": "_8",
             "baseName": "8",
-            "type": "string",
+            "type": "Command",
             "format": ""
         },
         {
@@ -61,13 +62,13 @@ export class LayoutV5 {
         {
             "name": "off",
             "baseName": "off",
-            "type": "string",
+            "type": "Command",
             "format": ""
         },
         {
             "name": "on",
             "baseName": "on",
-            "type": "string",
+            "type": "Command",
             "format": ""
         },
         {

@@ -3,6 +3,7 @@ import { Configuration, ConfigurationOptions, mergeConfiguration } from '../conf
 import type { Middleware } from '../middleware';
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
+import { Command } from '../models/Command';
 import { Config } from '../models/Config';
 import { Device } from '../models/Device';
 import { ErrorDetail } from '../models/ErrorDetail';

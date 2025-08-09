@@ -1,3 +1,4 @@
+export * from '../models/Command'
 export * from '../models/Config'
 export * from '../models/Device'
 export * from '../models/ErrorDetail'

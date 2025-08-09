@@ -1,5 +1,21 @@
 components:
   schemas:
+    Command:
+      additionalProperties: false
+      properties:
+        cmd:
+          type: string
+        color:
+          items:
+            format: int64
+            type: integer
+          type:
+            - array
+            - "null"
+      required:
+        - cmd
+        - color
+      type: object
     Config:
       additionalProperties: false
       properties:
@@ -133,43 +149,43 @@ components:
       additionalProperties: false
       properties:
         "1":
-          type: string
+          $ref: '#/components/schemas/Command'
         "2":
-          type: string
+          $ref: '#/components/schemas/Command'
         "3":
-          type: string
+          $ref: '#/components/schemas/Command'
         "4":
-          type: string
+          $ref: '#/components/schemas/Command'
         "5":
-          type: string
+          $ref: '#/components/schemas/Command'
         "6":
-          type: string
+          $ref: '#/components/schemas/Command'
         "7":
-          type: string
+          $ref: '#/components/schemas/Command'
         "8":
-          type: string
+          $ref: '#/components/schemas/Command'
         "off":
-          type: string
+          $ref: '#/components/schemas/Command'
         "on":
-          type: string
+          $ref: '#/components/schemas/Command'
       type: object
     LayoutV5:
       additionalProperties: false
       properties:
         "5":
-          type: string
+          $ref: '#/components/schemas/Command'
         "6":
-          type: string
+          $ref: '#/components/schemas/Command'
         "7":
-          type: string
+          $ref: '#/components/schemas/Command'
         "8":
-          type: string
+          $ref: '#/components/schemas/Command'
         flipped:
           type: boolean
         "off":
-          type: string
+          $ref: '#/components/schemas/Command'
         "on":
-          type: string
+          $ref: '#/components/schemas/Command'
         wheel-routines:
           items:
             $ref: '#/components/schemas/WheelRoutine'
@@ -181,19 +197,19 @@ components:
       additionalProperties: false
       properties:
         "5":
-          type: string
+          $ref: '#/components/schemas/Command'
         "6":
-          type: string
+          $ref: '#/components/schemas/Command'
         "7":
-          type: string
+          $ref: '#/components/schemas/Command'
         "8":
-          type: string
+          $ref: '#/components/schemas/Command'
         flipped:
           type: boolean
         "off":
-          type: string
+          $ref: '#/components/schemas/Command'
         "on":
-          type: string
+          $ref: '#/components/schemas/Command'
         wheel-routines:
           items:
             $ref: '#/components/schemas/WheelRoutine'
@@ -205,27 +221,27 @@ components:
       additionalProperties: false
       properties:
         "1":
-          type: string
+          $ref: '#/components/schemas/Command'
         "2":
-          type: string
+          $ref: '#/components/schemas/Command'
         "3":
-          type: string
+          $ref: '#/components/schemas/Command'
         "4":
-          type: string
+          $ref: '#/components/schemas/Command'
         "5":
-          type: string
+          $ref: '#/components/schemas/Command'
         "6":
-          type: string
+          $ref: '#/components/schemas/Command'
         "7":
-          type: string
+          $ref: '#/components/schemas/Command'
         "8":
-          type: string
+          $ref: '#/components/schemas/Command'
         flipped:
           type: boolean
         "off":
-          type: string
+          $ref: '#/components/schemas/Command'
         "on":
-          type: string
+          $ref: '#/components/schemas/Command'
       type: object
     Layouts:
       additionalProperties: false

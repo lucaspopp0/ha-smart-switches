@@ -1,9 +1,5 @@
 package model
 
-type commandMatcher interface {
-	MatchesKey(key string) (command string, ok bool)
-}
-
 type Flippable struct {
 	Flipped bool `json:"flipped,omitempty"`
 }
@@ -32,123 +28,123 @@ type FourButtons struct {
 }
 
 type On struct {
-	On string `json:"on,omitempty"`
+	On Command `json:"on,omitempty"`
 }
 
-func (c On) MatchesKey(key string) (string, bool) {
+func (c On) MatchesKey(key string) (Command, bool) {
 	if key == "on" {
 		return c.On, true
 	}
 
-	return "", false
+	return Command{}, false
 }
 
 type Off struct {
-	Off string `json:"off,omitempty"`
+	Off Command `json:"off,omitempty"`
 }
 
-func (c Off) MatchesKey(key string) (string, bool) {
+func (c Off) MatchesKey(key string) (Command, bool) {
 	if key == "off" {
 		return c.Off, true
 	}
 
-	return "", false
+	return Command{}, false
 }
 
 type One struct {
-	One string `json:"1,omitempty"`
+	One Command `json:"1,omitempty"`
 }
 
-func (c One) MatchesKey(key string) (string, bool) {
+func (c One) MatchesKey(key string) (Command, bool) {
 	if key == "1" {
 		return c.One, true
 	}
 
-	return "", false
+	return Command{}, false
 }
 
 type Two struct {
-	Two string `json:"2,omitempty"`
+	Two Command `json:"2,omitempty"`
 }
 
-func (c Two) MatchesKey(key string) (string, bool) {
+func (c Two) MatchesKey(key string) (Command, bool) {
 	if key == "2" {
 		return c.Two, true
 	}
 
-	return "", false
+	return Command{}, false
 }
 
 type Three struct {
-	Three string `json:"3,omitempty"`
+	Three Command `json:"3,omitempty"`
 }
 
-func (c Three) MatchesKey(key string) (string, bool) {
+func (c Three) MatchesKey(key string) (Command, bool) {
 	if key == "3" {
 		return c.Three, true
 	}
 
-	return "", false
+	return Command{}, false
 }
 
 type Four struct {
-	Four string `json:"4,omitempty"`
+	Four Command `json:"4,omitempty"`
 }
 
-func (c Four) MatchesKey(key string) (string, bool) {
+func (c Four) MatchesKey(key string) (Command, bool) {
 	if key == "4" {
 		return c.Four, true
 	}
 
-	return "", false
+	return Command{}, false
 }
 
 type Five struct {
-	Five string `json:"5,omitempty"`
+	Five Command `json:"5,omitempty"`
 }
 
-func (c Five) MatchesKey(key string) (string, bool) {
+func (c Five) MatchesKey(key string) (Command, bool) {
 	if key == "5" {
 		return c.Five, true
 	}
 
-	return "", false
+	return Command{}, false
 }
 
 type Six struct {
-	Six string `json:"6,omitempty"`
+	Six Command `json:"6,omitempty"`
 }
 
-func (c Six) MatchesKey(key string) (string, bool) {
+func (c Six) MatchesKey(key string) (Command, bool) {
 	if key == "6" {
 		return c.Six, true
 	}
 
-	return "", false
+	return Command{}, false
 }
 
 type Seven struct {
-	Seven string `json:"7,omitempty"`
+	Seven Command `json:"7,omitempty"`
 }
 
-func (c Seven) MatchesKey(key string) (string, bool) {
+func (c Seven) MatchesKey(key string) (Command, bool) {
 	if key == "7" {
 		return c.Seven, true
 	}
 
-	return "", false
+	return Command{}, false
 }
 
 type Eight struct {
-	Eight string `json:"8,omitempty"`
+	Eight Command `json:"8,omitempty"`
 }
 
-func (c Eight) MatchesKey(key string) (string, bool) {
+func (c Eight) MatchesKey(key string) (Command, bool) {
 	if key == "8" {
 		return c.Eight, true
 	}
 
-	return "", false
+	return Command{}, false
 }
 
 type WheelRoutine struct {
@@ -161,12 +157,15 @@ type WheelRoutines struct {
 	WheelRoutines []WheelRoutine `json:"wheel-routines,omitempty"`
 }
 
-func (c WheelRoutines) MatchesKey(key string) (string, bool) {
+func (c WheelRoutines) MatchesKey(key string) (Command, bool) {
 	for _, routine := range c.WheelRoutines {
 		if key == routine.Name {
-			return routine.Command, true
+			return Command{
+				Cmd:   routine.Command,
+				Color: routine.RGB,
+			}, true
 		}
 	}
 
-	return "", false
+	return Command{}, false
 }
