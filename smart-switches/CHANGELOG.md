@@ -1,6 +1,10 @@
+# v1.1.119.1
+ * [`c1024cc`](https://github.com/lucaspopp0/ha-smart-switches/commit/c1024cc) feat: RGB colors via new `Command` type (#70)
+
+ * [`5722ba3`](https://github.com/lucaspopp0/ha-smart-switches/commit/5722ba3) renovate schedule
+
 # v1.1.118.0
  * [`cda62b7`](https://github.com/lucaspopp0/ha-smart-switches/commit/cda62b7) fix(deps): update dependency antd to v5.25.4 (#67)
-
 
 # v1.1.117.0
  * [`6dfb4d4`](https://github.com/lucaspopp0/ha-smart-switches/commit/6dfb4d4) chore(deps): update dependency @types/node to v20.17.57 (#66)
