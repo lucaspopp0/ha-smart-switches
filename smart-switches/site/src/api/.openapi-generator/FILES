@@ -1,12 +1,12 @@
 .gitattributes
 .gitignore
-DefaultApi.md
 README.md
 apis/DefaultApi.ts
 apis/baseapi.ts
 apis/exception.ts
 auth/auth.ts
 configuration.ts
+docs/DefaultApi.md
 git_push.sh
 http/http.ts
 http/isomorphic-fetch.ts
@@ -22,6 +22,7 @@ models/LayoutV4.ts
 models/LayoutV5.ts
 models/LayoutV6.ts
 models/LayoutV7.ts
+models/LayoutV9.ts
 models/Layouts.ts
 models/ListBLEDevicesResponseBody.ts
 models/ListExecutablesResponseBody.ts

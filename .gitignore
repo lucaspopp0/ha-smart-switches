@@ -2,3 +2,4 @@
 .DS_Store
 node_modules
 smart-switches/local/data
+.claude
