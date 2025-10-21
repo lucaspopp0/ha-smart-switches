@@ -1,6 +1,9 @@
+# v1.1.120.0
+ * [`52785c0`](https://github.com/lucaspopp0/ha-smart-switches/commit/52785c0) feat: Layout v9 (#71)
+
+
 # v1.1.119.1
  * [`c1024cc`](https://github.com/lucaspopp0/ha-smart-switches/commit/c1024cc) feat: RGB colors via new `Command` type (#70)
-
  * [`5722ba3`](https://github.com/lucaspopp0/ha-smart-switches/commit/5722ba3) renovate schedule
 
 # v1.1.118.0
