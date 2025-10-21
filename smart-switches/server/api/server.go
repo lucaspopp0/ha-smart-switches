@@ -53,6 +53,10 @@ func (s *server) onStart() {
 		fmt.Printf("Failed to load config: %v\n", err.Error())
 	} else {
 		s.cfg = *cfg
+
+		// Print loaded config for debugging
+		configJSON, _ := json.MarshalIndent(cfg, "", "  ")
+		fmt.Printf("Loaded config:\n%s\n", string(configJSON))
 	}
 
 	if cfg.Switches == nil {
