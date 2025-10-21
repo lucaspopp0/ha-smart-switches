@@ -45,6 +45,7 @@ func Logger(ctx huma.Context, next func(huma.Context)) {
 			fmt.Printf("request body: %s\n", string(requestBody))
 		}
 
+		// Log response body if it's JSON
 		if strings.Contains(logger.header.Get("Content-Type"), "json") {
 			jsonObj := map[string]any{}
 			err = json.Unmarshal(bodyBytes, &jsonObj)
