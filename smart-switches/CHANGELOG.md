@@ -1,6 +1,10 @@
+# v1.1.121.1
+ * [`f6e1ece`](https://github.com/lucaspopp0/ha-smart-switches/commit/f6e1ece) fix(deps): update module github.com/go-chi/chi/v5 to v5.2.2 [security] (#73)
+
+ * [`4a75b69`](https://github.com/lucaspopp0/ha-smart-switches/commit/4a75b69) ci: Renovate fix (#72)
+
 # v1.1.120.0
  * [`52785c0`](https://github.com/lucaspopp0/ha-smart-switches/commit/52785c0) feat: Layout v9 (#71)
-
 
 # v1.1.119.1
  * [`c1024cc`](https://github.com/lucaspopp0/ha-smart-switches/commit/c1024cc) feat: RGB colors via new `Command` type (#70)
