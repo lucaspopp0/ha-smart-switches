@@ -2,8 +2,10 @@ package api
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 
 	"github.com/danielgtaylor/huma/v2"
@@ -35,6 +37,9 @@ func (s *server) RegisterPostPress(api huma.API) {
 }
 
 func (s *server) postPress(ctx context.Context, req *PostPressRequest) (*PostPressResponse, error) {
+	reqBodyJSON, _ := json.Marshal(req.Body)
+	log.Printf("Press request: %s", string(reqBodyJSON))
+
 	if s.cfg.Switches == nil {
 		return nil, huma.Error404NotFound("No switches configured", nil)
 	}
@@ -45,6 +50,7 @@ func (s *server) postPress(ctx context.Context, req *PostPressRequest) (*PostPre
 
 	command, err := s.cfg.Switches[req.Body.Switch].Layouts.GetCommand(req.Body.Layout, req.Body.Key)
 	if err != nil {
+		log.Printf("GetCommand failed for layout=%q key=%q: %v", req.Body.Layout, req.Body.Key, err)
 		return nil, huma.Error400BadRequest(err.Error())
 	}
 
