@@ -41,6 +41,13 @@ func (c *Command) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
+	// Fix legacy double-encoded cmd strings (e.g., "\"script.name\"" -> "script.name")
+	if strings.HasPrefix(v.Cmd, "\"") && strings.HasSuffix(v.Cmd, "\"") && len(v.Cmd) > 1 {
+		fmt.Printf("Command.UnmarshalJSON: detected double-encoded cmd, fixing: %s\n", v.Cmd)
+		unescapedCmd := v.Cmd[1 : len(v.Cmd)-1]
+		v.Cmd = strings.ReplaceAll(unescapedCmd, "\\\"", "\"")
+	}
+
 	c.Cmd = v.Cmd
 	c.Color = v.Color
 
