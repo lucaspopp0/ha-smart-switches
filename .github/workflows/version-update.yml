@@ -94,7 +94,7 @@ jobs:
         uses: paulhatch/semantic-version@v5.4.0
         with:
           tag_prefix: v
-          enable_prerelease_mode: true
+          bump_each_commit: true
       -
         name: Construct version tags
         id: output-tags
