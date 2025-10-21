@@ -8,6 +8,7 @@ export * from '../models/LayoutV4';
 export * from '../models/LayoutV5';
 export * from '../models/LayoutV6';
 export * from '../models/LayoutV7';
+export * from '../models/LayoutV9';
 export * from '../models/Layouts';
 export * from '../models/ListBLEDevicesResponseBody';
 export * from '../models/ListExecutablesResponseBody';
@@ -28,6 +29,7 @@ import { LayoutV4 } from '../models/LayoutV4';
 import { LayoutV5 } from '../models/LayoutV5';
 import { LayoutV6 } from '../models/LayoutV6';
 import { LayoutV7 } from '../models/LayoutV7';
+import { LayoutV9 } from '../models/LayoutV9';
 import { Layouts } from '../models/Layouts';
 import { ListBLEDevicesResponseBody } from '../models/ListBLEDevicesResponseBody';
 import { ListExecutablesResponseBody } from '../models/ListExecutablesResponseBody';
@@ -64,6 +66,7 @@ let typeMap: {[index: string]: any} = {
     "LayoutV5": LayoutV5,
     "LayoutV6": LayoutV6,
     "LayoutV7": LayoutV7,
+    "LayoutV9": LayoutV9,
     "Layouts": Layouts,
     "ListBLEDevicesResponseBody": ListBLEDevicesResponseBody,
     "ListExecutablesResponseBody": ListExecutablesResponseBody,
@@ -203,13 +206,16 @@ export class ObjectSerializer {
             }
             return transformedData;
         } else if (type === "Date") {
+            if (!(data instanceof Date)) {
+                return data;
+            }
             if (format == "date") {
                 let month = data.getMonth()+1
-                month = month < 10 ? "0" + month.toString() : month.toString()
+                let monthStr = month < 10 ? "0" + month.toString() : month.toString()
                 let day = data.getDate();
-                day = day < 10 ? "0" + day.toString() : day.toString();
+                let dayStr = day < 10 ? "0" + day.toString() : day.toString();
 
-                return data.getFullYear() + "-" + month + "-" + day;
+                return data.getFullYear() + "-" + monthStr + "-" + dayStr;
             } else {
                 return data.toISOString();
             }

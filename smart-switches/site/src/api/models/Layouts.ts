@@ -14,6 +14,7 @@ import { LayoutV4 } from '../models/LayoutV4';
 import { LayoutV5 } from '../models/LayoutV5';
 import { LayoutV6 } from '../models/LayoutV6';
 import { LayoutV7 } from '../models/LayoutV7';
+import { LayoutV9 } from '../models/LayoutV9';
 import { HttpFile } from '../http/http';
 
 export class Layouts {
@@ -21,6 +22,7 @@ export class Layouts {
     'v5'?: LayoutV5;
     'v6'?: LayoutV6;
     'v7'?: LayoutV7;
+    'v9'?: LayoutV9;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -49,6 +51,12 @@ export class Layouts {
             "name": "v7",
             "baseName": "v7",
             "type": "LayoutV7",
+            "format": ""
+        },
+        {
+            "name": "v9",
+            "baseName": "v9",
+            "type": "LayoutV9",
             "format": ""
         }    ];
 

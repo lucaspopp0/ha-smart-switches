@@ -19,6 +19,7 @@ type Layouts struct {
 	V5 *LayoutV5 `json:"v5,omitempty"`
 	V6 *LayoutV6 `json:"v6,omitempty"`
 	V7 *LayoutV7 `json:"v7,omitempty"`
+	V9 *LayoutV9 `json:"v9,omitempty"`
 }
 
 func (l Layouts) GetLayout(name string) (Layout, error) {
@@ -197,4 +198,39 @@ func (v7 *LayoutV7) GetMapping(key string) (*string, error) {
 
 func (v7 LayoutV7) MatchesLayout(key string) bool {
 	return key == "v7"
+}
+
+type LayoutV9 struct {
+	OnOff
+	EightButtons
+	Flippable
+}
+
+var _ Layout = (*LayoutV9)(nil)
+
+func (v9 *LayoutV9) GetMapping(key string) (*string, error) {
+	if key == "flippable" {
+		return nil, fmt.Errorf("invalid key %q", key)
+	}
+
+	jsonLayout, err := json.Marshal(v9)
+	if err != nil {
+		return nil, err
+	}
+
+	mapping := map[string]string{}
+	err = json.Unmarshal(jsonLayout, &mapping)
+	if err != nil {
+		return nil, err
+	}
+
+	if value, ok := mapping[key]; ok {
+		return &value, nil
+	}
+
+	return nil, fmt.Errorf("unknown key %q", key)
+}
+
+func (v9 LayoutV9) MatchesLayout(key string) bool {
+	return key == "v9"
 }

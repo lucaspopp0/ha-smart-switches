@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Layouts, LayoutV4, LayoutV5, LayoutV6, LayoutV7, Switch } from "../../api"
+import { Layouts, LayoutV4, LayoutV5, LayoutV6, LayoutV7, LayoutV9, Switch } from "../../api"
 import { Button, Dropdown, Space, Typography } from "antd"
 import { LayoutKey, LayoutNames } from "../../api/convenience"
 
@@ -30,6 +30,7 @@ const LayoutPicker: React.FC<LayoutPickerProps> = (props) => {
         v5: "White circuit board, wheel, no switch to enable/disable",
         v6: "White circuit board, wheel, + switch to enable/disable",
         v7: "First fully enclosed case",
+        v9: "Second fully enclosed case",
     }
 
     return (

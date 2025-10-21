@@ -22,6 +22,7 @@ models/LayoutV4.ts
 models/LayoutV5.ts
 models/LayoutV6.ts
 models/LayoutV7.ts
+models/LayoutV9.ts
 models/Layouts.ts
 models/ListBLEDevicesResponseBody.ts
 models/ListExecutablesResponseBody.ts

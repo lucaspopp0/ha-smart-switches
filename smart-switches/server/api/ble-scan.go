@@ -21,8 +21,8 @@ type StartBLEScanResponse struct {
 }
 
 type StartBLEScanResponseBody struct {
-	Message string `json:"message"`
-	Scanning bool  `json:"scanning"`
+	Message  string `json:"message"`
+	Scanning bool   `json:"scanning"`
 }
 
 type StopBLEScanResponse struct {
@@ -30,8 +30,8 @@ type StopBLEScanResponse struct {
 }
 
 type StopBLEScanResponseBody struct {
-	Message string `json:"message"`
-	Scanning bool  `json:"scanning"`
+	Message  string `json:"message"`
+	Scanning bool   `json:"scanning"`
 }
 
 func (s *server) RegisterBLEScan(api huma.API) {
@@ -79,7 +79,7 @@ func (s *server) startBLEScan(ctx context.Context, request *StartBLEScanRequest)
 
 	return &StartBLEScanResponse{
 		Body: StartBLEScanResponseBody{
-			Message: "BLE scan started",
+			Message:  "BLE scan started",
 			Scanning: true,
 		},
 	}, nil
@@ -94,7 +94,7 @@ func (s *server) stopBLEScan(ctx context.Context, request *struct{}) (*StopBLESc
 
 	return &StopBLEScanResponse{
 		Body: StopBLEScanResponseBody{
-			Message: "BLE scan stopped",
+			Message:  "BLE scan stopped",
 			Scanning: false,
 		},
 	}, nil

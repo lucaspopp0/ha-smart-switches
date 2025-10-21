@@ -9,7 +9,7 @@ export type NewLayoutModalProps = {
 }
 
 const NewLayoutModal: React.FC<NewLayoutModalProps> = (props) => {
-    const layouts = ['v4', 'v5', 'v6', 'v7'];
+    const layouts = ['v4', 'v5', 'v6', 'v7', 'v9'];
 
     return (
         <Modal show={props.show} onHide={props.onHide}>

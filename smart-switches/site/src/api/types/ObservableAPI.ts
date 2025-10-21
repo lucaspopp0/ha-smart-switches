@@ -13,6 +13,7 @@ import { LayoutV4 } from '../models/LayoutV4';
 import { LayoutV5 } from '../models/LayoutV5';
 import { LayoutV6 } from '../models/LayoutV6';
 import { LayoutV7 } from '../models/LayoutV7';
+import { LayoutV9 } from '../models/LayoutV9';
 import { Layouts } from '../models/Layouts';
 import { ListBLEDevicesResponseBody } from '../models/ListBLEDevicesResponseBody';
 import { ListExecutablesResponseBody } from '../models/ListExecutablesResponseBody';
