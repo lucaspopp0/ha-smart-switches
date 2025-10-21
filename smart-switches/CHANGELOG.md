@@ -1,6 +1,9 @@
+# v1.1.125
+ * [`ea62fa2`](https://github.com/lucaspopp0/ha-smart-switches/commit/ea62fa2) log cfg on startup
+
+
 # v1.1.124
  * [`f0d6b8a`](https://github.com/lucaspopp0/ha-smart-switches/commit/f0d6b8a) usages
-
  * [`f19d499`](https://github.com/lucaspopp0/ha-smart-switches/commit/f19d499) no more incrm version
 
 # v1.1.123.0
