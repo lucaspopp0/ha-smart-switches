@@ -1,6 +1,9 @@
+# v1.3.0
+ * [`ac2c8b7`](https://github.com/lucaspopp0/ha-smart-switches/commit/ac2c8b7) (MINOR) New button editor (#78)
+
+
 # v1.2.2
  * [`bbf0a78`](https://github.com/lucaspopp0/ha-smart-switches/commit/bbf0a78) fix: Unmarshal as cmd (#77)
-
 
 # v1.2.1
  * [`5a7258b`](https://github.com/lucaspopp0/ha-smart-switches/commit/5a7258b) fix: Unescape quotes (#76)
