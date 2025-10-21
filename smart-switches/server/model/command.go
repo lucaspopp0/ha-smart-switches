@@ -2,6 +2,7 @@ package model
 
 import (
 	"encoding/json"
+	"fmt"
 	"strings"
 )
 
@@ -18,13 +19,16 @@ var _ json.Unmarshaler = (*Command)(nil)
 
 func (c *Command) UnmarshalJSON(data []byte) error {
 	str := string(data)
+	fmt.Printf("Command.UnmarshalJSON: raw data = %s\n", str)
 
 	if !strings.Contains(str, "{") {
+		fmt.Printf("Command.UnmarshalJSON: treating as string\n")
 		c.Cmd = str
 		c.Color = []int{0, 0, 255}
 		return nil
 	}
 
+	fmt.Printf("Command.UnmarshalJSON: treating as object\n")
 	type base struct {
 		Cmd   string `json:"cmd"`
 		Color []int  `json:"color"`
@@ -33,6 +37,7 @@ func (c *Command) UnmarshalJSON(data []byte) error {
 	var v base
 	err := json.Unmarshal(data, &v)
 	if err != nil {
+		fmt.Printf("Command.UnmarshalJSON: error unmarshaling object: %v\n", err)
 		return err
 	}
 
