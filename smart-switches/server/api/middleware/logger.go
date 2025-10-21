@@ -15,6 +15,10 @@ import (
 func Logger(ctx huma.Context, next func(huma.Context)) {
 	fmt.Printf("incoming %s %s request\n", ctx.Method(), ctx.Operation().OperationID)
 
+	// Capture request body for error logging
+	requestBody, _ := io.ReadAll(ctx.BodyReader())
+	ctx.SetBodyReader(io.NopCloser(bytes.NewReader(requestBody)))
+
 	bodyBuffer := &bytes.Buffer{}
 
 	logger := &contextLogger{
@@ -36,6 +40,11 @@ func Logger(ctx huma.Context, next func(huma.Context)) {
 	}
 
 	if logger.status >= 400 {
+		// Log request body on error
+		if len(requestBody) > 0 {
+			fmt.Printf("request body: %s\n", string(requestBody))
+		}
+
 		if strings.Contains(logger.header.Get("Content-Type"), "json") {
 			jsonObj := map[string]any{}
 			err = json.Unmarshal(bodyBytes, &jsonObj)
