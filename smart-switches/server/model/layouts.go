@@ -69,7 +69,7 @@ func (l Layouts) GetCommand(layoutName string, keyName string) (string, error) {
 		return "", err
 	}
 
-	mappings := map[string]string{}
+	mappings := map[string]Command{}
 	err = json.Unmarshal(jsonBytes, &mappings)
 	if err != nil {
 		return "", err
@@ -80,7 +80,7 @@ func (l Layouts) GetCommand(layoutName string, keyName string) (string, error) {
 		return "", fmt.Errorf("no commands found for %q", keyName)
 	}
 
-	return command, nil
+	return command.Cmd, nil
 }
 
 type LayoutV4 struct {
