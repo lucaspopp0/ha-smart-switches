@@ -103,7 +103,7 @@ jobs:
           LATEST_MINOR="${LATEST_MAJOR}.${{ steps.version.outputs.minor }}"
           LATEST_PATCH="${LATEST_MINOR}.${{ steps.version.outputs.patch }}"
 
-          echo "::notice::Detected version: ${LATEST_INCRM}"
+          echo "::notice::Detected version: ${LATEST_PATCH}"
 
           {
             echo "MAJOR=v$LATEST_MAJOR";
@@ -133,7 +133,7 @@ jobs:
       -
         name: Update config.yml
         env:
-          VERSION_TAG: ${{ steps.output-tags.outputs.INCRM }}
+          VERSION_TAG: ${{ steps.output-tags.outputs.PATCH }}
         run: |
           WITHOUT_PREFIX="${VERSION_TAG#v}" \
             yq -i \
@@ -142,7 +142,7 @@ jobs:
       -
         name: Update CHANGELOG.md
         env:
-          VERSION_TAG: ${{ steps.output-tags.outputs.INCRM }}
+          VERSION_TAG: ${{ steps.output-tags.outputs.PATCH }}
           COMMIT_MESSAGE: '[`${{ steps.commit-message.outputs.hash }}`](${{ github.server_url }}/${{ github.repository }}/commit/${{ steps.commit-message.outputs.hash }}) ${{ steps.commit-message.outputs.message }}'
         run: |
           ./smart-switches/scripts/changelog.sh \
@@ -152,7 +152,7 @@ jobs:
         id: commit
         run: |
           git add .
-          git commit -m "[bot] ${INCRM}"
+          git commit -m "[bot] ${PATCH}"
           
           # Output commit hash
           COMMIT_HASH=$(git show --no-patch --format="%h")
@@ -168,9 +168,9 @@ jobs:
       -
         name: "Update tags (DRY_RUN=${{ env.DRY_RUN }})"
         run: |
-          git tag "$INCRM"
+          git tag "$PATCH"
 
-          tags=("$INCRM" "$MAJOR" "$MINOR" "$PATCH")
+          tags=("$MAJOR" "$MINOR" "$PATCH")
 
           for tag in "${tags[@]}"; do
             echo "::group::Pointing tag ${tag} to ${{ steps.commit.outputs.commit-hash }}"
@@ -222,7 +222,7 @@ jobs:
             gh release delete "${PATCH}" -y
           fi
 
-          gh release create ${INCRM} \
+          gh release create ${PATCH} \
             --title "${PATCH}" \
             --generate-notes \
             --notes-start-tag "${NOTES_START_TAG}"
