@@ -1,6 +1,10 @@
+# v1.1.124
+ * [`f0d6b8a`](https://github.com/lucaspopp0/ha-smart-switches/commit/f0d6b8a) usages
+
+ * [`f19d499`](https://github.com/lucaspopp0/ha-smart-switches/commit/f19d499) no more incrm version
+
 # v1.1.123.0
  * [`f5310b3`](https://github.com/lucaspopp0/ha-smart-switches/commit/f5310b3) chore: Logging improvements (#75)
-
 
 # v1.1.122.0
  * [`d4e4a8c`](https://github.com/lucaspopp0/ha-smart-switches/commit/d4e4a8c) chore: Improved logging (#74)
