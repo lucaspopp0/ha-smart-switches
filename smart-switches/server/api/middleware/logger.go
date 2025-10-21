@@ -15,13 +15,18 @@ import (
 func Logger(ctx huma.Context, next func(huma.Context)) {
 	fmt.Printf("incoming %s %s request\n", ctx.Method(), ctx.Operation().OperationID)
 
+	// Capture request body for error logging by reading and re-wrapping
+	requestBody, _ := io.ReadAll(ctx.BodyReader())
+
 	bodyBuffer := &bytes.Buffer{}
 
 	logger := &contextLogger{
-		capturedCtx: ctx,
-		status:      http.StatusOK,
-		body:        bodyBuffer,
-		header:      http.Header{},
+		capturedCtx:  ctx,
+		status:       http.StatusOK,
+		body:         bodyBuffer,
+		header:       http.Header{},
+		requestBody:  requestBody,
+		originalBody: bytes.NewReader(requestBody),
 	}
 
 	next(logger)
@@ -36,6 +41,12 @@ func Logger(ctx huma.Context, next func(huma.Context)) {
 	}
 
 	if logger.status >= 400 {
+		// Log request body on error
+		if len(logger.requestBody) > 0 {
+			fmt.Printf("request body: %s\n", string(logger.requestBody))
+		}
+
+		// Log response body if it's JSON
 		if strings.Contains(logger.header.Get("Content-Type"), "json") {
 			jsonObj := map[string]any{}
 			err = json.Unmarshal(bodyBytes, &jsonObj)
@@ -55,14 +66,20 @@ type capturedCtx huma.Context
 
 type contextLogger struct {
 	capturedCtx
-	status int
-	body   io.Writer
-	header http.Header
+	status       int
+	body         io.Writer
+	header       http.Header
+	requestBody  []byte
+	originalBody *bytes.Reader
 }
 
 func (c *contextLogger) SetStatus(code int) {
 	c.status = code
 	c.capturedCtx.SetStatus(code)
+}
+
+func (c *contextLogger) BodyReader() io.Reader {
+	return c.originalBody
 }
 
 func (c *contextLogger) BodyWriter() io.Writer {
