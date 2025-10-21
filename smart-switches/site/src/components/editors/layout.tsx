@@ -1,7 +1,7 @@
 import React from 'react';
 import ConfirmModal from '../modals/confirm';
 import { CaretRightFilled } from '@ant-design/icons';
-import { Button, Space, Switch, Typography, ColorPicker } from 'antd';
+import { Button, Space, Switch, Typography, ColorPicker, Select } from 'antd';
 import { config } from 'process';
 import ExecutablePicker from '../inputs/executable-picker';
 import { DefaultApi, Config, Layouts, WheelRoutine } from '../../api';
@@ -177,6 +177,39 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
                     </Space>,
                   )
                 })
+            }
+            {
+              // Add button dropdown for unconfigured buttons
+              (() => {
+                const unconfiguredButtons = basicButtons.filter(btn => !currentLayout[btn as keyof typeof currentLayout])
+
+                if (unconfiguredButtons.length > 0) {
+                  return (
+                    <div style={{ ...styles.editorRow, justifyContent: 'flex-start' }}>
+                      <Select
+                        placeholder="Add button"
+                        style={{ width: 150 }}
+                        value={null}
+                        onChange={(value) => {
+                          if (value) {
+                            // Initialize the button with default values
+                            (currentLayout as any)[value] = {
+                              cmd: '',
+                              color: [0, 0, 255]
+                            }
+                            onUpdate()
+                          }
+                        }}
+                        options={unconfiguredButtons.map(btn => ({
+                          value: btn,
+                          label: btn
+                        }))}
+                      />
+                    </div>
+                  )
+                }
+                return <></>
+              })()
             }
             {hasWheelRoutines
               ? <WheelRoutinesEditor
