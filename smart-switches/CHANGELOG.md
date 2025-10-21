@@ -1,6 +1,9 @@
+# v1.2.1
+ * [`5a7258b`](https://github.com/lucaspopp0/ha-smart-switches/commit/5a7258b) fix: Unescape quotes (#76)
+
+
 # v1.2.0
  * [`31173aa`](https://github.com/lucaspopp0/ha-smart-switches/commit/31173aa) (MINOR) Minor bump
-
 
 # v1.1.126
  * [`0f33db7`](https://github.com/lucaspopp0/ha-smart-switches/commit/0f33db7) feat: Prerelease off
