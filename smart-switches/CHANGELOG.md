@@ -1,6 +1,9 @@
+# v1.2.2
+ * [`bbf0a78`](https://github.com/lucaspopp0/ha-smart-switches/commit/bbf0a78) fix: Unmarshal as cmd (#77)
+
+
 # v1.2.1
  * [`5a7258b`](https://github.com/lucaspopp0/ha-smart-switches/commit/5a7258b) fix: Unescape quotes (#76)
-
 
 # v1.2.0
  * [`31173aa`](https://github.com/lucaspopp0/ha-smart-switches/commit/31173aa) (MINOR) Minor bump
