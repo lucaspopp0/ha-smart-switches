@@ -1,6 +1,9 @@
+# v1.1.123.0
+ * [`f5310b3`](https://github.com/lucaspopp0/ha-smart-switches/commit/f5310b3) chore: Logging improvements (#75)
+
+
 # v1.1.122.0
  * [`d4e4a8c`](https://github.com/lucaspopp0/ha-smart-switches/commit/d4e4a8c) chore: Improved logging (#74)
-
 
 # v1.1.121.1
  * [`f6e1ece`](https://github.com/lucaspopp0/ha-smart-switches/commit/f6e1ece) fix(deps): update module github.com/go-chi/chi/v5 to v5.2.2 [security] (#73)
