@@ -247,27 +247,27 @@ components:
       additionalProperties: false
       properties:
         "1":
-          type: string
+          $ref: '#/components/schemas/Command'
         "2":
-          type: string
+          $ref: '#/components/schemas/Command'
         "3":
-          type: string
+          $ref: '#/components/schemas/Command'
         "4":
-          type: string
+          $ref: '#/components/schemas/Command'
         "5":
-          type: string
+          $ref: '#/components/schemas/Command'
         "6":
-          type: string
+          $ref: '#/components/schemas/Command'
         "7":
-          type: string
+          $ref: '#/components/schemas/Command'
         "8":
-          type: string
+          $ref: '#/components/schemas/Command'
         flipped:
           type: boolean
         "off":
-          type: string
+          $ref: '#/components/schemas/Command'
         "on":
-          type: string
+          $ref: '#/components/schemas/Command'
       type: object
     Layouts:
       additionalProperties: false

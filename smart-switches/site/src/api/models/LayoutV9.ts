@@ -10,20 +10,21 @@
  * Do not edit the class manually.
  */
 
+import { Command } from '../models/Command';
 import { HttpFile } from '../http/http';
 
 export class LayoutV9 {
-    '_1'?: string;
-    '_2'?: string;
-    '_3'?: string;
-    '_4'?: string;
-    '_5'?: string;
-    '_6'?: string;
-    '_7'?: string;
-    '_8'?: string;
+    '_1'?: Command;
+    '_2'?: Command;
+    '_3'?: Command;
+    '_4'?: Command;
+    '_5'?: Command;
+    '_6'?: Command;
+    '_7'?: Command;
+    '_8'?: Command;
     'flipped'?: boolean;
-    'off'?: string;
-    'on'?: string;
+    'off'?: Command;
+    'on'?: Command;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -33,49 +34,49 @@ export class LayoutV9 {
         {
             "name": "_1",
             "baseName": "1",
-            "type": "string",
+            "type": "Command",
             "format": ""
         },
         {
             "name": "_2",
             "baseName": "2",
-            "type": "string",
+            "type": "Command",
             "format": ""
         },
         {
             "name": "_3",
             "baseName": "3",
-            "type": "string",
+            "type": "Command",
             "format": ""
         },
         {
             "name": "_4",
             "baseName": "4",
-            "type": "string",
+            "type": "Command",
             "format": ""
         },
         {
             "name": "_5",
             "baseName": "5",
-            "type": "string",
+            "type": "Command",
             "format": ""
         },
         {
             "name": "_6",
             "baseName": "6",
-            "type": "string",
+            "type": "Command",
             "format": ""
         },
         {
             "name": "_7",
             "baseName": "7",
-            "type": "string",
+            "type": "Command",
             "format": ""
         },
         {
             "name": "_8",
             "baseName": "8",
-            "type": "string",
+            "type": "Command",
             "format": ""
         },
         {
@@ -87,13 +88,13 @@ export class LayoutV9 {
         {
             "name": "off",
             "baseName": "off",
-            "type": "string",
+            "type": "Command",
             "format": ""
         },
         {
             "name": "on",
             "baseName": "on",
-            "type": "string",
+            "type": "Command",
             "format": ""
         }    ];
 
