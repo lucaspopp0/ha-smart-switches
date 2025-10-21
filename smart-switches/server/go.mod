@@ -7,7 +7,7 @@ replace github.com/lucaspopp0/ha-smart-switches/smart-switches => ./
 require (
 	github.com/danielgtaylor/huma/v2 v2.32.0
 	github.com/gabriel-vasile/mimetype v1.4.9
-	github.com/go-chi/chi/v5 v5.2.1
+	github.com/go-chi/chi/v5 v5.2.2
 	github.com/spf13/cobra v1.9.1
 	tinygo.org/x/bluetooth v0.11.0
 )
