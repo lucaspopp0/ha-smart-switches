@@ -21,8 +21,6 @@ on:
         value: ${{ jobs.bump-version.outputs.next-minor-tag }}
       next-patch-tag:
         value: ${{ jobs.bump-version.outputs.next-patch-tag }}
-      next-incrm-tag:
-        value: ${{ jobs.bump-version.outputs.next-incrm-tag }}
       change:
         value: ${{ jobs.bump-version.outputs.change }}
       update-sha:
@@ -47,7 +45,6 @@ jobs:
       next-major-tag: ${{ steps.output-tags.outputs.MAJOR }}
       next-minor-tag: ${{ steps.output-tags.outputs.MINOR }}
       next-patch-tag: ${{ steps.output-tags.outputs.PATCH }}
-      next-incrm-tag: ${{ steps.output-tags.outputs.INCR }}
       change: ${{ steps.output-tags.outputs.change }}
       update-sha: ${{ steps.commit.outputs.commit-hash }}
     steps:
@@ -84,7 +81,7 @@ jobs:
         env:
           PR_NUMBER: ${{ github.event.number }}
         run: |
-          VERSION_FORMAT='${major}.${minor}.${patch}.${increment}'
+          VERSION_FORMAT='${major}.${minor}.${patch}'
           
           if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
             VERSION_FORMAT='${major}.${minor}.${patch}-pr'"${PR_NUMBER}"'-${increment}'
@@ -105,7 +102,6 @@ jobs:
           LATEST_MAJOR="${{ steps.version.outputs.major }}"
           LATEST_MINOR="${LATEST_MAJOR}.${{ steps.version.outputs.minor }}"
           LATEST_PATCH="${LATEST_MINOR}.${{ steps.version.outputs.patch }}"
-          LATEST_INCRM="${LATEST_PATCH}.${{ steps.version.outputs.increment }}"
 
           echo "::notice::Detected version: ${LATEST_INCRM}"
 
@@ -113,10 +109,9 @@ jobs:
             echo "MAJOR=v$LATEST_MAJOR";
             echo "MINOR=v$LATEST_MINOR";
             echo "PATCH=v$LATEST_PATCH";
-            echo "INCRM=v$LATEST_INCRM";
           } | tee -a "$GITHUB_OUTPUT" "$GITHUB_ENV"
           
-          if [[ "$LATEST_INCRM" == "${{ steps.config-version.outputs.version }}" ]]; then
+          if [[ "$LATEST_PATCH" == "${{ steps.config-version.outputs.version }}" ]]; then
             echo "change=false" | tee -a "$GITHUB_OUTPUT"
           else
             echo "change=true" | tee -a "$GITHUB_OUTPUT"
