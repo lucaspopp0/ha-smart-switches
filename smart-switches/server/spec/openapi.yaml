@@ -243,6 +243,32 @@ components:
         "on":
           $ref: '#/components/schemas/Command'
       type: object
+    LayoutV9:
+      additionalProperties: false
+      properties:
+        "1":
+          $ref: '#/components/schemas/Command'
+        "2":
+          $ref: '#/components/schemas/Command'
+        "3":
+          $ref: '#/components/schemas/Command'
+        "4":
+          $ref: '#/components/schemas/Command'
+        "5":
+          $ref: '#/components/schemas/Command'
+        "6":
+          $ref: '#/components/schemas/Command'
+        "7":
+          $ref: '#/components/schemas/Command'
+        "8":
+          $ref: '#/components/schemas/Command'
+        flipped:
+          type: boolean
+        "off":
+          $ref: '#/components/schemas/Command'
+        "on":
+          $ref: '#/components/schemas/Command'
+      type: object
     Layouts:
       additionalProperties: false
       properties:
@@ -254,6 +280,8 @@ components:
           $ref: '#/components/schemas/LayoutV6'
         v7:
           $ref: '#/components/schemas/LayoutV7'
+        v9:
+          $ref: '#/components/schemas/LayoutV9'
       type: object
     ListBLEDevicesResponseBody:
       additionalProperties: false

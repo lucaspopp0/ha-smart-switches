@@ -452,17 +452,67 @@ const request: DefaultApiPutConfigRequest = {
             },
           },
           v9: {
-            _1: "_1_example",
-            _2: "_2_example",
-            _3: "_3_example",
-            _4: "_4_example",
-            _5: "_5_example",
-            _6: "_6_example",
-            _7: "_7_example",
-            _8: "_8_example",
+            _1: {
+              cmd: "cmd_example",
+              color: [
+                1,
+              ],
+            },
+            _2: {
+              cmd: "cmd_example",
+              color: [
+                1,
+              ],
+            },
+            _3: {
+              cmd: "cmd_example",
+              color: [
+                1,
+              ],
+            },
+            _4: {
+              cmd: "cmd_example",
+              color: [
+                1,
+              ],
+            },
+            _5: {
+              cmd: "cmd_example",
+              color: [
+                1,
+              ],
+            },
+            _6: {
+              cmd: "cmd_example",
+              color: [
+                1,
+              ],
+            },
+            _7: {
+              cmd: "cmd_example",
+              color: [
+                1,
+              ],
+            },
+            _8: {
+              cmd: "cmd_example",
+              color: [
+                1,
+              ],
+            },
             flipped: true,
-            off: "off_example",
-            on: "on_example",
+            off: {
+              cmd: "cmd_example",
+              color: [
+                1,
+              ],
+            },
+            on: {
+              cmd: "cmd_example",
+              color: [
+                1,
+              ],
+            },
           },
         },
       },

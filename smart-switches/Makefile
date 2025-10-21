@@ -1,21 +1,26 @@
+SHELL := /bin/bash -e
+
 MF_PATH := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 
 IMAGE_NAME := ha-smart-switches
 
 tidy-server:
 	@cd $(MF_PATH)/server; \
-	go mod tidy
+	go mod tidy; \
+	go fmt ./...
 .PHONY: tidy-server
 
 build-server:
-	@cd $(MF_PATH); \
+	@set -x; \
+	cd $(MF_PATH); \
 	\
 	IMAGE_NAME=$(IMAGE_NAME) \
 		bash scripts/build-server.sh
 .PHONY: local-build
 
 run-server: build-server
-	@cd $(MF_PATH)/local; \
+	@set -x; \
+	cd $(MF_PATH)/local; \
 	\
 	IMAGE_NAME=$(IMAGE_NAME) \
 		bash ../scripts/run-server.sh
