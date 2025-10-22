@@ -190,14 +190,17 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
                         placeholder="Add button"
                         style={{ width: 150 }}
                         value={null}
-                        onChange={(value) => {
+                        onChange={async (value) => {
                           if (value) {
                             // Initialize the button with default values
-                            (currentLayout as any)[value] = {
+                            console.log('Adding button:', value)
+                            ;(currentLayout as any)[value] = {
                               cmd: '',
                               color: [0, 0, 255]
                             }
-                            onUpdate()
+                            console.log('Button added to layout, calling onUpdate')
+                            await onUpdate()
+                            console.log('onUpdate completed')
                           }
                         }}
                         options={unconfiguredButtons.map(btn => ({
