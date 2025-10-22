@@ -1,6 +1,9 @@
+# v1.3.2
+ * [`ac6559c`](https://github.com/lucaspopp0/ha-smart-switches/commit/ac6559c) chore(deps): update github-actions (#80)
+
+
 # v1.3.1
  * [`6591464`](https://github.com/lucaspopp0/ha-smart-switches/commit/6591464) chore: Debugger, and mockha for local debugging (#79)
-
 
 # v1.3.0
  * [`ac2c8b7`](https://github.com/lucaspopp0/ha-smart-switches/commit/ac2c8b7) (MINOR) New button editor (#78)
