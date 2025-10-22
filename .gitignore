@@ -3,3 +3,4 @@
 node_modules
 smart-switches/local/data
 .claude
+.env

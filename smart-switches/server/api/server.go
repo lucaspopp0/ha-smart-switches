@@ -74,10 +74,15 @@ func (s *server) onStart() {
 		fmt.Printf("Home assistant service call failed: %v\n", err.Error())
 	}
 
-	fmt.Println("Initializing BLE service...")
-	s.bleService, err = ble.NewService()
-	if err != nil {
-		fmt.Printf("Failed to initialize BLE service: %v\n", err.Error())
+	// Skip BLE initialization in local development mode
+	if os.Getenv(envLocal) != "true" {
+		fmt.Println("Initializing BLE service...")
+		s.bleService, err = ble.NewService()
+		if err != nil {
+			fmt.Printf("Failed to initialize BLE service: %v\n", err.Error())
+		}
+	} else {
+		fmt.Println("Skipping BLE service in local mode")
 	}
 
 	addonInfo, err := s.ha.GetAddOnInfo("self")

@@ -51,3 +51,18 @@ generate-server-sdk:
 		-o /local/ \
 		--additional-properties="npmName=@smart-switches/server,npmVersion=0.0.0,paramNaming=original,modelPropertyNaming=original"
 .PHONY: generate-server-sdk
+
+run-site:
+	@cd $(MF_PATH)/site && npm run develop
+.PHONY: run-site
+
+build-mockha:
+	@cd mockha; \
+	GOOS=linux go build -tags netgo -o mockha-linux; \
+	DOCKER_BUILDKIT=1 docker build --quiet --tag lucaspopp0/mockha:latest .
+.PHONY: build-mockha
+
+run-mockha:
+	@make build-mockha; \
+	docker run --rm -p 8123:8123 lucaspopp0/mockha:latest
+.PHONY: run-mockha

@@ -6,7 +6,22 @@ services:
       - "host.docker.internal:host-gateway"
     ports:
       - "8124:8124"
+      - "2345:2345"
     volumes:
       - ./data:/data
     environment:
       LOCAL: true
+      SUPERVISOR_HOST: mockha:8123
+      SUPERVISOR_TOKEN: mock-token-12345
+      DEBUG: ${DEBUG:-false}
+    depends_on:
+      - mockha
+
+  mockha:
+    container_name: mockha
+    build:
+      context: ..
+      dockerfile: mockha/Dockerfile
+    ports:
+      - "8123:8123"
+    command: ["--port=8123"]
