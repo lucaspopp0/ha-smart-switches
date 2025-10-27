@@ -1,6 +1,9 @@
+# v1.3.3
+ * [`24c7309`](https://github.com/lucaspopp0/ha-smart-switches/commit/24c7309) chore(deps): update golang docker tag to v1.25 (#82)
+
+
 # v1.3.2
  * [`ac6559c`](https://github.com/lucaspopp0/ha-smart-switches/commit/ac6559c) chore(deps): update github-actions (#80)
-
 
 # v1.3.1
  * [`6591464`](https://github.com/lucaspopp0/ha-smart-switches/commit/6591464) chore: Debugger, and mockha for local debugging (#79)
