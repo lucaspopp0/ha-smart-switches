@@ -10,11 +10,11 @@
  * Do not edit the class manually.
  */
 
-import { Layouts } from '../models/Layouts';
+import { LayoutInstance } from '../models/LayoutInstance';
 import { HttpFile } from '../http/http';
 
 export class Switch {
-    'layouts': Layouts;
+    'layouts': { [key: string]: LayoutInstance; };
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -24,7 +24,7 @@ export class Switch {
         {
             "name": "layouts",
             "baseName": "layouts",
-            "type": "Layouts",
+            "type": "{ [key: string]: LayoutInstance; }",
             "format": ""
         }    ];
 

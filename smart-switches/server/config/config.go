@@ -8,8 +8,13 @@ import (
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/util"
 )
 
+const (
+	envConfigFile     = "SWITCHES_JSON"
+	defaultConfigFile = "/data/switches_v2.json"
+)
+
 func configFile() string {
-	return util.GetEnv("SWITCHES_JSON", "/data/switches.json")
+	return util.GetEnv(envConfigFile, defaultConfigFile)
 }
 
 type Config struct {

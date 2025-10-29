@@ -12,11 +12,11 @@ if [[ -f /data/.env ]]; then
     fi
 fi
 
-SWITCHES_JSON=/data/switches.json
+SWITCHES_JSON=/data/switches_v2.json
 SITE_DIR=/smartswitches/site
 
 if [[ ! -f "$SWITCHES_JSON" ]]; then
-    echo "{}" > "$SWITCHES_JSON"
+    echo '{"switches":{}}' > "$SWITCHES_JSON"
 fi
 
 # Check if we should run with debugger
