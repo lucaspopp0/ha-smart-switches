@@ -18,6 +18,7 @@ models/Device.ts
 models/ErrorDetail.ts
 models/ErrorModel.ts
 models/Executable.ts
+models/LayoutDefinition.ts
 models/LayoutInstance.ts
 models/ListBLEDevicesResponseBody.ts
 models/ListExecutablesResponseBody.ts

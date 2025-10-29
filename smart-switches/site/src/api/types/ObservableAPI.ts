@@ -9,6 +9,7 @@ import { Device } from '../models/Device';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ErrorModel } from '../models/ErrorModel';
 import { Executable } from '../models/Executable';
+import { LayoutDefinition } from '../models/LayoutDefinition';
 import { LayoutInstance } from '../models/LayoutInstance';
 import { ListBLEDevicesResponseBody } from '../models/ListBLEDevicesResponseBody';
 import { ListExecutablesResponseBody } from '../models/ListExecutablesResponseBody';
@@ -60,6 +61,38 @@ export class ObservableDefaultApi {
      */
     public getConfig(_options?: ConfigurationOptions): Observable<Config> {
         return this.getConfigWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<Config>) => apiResponse.data));
+    }
+
+    /**
+     * Returns the definitions of all supported layout versions, including which buttons they support
+     * Get available layout definitions
+     */
+    public getLayoutDefinitionsWithHttpInfo(_options?: ConfigurationOptions): Observable<HttpInfo<{ [key: string]: LayoutDefinition; }>> {
+        const _config = mergeConfiguration(this.configuration, _options);
+
+        const requestContextPromise = this.requestFactory.getLayoutDefinitions(_config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of _config.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => _config.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of _config.middleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getLayoutDefinitionsWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Returns the definitions of all supported layout versions, including which buttons they support
+     * Get available layout definitions
+     */
+    public getLayoutDefinitions(_options?: ConfigurationOptions): Observable<{ [key: string]: LayoutDefinition; }> {
+        return this.getLayoutDefinitionsWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<{ [key: string]: LayoutDefinition; }>) => apiResponse.data));
     }
 
     /**

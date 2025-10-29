@@ -4,6 +4,7 @@ export * from '../models/Device';
 export * from '../models/ErrorDetail';
 export * from '../models/ErrorModel';
 export * from '../models/Executable';
+export * from '../models/LayoutDefinition';
 export * from '../models/LayoutInstance';
 export * from '../models/ListBLEDevicesResponseBody';
 export * from '../models/ListExecutablesResponseBody';
@@ -19,6 +20,7 @@ import { Device } from '../models/Device';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ErrorModel } from '../models/ErrorModel';
 import { Executable } from '../models/Executable';
+import { LayoutDefinition } from '../models/LayoutDefinition';
 import { LayoutInstance } from '../models/LayoutInstance';
 import { ListBLEDevicesResponseBody } from '../models/ListBLEDevicesResponseBody';
 import { ListExecutablesResponseBody } from '../models/ListExecutablesResponseBody';
@@ -50,6 +52,7 @@ let typeMap: {[index: string]: any} = {
     "ErrorDetail": ErrorDetail,
     "ErrorModel": ErrorModel,
     "Executable": Executable,
+    "LayoutDefinition": LayoutDefinition,
     "LayoutInstance": LayoutInstance,
     "ListBLEDevicesResponseBody": ListBLEDevicesResponseBody,
     "ListExecutablesResponseBody": ListExecutablesResponseBody,

@@ -9,14 +9,16 @@ const (
 
 // LayoutDefinition defines the structure and capabilities of a layout version
 type LayoutDefinition struct {
-	Version LayoutVersion
-	Buttons []string
+	Version     LayoutVersion
+	Description string
+	Buttons     []string
 }
 
 // LayoutDefinitions contains all supported layout versions
 var LayoutDefinitions = map[LayoutVersion]LayoutDefinition{
 	V9: {
-		Version: V9,
+		Version:     V9,
+		Description: "Second fully enclosed case",
 		Buttons: []string{
 			"on",
 			"off",

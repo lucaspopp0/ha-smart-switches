@@ -1,22 +1,41 @@
-import { Layouts } from "./models/Layouts"
-import { LayoutV4 } from "./models/LayoutV4"
-import { LayoutV5 } from "./models/LayoutV5"
-import { LayoutV6 } from "./models/LayoutV6"
-import { LayoutV7 } from "./models/LayoutV7"
-import { LayoutV9 } from "./models/LayoutV9"
+import { LayoutInstance } from "./models/LayoutInstance"
+import { LayoutDefinition } from "./models/LayoutDefinition"
+import { DefaultApi } from "./index"
+import { createConfiguration } from "./configuration"
 
-export type LayoutKey = keyof Layouts;
+// These will be populated by calling fetchLayoutDefinitions()
+export let ButtonsByLayout: Record<string, string[]> = {};
+export let LayoutDescriptions: Record<string, string> = {};
+export let LayoutNames: string[] = [];
 
-export const ButtonsByLayout: Record<keyof Layouts, string[]> = {
-    v4: LayoutV4.attributeTypeMap.map(attr => attr.baseName),
-    v5: LayoutV5.attributeTypeMap.map(attr => attr.baseName),
-    v6: LayoutV6.attributeTypeMap.map(attr => attr.baseName),
-    v7: LayoutV7.attributeTypeMap.map(attr => attr.baseName),
-    v9: LayoutV9.attributeTypeMap.map(attr => attr.baseName),
+let layoutDefinitionsCache: { [key: string]: LayoutDefinition } | null = null;
+
+/**
+ * Fetch layout definitions from the backend API
+ * This should be called once at app startup
+ */
+export async function fetchLayoutDefinitions(): Promise<{ [key: string]: LayoutDefinition }> {
+    if (layoutDefinitionsCache) {
+        return layoutDefinitionsCache;
+    }
+
+    const api = new DefaultApi(createConfiguration());
+    const definitions = await api.getLayoutDefinitions();
+
+    layoutDefinitionsCache = definitions;
+
+    // Populate ButtonsByLayout, LayoutDescriptions, and LayoutNames from the fetched definitions
+    ButtonsByLayout = {};
+    LayoutDescriptions = {};
+    for (const [version, def] of Object.entries(definitions)) {
+        const typedDef = def as LayoutDefinition;
+        ButtonsByLayout[version] = typedDef.Buttons || [];
+        LayoutDescriptions[version] = typedDef.Description || "";
+    }
+
+    LayoutNames = Object.keys(ButtonsByLayout);
+
+    return definitions;
 }
 
-
-export type AnyLayout = LayoutV4 | LayoutV5 | LayoutV6 | LayoutV7 | LayoutV9;
-export type AnyButton = keyof (LayoutV4 & LayoutV5 & LayoutV6 & LayoutV7 & LayoutV9)
-
-export const LayoutNames = Object.keys(ButtonsByLayout)
+export type AnyLayout = LayoutInstance;

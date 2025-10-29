@@ -1,36 +1,30 @@
 import * as React from "react"
-import { Layouts, LayoutV4, LayoutV5, LayoutV6, LayoutV7, LayoutV9, Switch } from "../../api"
+import { Switch, LayoutInstance } from "../../api"
 import { Button, Dropdown, Space, Typography } from "antd"
-import { LayoutKey, LayoutNames } from "../../api/convenience"
-
-type AnyLayout = Layouts[keyof Layouts]
+import { LayoutNames, LayoutDescriptions } from "../../api/convenience"
 
 export type LayoutPickerProps = {
     switch?: Switch,
-    onPick: (key: keyof Layouts, layout: AnyLayout) => Promise<void>
+    onPick: (key: string, layout: LayoutInstance) => Promise<void>
 }
 
 const LayoutPicker: React.FC<LayoutPickerProps> = (props) => {
     const sw = props.switch ?? { layouts: {} }
 
-    const pickLayout = (layout: keyof Layouts) => {
+    const pickLayout = (layout: string) => {
         console.log(layout)
 
         if (!layout) {
             return
         }
 
-        const key = layout as keyof Layouts
+        const newLayout: LayoutInstance = {
+            version: layout,
+            buttons: {},
+            flipped: false,
+        }
 
-        props.onPick(key, {} as AnyLayout)
-    }
-
-    const layoutDescriptions: Record<LayoutKey, string> = {
-        v4: "Green circuit board, eight buttons + on/off",
-        v5: "White circuit board, wheel, no switch to enable/disable",
-        v6: "White circuit board, wheel, + switch to enable/disable",
-        v7: "First fully enclosed case",
-        v9: "Second fully enclosed case",
+        props.onPick(layout, newLayout)
     }
 
     return (
@@ -42,21 +36,21 @@ const LayoutPicker: React.FC<LayoutPickerProps> = (props) => {
                         <Space size='small' direction="vertical" style={{ maxWidth: 200 }}>
                             <Typography.Text
                                 strong
-                                disabled={!!sw.layouts[layout as keyof Layouts]}
+                                disabled={!!sw.layouts[layout]}
                             >
                                 {layout}
                             </Typography.Text>
                             <Typography.Text
-                                disabled={!!sw.layouts[layout as keyof Layouts]}
+                                disabled={!!sw.layouts[layout]}
                             >
-                                {layoutDescriptions[layout as LayoutKey]}
+                                {LayoutDescriptions[layout] || "No description"}
                             </Typography.Text>
                         </Space>
                     ),
-                    disabled: !!sw.layouts[layout as keyof Layouts],
+                    disabled: !!sw.layouts[layout],
                 })),
                 onClick: (event) => {
-                    pickLayout(event.key as keyof Layouts)
+                    pickLayout(event.key)
                 }
             }}
         >

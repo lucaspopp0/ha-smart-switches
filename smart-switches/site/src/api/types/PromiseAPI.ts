@@ -8,6 +8,7 @@ import { Device } from '../models/Device';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ErrorModel } from '../models/ErrorModel';
 import { Executable } from '../models/Executable';
+import { LayoutDefinition } from '../models/LayoutDefinition';
 import { LayoutInstance } from '../models/LayoutInstance';
 import { ListBLEDevicesResponseBody } from '../models/ListBLEDevicesResponseBody';
 import { ListExecutablesResponseBody } from '../models/ListExecutablesResponseBody';
@@ -43,6 +44,26 @@ export class PromiseDefaultApi {
     public getConfig(_options?: PromiseConfigurationOptions): Promise<Config> {
         const observableOptions = wrapOptions(_options);
         const result = this.api.getConfig(observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Returns the definitions of all supported layout versions, including which buttons they support
+     * Get available layout definitions
+     */
+    public getLayoutDefinitionsWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<{ [key: string]: LayoutDefinition; }>> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.getLayoutDefinitionsWithHttpInfo(observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Returns the definitions of all supported layout versions, including which buttons they support
+     * Get available layout definitions
+     */
+    public getLayoutDefinitions(_options?: PromiseConfigurationOptions): Promise<{ [key: string]: LayoutDefinition; }> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.getLayoutDefinitions(observableOptions);
         return result.toPromise();
     }
 

@@ -11,7 +11,8 @@ import { MenuItemType } from "antd/lib/menu/interface";
 import { DeleteOutlined } from "@ant-design/icons";
 import ConfirmModal from "../components/modals/confirm";
 import LayoutEditor from "../components/editors/layout";
-import { Config, createConfiguration, DefaultApi, Layouts, ListExecutablesResponseBody, server1 } from "../api";
+import { Config, createConfiguration, DefaultApi, ListExecutablesResponseBody, server1 } from "../api";
+import { fetchLayoutDefinitions } from "../api/convenience";
 
 const borderColor = 'rgb(224, 229, 229)';
 const backgroundColor = 'white';
@@ -85,7 +86,7 @@ const IndexPage: React.FC<PageProps> = () => {
 
   let [config, setConfig] = React.useState<Config | undefined>(undefined)
   let [currentSwitch, setCurrentSwitch] = React.useState<string | undefined>(undefined)
-  let [currentLayout, setCurrentLayout] = React.useState<keyof Layouts | undefined>(undefined)
+  let [currentLayout, setCurrentLayout] = React.useState<string | undefined>(undefined)
 
   const deleteSwitch = async (name: string) => {
     if (config?.switches) {
@@ -101,7 +102,7 @@ const IndexPage: React.FC<PageProps> = () => {
     }
   }
 
-  const deleteLayout = async (name: keyof Layouts) => {
+  const deleteLayout = async (name: string) => {
     if (config?.switches && currentSwitch && sw) {
       let newConfig = {
         switches: {
@@ -141,23 +142,26 @@ const IndexPage: React.FC<PageProps> = () => {
     let ignore = false
     setLoading(true)
 
-    api
-      .getConfig()
-      .then(response => {
-        if (!response.switches) {
-          response.switches = {}
-        }
-
-        setConfig(response)
-
-        if (response.switches?.length) {
-          setCurrentSwitch(Object.keys(response.switches)[0])
-
-          if (Object.keys(response.switches[0].layouts).length > 0) {
-            setCurrentLayout(Object.keys(response.switches[0].layouts)[0] as keyof Layouts)
+    // Fetch layout definitions first
+    fetchLayoutDefinitions().then(() => {
+      api
+        .getConfig()
+        .then(response => {
+          if (!response.switches) {
+            response.switches = {}
           }
-        }
-      })
+
+          setConfig(response)
+
+          if (response.switches?.length) {
+            setCurrentSwitch(Object.keys(response.switches)[0])
+
+            if (Object.keys(response.switches[0].layouts).length > 0) {
+              setCurrentLayout(Object.keys(response.switches[0].layouts)[0])
+            }
+          }
+        })
+    })
 
     return () => {
       ignore = true
@@ -215,7 +219,7 @@ const IndexPage: React.FC<PageProps> = () => {
       color: 'danger',
       title: 'Delete'
     }}
-    onOk={() => deleteLayout(currentLayout as keyof Layouts)}
+    onOk={() => deleteLayout(currentLayout as string)}
     onCancel={() => {
       setShowConfirmDeleteLayout(false)
     }}

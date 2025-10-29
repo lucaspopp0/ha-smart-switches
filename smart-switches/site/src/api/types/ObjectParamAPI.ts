@@ -8,6 +8,7 @@ import { Device } from '../models/Device';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ErrorModel } from '../models/ErrorModel';
 import { Executable } from '../models/Executable';
+import { LayoutDefinition } from '../models/LayoutDefinition';
 import { LayoutInstance } from '../models/LayoutInstance';
 import { ListBLEDevicesResponseBody } from '../models/ListBLEDevicesResponseBody';
 import { ListExecutablesResponseBody } from '../models/ListExecutablesResponseBody';
@@ -21,6 +22,9 @@ import { ObservableDefaultApi } from "./ObservableAPI";
 import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
 
 export interface DefaultApiGetConfigRequest {
+}
+
+export interface DefaultApiGetLayoutDefinitionsRequest {
 }
 
 export interface DefaultApiListBleDevicesRequest {
@@ -78,6 +82,24 @@ export class ObjectDefaultApi {
      */
     public getConfig(param: DefaultApiGetConfigRequest = {}, options?: ConfigurationOptions): Promise<Config> {
         return this.api.getConfig( options).toPromise();
+    }
+
+    /**
+     * Returns the definitions of all supported layout versions, including which buttons they support
+     * Get available layout definitions
+     * @param param the request object
+     */
+    public getLayoutDefinitionsWithHttpInfo(param: DefaultApiGetLayoutDefinitionsRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<{ [key: string]: LayoutDefinition; }>> {
+        return this.api.getLayoutDefinitionsWithHttpInfo( options).toPromise();
+    }
+
+    /**
+     * Returns the definitions of all supported layout versions, including which buttons they support
+     * Get available layout definitions
+     * @param param the request object
+     */
+    public getLayoutDefinitions(param: DefaultApiGetLayoutDefinitionsRequest = {}, options?: ConfigurationOptions): Promise<{ [key: string]: LayoutDefinition; }> {
+        return this.api.getLayoutDefinitions( options).toPromise();
     }
 
     /**
