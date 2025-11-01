@@ -4,8 +4,8 @@ import { CaretRightFilled } from '@ant-design/icons';
 import { Button, Space, Switch, Typography, ColorPicker, Select } from 'antd';
 import { config } from 'process';
 import ExecutablePicker from '../inputs/executable-picker';
-import { DefaultApi, Config, Layouts, WheelRoutine } from '../../api';
-import { ButtonsByLayout, LayoutKey } from '../../api/convenience';
+import { DefaultApi, Config } from '../../api';
+import { ButtonsByLayout } from '../../api/convenience';
 import { WheelRoutinesEditor } from './wheel-routines';
 
 
@@ -29,7 +29,7 @@ export type LayoutEditorProps = {
     api: DefaultApi,
     config?: Config,
     currentSwitch?: string,
-    currentLayout?: keyof Layouts,
+    currentLayout?: string,
     onUpdate: (latestConfig: Config) => Promise<void>,
 }
 
@@ -46,7 +46,7 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
     }
 
     const onUpdate = async () => {
-      currentSwitch.layouts[props.currentLayout as LayoutKey] = currentLayout
+      currentSwitch.layouts[props.currentLayout] = currentLayout
       
       return props.onUpdate({
         switches: {

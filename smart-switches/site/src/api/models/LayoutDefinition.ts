@@ -10,11 +10,12 @@
  * Do not edit the class manually.
  */
 
-import { LayoutInstance } from '../models/LayoutInstance';
 import { HttpFile } from '../http/http';
 
-export class Switch {
-    'layouts': { [key: string]: LayoutInstance; };
+export class LayoutDefinition {
+    'Buttons': Array<string> | null;
+    'Description': string;
+    'Version': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -22,14 +23,26 @@ export class Switch {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "layouts",
-            "baseName": "layouts",
-            "type": "{ [key: string]: LayoutInstance; }",
+            "name": "Buttons",
+            "baseName": "Buttons",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "Description",
+            "baseName": "Description",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "Version",
+            "baseName": "Version",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return Switch.attributeTypeMap;
+        return LayoutDefinition.attributeTypeMap;
     }
 
     public constructor() {

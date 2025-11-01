@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getConfig**](DefaultApi.md#getConfig) | **GET** /api/config | 
+[**getLayoutDefinitions**](DefaultApi.md#getLayoutDefinitions) | **GET** /api/layout-definitions | Get available layout definitions
 [**listBleDevices**](DefaultApi.md#listBleDevices) | **GET** /api/ble/devices | List discovered BLE devices
 [**listExecutables**](DefaultApi.md#listExecutables) | **GET** /api/executables | 
 [**press**](DefaultApi.md#press) | **POST** /api/press | 
@@ -56,6 +57,53 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **getLayoutDefinitions**
+> { [key: string]: LayoutDefinition; } getLayoutDefinitions()
+
+Returns the definitions of all supported layout versions, including which buttons they support
+
+### Example
+
+
+```typescript
+import { createConfiguration, DefaultApi } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new DefaultApi(configuration);
+
+const request = {};
+
+const data = await apiInstance.getLayoutDefinitions(request);
+console.log('API called successfully. Returned data:', data);
+```
+
+
+### Parameters
+This endpoint does not need any parameter.
+
+
+### Return type
+
+**{ [key: string]: LayoutDefinition; }**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**0** | Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -230,239 +278,17 @@ const request: DefaultApiPutConfigRequest = {
     switches: {
       "key": {
         layouts: {
-          v4: {
-            _1: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            _2: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            _3: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            _4: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            _5: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            _6: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            _7: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            _8: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            off: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            on: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-          },
-          v5: {
-            _5: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            _6: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            _7: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            _8: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            flipped: true,
-            off: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            on: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            wheel_routines: [
-              {
-                command: "command_example",
-                name: "name_example",
-                rgb: [
+          "key": {
+            buttons: {
+              "key": {
+                cmd: "cmd_example",
+                color: [
                   1,
                 ],
               },
-            ],
-          },
-          v6: {
-            _5: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            _6: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            _7: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            _8: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
             },
             flipped: true,
-            off: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            on: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            wheel_routines: [
-              {
-                command: "command_example",
-                name: "name_example",
-                rgb: [
-                  1,
-                ],
-              },
-            ],
-          },
-          v7: {
-            _1: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            _2: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            _3: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            _4: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            _5: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            _6: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            _7: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            _8: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            flipped: true,
-            off: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-            on: {
-              cmd: "cmd_example",
-              color: [
-                1,
-              ],
-            },
-          },
-          v9: {
-            _1: "_1_example",
-            _2: "_2_example",
-            _3: "_3_example",
-            _4: "_4_example",
-            _5: "_5_example",
-            _6: "_6_example",
-            _7: "_7_example",
-            _8: "_8_example",
-            flipped: true,
-            off: "off_example",
-            on: "on_example",
+            version: "version_example",
           },
         },
       },

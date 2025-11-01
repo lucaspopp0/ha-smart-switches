@@ -4,12 +4,8 @@ export * from '../models/Device';
 export * from '../models/ErrorDetail';
 export * from '../models/ErrorModel';
 export * from '../models/Executable';
-export * from '../models/LayoutV4';
-export * from '../models/LayoutV5';
-export * from '../models/LayoutV6';
-export * from '../models/LayoutV7';
-export * from '../models/LayoutV9';
-export * from '../models/Layouts';
+export * from '../models/LayoutDefinition';
+export * from '../models/LayoutInstance';
 export * from '../models/ListBLEDevicesResponseBody';
 export * from '../models/ListExecutablesResponseBody';
 export * from '../models/PostPressRequestBody';
@@ -17,7 +13,6 @@ export * from '../models/StartBLEScanRequestBody';
 export * from '../models/StartBLEScanResponseBody';
 export * from '../models/StopBLEScanResponseBody';
 export * from '../models/Switch';
-export * from '../models/WheelRoutine';
 
 import { Command } from '../models/Command';
 import { Config } from '../models/Config';
@@ -25,12 +20,8 @@ import { Device } from '../models/Device';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ErrorModel } from '../models/ErrorModel';
 import { Executable } from '../models/Executable';
-import { LayoutV4 } from '../models/LayoutV4';
-import { LayoutV5 } from '../models/LayoutV5';
-import { LayoutV6 } from '../models/LayoutV6';
-import { LayoutV7 } from '../models/LayoutV7';
-import { LayoutV9 } from '../models/LayoutV9';
-import { Layouts } from '../models/Layouts';
+import { LayoutDefinition } from '../models/LayoutDefinition';
+import { LayoutInstance } from '../models/LayoutInstance';
 import { ListBLEDevicesResponseBody } from '../models/ListBLEDevicesResponseBody';
 import { ListExecutablesResponseBody } from '../models/ListExecutablesResponseBody';
 import { PostPressRequestBody } from '../models/PostPressRequestBody';
@@ -38,7 +29,6 @@ import { StartBLEScanRequestBody } from '../models/StartBLEScanRequestBody';
 import { StartBLEScanResponseBody } from '../models/StartBLEScanResponseBody';
 import { StopBLEScanResponseBody } from '../models/StopBLEScanResponseBody';
 import { Switch } from '../models/Switch';
-import { WheelRoutine } from '../models/WheelRoutine';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -62,12 +52,8 @@ let typeMap: {[index: string]: any} = {
     "ErrorDetail": ErrorDetail,
     "ErrorModel": ErrorModel,
     "Executable": Executable,
-    "LayoutV4": LayoutV4,
-    "LayoutV5": LayoutV5,
-    "LayoutV6": LayoutV6,
-    "LayoutV7": LayoutV7,
-    "LayoutV9": LayoutV9,
-    "Layouts": Layouts,
+    "LayoutDefinition": LayoutDefinition,
+    "LayoutInstance": LayoutInstance,
     "ListBLEDevicesResponseBody": ListBLEDevicesResponseBody,
     "ListExecutablesResponseBody": ListExecutablesResponseBody,
     "PostPressRequestBody": PostPressRequestBody,
@@ -75,7 +61,6 @@ let typeMap: {[index: string]: any} = {
     "StartBLEScanResponseBody": StartBLEScanResponseBody,
     "StopBLEScanResponseBody": StopBLEScanResponseBody,
     "Switch": Switch,
-    "WheelRoutine": WheelRoutine,
 }
 
 type MimeTypeDescriptor = {

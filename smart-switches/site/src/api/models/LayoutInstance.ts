@@ -10,12 +10,13 @@
  * Do not edit the class manually.
  */
 
+import { Command } from '../models/Command';
 import { HttpFile } from '../http/http';
 
-export class WheelRoutine {
-    'command': string;
-    'name': string;
-    'rgb': Array<number> | null;
+export class LayoutInstance {
+    'buttons': { [key: string]: Command; };
+    'flipped': boolean;
+    'version': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -23,26 +24,26 @@ export class WheelRoutine {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "command",
-            "baseName": "command",
-            "type": "string",
+            "name": "buttons",
+            "baseName": "buttons",
+            "type": "{ [key: string]: Command; }",
             "format": ""
         },
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
+            "name": "flipped",
+            "baseName": "flipped",
+            "type": "boolean",
             "format": ""
         },
         {
-            "name": "rgb",
-            "baseName": "rgb",
-            "type": "Array<number>",
-            "format": "int64"
+            "name": "version",
+            "baseName": "version",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return WheelRoutine.attributeTypeMap;
+        return LayoutInstance.attributeTypeMap;
     }
 
     public constructor() {

@@ -145,143 +145,39 @@ components:
         - entityId
         - friendlyName
       type: object
-    LayoutV4:
+    LayoutDefinition:
       additionalProperties: false
       properties:
-        "1":
-          $ref: '#/components/schemas/Command'
-        "2":
-          $ref: '#/components/schemas/Command'
-        "3":
-          $ref: '#/components/schemas/Command'
-        "4":
-          $ref: '#/components/schemas/Command'
-        "5":
-          $ref: '#/components/schemas/Command'
-        "6":
-          $ref: '#/components/schemas/Command'
-        "7":
-          $ref: '#/components/schemas/Command'
-        "8":
-          $ref: '#/components/schemas/Command'
-        "off":
-          $ref: '#/components/schemas/Command'
-        "on":
-          $ref: '#/components/schemas/Command'
-      type: object
-    LayoutV5:
-      additionalProperties: false
-      properties:
-        "5":
-          $ref: '#/components/schemas/Command'
-        "6":
-          $ref: '#/components/schemas/Command'
-        "7":
-          $ref: '#/components/schemas/Command'
-        "8":
-          $ref: '#/components/schemas/Command'
-        flipped:
-          type: boolean
-        "off":
-          $ref: '#/components/schemas/Command'
-        "on":
-          $ref: '#/components/schemas/Command'
-        wheel-routines:
+        Buttons:
           items:
-            $ref: '#/components/schemas/WheelRoutine'
+            type: string
           type:
             - array
             - "null"
+        Description:
+          type: string
+        Version:
+          type: string
+      required:
+        - Version
+        - Description
+        - Buttons
       type: object
-    LayoutV6:
+    LayoutInstance:
       additionalProperties: false
       properties:
-        "5":
-          $ref: '#/components/schemas/Command'
-        "6":
-          $ref: '#/components/schemas/Command'
-        "7":
-          $ref: '#/components/schemas/Command'
-        "8":
-          $ref: '#/components/schemas/Command'
+        buttons:
+          additionalProperties:
+            $ref: '#/components/schemas/Command'
+          type: object
         flipped:
           type: boolean
-        "off":
-          $ref: '#/components/schemas/Command'
-        "on":
-          $ref: '#/components/schemas/Command'
-        wheel-routines:
-          items:
-            $ref: '#/components/schemas/WheelRoutine'
-          type:
-            - array
-            - "null"
-      type: object
-    LayoutV7:
-      additionalProperties: false
-      properties:
-        "1":
-          $ref: '#/components/schemas/Command'
-        "2":
-          $ref: '#/components/schemas/Command'
-        "3":
-          $ref: '#/components/schemas/Command'
-        "4":
-          $ref: '#/components/schemas/Command'
-        "5":
-          $ref: '#/components/schemas/Command'
-        "6":
-          $ref: '#/components/schemas/Command'
-        "7":
-          $ref: '#/components/schemas/Command'
-        "8":
-          $ref: '#/components/schemas/Command'
-        flipped:
-          type: boolean
-        "off":
-          $ref: '#/components/schemas/Command'
-        "on":
-          $ref: '#/components/schemas/Command'
-      type: object
-    LayoutV9:
-      additionalProperties: false
-      properties:
-        "1":
-          $ref: '#/components/schemas/Command'
-        "2":
-          $ref: '#/components/schemas/Command'
-        "3":
-          $ref: '#/components/schemas/Command'
-        "4":
-          $ref: '#/components/schemas/Command'
-        "5":
-          $ref: '#/components/schemas/Command'
-        "6":
-          $ref: '#/components/schemas/Command'
-        "7":
-          $ref: '#/components/schemas/Command'
-        "8":
-          $ref: '#/components/schemas/Command'
-        flipped:
-          type: boolean
-        "off":
-          $ref: '#/components/schemas/Command'
-        "on":
-          $ref: '#/components/schemas/Command'
-      type: object
-    Layouts:
-      additionalProperties: false
-      properties:
-        v4:
-          $ref: '#/components/schemas/LayoutV4'
-        v5:
-          $ref: '#/components/schemas/LayoutV5'
-        v6:
-          $ref: '#/components/schemas/LayoutV6'
-        v7:
-          $ref: '#/components/schemas/LayoutV7'
-        v9:
-          $ref: '#/components/schemas/LayoutV9'
+        version:
+          type: string
+      required:
+        - version
+        - buttons
+        - flipped
       type: object
     ListBLEDevicesResponseBody:
       additionalProperties: false
@@ -402,28 +298,11 @@ components:
       additionalProperties: false
       properties:
         layouts:
-          $ref: '#/components/schemas/Layouts'
+          additionalProperties:
+            $ref: '#/components/schemas/LayoutInstance'
+          type: object
       required:
         - layouts
-      type: object
-    WheelRoutine:
-      additionalProperties: false
-      properties:
-        command:
-          type: string
-        name:
-          type: string
-        rgb:
-          items:
-            format: int64
-            type: integer
-          type:
-            - array
-            - "null"
-      required:
-        - name
-        - rgb
-        - command
       type: object
 info:
   title: Smart Switches
@@ -561,6 +440,26 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorModel'
           description: Internal Server Error
+  /api/layout-definitions:
+    get:
+      description: Returns the definitions of all supported layout versions, including which buttons they support
+      operationId: get-layout-definitions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  $ref: '#/components/schemas/LayoutDefinition'
+                type: object
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+          description: Error
+      summary: Get available layout definitions
   /api/press:
     post:
       operationId: press

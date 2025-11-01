@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/danielgtaylor/huma/v2"
+	"github.com/lucaspopp0/ha-smart-switches/smart-switches/model"
 )
 
 type PostPressRequest struct {
@@ -39,16 +40,17 @@ func (s *server) postPress(ctx context.Context, req *PostPressRequest) (*PostPre
 		return nil, huma.Error404NotFound("No switches configured", nil)
 	}
 
-	if _, ok := s.cfg.Switches[req.Body.Switch]; !ok {
+	sw, ok := s.cfg.Switches[req.Body.Switch]
+	if !ok {
 		return nil, huma.Error404NotFound(fmt.Sprintf("No switch named %q", req.Body.Switch))
 	}
 
-	command, err := s.cfg.Switches[req.Body.Switch].Layouts.GetCommand(req.Body.Layout, req.Body.Key)
+	command, err := sw.GetCommand(model.LayoutVersion(req.Body.Layout), req.Body.Key)
 	if err != nil {
 		return nil, huma.Error400BadRequest(err.Error())
 	}
 
-	resp, err := s.ha.Execute(command)
+	resp, err := s.ha.Execute(command.Cmd)
 	if err != nil {
 		return nil, err
 	}

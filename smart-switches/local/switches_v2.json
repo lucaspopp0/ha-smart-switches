@@ -1,0 +1,26 @@
+{
+  "switches": {
+    "test-switch": {
+      "layouts": {
+        "v9": {
+          "version": "v9",
+          "buttons": {
+            "on": {
+              "cmd": "script.turn_on",
+              "color": [0, 255, 0]
+            },
+            "off": {
+              "cmd": "script.turn_off",
+              "color": [255, 0, 0]
+            },
+            "1": {
+              "cmd": "scene.movie_mode",
+              "color": [0, 0, 255]
+            }
+          },
+          "flipped": false
+        }
+      }
+    }
+  }
+}

@@ -8,12 +8,8 @@ import { Device } from '../models/Device';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ErrorModel } from '../models/ErrorModel';
 import { Executable } from '../models/Executable';
-import { LayoutV4 } from '../models/LayoutV4';
-import { LayoutV5 } from '../models/LayoutV5';
-import { LayoutV6 } from '../models/LayoutV6';
-import { LayoutV7 } from '../models/LayoutV7';
-import { LayoutV9 } from '../models/LayoutV9';
-import { Layouts } from '../models/Layouts';
+import { LayoutDefinition } from '../models/LayoutDefinition';
+import { LayoutInstance } from '../models/LayoutInstance';
 import { ListBLEDevicesResponseBody } from '../models/ListBLEDevicesResponseBody';
 import { ListExecutablesResponseBody } from '../models/ListExecutablesResponseBody';
 import { PostPressRequestBody } from '../models/PostPressRequestBody';
@@ -21,7 +17,6 @@ import { StartBLEScanRequestBody } from '../models/StartBLEScanRequestBody';
 import { StartBLEScanResponseBody } from '../models/StartBLEScanResponseBody';
 import { StopBLEScanResponseBody } from '../models/StopBLEScanResponseBody';
 import { Switch } from '../models/Switch';
-import { WheelRoutine } from '../models/WheelRoutine';
 import { ObservableDefaultApi } from './ObservableAPI';
 
 import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
@@ -49,6 +44,26 @@ export class PromiseDefaultApi {
     public getConfig(_options?: PromiseConfigurationOptions): Promise<Config> {
         const observableOptions = wrapOptions(_options);
         const result = this.api.getConfig(observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Returns the definitions of all supported layout versions, including which buttons they support
+     * Get available layout definitions
+     */
+    public getLayoutDefinitionsWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<{ [key: string]: LayoutDefinition; }>> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.getLayoutDefinitionsWithHttpInfo(observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Returns the definitions of all supported layout versions, including which buttons they support
+     * Get available layout definitions
+     */
+    public getLayoutDefinitions(_options?: PromiseConfigurationOptions): Promise<{ [key: string]: LayoutDefinition; }> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.getLayoutDefinitions(observableOptions);
         return result.toPromise();
     }
 

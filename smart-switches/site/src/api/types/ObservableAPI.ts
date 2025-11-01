@@ -9,12 +9,8 @@ import { Device } from '../models/Device';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ErrorModel } from '../models/ErrorModel';
 import { Executable } from '../models/Executable';
-import { LayoutV4 } from '../models/LayoutV4';
-import { LayoutV5 } from '../models/LayoutV5';
-import { LayoutV6 } from '../models/LayoutV6';
-import { LayoutV7 } from '../models/LayoutV7';
-import { LayoutV9 } from '../models/LayoutV9';
-import { Layouts } from '../models/Layouts';
+import { LayoutDefinition } from '../models/LayoutDefinition';
+import { LayoutInstance } from '../models/LayoutInstance';
 import { ListBLEDevicesResponseBody } from '../models/ListBLEDevicesResponseBody';
 import { ListExecutablesResponseBody } from '../models/ListExecutablesResponseBody';
 import { PostPressRequestBody } from '../models/PostPressRequestBody';
@@ -22,7 +18,6 @@ import { StartBLEScanRequestBody } from '../models/StartBLEScanRequestBody';
 import { StartBLEScanResponseBody } from '../models/StartBLEScanResponseBody';
 import { StopBLEScanResponseBody } from '../models/StopBLEScanResponseBody';
 import { Switch } from '../models/Switch';
-import { WheelRoutine } from '../models/WheelRoutine';
 
 import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
 export class ObservableDefaultApi {
@@ -66,6 +61,38 @@ export class ObservableDefaultApi {
      */
     public getConfig(_options?: ConfigurationOptions): Observable<Config> {
         return this.getConfigWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<Config>) => apiResponse.data));
+    }
+
+    /**
+     * Returns the definitions of all supported layout versions, including which buttons they support
+     * Get available layout definitions
+     */
+    public getLayoutDefinitionsWithHttpInfo(_options?: ConfigurationOptions): Observable<HttpInfo<{ [key: string]: LayoutDefinition; }>> {
+        const _config = mergeConfiguration(this.configuration, _options);
+
+        const requestContextPromise = this.requestFactory.getLayoutDefinitions(_config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of _config.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => _config.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of _config.middleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getLayoutDefinitionsWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Returns the definitions of all supported layout versions, including which buttons they support
+     * Get available layout definitions
+     */
+    public getLayoutDefinitions(_options?: ConfigurationOptions): Observable<{ [key: string]: LayoutDefinition; }> {
+        return this.getLayoutDefinitionsWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<{ [key: string]: LayoutDefinition; }>) => apiResponse.data));
     }
 
     /**
