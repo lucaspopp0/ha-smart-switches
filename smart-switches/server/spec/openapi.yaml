@@ -52,15 +52,7 @@ components:
           type: integer
         services:
           items:
-            items:
-              format: int32
-              minimum: 0
-              type: integer
-            maxItems: 4
-            minItems: 4
-            type:
-              - array
-              - "null"
+            type: string
           type:
             - array
             - "null"
