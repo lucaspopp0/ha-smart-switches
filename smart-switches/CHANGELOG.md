@@ -1,6 +1,9 @@
+# v1.4.1
+ * [`352dda9`](https://github.com/lucaspopp0/ha-smart-switches/commit/352dda9) fix(deps): update go-server (#85)
+
+
 # v1.4.0
  * [`95af520`](https://github.com/lucaspopp0/ha-smart-switches/commit/95af520) (MINOR) Simpler configuration (#83)
-
 
 # v1.3.4
  * [`e62545c`](https://github.com/lucaspopp0/ha-smart-switches/commit/e62545c) fix(deps): update module github.com/go-chi/chi/v5 to v5.2.3 (#81)
