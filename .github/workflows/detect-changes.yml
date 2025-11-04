@@ -41,7 +41,7 @@ jobs:
         run: |
           echo "detected=${{ github.actor == 'lucaspopp0-bot[bot]' }}" | tee -a "$GITHUB_OUTPUT"
       -
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       -
         name: Detect changes
         uses: dorny/paths-filter@v3
