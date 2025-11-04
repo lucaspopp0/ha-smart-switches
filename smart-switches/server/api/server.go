@@ -51,21 +51,22 @@ func (s *server) onStart() {
 	cfg, err := config.FromFile()
 	if err != nil {
 		fmt.Printf("Failed to load config: %v\n", err.Error())
-	} else {
-		s.cfg = *cfg
-
-		// Print loaded config for debugging
-		configJSON, _ := json.MarshalIndent(cfg, "", "  ")
-		fmt.Printf("Loaded config:\n%s\n", string(configJSON))
+		cfg = config.NewDefaultConfig()
 	}
+
+	s.cfg = *cfg
+
+	// Print loaded config for debugging
+	configJSON, _ := json.MarshalIndent(cfg, "", "  ")
+	fmt.Printf("Loaded config:\n%s\n", string(configJSON))
 
 	if cfg.Switches == nil {
 		cfg.Switches = map[string]model.Switch{}
+	}
 
-		err = cfg.WriteFile()
-		if err != nil {
-			fmt.Printf("Failed to init config: %v\n", err.Error())
-		}
+	err = cfg.WriteFile()
+	if err != nil {
+		fmt.Printf("Failed to init config: %v\n", err.Error())
 	}
 
 	s.executables, err = s.ha.ListExecutables()
