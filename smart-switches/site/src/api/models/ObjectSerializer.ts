@@ -1,33 +1,23 @@
 export * from '../models/Command';
 export * from '../models/Config';
-export * from '../models/Device';
 export * from '../models/ErrorDetail';
 export * from '../models/ErrorModel';
 export * from '../models/Executable';
 export * from '../models/LayoutDefinition';
 export * from '../models/LayoutInstance';
-export * from '../models/ListBLEDevicesResponseBody';
 export * from '../models/ListExecutablesResponseBody';
 export * from '../models/PostPressRequestBody';
-export * from '../models/StartBLEScanRequestBody';
-export * from '../models/StartBLEScanResponseBody';
-export * from '../models/StopBLEScanResponseBody';
 export * from '../models/Switch';
 
 import { Command } from '../models/Command';
 import { Config } from '../models/Config';
-import { Device } from '../models/Device';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ErrorModel } from '../models/ErrorModel';
 import { Executable } from '../models/Executable';
 import { LayoutDefinition } from '../models/LayoutDefinition';
 import { LayoutInstance } from '../models/LayoutInstance';
-import { ListBLEDevicesResponseBody } from '../models/ListBLEDevicesResponseBody';
 import { ListExecutablesResponseBody } from '../models/ListExecutablesResponseBody';
 import { PostPressRequestBody } from '../models/PostPressRequestBody';
-import { StartBLEScanRequestBody } from '../models/StartBLEScanRequestBody';
-import { StartBLEScanResponseBody } from '../models/StartBLEScanResponseBody';
-import { StopBLEScanResponseBody } from '../models/StopBLEScanResponseBody';
 import { Switch } from '../models/Switch';
 
 /* tslint:disable:no-unused-variable */
@@ -48,18 +38,13 @@ let enumsMap: Set<string> = new Set<string>([
 let typeMap: {[index: string]: any} = {
     "Command": Command,
     "Config": Config,
-    "Device": Device,
     "ErrorDetail": ErrorDetail,
     "ErrorModel": ErrorModel,
     "Executable": Executable,
     "LayoutDefinition": LayoutDefinition,
     "LayoutInstance": LayoutInstance,
-    "ListBLEDevicesResponseBody": ListBLEDevicesResponseBody,
     "ListExecutablesResponseBody": ListExecutablesResponseBody,
     "PostPressRequestBody": PostPressRequestBody,
-    "StartBLEScanRequestBody": StartBLEScanRequestBody,
-    "StartBLEScanResponseBody": StartBLEScanResponseBody,
-    "StopBLEScanResponseBody": StopBLEScanResponseBody,
     "Switch": Switch,
 }
 
