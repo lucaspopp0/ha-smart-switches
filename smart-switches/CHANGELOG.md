@@ -1,6 +1,10 @@
+# v1.4.7
+ * [`04afbed`](https://github.com/lucaspopp0/ha-smart-switches/commit/04afbed) chore(deps): update github-actions (major) (#88)
+
+ * [`84523dc`](https://github.com/lucaspopp0/ha-smart-switches/commit/84523dc) fix: Rebuild site with dark mode changes (#91)
+
 # v1.4.5
  * [`78942c5`](https://github.com/lucaspopp0/ha-smart-switches/commit/78942c5) chore: Remove BLE (#90)
-
 
 # v1.4.4
  * [`a7be24e`](https://github.com/lucaspopp0/ha-smart-switches/commit/a7be24e) feat: Dark mode (#89)
