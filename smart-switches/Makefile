@@ -52,6 +52,10 @@ generate-server-sdk:
 		--additional-properties="npmName=@smart-switches/server,npmVersion=0.0.0,paramNaming=original,modelPropertyNaming=original"
 .PHONY: generate-server-sdk
 
+build-site:
+	@cd $(MF_PATH)/site && npm run build
+.PHONY: run-site
+
 run-site:
 	@cd $(MF_PATH)/site && npm run develop
 .PHONY: run-site
