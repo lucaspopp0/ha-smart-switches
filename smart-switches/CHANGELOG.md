@@ -1,6 +1,9 @@
+# v1.4.9
+ * [`7534335`](https://github.com/lucaspopp0/ha-smart-switches/commit/7534335) Revert dark mode (#92)
+
+
 # v1.4.8
  * [`4007d49`](https://github.com/lucaspopp0/ha-smart-switches/commit/4007d49) chore(deps): update site (#84)
-
 
 # v1.4.7
  * [`04afbed`](https://github.com/lucaspopp0/ha-smart-switches/commit/04afbed) chore(deps): update github-actions (major) (#88)
