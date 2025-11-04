@@ -21,8 +21,30 @@ type Config struct {
 	Switches map[string]model.Switch `json:"switches"`
 }
 
+func NewDefaultConfig() *Config {
+	return &Config{
+		Switches: map[string]model.Switch{},
+	}
+}
+
 func FromFile() (*Config, error) {
-	configBytes, err := os.ReadFile(configFile())
+	path := configFile()
+
+	// Check if file exists
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		// File doesn't exist, create default config
+		defaultConfig := NewDefaultConfig()
+
+		// Write default config to file
+		if err := defaultConfig.WriteFile(); err != nil {
+			return nil, err
+		}
+
+		return defaultConfig, nil
+	}
+
+	// File exists, read it
+	configBytes, err := os.ReadFile(path)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +64,8 @@ func (c *Config) WriteFile() error {
 		return err
 	}
 
-	file, err := os.OpenFile(configFile(), os.O_RDWR, os.ModeExclusive)
+	// Use O_CREATE to create file if it doesn't exist, O_TRUNC to truncate if it does
+	file, err := os.OpenFile(configFile(), os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0644)
 	if err != nil {
 		return err
 	}
@@ -53,11 +76,6 @@ func (c *Config) WriteFile() error {
 			panic(err)
 		}
 	}()
-
-	err = file.Truncate(0)
-	if err != nil {
-		return err
-	}
 
 	_, err = file.Write(configBytes)
 	if err != nil {
