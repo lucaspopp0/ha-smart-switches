@@ -1,6 +1,9 @@
+# v1.4.5
+ * [`78942c5`](https://github.com/lucaspopp0/ha-smart-switches/commit/78942c5) chore: Remove BLE (#90)
+
+
 # v1.4.4
  * [`a7be24e`](https://github.com/lucaspopp0/ha-smart-switches/commit/a7be24e) feat: Dark mode (#89)
-
 
 # v1.4.3
  * [`61cb2b5`](https://github.com/lucaspopp0/ha-smart-switches/commit/61cb2b5) fix: UI updates after config updates (#87)
