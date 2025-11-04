@@ -6,66 +6,78 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from 'react-bootstrap/Navbar';
 import NewSwitchModal from "../components/modals/new-switch";
 import LayoutPicker from "../components/inputs/layout-picker";
-import { Button, Menu } from "antd";
+import { Button, Menu, ConfigProvider, theme, Switch } from "antd";
 import { MenuItemType } from "antd/lib/menu/interface";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, BulbOutlined, BulbFilled } from "@ant-design/icons";
 import ConfirmModal from "../components/modals/confirm";
 import LayoutEditor from "../components/editors/layout";
 import { Config, createConfiguration, DefaultApi, ListExecutablesResponseBody, server1 } from "../api";
 import { fetchLayoutDefinitions } from "../api/convenience";
 
-const borderColor = 'rgb(224, 229, 229)';
-const backgroundColor = 'white';
+// Helper to get theme colors based on dark mode
+const getThemeColors = (isDark: boolean) => ({
+  borderColor: isDark ? 'rgb(48, 48, 48)' : 'rgb(224, 229, 229)',
+  backgroundColor: isDark ? 'rgb(20, 20, 20)' : 'white',
+  textColor: isDark ? 'rgba(255, 255, 255, 0.85)' : '#232129',
+  headerBackground: isDark ? 'rgb(20, 20, 20)' : 'white',
+})
 
-const styles: { [key: string]: React.CSSProperties } = {
-  page: {
-    display: 'flex',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    flexDirection: 'column',
-    height: '100vh',
-    width: '100vw',
-    margin: 0,
-    padding: 0,
-  },
-  header: {
-    paddingLeft: 12,
-    paddingRight: 12,
-    background: 'white',
-    fontWeight: 'bold',
-  },
-  content: {
-    borderTop: `solid 1px ${borderColor}`,
-    display: 'flex',
-    color: "#232129",
-    flexDirection: 'row',
-    flexGrow: 2,
-    margin: 0,
-    padding: 0,
-  },
-  sidebar: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '20%',
-    minWidth: 250,
-    maxWidth: 500,
-    height: '100%',
-    background: backgroundColor,
-    borderRight: `solid 1px ${borderColor}`,
-  },
-  sidebarItem: {
-    display: 'flex',
-    width: '100%',
-    padding: 12,
-    borderTop: 'none',
-    borderLeft: 'none',
-    borderRight: 'none',
-    borderBottom: `solid 1px ${borderColor}`,
-    borderRadius: 0,
-    background: backgroundColor,
-    color: 'inherit',
-  },
+const getStyles = (isDark: boolean): { [key: string]: React.CSSProperties } => {
+  const colors = getThemeColors(isDark)
+
+  return {
+    page: {
+      display: 'flex',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      flexDirection: 'column',
+      height: '100vh',
+      width: '100vw',
+      margin: 0,
+      padding: 0,
+      background: colors.backgroundColor,
+      color: colors.textColor,
+    },
+    header: {
+      paddingLeft: 12,
+      paddingRight: 12,
+      background: colors.headerBackground,
+      fontWeight: 'bold',
+      borderBottom: `solid 1px ${colors.borderColor}`,
+    },
+    content: {
+      borderTop: `solid 1px ${colors.borderColor}`,
+      display: 'flex',
+      color: colors.textColor,
+      flexDirection: 'row',
+      flexGrow: 2,
+      margin: 0,
+      padding: 0,
+    },
+    sidebar: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '20%',
+      minWidth: 250,
+      maxWidth: 500,
+      height: '100%',
+      background: colors.backgroundColor,
+      borderRight: `solid 1px ${colors.borderColor}`,
+    },
+    sidebarItem: {
+      display: 'flex',
+      width: '100%',
+      padding: 12,
+      borderTop: 'none',
+      borderLeft: 'none',
+      borderRight: 'none',
+      borderBottom: `solid 1px ${colors.borderColor}`,
+      borderRadius: 0,
+      background: colors.backgroundColor,
+      color: 'inherit',
+    },
+  }
 }
 
 /*
@@ -78,6 +90,25 @@ const styles: { [key: string]: React.CSSProperties } = {
  */
 
 const IndexPage: React.FC<PageProps> = () => {
+  // Dark mode state - respects system preference initially
+  const [isDarkMode, setIsDarkMode] = React.useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
+    return false
+  })
+
+  // Listen for system dark mode changes
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    const handleChange = (e: MediaQueryListEvent) => setIsDarkMode(e.matches)
+
+    mediaQuery.addEventListener('change', handleChange)
+    return () => mediaQuery.removeEventListener('change', handleChange)
+  }, [])
+
   let [refresh, setRefresh] = React.useState(false)
   let [loading, setLoading] = React.useState(false)
 
@@ -87,6 +118,9 @@ const IndexPage: React.FC<PageProps> = () => {
   let [config, setConfig] = React.useState<Config | undefined>(undefined)
   let [currentSwitch, setCurrentSwitch] = React.useState<string | undefined>(undefined)
   let [currentLayout, setCurrentLayout] = React.useState<string | undefined>(undefined)
+
+  // Get styles based on current dark mode state
+  const styles = getStyles(isDarkMode)
 
   const deleteSwitch = async (name: string) => {
     if (config?.switches) {
@@ -328,10 +362,28 @@ const IndexPage: React.FC<PageProps> = () => {
   )
 
   return (
-    <main style={styles.page}>
-      <Navbar expand="lg" style={styles.header}>
-          <Navbar.Brand href="#home">Smart Switches</Navbar.Brand>
-      </Navbar>
+    <ConfigProvider
+      theme={{
+        algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
+      }}
+    >
+      <main style={styles.page}>
+        <Navbar expand="lg" style={styles.header}>
+          <Navbar.Brand
+            href="#home"
+            style={{
+              color: getThemeColors(isDarkMode).textColor
+            }}
+          >
+            Smart Switches
+          </Navbar.Brand>
+          <Button
+            type="text"
+            icon={isDarkMode ? <BulbFilled /> : <BulbOutlined />}
+            onClick={() => setIsDarkMode(!isDarkMode)}
+            style={{ marginLeft: 'auto' }}
+          />
+        </Navbar>
       <div style={styles.content}>
         {switchesMenu}
         {layoutsMenu}
@@ -387,7 +439,8 @@ const IndexPage: React.FC<PageProps> = () => {
           return res
         }}
       />
-    </main>
+      </main>
+    </ConfigProvider>
   )
 }
 
