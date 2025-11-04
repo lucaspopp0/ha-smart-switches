@@ -6,7 +6,6 @@ import { config } from 'process';
 import ExecutablePicker from '../inputs/executable-picker';
 import { DefaultApi, Config } from '../../api';
 import { ButtonsByLayout } from '../../api/convenience';
-import { WheelRoutinesEditor } from './wheel-routines';
 
 
 const styles: { [key: string]: React.CSSProperties } = {
@@ -46,8 +45,10 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
     }
 
     const onUpdate = async () => {
+      if (!props.currentLayout) return
+
       currentSwitch.layouts[props.currentLayout] = currentLayout
-      
+
       return props.onUpdate({
         switches: {
           ...(props.config?.switches ?? {}),
@@ -56,11 +57,10 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
       })
     }
 
-    const hasWheelRoutines = ButtonsByLayout[props.currentLayout].includes('wheel-routines');
     const canFlip = ButtonsByLayout[props.currentLayout].includes('flipped');
 
     const basicButtons = ButtonsByLayout[props.currentLayout]
-      .filter(button => button != 'flipped' && button != 'wheel-routines')
+      .filter(button => button != 'flipped')
       .sort((a, b): number => {
         // Handle the equal condition right away
         if (a == b) {
@@ -125,9 +125,9 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
                 Basic Buttons
             </Typography.Text>
             {
-              (basicButtons as ((keyof typeof currentLayout)[]))
+              basicButtons
                 .map(buttonName => {
-                  const command = currentLayout[buttonName]
+                  const command = currentLayout.buttons[buttonName]
                   if (!command) return <></>
 
                   const r = Math.round(command.color?.[0] ?? 50)
@@ -140,20 +140,20 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
                       onChange={color => {
                         const { r, g, b } = color.toRgb()
                         command.color = [r, g, b]
-                        currentLayout[buttonName] = command
+                        currentLayout.buttons[buttonName] = command
 
                         return onUpdate()
                       }}
                     />
                     <ExecutablePicker
-                        value={currentLayout[buttonName]?.cmd}
+                        value={currentLayout.buttons[buttonName]?.cmd}
                         api={props.api}
                         onPick={async picked => {
-                          let currentButton = currentLayout[buttonName]
+                          let currentButton = currentLayout.buttons[buttonName]
 
                           if (currentButton && picked) {
                             currentButton.cmd = picked.entityId
-                            currentLayout[buttonName] = currentButton
+                            currentLayout.buttons[buttonName] = currentButton
                           }
 
                           return onUpdate()
@@ -161,7 +161,7 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
                       />
                       <Button
                         icon={<CaretRightFilled />}
-                        disabled={!currentLayout[buttonName]}
+                        disabled={!currentLayout.buttons[buttonName]}
                         onClick={() => {
                           props.api
                             .press({
@@ -181,7 +181,7 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
             {
               // Add button dropdown for unconfigured buttons
               (() => {
-                const unconfiguredButtons = basicButtons.filter(btn => !currentLayout[btn as keyof typeof currentLayout])
+                const unconfiguredButtons = basicButtons.filter(btn => !currentLayout.buttons[btn])
 
                 if (unconfiguredButtons.length > 0) {
                   return (
@@ -194,7 +194,7 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
                           if (value) {
                             // Initialize the button with default values
                             console.log('Adding button:', value)
-                            ;(currentLayout as any)[value] = {
+                            currentLayout.buttons[value] = {
                               cmd: '',
                               color: [0, 0, 255]
                             }
@@ -214,16 +214,6 @@ const LayoutEditor: React.FC<LayoutEditorProps> = props => {
                 return <></>
               })()
             }
-            {hasWheelRoutines
-              ? <WheelRoutinesEditor
-                  api={props.api}
-                  wheelRoutines={(currentLayout as { 'wheel_routines': WheelRoutine[] })['wheel_routines']}
-                  onUpdate={async newRoutines => {
-                    (currentLayout as { 'wheel_routines': WheelRoutine[] })['wheel_routines'] = newRoutines
-                    return onUpdate()
-                  }}
-                />
-              : <></>}
             <div style={{ display: 'flex', flexGrow: 2, }}/>
           </div>
         </div>

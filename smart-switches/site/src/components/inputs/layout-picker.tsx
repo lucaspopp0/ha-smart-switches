@@ -1,5 +1,6 @@
 import * as React from "react"
-import { Switch, LayoutInstance } from "../../api"
+import { Switch } from "../../api"
+import { LayoutInstance } from "../../api/models/LayoutInstance"
 import { Button, Dropdown, Space, Typography } from "antd"
 import { LayoutNames, LayoutDescriptions } from "../../api/convenience"
 

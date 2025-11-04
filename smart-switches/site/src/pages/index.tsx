@@ -104,14 +104,14 @@ const IndexPage: React.FC<PageProps> = () => {
 
   const deleteLayout = async (name: string) => {
     if (config?.switches && currentSwitch && sw) {
+      const updatedLayouts = { ...sw.layouts }
+      delete updatedLayouts[name]
+
       let newConfig = {
         switches: {
           ...(config?.switches ?? {}),
           [currentSwitch as string]: {
-            layouts: {
-              ...sw.layouts,
-              [name]: undefined,
-            }
+            layouts: updatedLayouts
           }
         }
       }
@@ -234,7 +234,7 @@ const IndexPage: React.FC<PageProps> = () => {
         }
 
         setCurrentSwitch(key)
-        setCurrentLayout(Object.keys(config?.switches[key].layouts ?? {})[0] as keyof Layouts)
+        setCurrentLayout(Object.keys(config?.switches[key].layouts ?? {})[0])
       }}
       items={[
         ...(Object.keys(config?.switches ?? {}).length
@@ -277,8 +277,8 @@ const IndexPage: React.FC<PageProps> = () => {
           return
         }
 
-        console.log(`Selecting ${key}`, sw?.layouts[key as keyof Layouts])
-        setCurrentLayout(key as keyof Layouts)
+        console.log(`Selecting ${key}`, sw?.layouts[key])
+        setCurrentLayout(key)
       }}
       items={
         sw ? [
@@ -311,12 +311,12 @@ const IndexPage: React.FC<PageProps> = () => {
                 switch={sw}
                 onPick={async (key, layout) => {
                   if (!sw) return
-  
-                  sw.layouts[key as keyof Layouts] = layout
+
+                  sw.layouts[key] = layout
                   if (!!config?.switches && !!currentSwitch) {
                     config.switches[currentSwitch] = sw
                     await api.putConfig(config)
-                    setCurrentLayout(key as keyof Layouts)
+                    setCurrentLayout(key)
                   }
                 }}
               />

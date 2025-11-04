@@ -18,7 +18,7 @@ export class Device {
     'metadata': { [key: string]: string; };
     'name': string;
     'rssi': number;
-    'services': Array<Array<number> | null> | null;
+    'services': Array<string> | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -58,8 +58,8 @@ export class Device {
         {
             "name": "services",
             "baseName": "services",
-            "type": "Array<Array<number> | null>",
-            "format": "int32"
+            "type": "Array<string>",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
