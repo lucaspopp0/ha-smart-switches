@@ -4,18 +4,13 @@ import { PromiseMiddleware, Middleware, PromiseMiddlewareWrapper } from '../midd
 
 import { Command } from '../models/Command';
 import { Config } from '../models/Config';
-import { Device } from '../models/Device';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ErrorModel } from '../models/ErrorModel';
 import { Executable } from '../models/Executable';
 import { LayoutDefinition } from '../models/LayoutDefinition';
 import { LayoutInstance } from '../models/LayoutInstance';
-import { ListBLEDevicesResponseBody } from '../models/ListBLEDevicesResponseBody';
 import { ListExecutablesResponseBody } from '../models/ListExecutablesResponseBody';
 import { PostPressRequestBody } from '../models/PostPressRequestBody';
-import { StartBLEScanRequestBody } from '../models/StartBLEScanRequestBody';
-import { StartBLEScanResponseBody } from '../models/StartBLEScanResponseBody';
-import { StopBLEScanResponseBody } from '../models/StopBLEScanResponseBody';
 import { Switch } from '../models/Switch';
 import { ObservableDefaultApi } from './ObservableAPI';
 
@@ -68,26 +63,6 @@ export class PromiseDefaultApi {
     }
 
     /**
-     * Get a list of all BLE devices discovered during scanning
-     * List discovered BLE devices
-     */
-    public listBleDevicesWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<ListBLEDevicesResponseBody>> {
-        const observableOptions = wrapOptions(_options);
-        const result = this.api.listBleDevicesWithHttpInfo(observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Get a list of all BLE devices discovered during scanning
-     * List discovered BLE devices
-     */
-    public listBleDevices(_options?: PromiseConfigurationOptions): Promise<ListBLEDevicesResponseBody> {
-        const observableOptions = wrapOptions(_options);
-        const result = this.api.listBleDevices(observableOptions);
-        return result.toPromise();
-    }
-
-    /**
      */
     public listExecutablesWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<ListExecutablesResponseBody>> {
         const observableOptions = wrapOptions(_options);
@@ -136,48 +111,6 @@ export class PromiseDefaultApi {
     public putConfig(Config: Config, _options?: PromiseConfigurationOptions): Promise<Config> {
         const observableOptions = wrapOptions(_options);
         const result = this.api.putConfig(Config, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Start scanning for BLE devices that can act as peripherals
-     * Start BLE device scan
-     * @param StartBLEScanRequestBody
-     */
-    public startBleScanWithHttpInfo(StartBLEScanRequestBody: StartBLEScanRequestBody, _options?: PromiseConfigurationOptions): Promise<HttpInfo<StartBLEScanResponseBody>> {
-        const observableOptions = wrapOptions(_options);
-        const result = this.api.startBleScanWithHttpInfo(StartBLEScanRequestBody, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Start scanning for BLE devices that can act as peripherals
-     * Start BLE device scan
-     * @param StartBLEScanRequestBody
-     */
-    public startBleScan(StartBLEScanRequestBody: StartBLEScanRequestBody, _options?: PromiseConfigurationOptions): Promise<StartBLEScanResponseBody> {
-        const observableOptions = wrapOptions(_options);
-        const result = this.api.startBleScan(StartBLEScanRequestBody, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Stop the current BLE device scan
-     * Stop BLE device scan
-     */
-    public stopBleScanWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<StopBLEScanResponseBody>> {
-        const observableOptions = wrapOptions(_options);
-        const result = this.api.stopBleScanWithHttpInfo(observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Stop the current BLE device scan
-     * Stop BLE device scan
-     */
-    public stopBleScan(_options?: PromiseConfigurationOptions): Promise<StopBLEScanResponseBody> {
-        const observableOptions = wrapOptions(_options);
-        const result = this.api.stopBleScan(observableOptions);
         return result.toPromise();
     }
 

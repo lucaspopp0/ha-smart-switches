@@ -14,7 +14,6 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/api/middleware"
-	"github.com/lucaspopp0/ha-smart-switches/smart-switches/ble"
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/config"
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/homeassistant"
 	"github.com/lucaspopp0/ha-smart-switches/smart-switches/model"
@@ -39,8 +38,6 @@ type server struct {
 
 	mExecutables sync.Mutex
 	executables  homeassistant.Executables
-
-	bleService *ble.Service
 
 	scripts []string
 }
@@ -73,17 +70,6 @@ func (s *server) onStart() {
 
 	if err != nil {
 		fmt.Printf("Home assistant service call failed: %v\n", err.Error())
-	}
-
-	// Skip BLE initialization in local development mode
-	if os.Getenv(envLocal) != "true" {
-		fmt.Println("Initializing BLE service...")
-		s.bleService, err = ble.NewService()
-		if err != nil {
-			fmt.Printf("Failed to initialize BLE service: %v\n", err.Error())
-		}
-	} else {
-		fmt.Println("Skipping BLE service in local mode")
 	}
 
 	addonInfo, err := s.ha.GetAddOnInfo("self")

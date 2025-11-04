@@ -4,18 +4,13 @@ import type { Middleware } from '../middleware';
 
 import { Command } from '../models/Command';
 import { Config } from '../models/Config';
-import { Device } from '../models/Device';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ErrorModel } from '../models/ErrorModel';
 import { Executable } from '../models/Executable';
 import { LayoutDefinition } from '../models/LayoutDefinition';
 import { LayoutInstance } from '../models/LayoutInstance';
-import { ListBLEDevicesResponseBody } from '../models/ListBLEDevicesResponseBody';
 import { ListExecutablesResponseBody } from '../models/ListExecutablesResponseBody';
 import { PostPressRequestBody } from '../models/PostPressRequestBody';
-import { StartBLEScanRequestBody } from '../models/StartBLEScanRequestBody';
-import { StartBLEScanResponseBody } from '../models/StartBLEScanResponseBody';
-import { StopBLEScanResponseBody } from '../models/StopBLEScanResponseBody';
 import { Switch } from '../models/Switch';
 
 import { ObservableDefaultApi } from "./ObservableAPI";
@@ -25,9 +20,6 @@ export interface DefaultApiGetConfigRequest {
 }
 
 export interface DefaultApiGetLayoutDefinitionsRequest {
-}
-
-export interface DefaultApiListBleDevicesRequest {
 }
 
 export interface DefaultApiListExecutablesRequest {
@@ -49,18 +41,6 @@ export interface DefaultApiPutConfigRequest {
      * @memberof DefaultApiputConfig
      */
     Config: Config
-}
-
-export interface DefaultApiStartBleScanRequest {
-    /**
-     * 
-     * @type StartBLEScanRequestBody
-     * @memberof DefaultApistartBleScan
-     */
-    StartBLEScanRequestBody: StartBLEScanRequestBody
-}
-
-export interface DefaultApiStopBleScanRequest {
 }
 
 export class ObjectDefaultApi {
@@ -103,24 +83,6 @@ export class ObjectDefaultApi {
     }
 
     /**
-     * Get a list of all BLE devices discovered during scanning
-     * List discovered BLE devices
-     * @param param the request object
-     */
-    public listBleDevicesWithHttpInfo(param: DefaultApiListBleDevicesRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<ListBLEDevicesResponseBody>> {
-        return this.api.listBleDevicesWithHttpInfo( options).toPromise();
-    }
-
-    /**
-     * Get a list of all BLE devices discovered during scanning
-     * List discovered BLE devices
-     * @param param the request object
-     */
-    public listBleDevices(param: DefaultApiListBleDevicesRequest = {}, options?: ConfigurationOptions): Promise<ListBLEDevicesResponseBody> {
-        return this.api.listBleDevices( options).toPromise();
-    }
-
-    /**
      * @param param the request object
      */
     public listExecutablesWithHttpInfo(param: DefaultApiListExecutablesRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<ListExecutablesResponseBody>> {
@@ -160,42 +122,6 @@ export class ObjectDefaultApi {
      */
     public putConfig(param: DefaultApiPutConfigRequest, options?: ConfigurationOptions): Promise<Config> {
         return this.api.putConfig(param.Config,  options).toPromise();
-    }
-
-    /**
-     * Start scanning for BLE devices that can act as peripherals
-     * Start BLE device scan
-     * @param param the request object
-     */
-    public startBleScanWithHttpInfo(param: DefaultApiStartBleScanRequest, options?: ConfigurationOptions): Promise<HttpInfo<StartBLEScanResponseBody>> {
-        return this.api.startBleScanWithHttpInfo(param.StartBLEScanRequestBody,  options).toPromise();
-    }
-
-    /**
-     * Start scanning for BLE devices that can act as peripherals
-     * Start BLE device scan
-     * @param param the request object
-     */
-    public startBleScan(param: DefaultApiStartBleScanRequest, options?: ConfigurationOptions): Promise<StartBLEScanResponseBody> {
-        return this.api.startBleScan(param.StartBLEScanRequestBody,  options).toPromise();
-    }
-
-    /**
-     * Stop the current BLE device scan
-     * Stop BLE device scan
-     * @param param the request object
-     */
-    public stopBleScanWithHttpInfo(param: DefaultApiStopBleScanRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<StopBLEScanResponseBody>> {
-        return this.api.stopBleScanWithHttpInfo( options).toPromise();
-    }
-
-    /**
-     * Stop the current BLE device scan
-     * Stop BLE device scan
-     * @param param the request object
-     */
-    public stopBleScan(param: DefaultApiStopBleScanRequest = {}, options?: ConfigurationOptions): Promise<StopBLEScanResponseBody> {
-        return this.api.stopBleScan( options).toPromise();
     }
 
 }
