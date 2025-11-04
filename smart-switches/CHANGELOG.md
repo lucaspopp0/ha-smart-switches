@@ -1,6 +1,9 @@
+# v1.4.8
+ * [`4007d49`](https://github.com/lucaspopp0/ha-smart-switches/commit/4007d49) chore(deps): update site (#84)
+
+
 # v1.4.7
  * [`04afbed`](https://github.com/lucaspopp0/ha-smart-switches/commit/04afbed) chore(deps): update github-actions (major) (#88)
-
  * [`84523dc`](https://github.com/lucaspopp0/ha-smart-switches/commit/84523dc) fix: Rebuild site with dark mode changes (#91)
 
 # v1.4.5
