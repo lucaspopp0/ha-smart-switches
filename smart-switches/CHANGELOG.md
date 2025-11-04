@@ -1,6 +1,9 @@
+# v1.4.2
+ * [`e294d7b`](https://github.com/lucaspopp0/ha-smart-switches/commit/e294d7b) fix: Handle empty configs (#86)
+
+
 # v1.4.1
  * [`352dda9`](https://github.com/lucaspopp0/ha-smart-switches/commit/352dda9) fix(deps): update go-server (#85)
-
 
 # v1.4.0
  * [`95af520`](https://github.com/lucaspopp0/ha-smart-switches/commit/95af520) (MINOR) Simpler configuration (#83)
