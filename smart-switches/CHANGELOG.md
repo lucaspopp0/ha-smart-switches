@@ -1,6 +1,10 @@
+# v1.4.11
+ * [`4ae2cbe`](https://github.com/lucaspopp0/ha-smart-switches/commit/4ae2cbe) fix(deps): update module github.com/danielgtaylor/huma/v2 to v2.34.1 (#98)
+
+ * [`3353813`](https://github.com/lucaspopp0/ha-smart-switches/commit/3353813) memories
+
 # v1.4.9
  * [`7534335`](https://github.com/lucaspopp0/ha-smart-switches/commit/7534335) Revert dark mode (#92)
-
 
 # v1.4.8
  * [`4007d49`](https://github.com/lucaspopp0/ha-smart-switches/commit/4007d49) chore(deps): update site (#84)
