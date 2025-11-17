@@ -1,6 +1,9 @@
+# v1.4.12
+ * [`4189e97`](https://github.com/lucaspopp0/ha-smart-switches/commit/4189e97) chore(deps): update site (#100)
+
+
 # v1.4.11
  * [`4ae2cbe`](https://github.com/lucaspopp0/ha-smart-switches/commit/4ae2cbe) fix(deps): update module github.com/danielgtaylor/huma/v2 to v2.34.1 (#98)
-
  * [`3353813`](https://github.com/lucaspopp0/ha-smart-switches/commit/3353813) memories
 
 # v1.4.9
