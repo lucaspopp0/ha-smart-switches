@@ -1,6 +1,9 @@
+# v1.4.14
+ * [`90e12a9`](https://github.com/lucaspopp0/ha-smart-switches/commit/90e12a9) fix(deps): update module github.com/spf13/cobra to v1.10.2 (#105)
+
+
 # v1.4.13
  * [`79cdf49`](https://github.com/lucaspopp0/ha-smart-switches/commit/79cdf49) chore(deps): update planetscale/ghcommit-action action to v0.2.19 (#102)
-
 
 # v1.4.12
  * [`4189e97`](https://github.com/lucaspopp0/ha-smart-switches/commit/4189e97) chore(deps): update site (#100)
