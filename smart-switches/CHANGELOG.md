@@ -1,6 +1,9 @@
+# v1.4.16
+ * [`0d3818e`](https://github.com/lucaspopp0/ha-smart-switches/commit/0d3818e) chore(deps): update docker/setup-buildx-action action to v3.12.0 (#107)
+
+
 # v1.4.15
  * [`29d2eac`](https://github.com/lucaspopp0/ha-smart-switches/commit/29d2eac) fix(deps): update module github.com/gabriel-vasile/mimetype to v1.4.12 (#106)
-
 
 # v1.4.14
  * [`90e12a9`](https://github.com/lucaspopp0/ha-smart-switches/commit/90e12a9) fix(deps): update module github.com/spf13/cobra to v1.10.2 (#105)
