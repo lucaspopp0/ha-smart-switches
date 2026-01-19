@@ -1,6 +1,9 @@
+# v1.4.18
+ * [`4ab818a`](https://github.com/lucaspopp0/ha-smart-switches/commit/4ab818a) fix(deps): update module github.com/go-chi/chi/v5 to v5.2.4 (#109)
+
+
 # v1.4.17
  * [`7c5e316`](https://github.com/lucaspopp0/ha-smart-switches/commit/7c5e316) chore(deps): update planetscale/ghcommit-action action to v0.2.20 (#108)
-
 
 # v1.4.16
  * [`0d3818e`](https://github.com/lucaspopp0/ha-smart-switches/commit/0d3818e) chore(deps): update docker/setup-buildx-action action to v3.12.0 (#107)
