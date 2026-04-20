@@ -1,6 +1,9 @@
+# v1.4.23
+ * [`7c0956a`](https://github.com/lucaspopp0/ha-smart-switches/commit/7c0956a) Update module github.com/danielgtaylor/huma/v2 to v2.37.3 (#116)
+
+
 # v1.4.22
  * [`df1f693`](https://github.com/lucaspopp0/ha-smart-switches/commit/df1f693) fix(deps): update module github.com/danielgtaylor/huma/v2 to v2.37.2 (#115)
-
 
 # v1.4.21
  * [`031df14`](https://github.com/lucaspopp0/ha-smart-switches/commit/031df14) chore(deps): update golang docker tag to v1.26 (#114)
