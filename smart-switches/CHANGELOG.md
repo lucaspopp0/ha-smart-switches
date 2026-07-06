@@ -1,6 +1,8 @@
 # v1.4.126
- * [`dfcdb42`](https://github.com/lucaspopp0/ha-smart-switches/commit/dfcdb42) [bot] v1.4.125
+ * [`9944cec`](https://github.com/lucaspopp0/ha-smart-switches/commit/9944cec) [bot] v1.4.126
 
+
+# v1.4.125
 
 # v1.4.125
 
