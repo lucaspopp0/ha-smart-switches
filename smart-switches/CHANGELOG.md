@@ -1,6 +1,8 @@
-# v1.4.45
- * [`ccb47de`](https://github.com/lucaspopp0/ha-smart-switches/commit/ccb47de) [bot] v1.4.45
+# v1.4.46
+ * [`2d9a840`](https://github.com/lucaspopp0/ha-smart-switches/commit/2d9a840) [bot] v1.4.45
 
+
+# v1.4.45
 
 # v1.4.44
 
