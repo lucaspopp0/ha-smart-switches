@@ -1,6 +1,8 @@
 # v1.4.241
- * [`b402def`](https://github.com/lucaspopp0/ha-smart-switches/commit/b402def) [bot] v1.4.240
+ * [`3d3240e`](https://github.com/lucaspopp0/ha-smart-switches/commit/3d3240e) [bot] v1.4.241
 
+
+# v1.4.240
 
 # v1.4.240
 
