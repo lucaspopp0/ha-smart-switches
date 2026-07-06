@@ -1,6 +1,8 @@
-# v1.4.97
- * [`dbdeb87`](https://github.com/lucaspopp0/ha-smart-switches/commit/dbdeb87) [bot] v1.4.97
+# v1.4.98
+ * [`860c68f`](https://github.com/lucaspopp0/ha-smart-switches/commit/860c68f) [bot] v1.4.97
 
+
+# v1.4.97
 
 # v1.4.96
 
