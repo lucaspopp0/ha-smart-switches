@@ -1,6 +1,8 @@
 # v1.4.34
- * [`db855cd`](https://github.com/lucaspopp0/ha-smart-switches/commit/db855cd) [bot] v1.4.33
+ * [`1180902`](https://github.com/lucaspopp0/ha-smart-switches/commit/1180902) [bot] v1.4.34
 
+
+# v1.4.33
 
 # v1.4.33
 
