@@ -1,6 +1,8 @@
-# v1.4.838
- * [`fdac298`](https://github.com/lucaspopp0/ha-smart-switches/commit/fdac298) [bot] v1.4.838
+# v1.4.839
+ * [`c135e93`](https://github.com/lucaspopp0/ha-smart-switches/commit/c135e93) [bot] v1.4.838
 
+
+# v1.4.838
 
 # v1.4.837
 
