@@ -1,6 +1,8 @@
 # v1.4.250
- * [`fd73cad`](https://github.com/lucaspopp0/ha-smart-switches/commit/fd73cad) [bot] v1.4.249
+ * [`9070339`](https://github.com/lucaspopp0/ha-smart-switches/commit/9070339) [bot] v1.4.250
 
+
+# v1.4.249
 
 # v1.4.249
 
