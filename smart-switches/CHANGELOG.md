@@ -1,6 +1,9 @@
+# v1.4.25
+ * [`634082c`](https://github.com/lucaspopp0/ha-smart-switches/commit/634082c) Update module github.com/go-chi/chi/v5 to v5.3.0 (#119)
+
+
 # v1.4.24
  * [`4fec9d6`](https://github.com/lucaspopp0/ha-smart-switches/commit/4fec9d6) Update module github.com/danielgtaylor/huma/v2 to v2.38.0 (#118)
-
 
 # v1.4.23
  * [`7c0956a`](https://github.com/lucaspopp0/ha-smart-switches/commit/7c0956a) Update module github.com/danielgtaylor/huma/v2 to v2.37.3 (#116)
