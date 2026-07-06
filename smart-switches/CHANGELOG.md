@@ -1,6 +1,8 @@
 # v1.4.26
- * [`e08a6b5`](https://github.com/lucaspopp0/ha-smart-switches/commit/e08a6b5) [bot] v1.4.25
+ * [`71673d2`](https://github.com/lucaspopp0/ha-smart-switches/commit/71673d2) [bot] v1.4.26
 
+
+# v1.4.25
 
 # v1.4.25
  * [`634082c`](https://github.com/lucaspopp0/ha-smart-switches/commit/634082c) Update module github.com/go-chi/chi/v5 to v5.3.0 (#119)
