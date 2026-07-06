@@ -1,6 +1,8 @@
-# v1.4.702
- * [`e381cdc`](https://github.com/lucaspopp0/ha-smart-switches/commit/e381cdc) [bot] v1.4.702
+# v1.4.703
+ * [`e420e76`](https://github.com/lucaspopp0/ha-smart-switches/commit/e420e76) [bot] v1.4.702
 
+
+# v1.4.702
 
 # v1.4.701
 
