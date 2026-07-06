@@ -1,6 +1,8 @@
 # v1.4.192
- * [`c270dea`](https://github.com/lucaspopp0/ha-smart-switches/commit/c270dea) [bot] v1.4.191
+ * [`06c9d60`](https://github.com/lucaspopp0/ha-smart-switches/commit/06c9d60) [bot] v1.4.192
 
+
+# v1.4.191
 
 # v1.4.191
 
