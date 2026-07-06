@@ -1,6 +1,8 @@
-# v1.4.611
- * [`aaec4ca`](https://github.com/lucaspopp0/ha-smart-switches/commit/aaec4ca) [bot] v1.4.611
+# v1.4.612
+ * [`00197ef`](https://github.com/lucaspopp0/ha-smart-switches/commit/00197ef) [bot] v1.4.611
 
+
+# v1.4.611
 
 # v1.4.610
 
