@@ -1,6 +1,8 @@
-# v1.4.945
- * [`dd265ed`](https://github.com/lucaspopp0/ha-smart-switches/commit/dd265ed) [bot] v1.4.945
+# v1.4.946
+ * [`eb64a13`](https://github.com/lucaspopp0/ha-smart-switches/commit/eb64a13) [bot] v1.4.945
 
+
+# v1.4.945
 
 # v1.4.944
 
