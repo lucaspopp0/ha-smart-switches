@@ -1,6 +1,8 @@
-# v1.4.1006
- * [`744deaf`](https://github.com/lucaspopp0/ha-smart-switches/commit/744deaf) [bot] v1.4.1006
+# v1.4.1007
+ * [`f40c7a9`](https://github.com/lucaspopp0/ha-smart-switches/commit/f40c7a9) [bot] v1.4.1006
 
+
+# v1.4.1006
 
 # v1.4.1005
 
