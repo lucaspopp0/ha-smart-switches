@@ -1,6 +1,8 @@
-# v1.4.1255
- * [`cac144da`](https://github.com/lucaspopp0/ha-smart-switches/commit/cac144da) [bot] v1.4.1255
+# v1.4.1256
+ * [`1bc57a1d`](https://github.com/lucaspopp0/ha-smart-switches/commit/1bc57a1d) [bot] v1.4.1255
 
+
+# v1.4.1255
 
 # v1.4.1254
 
