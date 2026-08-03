@@ -1,6 +1,8 @@
-# v1.4.1144
- * [`cdf269b`](https://github.com/lucaspopp0/ha-smart-switches/commit/cdf269b) [bot] v1.4.1144
+# v1.4.1145
+ * [`ba62727`](https://github.com/lucaspopp0/ha-smart-switches/commit/ba62727) [bot] v1.4.1144
 
+
+# v1.4.1144
 
 # v1.4.1143
 
