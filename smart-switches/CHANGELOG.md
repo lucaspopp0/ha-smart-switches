@@ -1,6 +1,8 @@
-# v1.4.1686
- * [`e2df5fad`](https://github.com/lucaspopp0/ha-smart-switches/commit/e2df5fad) [bot] v1.4.1686
+# v1.4.1687
+ * [`daa50e94`](https://github.com/lucaspopp0/ha-smart-switches/commit/daa50e94) [bot] v1.4.1686
 
+
+# v1.4.1686
 
 # v1.4.1685
 
