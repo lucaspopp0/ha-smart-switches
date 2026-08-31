@@ -1,6 +1,8 @@
-# v1.4.2945
- * [`42c2d3a6`](https://github.com/lucaspopp0/ha-smart-switches/commit/42c2d3a6) [bot] v1.4.2945
+# v1.4.2946
+ * [`a651f177`](https://github.com/lucaspopp0/ha-smart-switches/commit/a651f177) [bot] v1.4.2945
 
+
+# v1.4.2945
 
 # v1.4.2944
 
