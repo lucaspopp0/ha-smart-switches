@@ -1,6 +1,8 @@
 # v1.4.1972
- * [`eacfdf09`](https://github.com/lucaspopp0/ha-smart-switches/commit/eacfdf09) [bot] v1.4.1971
+ * [`ae42361a`](https://github.com/lucaspopp0/ha-smart-switches/commit/ae42361a) [bot] v1.4.1972
 
+
+# v1.4.1971
 
 # v1.4.1971
 
