@@ -1,6 +1,8 @@
-# v1.4.2843
- * [`cfd45add`](https://github.com/lucaspopp0/ha-smart-switches/commit/cfd45add) [bot] v1.4.2843
+# v1.4.2844
+ * [`f89d58fc`](https://github.com/lucaspopp0/ha-smart-switches/commit/f89d58fc) [bot] v1.4.2843
 
+
+# v1.4.2843
 
 # v1.4.2842
 
