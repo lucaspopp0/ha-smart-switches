@@ -1,6 +1,8 @@
-# v1.4.1997
- * [`cc77c222`](https://github.com/lucaspopp0/ha-smart-switches/commit/cc77c222) [bot] v1.4.1997
+# v1.4.1998
+ * [`c3e9dfd4`](https://github.com/lucaspopp0/ha-smart-switches/commit/c3e9dfd4) [bot] v1.4.1997
 
+
+# v1.4.1997
 
 # v1.4.1996
 
