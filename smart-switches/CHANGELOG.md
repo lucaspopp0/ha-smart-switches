@@ -1,6 +1,8 @@
-# v1.4.2116
- * [`edb3435f`](https://github.com/lucaspopp0/ha-smart-switches/commit/edb3435f) [bot] v1.4.2116
+# v1.4.2117
+ * [`46b2081c`](https://github.com/lucaspopp0/ha-smart-switches/commit/46b2081c) [bot] v1.4.2116
 
+
+# v1.4.2116
 
 # v1.4.2115
 
