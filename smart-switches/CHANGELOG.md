@@ -1,6 +1,8 @@
 # v1.4.2681
- * [`dfc6590c`](https://github.com/lucaspopp0/ha-smart-switches/commit/dfc6590c) [bot] v1.4.2680
+ * [`dd8a1270`](https://github.com/lucaspopp0/ha-smart-switches/commit/dd8a1270) [bot] v1.4.2681
 
+
+# v1.4.2680
 
 # v1.4.2680
 
