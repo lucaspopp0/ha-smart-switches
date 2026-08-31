@@ -1,6 +1,8 @@
-# v1.4.2159
- * [`eecafe8a`](https://github.com/lucaspopp0/ha-smart-switches/commit/eecafe8a) [bot] v1.4.2159
+# v1.4.2160
+ * [`31de9fe2`](https://github.com/lucaspopp0/ha-smart-switches/commit/31de9fe2) [bot] v1.4.2159
 
+
+# v1.4.2159
 
 # v1.4.2158
 
