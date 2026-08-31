@@ -1,6 +1,8 @@
-# v1.4.2908
- * [`fedbca11`](https://github.com/lucaspopp0/ha-smart-switches/commit/fedbca11) [bot] v1.4.2908
+# v1.4.2909
+ * [`7ef877e2`](https://github.com/lucaspopp0/ha-smart-switches/commit/7ef877e2) [bot] v1.4.2908
 
+
+# v1.4.2908
 
 # v1.4.2907
 
