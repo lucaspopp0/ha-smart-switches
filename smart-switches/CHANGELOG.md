@@ -1,6 +1,8 @@
 # v1.4.2327
- * [`eacccefc`](https://github.com/lucaspopp0/ha-smart-switches/commit/eacccefc) [bot] v1.4.2326
+ * [`e8979a66`](https://github.com/lucaspopp0/ha-smart-switches/commit/e8979a66) [bot] v1.4.2327
 
+
+# v1.4.2326
 
 # v1.4.2326
 
