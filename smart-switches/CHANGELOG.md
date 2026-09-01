@@ -1,6 +1,8 @@
-# v1.4.4019
- * [`fc811cbd`](https://github.com/lucaspopp0/ha-smart-switches/commit/fc811cbd) [bot] v1.4.4019
+# v1.4.4020
+ * [`336145ff`](https://github.com/lucaspopp0/ha-smart-switches/commit/336145ff) [bot] v1.4.4019
 
+
+# v1.4.4019
 
 # v1.4.4018
 
