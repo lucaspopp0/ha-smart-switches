@@ -1,6 +1,8 @@
 # v1.4.4888
- * [`daff7561`](https://github.com/lucaspopp0/ha-smart-switches/commit/daff7561) [bot] v1.4.4887
+ * [`9fb90459`](https://github.com/lucaspopp0/ha-smart-switches/commit/9fb90459) [bot] v1.4.4888
 
+
+# v1.4.4887
 
 # v1.4.4887
 
