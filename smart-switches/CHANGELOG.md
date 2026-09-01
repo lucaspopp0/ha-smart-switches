@@ -1,6 +1,8 @@
-# v1.4.3839
- * [`feca795c`](https://github.com/lucaspopp0/ha-smart-switches/commit/feca795c) [bot] v1.4.3839
+# v1.4.3840
+ * [`0dedb354`](https://github.com/lucaspopp0/ha-smart-switches/commit/0dedb354) [bot] v1.4.3839
 
+
+# v1.4.3839
 
 # v1.4.3838
 
