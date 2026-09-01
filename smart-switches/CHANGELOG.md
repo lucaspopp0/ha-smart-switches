@@ -1,6 +1,8 @@
-# v1.4.4564
- * [`b3d74bed`](https://github.com/lucaspopp0/ha-smart-switches/commit/b3d74bed) [bot] v1.4.4564
+# v1.4.4565
+ * [`ccfdaf4f`](https://github.com/lucaspopp0/ha-smart-switches/commit/ccfdaf4f) [bot] v1.4.4564
 
+
+# v1.4.4564
 
 # v1.4.4563
 
