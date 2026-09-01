@@ -1,6 +1,8 @@
 # v1.4.4269
- * [`fda85cca`](https://github.com/lucaspopp0/ha-smart-switches/commit/fda85cca) [bot] v1.4.4268
+ * [`735c3b58`](https://github.com/lucaspopp0/ha-smart-switches/commit/735c3b58) [bot] v1.4.4269
 
+
+# v1.4.4268
 
 # v1.4.4268
 
