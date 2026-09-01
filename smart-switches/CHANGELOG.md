@@ -1,6 +1,8 @@
 # v1.4.4610
- * [`ca365dbc`](https://github.com/lucaspopp0/ha-smart-switches/commit/ca365dbc) [bot] v1.4.4609
+ * [`ea3d7359`](https://github.com/lucaspopp0/ha-smart-switches/commit/ea3d7359) [bot] v1.4.4610
 
+
+# v1.4.4609
 
 # v1.4.4609
 
