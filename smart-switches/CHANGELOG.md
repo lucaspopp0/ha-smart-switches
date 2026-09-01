@@ -1,6 +1,8 @@
-# v1.4.3610
- * [`ca3facab`](https://github.com/lucaspopp0/ha-smart-switches/commit/ca3facab) [bot] v1.4.3610
+# v1.4.3611
+ * [`372f1482`](https://github.com/lucaspopp0/ha-smart-switches/commit/372f1482) [bot] v1.4.3610
 
+
+# v1.4.3610
 
 # v1.4.3609
 
