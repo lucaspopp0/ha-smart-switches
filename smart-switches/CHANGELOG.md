@@ -1,6 +1,8 @@
 # v1.4.3710
- * [`dbadfcec`](https://github.com/lucaspopp0/ha-smart-switches/commit/dbadfcec) [bot] v1.4.3709
+ * [`70592b80`](https://github.com/lucaspopp0/ha-smart-switches/commit/70592b80) [bot] v1.4.3710
 
+
+# v1.4.3709
 
 # v1.4.3709
 
