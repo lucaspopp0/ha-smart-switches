@@ -1,6 +1,8 @@
-# v1.4.3420
- * [`4d4cad50`](https://github.com/lucaspopp0/ha-smart-switches/commit/4d4cad50) [bot] v1.4.3420
+# v1.4.3421
+ * [`fcaec0e8`](https://github.com/lucaspopp0/ha-smart-switches/commit/fcaec0e8) [bot] v1.4.3420
 
+
+# v1.4.3420
 
 # v1.4.3419
 
