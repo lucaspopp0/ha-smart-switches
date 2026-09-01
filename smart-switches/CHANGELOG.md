@@ -1,6 +1,8 @@
-# v1.4.3788
- * [`dd362cab`](https://github.com/lucaspopp0/ha-smart-switches/commit/dd362cab) [bot] v1.4.3788
+# v1.4.3789
+ * [`026cc9ba`](https://github.com/lucaspopp0/ha-smart-switches/commit/026cc9ba) [bot] v1.4.3788
 
+
+# v1.4.3788
 
 # v1.4.3787
 
