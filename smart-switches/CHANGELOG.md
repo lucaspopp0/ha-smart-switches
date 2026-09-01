@@ -1,6 +1,8 @@
 # v1.4.4006
- * [`df168c08`](https://github.com/lucaspopp0/ha-smart-switches/commit/df168c08) [bot] v1.4.4005
+ * [`ba1fd2c7`](https://github.com/lucaspopp0/ha-smart-switches/commit/ba1fd2c7) [bot] v1.4.4006
 
+
+# v1.4.4005
 
 # v1.4.4005
 
