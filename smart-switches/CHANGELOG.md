@@ -1,6 +1,8 @@
-# v1.4.5025
- * [`08cfdbdb`](https://github.com/lucaspopp0/ha-smart-switches/commit/08cfdbdb) [bot] v1.4.5025
+# v1.4.5026
+ * [`d7c3e1bb`](https://github.com/lucaspopp0/ha-smart-switches/commit/d7c3e1bb) [bot] v1.4.5025
 
+
+# v1.4.5025
 
 # v1.4.5024
 
