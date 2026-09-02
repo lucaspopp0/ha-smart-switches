@@ -1,6 +1,8 @@
-# v1.4.5605
- * [`cdb4000d`](https://github.com/lucaspopp0/ha-smart-switches/commit/cdb4000d) [bot] v1.4.5605
+# v1.4.5606
+ * [`89775446`](https://github.com/lucaspopp0/ha-smart-switches/commit/89775446) [bot] v1.4.5605
 
+
+# v1.4.5605
 
 # v1.4.5604
 
