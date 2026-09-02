@@ -1,4 +1,4 @@
-FROM golang:1.26
+FROM golang:1.27
 
 # Install Delve debugger
 RUN go install github.com/go-delve/delve/cmd/dlv@latest
