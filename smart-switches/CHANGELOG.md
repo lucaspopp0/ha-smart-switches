@@ -1,6 +1,8 @@
-# v1.4.5448
- * [`cec48df6`](https://github.com/lucaspopp0/ha-smart-switches/commit/cec48df6) [bot] v1.4.5448
+# v1.4.5449
+ * [`02124711`](https://github.com/lucaspopp0/ha-smart-switches/commit/02124711) [bot] v1.4.5448
 
+
+# v1.4.5448
 
 # v1.4.5447
 
