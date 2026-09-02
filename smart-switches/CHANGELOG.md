@@ -1,6 +1,7 @@
 # v1.4.5119
- * [`dae9167a`](https://github.com/lucaspopp0/ha-smart-switches/commit/dae9167a) Update golang Docker tag to v1.27 (#124)
+ * [`19bd0cd7`](https://github.com/lucaspopp0/ha-smart-switches/commit/19bd0cd7) [bot] v1.4.5119
 
+ * [`dae9167a`](https://github.com/lucaspopp0/ha-smart-switches/commit/dae9167a) Update golang Docker tag to v1.27 (#124)
 
 # v1.4.5117
 
