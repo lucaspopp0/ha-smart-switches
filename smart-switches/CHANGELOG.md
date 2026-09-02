@@ -1,6 +1,8 @@
-# v1.4.5159
- * [`c323ebed`](https://github.com/lucaspopp0/ha-smart-switches/commit/c323ebed) [bot] v1.4.5159
+# v1.4.5160
+ * [`c0cc525a`](https://github.com/lucaspopp0/ha-smart-switches/commit/c0cc525a) [bot] v1.4.5159
 
+
+# v1.4.5159
 
 # v1.4.5158
 
