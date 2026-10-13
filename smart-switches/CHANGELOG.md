@@ -1,6 +1,8 @@
-# v1.4.5773
- * [`97a87500`](https://github.com/lucaspopp0/ha-smart-switches/commit/97a87500) [bot] v1.4.5773
+# v1.4.5774
+ * [`e952947f`](https://github.com/lucaspopp0/ha-smart-switches/commit/e952947f) [bot] v1.4.5773
 
+
+# v1.4.5773
  * [`2f091819`](https://github.com/lucaspopp0/ha-smart-switches/commit/2f091819) Update module golang.org/x/net to v0.55.0 [SECURITY] (#125)
 
 # v1.4.5771
