@@ -1,6 +1,8 @@
-# v1.4.5775
- * [`df253556`](https://github.com/lucaspopp0/ha-smart-switches/commit/df253556) [bot] v1.4.5775
+# v1.4.5776
+ * [`438cbabf`](https://github.com/lucaspopp0/ha-smart-switches/commit/438cbabf) [bot] v1.4.5775
 
+
+# v1.4.5775
 
 # v1.4.5774
 
