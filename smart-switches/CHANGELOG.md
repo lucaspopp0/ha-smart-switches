@@ -1,6 +1,8 @@
 # v1.4.6468
- * [`ccfe3a60`](https://github.com/lucaspopp0/ha-smart-switches/commit/ccfe3a60) [bot] v1.4.6467
+ * [`da25744e`](https://github.com/lucaspopp0/ha-smart-switches/commit/da25744e) [bot] v1.4.6468
 
+
+# v1.4.6467
 
 # v1.4.6467
 
