@@ -1,6 +1,8 @@
 # v1.4.6191
- * [`e9773458`](https://github.com/lucaspopp0/ha-smart-switches/commit/e9773458) [bot] v1.4.6190
+ * [`cefada64`](https://github.com/lucaspopp0/ha-smart-switches/commit/cefada64) [bot] v1.4.6191
 
+
+# v1.4.6190
 
 # v1.4.6190
 
