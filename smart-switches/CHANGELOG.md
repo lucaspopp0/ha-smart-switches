@@ -1,6 +1,8 @@
-# v1.4.6114
- * [`ea3120fc`](https://github.com/lucaspopp0/ha-smart-switches/commit/ea3120fc) [bot] v1.4.6114
+# v1.4.6115
+ * [`77d364e8`](https://github.com/lucaspopp0/ha-smart-switches/commit/77d364e8) [bot] v1.4.6114
 
+
+# v1.4.6114
 
 # v1.4.6113
 
