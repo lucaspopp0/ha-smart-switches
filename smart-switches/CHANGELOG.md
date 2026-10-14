@@ -1,6 +1,8 @@
-# v1.4.6817
- * [`adb87173c`](https://github.com/lucaspopp0/ha-smart-switches/commit/adb87173c) [bot] v1.4.6817
+# v1.4.6818
+ * [`61b612c06`](https://github.com/lucaspopp0/ha-smart-switches/commit/61b612c06) [bot] v1.4.6817
 
+
+# v1.4.6817
 
 # v1.4.6816
 
