@@ -1,6 +1,8 @@
+# v1.4.6627
+ * [`db5bcbce7`](https://github.com/lucaspopp0/ha-smart-switches/commit/db5bcbce7) [bot] v1.4.6626
+
+
 # v1.4.6626
- * [`8953562b`](https://github.com/lucaspopp0/ha-smart-switches/commit/8953562b) [bot] v1.4.6626
-
 
 # v1.4.6625
 
@@ -3413,7 +3415,7 @@
 # v1.4.5773
 
 # v1.4.5773
- * [`2f091819`](https://github.com/lucaspopp0/ha-smart-switches/commit/2f091819) Update module golang.org/x/net to v0.55.0 [SECURITY] (#125)
+ * [`2f0918194`](https://github.com/lucaspopp0/ha-smart-switches/commit/2f0918194) Update module golang.org/x/net to v0.55.0 [SECURITY] (#125)
 
 # v1.4.5771
 
@@ -6022,7 +6024,7 @@
 # v1.4.5119
 
 # v1.4.5119
- * [`dae9167a`](https://github.com/lucaspopp0/ha-smart-switches/commit/dae9167a) Update golang Docker tag to v1.27 (#124)
+ * [`dae9167ad`](https://github.com/lucaspopp0/ha-smart-switches/commit/dae9167ad) Update golang Docker tag to v1.27 (#124)
 
 # v1.4.5117
 
@@ -19539,7 +19541,7 @@
 # v1.4.1738
 
 # v1.4.1738
- * [`21679f76`](https://github.com/lucaspopp0/ha-smart-switches/commit/21679f76) Update module github.com/go-chi/chi/v5 to v5.3.2 (#123)
+ * [`21679f768`](https://github.com/lucaspopp0/ha-smart-switches/commit/21679f768) Update module github.com/go-chi/chi/v5 to v5.3.2 (#123)
 
 # v1.4.1737
 
@@ -20626,7 +20628,7 @@
 # v1.4.1466
 
 # v1.4.1466
- * [`9d6b4f38`](https://github.com/lucaspopp0/ha-smart-switches/commit/9d6b4f38) Update module github.com/danielgtaylor/huma/v2 to v2.39.1 (#121)
+ * [`9d6b4f383`](https://github.com/lucaspopp0/ha-smart-switches/commit/9d6b4f383) Update module github.com/danielgtaylor/huma/v2 to v2.39.1 (#121)
 
 # v1.4.1465
 
@@ -22745,7 +22747,7 @@
 # v1.4.934
 
 # v1.4.934
- * [`9f2db967`](https://github.com/lucaspopp0/ha-smart-switches/commit/9f2db967) Update module github.com/go-chi/chi/v5 to v5.3.1 (#120)
+ * [`9f2db967f`](https://github.com/lucaspopp0/ha-smart-switches/commit/9f2db967f) Update module github.com/go-chi/chi/v5 to v5.3.1 (#120)
 
 # v1.4.932
 
@@ -26378,537 +26380,537 @@
 # v1.4.25
 
 # v1.4.25
- * [`634082cd`](https://github.com/lucaspopp0/ha-smart-switches/commit/634082cd) Update module github.com/go-chi/chi/v5 to v5.3.0 (#119)
+ * [`634082cd1`](https://github.com/lucaspopp0/ha-smart-switches/commit/634082cd1) Update module github.com/go-chi/chi/v5 to v5.3.0 (#119)
 
 # v1.4.24
- * [`4fec9d68`](https://github.com/lucaspopp0/ha-smart-switches/commit/4fec9d68) Update module github.com/danielgtaylor/huma/v2 to v2.38.0 (#118)
+ * [`4fec9d68c`](https://github.com/lucaspopp0/ha-smart-switches/commit/4fec9d68c) Update module github.com/danielgtaylor/huma/v2 to v2.38.0 (#118)
 
 # v1.4.23
- * [`7c0956a2`](https://github.com/lucaspopp0/ha-smart-switches/commit/7c0956a2) Update module github.com/danielgtaylor/huma/v2 to v2.37.3 (#116)
+ * [`7c0956a28`](https://github.com/lucaspopp0/ha-smart-switches/commit/7c0956a28) Update module github.com/danielgtaylor/huma/v2 to v2.37.3 (#116)
 
 # v1.4.22
- * [`df1f6932`](https://github.com/lucaspopp0/ha-smart-switches/commit/df1f6932) fix(deps): update module github.com/danielgtaylor/huma/v2 to v2.37.2 (#115)
+ * [`df1f69326`](https://github.com/lucaspopp0/ha-smart-switches/commit/df1f69326) fix(deps): update module github.com/danielgtaylor/huma/v2 to v2.37.2 (#115)
 
 # v1.4.21
- * [`031df14e`](https://github.com/lucaspopp0/ha-smart-switches/commit/031df14e) chore(deps): update golang docker tag to v1.26 (#114)
+ * [`031df14e4`](https://github.com/lucaspopp0/ha-smart-switches/commit/031df14e4) chore(deps): update golang docker tag to v1.26 (#114)
 
 # v1.4.20
- * [`c471aa4b`](https://github.com/lucaspopp0/ha-smart-switches/commit/c471aa4b) fix(deps): update module github.com/go-chi/chi/v5 to v5.2.5 (#112)
+ * [`c471aa4bd`](https://github.com/lucaspopp0/ha-smart-switches/commit/c471aa4bd) fix(deps): update module github.com/go-chi/chi/v5 to v5.2.5 (#112)
 
 # v1.4.19
- * [`e52ba832`](https://github.com/lucaspopp0/ha-smart-switches/commit/e52ba832) fix(deps): update module github.com/danielgtaylor/huma/v2 to v2.35.0 (#111)
+ * [`e52ba832c`](https://github.com/lucaspopp0/ha-smart-switches/commit/e52ba832c) fix(deps): update module github.com/danielgtaylor/huma/v2 to v2.35.0 (#111)
 
 # v1.4.18
- * [`4ab818a2`](https://github.com/lucaspopp0/ha-smart-switches/commit/4ab818a2) fix(deps): update module github.com/go-chi/chi/v5 to v5.2.4 (#109)
+ * [`4ab818a2b`](https://github.com/lucaspopp0/ha-smart-switches/commit/4ab818a2b) fix(deps): update module github.com/go-chi/chi/v5 to v5.2.4 (#109)
 
 # v1.4.17
- * [`7c5e316b`](https://github.com/lucaspopp0/ha-smart-switches/commit/7c5e316b) chore(deps): update planetscale/ghcommit-action action to v0.2.20 (#108)
+ * [`7c5e316b8`](https://github.com/lucaspopp0/ha-smart-switches/commit/7c5e316b8) chore(deps): update planetscale/ghcommit-action action to v0.2.20 (#108)
 
 # v1.4.16
- * [`0d3818e2`](https://github.com/lucaspopp0/ha-smart-switches/commit/0d3818e2) chore(deps): update docker/setup-buildx-action action to v3.12.0 (#107)
+ * [`0d3818e2b`](https://github.com/lucaspopp0/ha-smart-switches/commit/0d3818e2b) chore(deps): update docker/setup-buildx-action action to v3.12.0 (#107)
 
 # v1.4.15
- * [`29d2eac0`](https://github.com/lucaspopp0/ha-smart-switches/commit/29d2eac0) fix(deps): update module github.com/gabriel-vasile/mimetype to v1.4.12 (#106)
+ * [`29d2eac08`](https://github.com/lucaspopp0/ha-smart-switches/commit/29d2eac08) fix(deps): update module github.com/gabriel-vasile/mimetype to v1.4.12 (#106)
 
 # v1.4.14
- * [`90e12a92`](https://github.com/lucaspopp0/ha-smart-switches/commit/90e12a92) fix(deps): update module github.com/spf13/cobra to v1.10.2 (#105)
+ * [`90e12a923`](https://github.com/lucaspopp0/ha-smart-switches/commit/90e12a923) fix(deps): update module github.com/spf13/cobra to v1.10.2 (#105)
 
 # v1.4.13
- * [`79cdf49d`](https://github.com/lucaspopp0/ha-smart-switches/commit/79cdf49d) chore(deps): update planetscale/ghcommit-action action to v0.2.19 (#102)
+ * [`79cdf49d2`](https://github.com/lucaspopp0/ha-smart-switches/commit/79cdf49d2) chore(deps): update planetscale/ghcommit-action action to v0.2.19 (#102)
 
 # v1.4.12
- * [`4189e974`](https://github.com/lucaspopp0/ha-smart-switches/commit/4189e974) chore(deps): update site (#100)
+ * [`4189e9744`](https://github.com/lucaspopp0/ha-smart-switches/commit/4189e9744) chore(deps): update site (#100)
 
 # v1.4.11
- * [`4ae2cbe9`](https://github.com/lucaspopp0/ha-smart-switches/commit/4ae2cbe9) fix(deps): update module github.com/danielgtaylor/huma/v2 to v2.34.1 (#98)
- * [`33538137`](https://github.com/lucaspopp0/ha-smart-switches/commit/33538137) memories
+ * [`4ae2cbe95`](https://github.com/lucaspopp0/ha-smart-switches/commit/4ae2cbe95) fix(deps): update module github.com/danielgtaylor/huma/v2 to v2.34.1 (#98)
+ * [`335381372`](https://github.com/lucaspopp0/ha-smart-switches/commit/335381372) memories
 
 # v1.4.9
- * [`7534335a`](https://github.com/lucaspopp0/ha-smart-switches/commit/7534335a) Revert dark mode (#92)
+ * [`7534335aa`](https://github.com/lucaspopp0/ha-smart-switches/commit/7534335aa) Revert dark mode (#92)
 
 # v1.4.8
- * [`4007d499`](https://github.com/lucaspopp0/ha-smart-switches/commit/4007d499) chore(deps): update site (#84)
+ * [`4007d499d`](https://github.com/lucaspopp0/ha-smart-switches/commit/4007d499d) chore(deps): update site (#84)
 
 # v1.4.7
- * [`04afbed5`](https://github.com/lucaspopp0/ha-smart-switches/commit/04afbed5) chore(deps): update github-actions (major) (#88)
- * [`84523dc5`](https://github.com/lucaspopp0/ha-smart-switches/commit/84523dc5) fix: Rebuild site with dark mode changes (#91)
+ * [`04afbed5e`](https://github.com/lucaspopp0/ha-smart-switches/commit/04afbed5e) chore(deps): update github-actions (major) (#88)
+ * [`84523dc50`](https://github.com/lucaspopp0/ha-smart-switches/commit/84523dc50) fix: Rebuild site with dark mode changes (#91)
 
 # v1.4.5
- * [`78942c5b`](https://github.com/lucaspopp0/ha-smart-switches/commit/78942c5b) chore: Remove BLE (#90)
+ * [`78942c5b4`](https://github.com/lucaspopp0/ha-smart-switches/commit/78942c5b4) chore: Remove BLE (#90)
 
 # v1.4.4
- * [`a7be24eb`](https://github.com/lucaspopp0/ha-smart-switches/commit/a7be24eb) feat: Dark mode (#89)
+ * [`a7be24ebb`](https://github.com/lucaspopp0/ha-smart-switches/commit/a7be24ebb) feat: Dark mode (#89)
 
 # v1.4.3
- * [`61cb2b57`](https://github.com/lucaspopp0/ha-smart-switches/commit/61cb2b57) fix: UI updates after config updates (#87)
+ * [`61cb2b576`](https://github.com/lucaspopp0/ha-smart-switches/commit/61cb2b576) fix: UI updates after config updates (#87)
 
 # v1.4.2
- * [`e294d7b2`](https://github.com/lucaspopp0/ha-smart-switches/commit/e294d7b2) fix: Handle empty configs (#86)
+ * [`e294d7b27`](https://github.com/lucaspopp0/ha-smart-switches/commit/e294d7b27) fix: Handle empty configs (#86)
 
 # v1.4.1
- * [`352dda91`](https://github.com/lucaspopp0/ha-smart-switches/commit/352dda91) fix(deps): update go-server (#85)
+ * [`352dda917`](https://github.com/lucaspopp0/ha-smart-switches/commit/352dda917) fix(deps): update go-server (#85)
 
 # v1.4.0
- * [`95af5205`](https://github.com/lucaspopp0/ha-smart-switches/commit/95af5205) (MINOR) Simpler configuration (#83)
+ * [`95af52055`](https://github.com/lucaspopp0/ha-smart-switches/commit/95af52055) (MINOR) Simpler configuration (#83)
 
 # v1.3.4
- * [`e62545cc`](https://github.com/lucaspopp0/ha-smart-switches/commit/e62545cc) fix(deps): update module github.com/go-chi/chi/v5 to v5.2.3 (#81)
+ * [`e62545cc6`](https://github.com/lucaspopp0/ha-smart-switches/commit/e62545cc6) fix(deps): update module github.com/go-chi/chi/v5 to v5.2.3 (#81)
 
 # v1.3.3
- * [`24c7309f`](https://github.com/lucaspopp0/ha-smart-switches/commit/24c7309f) chore(deps): update golang docker tag to v1.25 (#82)
+ * [`24c7309f0`](https://github.com/lucaspopp0/ha-smart-switches/commit/24c7309f0) chore(deps): update golang docker tag to v1.25 (#82)
 
 # v1.3.2
- * [`ac6559ca`](https://github.com/lucaspopp0/ha-smart-switches/commit/ac6559ca) chore(deps): update github-actions (#80)
+ * [`ac6559ca2`](https://github.com/lucaspopp0/ha-smart-switches/commit/ac6559ca2) chore(deps): update github-actions (#80)
 
 # v1.3.1
- * [`65914649`](https://github.com/lucaspopp0/ha-smart-switches/commit/65914649) chore: Debugger, and mockha for local debugging (#79)
+ * [`659146495`](https://github.com/lucaspopp0/ha-smart-switches/commit/659146495) chore: Debugger, and mockha for local debugging (#79)
 
 # v1.3.0
- * [`ac2c8b74`](https://github.com/lucaspopp0/ha-smart-switches/commit/ac2c8b74) (MINOR) New button editor (#78)
+ * [`ac2c8b741`](https://github.com/lucaspopp0/ha-smart-switches/commit/ac2c8b741) (MINOR) New button editor (#78)
 
 # v1.2.2
- * [`bbf0a787`](https://github.com/lucaspopp0/ha-smart-switches/commit/bbf0a787) fix: Unmarshal as cmd (#77)
+ * [`bbf0a7875`](https://github.com/lucaspopp0/ha-smart-switches/commit/bbf0a7875) fix: Unmarshal as cmd (#77)
 
 # v1.2.1
- * [`5a7258b0`](https://github.com/lucaspopp0/ha-smart-switches/commit/5a7258b0) fix: Unescape quotes (#76)
+ * [`5a7258b08`](https://github.com/lucaspopp0/ha-smart-switches/commit/5a7258b08) fix: Unescape quotes (#76)
 
 # v1.2.0
- * [`31173aa0`](https://github.com/lucaspopp0/ha-smart-switches/commit/31173aa0) (MINOR) Minor bump
+ * [`31173aa08`](https://github.com/lucaspopp0/ha-smart-switches/commit/31173aa08) (MINOR) Minor bump
 
 # v1.1.126
- * [`0f33db7e`](https://github.com/lucaspopp0/ha-smart-switches/commit/0f33db7e) feat: Prerelease off
+ * [`0f33db7eb`](https://github.com/lucaspopp0/ha-smart-switches/commit/0f33db7eb) feat: Prerelease off
 
 # v1.1.125
- * [`ea62fa2a`](https://github.com/lucaspopp0/ha-smart-switches/commit/ea62fa2a) log cfg on startup
+ * [`ea62fa2a5`](https://github.com/lucaspopp0/ha-smart-switches/commit/ea62fa2a5) log cfg on startup
 
 # v1.1.124
- * [`f0d6b8a7`](https://github.com/lucaspopp0/ha-smart-switches/commit/f0d6b8a7) usages
- * [`f19d4991`](https://github.com/lucaspopp0/ha-smart-switches/commit/f19d4991) no more incrm version
+ * [`f0d6b8a77`](https://github.com/lucaspopp0/ha-smart-switches/commit/f0d6b8a77) usages
+ * [`f19d4991c`](https://github.com/lucaspopp0/ha-smart-switches/commit/f19d4991c) no more incrm version
 
 # v1.1.123.0
- * [`f5310b3a`](https://github.com/lucaspopp0/ha-smart-switches/commit/f5310b3a) chore: Logging improvements (#75)
+ * [`f5310b3a1`](https://github.com/lucaspopp0/ha-smart-switches/commit/f5310b3a1) chore: Logging improvements (#75)
 
 # v1.1.122.0
- * [`d4e4a8c8`](https://github.com/lucaspopp0/ha-smart-switches/commit/d4e4a8c8) chore: Improved logging (#74)
+ * [`d4e4a8c85`](https://github.com/lucaspopp0/ha-smart-switches/commit/d4e4a8c85) chore: Improved logging (#74)
 
 # v1.1.121.1
- * [`f6e1eceb`](https://github.com/lucaspopp0/ha-smart-switches/commit/f6e1eceb) fix(deps): update module github.com/go-chi/chi/v5 to v5.2.2 [security] (#73)
- * [`4a75b696`](https://github.com/lucaspopp0/ha-smart-switches/commit/4a75b696) ci: Renovate fix (#72)
+ * [`f6e1eceb4`](https://github.com/lucaspopp0/ha-smart-switches/commit/f6e1eceb4) fix(deps): update module github.com/go-chi/chi/v5 to v5.2.2 [security] (#73)
+ * [`4a75b696d`](https://github.com/lucaspopp0/ha-smart-switches/commit/4a75b696d) ci: Renovate fix (#72)
 
 # v1.1.120.0
- * [`52785c0d`](https://github.com/lucaspopp0/ha-smart-switches/commit/52785c0d) feat: Layout v9 (#71)
+ * [`52785c0d7`](https://github.com/lucaspopp0/ha-smart-switches/commit/52785c0d7) feat: Layout v9 (#71)
 
 # v1.1.119.1
- * [`c1024cc9`](https://github.com/lucaspopp0/ha-smart-switches/commit/c1024cc9) feat: RGB colors via new `Command` type (#70)
- * [`5722ba3c`](https://github.com/lucaspopp0/ha-smart-switches/commit/5722ba3c) renovate schedule
+ * [`c1024cc98`](https://github.com/lucaspopp0/ha-smart-switches/commit/c1024cc98) feat: RGB colors via new `Command` type (#70)
+ * [`5722ba3cf`](https://github.com/lucaspopp0/ha-smart-switches/commit/5722ba3cf) renovate schedule
 
 # v1.1.118.0
- * [`cda62b7f`](https://github.com/lucaspopp0/ha-smart-switches/commit/cda62b7f) fix(deps): update dependency antd to v5.25.4 (#67)
+ * [`cda62b7f8`](https://github.com/lucaspopp0/ha-smart-switches/commit/cda62b7f8) fix(deps): update dependency antd to v5.25.4 (#67)
 
 # v1.1.117.0
- * [`6dfb4d44`](https://github.com/lucaspopp0/ha-smart-switches/commit/6dfb4d44) chore(deps): update dependency @types/node to v20.17.57 (#66)
+ * [`6dfb4d44c`](https://github.com/lucaspopp0/ha-smart-switches/commit/6dfb4d44c) chore(deps): update dependency @types/node to v20.17.57 (#66)
 
 # v1.1.116.0
- * [`5252a2b5`](https://github.com/lucaspopp0/ha-smart-switches/commit/5252a2b5) chore(deps): update dependency @types/node to v20.17.56 (#65)
+ * [`5252a2b50`](https://github.com/lucaspopp0/ha-smart-switches/commit/5252a2b50) chore(deps): update dependency @types/node to v20.17.56 (#65)
 
 # v1.1.115.0
- * [`6443e771`](https://github.com/lucaspopp0/ha-smart-switches/commit/6443e771) fix(deps): update dependency zod to v3.25.42 (#64)
+ * [`6443e771a`](https://github.com/lucaspopp0/ha-smart-switches/commit/6443e771a) fix(deps): update dependency zod to v3.25.42 (#64)
 
 # v1.1.114.0
- * [`2aee00ca`](https://github.com/lucaspopp0/ha-smart-switches/commit/2aee00ca) fix(deps): update site (#63)
+ * [`2aee00caf`](https://github.com/lucaspopp0/ha-smart-switches/commit/2aee00caf) fix(deps): update site (#63)
 
 # v1.1.113.0
- * [`a2225d90`](https://github.com/lucaspopp0/ha-smart-switches/commit/a2225d90) final script improvement
+ * [`a2225d90d`](https://github.com/lucaspopp0/ha-smart-switches/commit/a2225d90d) final script improvement
 
 # v1.1.112.0
- * [`c07d3ec4`](https://github.com/lucaspopp0/ha-smart-switches/commit/c07d3ec4) script improvement
+ * [`c07d3ec44`](https://github.com/lucaspopp0/ha-smart-switches/commit/c07d3ec44) script improvement
 
 # v1.1.111.1
- * [`e57268f9`](https://github.com/lucaspopp0/ha-smart-switches/commit/e57268f9) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`a8871638`](https://github.com/lucaspopp0/ha-smart-switches/commit/a8871638) add links to changelog
+ * [`e57268f95`](https://github.com/lucaspopp0/ha-smart-switches/commit/e57268f95) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`a88716384`](https://github.com/lucaspopp0/ha-smart-switches/commit/a88716384) add links to changelog
 
 # v1.1.110.0
- * [`8f5ee6a1`](https://github.com/lucaspopp0/ha-smart-switches/commit/8f5ee6a1) fix(deps): update site (#62)
+ * [`8f5ee6a18`](https://github.com/lucaspopp0/ha-smart-switches/commit/8f5ee6a18) fix(deps): update site (#62)
 
 # v1.1.109.0
- * [`e40eb8fc`](https://github.com/lucaspopp0/ha-smart-switches/commit/e40eb8fc) scanner logs
+ * [`e40eb8fc8`](https://github.com/lucaspopp0/ha-smart-switches/commit/e40eb8fc8) scanner logs
 
 # v1.1.108.0
- * [`37ad57ba`](https://github.com/lucaspopp0/ha-smart-switches/commit/37ad57ba) ble scan logs
+ * [`37ad57ba5`](https://github.com/lucaspopp0/ha-smart-switches/commit/37ad57ba5) ble scan logs
 
 # v1.1.107.0
- * [`d0aea651`](https://github.com/lucaspopp0/ha-smart-switches/commit/d0aea651) fix(deps): update dependency zod to v3.25.36 (#61)
+ * [`d0aea6512`](https://github.com/lucaspopp0/ha-smart-switches/commit/d0aea6512) fix(deps): update dependency zod to v3.25.36 (#61)
 
 # v1.1.106.0
- * [`0f41b73f`](https://github.com/lucaspopp0/ha-smart-switches/commit/0f41b73f) fix openapi path
+ * [`0f41b73fe`](https://github.com/lucaspopp0/ha-smart-switches/commit/0f41b73fe) fix openapi path
 
 # v1.1.105.0
- * [`daf8ee11`](https://github.com/lucaspopp0/ha-smart-switches/commit/daf8ee11) fix(deps): update module github.com/spf13/cobra to v1.9.1 (#57)
+ * [`daf8ee115`](https://github.com/lucaspopp0/ha-smart-switches/commit/daf8ee115) fix(deps): update module github.com/spf13/cobra to v1.9.1 (#57)
 
 # v1.1.104.0
- * [`c4a1dff4`](https://github.com/lucaspopp0/ha-smart-switches/commit/c4a1dff4) changelog fix
+ * [`c4a1dff47`](https://github.com/lucaspopp0/ha-smart-switches/commit/c4a1dff47) changelog fix
 
 # v1.1.103.0
- * [`0523933b`](https://github.com/lucaspopp0/ha-smart-switches/commit/0523933b) fix: Script for changelog generation (#60)
+ * [`0523933bb`](https://github.com/lucaspopp0/ha-smart-switches/commit/0523933bb) fix: Script for changelog generation (#60)
 
 # v1.1.102.0
- * [`8a02721f`](https://github.com/lucaspopp0/ha-smart-switches/commit/8a02721f) fix(deps): update site (#44)
+ * [`8a02721fc`](https://github.com/lucaspopp0/ha-smart-switches/commit/8a02721fc) fix(deps): update site (#44)
 
 # v1.1.101.0
- * [`fbcde623`](https://github.com/lucaspopp0/ha-smart-switches/commit/fbcde623) chore(deps): update actions/create-github-app-token action to v2 (#45)
+ * [`fbcde623a`](https://github.com/lucaspopp0/ha-smart-switches/commit/fbcde623a) chore(deps): update actions/create-github-app-token action to v2 (#45)
 
 # v1.1.100.0
- * [`f032ab7a`](https://github.com/lucaspopp0/ha-smart-switches/commit/f032ab7a) fix version update pr check (#59)
+ * [`f032ab7ad`](https://github.com/lucaspopp0/ha-smart-switches/commit/f032ab7ad) fix version update pr check (#59)
 
 # v1.1.99.0
- * [`49f4ace5`](https://github.com/lucaspopp0/ha-smart-switches/commit/49f4ace5) feat: BLE scanning (#58)
+ * [`49f4ace5a`](https://github.com/lucaspopp0/ha-smart-switches/commit/49f4ace5a) feat: BLE scanning (#58)
 
 # v1.1.98.2
- * [`00156635`](https://github.com/lucaspopp0/ha-smart-switches/commit/00156635) use direct network
- * [`b0055001`](https://github.com/lucaspopp0/ha-smart-switches/commit/b0055001) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`78325d7d`](https://github.com/lucaspopp0/ha-smart-switches/commit/78325d7d) add slug
+ * [`001566356`](https://github.com/lucaspopp0/ha-smart-switches/commit/001566356) use direct network
+ * [`b00550011`](https://github.com/lucaspopp0/ha-smart-switches/commit/b00550011) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`78325d7db`](https://github.com/lucaspopp0/ha-smart-switches/commit/78325d7db) add slug
 
 # v1.1.97.1
- * [`23f93e86`](https://github.com/lucaspopp0/ha-smart-switches/commit/23f93e86) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`ffff6f86`](https://github.com/lucaspopp0/ha-smart-switches/commit/ffff6f86) get own add-on info
+ * [`23f93e86f`](https://github.com/lucaspopp0/ha-smart-switches/commit/23f93e86f) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`ffff6f863`](https://github.com/lucaspopp0/ha-smart-switches/commit/ffff6f863) get own add-on info
 
 # v1.1.96.0
- * [`2700f159`](https://github.com/lucaspopp0/ha-smart-switches/commit/2700f159) update urls
+ * [`2700f159d`](https://github.com/lucaspopp0/ha-smart-switches/commit/2700f159d) update urls
 
 # v1.1.95.0
- * [`cd847fcf`](https://github.com/lucaspopp0/ha-smart-switches/commit/cd847fcf) list add ons
+ * [`cd847fcff`](https://github.com/lucaspopp0/ha-smart-switches/commit/cd847fcff) list add ons
 
 # v1.1.94.0
- * [`f288e397`](https://github.com/lucaspopp0/ha-smart-switches/commit/f288e397) show add on info on startup
+ * [`f288e3976`](https://github.com/lucaspopp0/ha-smart-switches/commit/f288e3976) show add on info on startup
 
 # v1.1.93.1
- * [`2573f6c4`](https://github.com/lucaspopp0/ha-smart-switches/commit/2573f6c4) mime types!
- * [`77010f59`](https://github.com/lucaspopp0/ha-smart-switches/commit/77010f59) delete dependabot
+ * [`2573f6c49`](https://github.com/lucaspopp0/ha-smart-switches/commit/2573f6c49) mime types!
+ * [`77010f59d`](https://github.com/lucaspopp0/ha-smart-switches/commit/77010f59d) delete dependabot
 
 # v1.1.92.0
- * [`0b941a71`](https://github.com/lucaspopp0/ha-smart-switches/commit/0b941a71) Update github-actions (#51)
+ * [`0b941a71c`](https://github.com/lucaspopp0/ha-smart-switches/commit/0b941a71c) Update github-actions (#51)
 
 # v1.1.91.1
- * [`1c8ad39d`](https://github.com/lucaspopp0/ha-smart-switches/commit/1c8ad39d) update panel title
- * [`66fbd394`](https://github.com/lucaspopp0/ha-smart-switches/commit/66fbd394) add ingress back
+ * [`1c8ad39d7`](https://github.com/lucaspopp0/ha-smart-switches/commit/1c8ad39d7) update panel title
+ * [`66fbd394c`](https://github.com/lucaspopp0/ha-smart-switches/commit/66fbd394c) add ingress back
 
 # v1.1.90.0
- * [`d3f6bf18`](https://github.com/lucaspopp0/ha-smart-switches/commit/d3f6bf18) no more ingress
+ * [`d3f6bf188`](https://github.com/lucaspopp0/ha-smart-switches/commit/d3f6bf188) no more ingress
 
 # v1.1.89.0
- * [`070c8c87`](https://github.com/lucaspopp0/ha-smart-switches/commit/070c8c87) share dbus
+ * [`070c8c871`](https://github.com/lucaspopp0/ha-smart-switches/commit/070c8c871) share dbus
 
 # v1.1.88.0
- * [`d00d3dd2`](https://github.com/lucaspopp0/ha-smart-switches/commit/d00d3dd2) update paths
+ * [`d00d3dd26`](https://github.com/lucaspopp0/ha-smart-switches/commit/d00d3dd26) update paths
 
 # v1.1.87.1
- * [`cdd8776e`](https://github.com/lucaspopp0/ha-smart-switches/commit/cdd8776e) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`96489359`](https://github.com/lucaspopp0/ha-smart-switches/commit/96489359) ingress path
+ * [`cdd8776e0`](https://github.com/lucaspopp0/ha-smart-switches/commit/cdd8776e0) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`964893595`](https://github.com/lucaspopp0/ha-smart-switches/commit/964893595) ingress path
 
 # v1.1.86.0
- * [`a1bfa63a`](https://github.com/lucaspopp0/ha-smart-switches/commit/a1bfa63a) pure ingress
+ * [`a1bfa63aa`](https://github.com/lucaspopp0/ha-smart-switches/commit/a1bfa63aa) pure ingress
 
 # v1.1.85.0
- * [`9a7780ab`](https://github.com/lucaspopp0/ha-smart-switches/commit/9a7780ab) unset ingress port
+ * [`9a7780ab5`](https://github.com/lucaspopp0/ha-smart-switches/commit/9a7780ab5) unset ingress port
 
 # v1.1.84.0
- * [`e9aba626`](https://github.com/lucaspopp0/ha-smart-switches/commit/e9aba626) remove web ui
+ * [`e9aba6267`](https://github.com/lucaspopp0/ha-smart-switches/commit/e9aba6267) remove web ui
 
 # v1.1.83.0
- * [`9bf2f4c8`](https://github.com/lucaspopp0/ha-smart-switches/commit/9bf2f4c8) ingress
+ * [`9bf2f4c82`](https://github.com/lucaspopp0/ha-smart-switches/commit/9bf2f4c82) ingress
 
 # v1.1.82.0
- * [`e9336a1b`](https://github.com/lucaspopp0/ha-smart-switches/commit/e9336a1b) default 8124
+ * [`e9336a1b6`](https://github.com/lucaspopp0/ha-smart-switches/commit/e9336a1b6) default 8124
 
 # v1.1.81.0
- * [`eca3b963`](https://github.com/lucaspopp0/ha-smart-switches/commit/eca3b963) default server port 8123
+ * [`eca3b9630`](https://github.com/lucaspopp0/ha-smart-switches/commit/eca3b9630) default server port 8123
 
 # v1.1.80.0
 
 # v1.1.80.1
- * [`9b2cd6d4`](https://github.com/lucaspopp0/ha-smart-switches/commit/9b2cd6d4) env port
- * [`789485dd`](https://github.com/lucaspopp0/ha-smart-switches/commit/789485dd) port
+ * [`9b2cd6d42`](https://github.com/lucaspopp0/ha-smart-switches/commit/9b2cd6d42) env port
+ * [`789485dde`](https://github.com/lucaspopp0/ha-smart-switches/commit/789485dde) port
 
 # v1.1.79.0
- * [`6248e4f1`](https://github.com/lucaspopp0/ha-smart-switches/commit/6248e4f1) switch icon
+ * [`6248e4f1c`](https://github.com/lucaspopp0/ha-smart-switches/commit/6248e4f1c) switch icon
 
 # v1.1.78.0
- * [`93da07cb`](https://github.com/lucaspopp0/ha-smart-switches/commit/93da07cb) update ports
+ * [`93da07cbd`](https://github.com/lucaspopp0/ha-smart-switches/commit/93da07cbd) update ports
 
 # v1.1.77.0
- * [`f428cce5`](https://github.com/lucaspopp0/ha-smart-switches/commit/f428cce5) add supervisor access
+ * [`f428cce5c`](https://github.com/lucaspopp0/ha-smart-switches/commit/f428cce5c) add supervisor access
 
 # v1.1.76.0
- * [`f0d6af1e`](https://github.com/lucaspopp0/ha-smart-switches/commit/f0d6af1e) remove ingress
+ * [`f0d6af1ea`](https://github.com/lucaspopp0/ha-smart-switches/commit/f0d6af1ea) remove ingress
 
 # v1.1.75.0
- * [`75e77c4f`](https://github.com/lucaspopp0/ha-smart-switches/commit/75e77c4f) ingress
+ * [`75e77c4f4`](https://github.com/lucaspopp0/ha-smart-switches/commit/75e77c4f4) ingress
 
 # v1.1.74.0
- * [`4af10776`](https://github.com/lucaspopp0/ha-smart-switches/commit/4af10776) panel title
+ * [`4af107767`](https://github.com/lucaspopp0/ha-smart-switches/commit/4af107767) panel title
 
 # v1.1.73.1
- * [`db02a4bb`](https://github.com/lucaspopp0/ha-smart-switches/commit/db02a4bb) chore: Claude memories (#56)
- * [`4f73feaa`](https://github.com/lucaspopp0/ha-smart-switches/commit/4f73feaa) empty
+ * [`db02a4bba`](https://github.com/lucaspopp0/ha-smart-switches/commit/db02a4bba) chore: Claude memories (#56)
+ * [`4f73feaa0`](https://github.com/lucaspopp0/ha-smart-switches/commit/4f73feaa0) empty
 
 # v1.1.72.0
- * [`55cccaee`](https://github.com/lucaspopp0/ha-smart-switches/commit/55cccaee) chore(ci): Actually update the changelog (#54)
+ * [`55cccaeed`](https://github.com/lucaspopp0/ha-smart-switches/commit/55cccaeed) chore(ci): Actually update the changelog (#54)
 
 # v1.1.71.0
- * [`7592a47f`](https://github.com/lucaspopp0/ha-smart-switches/commit/7592a47f) chore(ci): Update changelog on push (#53)
+ * [`7592a47fa`](https://github.com/lucaspopp0/ha-smart-switches/commit/7592a47fa) chore(ci): Update changelog on push (#53)
 
 # v1.1.70.0
- * [`08f0f23d`](https://github.com/lucaspopp0/ha-smart-switches/commit/08f0f23d) feat: Improve the layout editor (#52)
+ * [`08f0f23dd`](https://github.com/lucaspopp0/ha-smart-switches/commit/08f0f23dd) feat: Improve the layout editor (#52)
 
 # v1.1.69.0
- * [`50cca78c`](https://github.com/lucaspopp0/ha-smart-switches/commit/50cca78c) feat: Descriptions in layout picker (#48)
+ * [`50cca78c3`](https://github.com/lucaspopp0/ha-smart-switches/commit/50cca78c3) feat: Descriptions in layout picker (#48)
 
 # v1.1.68.0
- * [`cedae8b0`](https://github.com/lucaspopp0/ha-smart-switches/commit/cedae8b0) Refactor New Switch Modal (#49)
+ * [`cedae8b0a`](https://github.com/lucaspopp0/ha-smart-switches/commit/cedae8b0a) Refactor New Switch Modal (#49)
 
 # v1.1.67.1
- * [`3e7f9066`](https://github.com/lucaspopp0/ha-smart-switches/commit/3e7f9066) chore(deps): update github-actions (#43)
- * [`c7dc42ff`](https://github.com/lucaspopp0/ha-smart-switches/commit/c7dc42ff) chore(ci): Renovate groups (#42)
+ * [`3e7f9066a`](https://github.com/lucaspopp0/ha-smart-switches/commit/3e7f9066a) chore(deps): update github-actions (#43)
+ * [`c7dc42ff8`](https://github.com/lucaspopp0/ha-smart-switches/commit/c7dc42ff8) chore(ci): Renovate groups (#42)
 
 # v1.1.66.1
- * [`397ba1b7`](https://github.com/lucaspopp0/ha-smart-switches/commit/397ba1b7) fix(deps): update dependency antd to v5.25.1 (#32)
- * [`0e30c8bf`](https://github.com/lucaspopp0/ha-smart-switches/commit/0e30c8bf) chore(deps): CI improvements (#41)
+ * [`397ba1b70`](https://github.com/lucaspopp0/ha-smart-switches/commit/397ba1b70) fix(deps): update dependency antd to v5.25.1 (#32)
+ * [`0e30c8bff`](https://github.com/lucaspopp0/ha-smart-switches/commit/0e30c8bff) chore(deps): CI improvements (#41)
 
 # v1.1.65.2
- * [`ae8bd874`](https://github.com/lucaspopp0/ha-smart-switches/commit/ae8bd874) chore(ci): Dependabot permissions improvements (#40)
- * [`e5b69c0c`](https://github.com/lucaspopp0/ha-smart-switches/commit/e5b69c0c) chore(deps): Enable npm security updates (#35)
- * [`2b9305e8`](https://github.com/lucaspopp0/ha-smart-switches/commit/2b9305e8) chore(deps): Configure Renovate (#30)
+ * [`ae8bd8740`](https://github.com/lucaspopp0/ha-smart-switches/commit/ae8bd8740) chore(ci): Dependabot permissions improvements (#40)
+ * [`e5b69c0ca`](https://github.com/lucaspopp0/ha-smart-switches/commit/e5b69c0ca) chore(deps): Enable npm security updates (#35)
+ * [`2b9305e89`](https://github.com/lucaspopp0/ha-smart-switches/commit/2b9305e89) chore(deps): Configure Renovate (#30)
 
 # v1.1.64.0
- * [`c24195d9`](https://github.com/lucaspopp0/ha-smart-switches/commit/c24195d9) local home assistant connection
+ * [`c24195d90`](https://github.com/lucaspopp0/ha-smart-switches/commit/c24195d90) local home assistant connection
 
 # v1.1.63.0
- * [`cd128d98`](https://github.com/lucaspopp0/ha-smart-switches/commit/cd128d98) local run ability
+ * [`cd128d986`](https://github.com/lucaspopp0/ha-smart-switches/commit/cd128d986) local run ability
 
 # v1.1.62.0
- * [`53521605`](https://github.com/lucaspopp0/ha-smart-switches/commit/53521605) condense
+ * [`535216051`](https://github.com/lucaspopp0/ha-smart-switches/commit/535216051) condense
 
 # v1.1.61.0
- * [`f019dd20`](https://github.com/lucaspopp0/ha-smart-switches/commit/f019dd20) panel admin false
+ * [`f019dd205`](https://github.com/lucaspopp0/ha-smart-switches/commit/f019dd205) panel admin false
 
 # v1.1.60.0
- * [`7dda92a5`](https://github.com/lucaspopp0/ha-smart-switches/commit/7dda92a5) remove logs
+ * [`7dda92a50`](https://github.com/lucaspopp0/ha-smart-switches/commit/7dda92a50) remove logs
 
 # v1.1.59.1
- * [`f3c6501e`](https://github.com/lucaspopp0/ha-smart-switches/commit/f3c6501e) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`6a145a99`](https://github.com/lucaspopp0/ha-smart-switches/commit/6a145a99) improvements
+ * [`f3c6501e9`](https://github.com/lucaspopp0/ha-smart-switches/commit/f3c6501e9) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`6a145a990`](https://github.com/lucaspopp0/ha-smart-switches/commit/6a145a990) improvements
 
 # v1.1.58.1
- * [`f016947d`](https://github.com/lucaspopp0/ha-smart-switches/commit/f016947d) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`38332e56`](https://github.com/lucaspopp0/ha-smart-switches/commit/38332e56) always set executables
+ * [`f016947df`](https://github.com/lucaspopp0/ha-smart-switches/commit/f016947df) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`38332e568`](https://github.com/lucaspopp0/ha-smart-switches/commit/38332e568) always set executables
 
 # v1.1.57.0
- * [`41b0ba70`](https://github.com/lucaspopp0/ha-smart-switches/commit/41b0ba70) log on fetch
+ * [`41b0ba702`](https://github.com/lucaspopp0/ha-smart-switches/commit/41b0ba702) log on fetch
 
 # v1.1.56.1
- * [`2807c844`](https://github.com/lucaspopp0/ha-smart-switches/commit/2807c844) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`d36c4444`](https://github.com/lucaspopp0/ha-smart-switches/commit/d36c4444) force refresh
+ * [`2807c844e`](https://github.com/lucaspopp0/ha-smart-switches/commit/2807c844e) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`d36c4444e`](https://github.com/lucaspopp0/ha-smart-switches/commit/d36c4444e) force refresh
 
 # v1.1.55.1
- * [`acb90080`](https://github.com/lucaspopp0/ha-smart-switches/commit/acb90080) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`827beb61`](https://github.com/lucaspopp0/ha-smart-switches/commit/827beb61) force refresh executable pickers
+ * [`acb90080c`](https://github.com/lucaspopp0/ha-smart-switches/commit/acb90080c) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`827beb610`](https://github.com/lucaspopp0/ha-smart-switches/commit/827beb610) force refresh executable pickers
 
 # v1.1.54.0
- * [`88119d1b`](https://github.com/lucaspopp0/ha-smart-switches/commit/88119d1b) log executables
+ * [`88119d1b4`](https://github.com/lucaspopp0/ha-smart-switches/commit/88119d1b4) log executables
 
 # v1.1.53.0
- * [`61b4e04f`](https://github.com/lucaspopp0/ha-smart-switches/commit/61b4e04f) fixes
+ * [`61b4e04fc`](https://github.com/lucaspopp0/ha-smart-switches/commit/61b4e04fc) fixes
 
 # v1.1.52.0
- * [`e8d12e26`](https://github.com/lucaspopp0/ha-smart-switches/commit/e8d12e26) rework logic
+ * [`e8d12e26f`](https://github.com/lucaspopp0/ha-smart-switches/commit/e8d12e26f) rework logic
 
 # v1.1.51.1
- * [`06211dfd`](https://github.com/lucaspopp0/ha-smart-switches/commit/06211dfd) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`87076cec`](https://github.com/lucaspopp0/ha-smart-switches/commit/87076cec) improve list
+ * [`06211dfda`](https://github.com/lucaspopp0/ha-smart-switches/commit/06211dfda) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`87076cec2`](https://github.com/lucaspopp0/ha-smart-switches/commit/87076cec2) improve list
 
 # v1.1.50.0
- * [`6e6ef083`](https://github.com/lucaspopp0/ha-smart-switches/commit/6e6ef083) style
+ * [`6e6ef0833`](https://github.com/lucaspopp0/ha-smart-switches/commit/6e6ef0833) style
 
 # v1.1.49.1
- * [`21b09225`](https://github.com/lucaspopp0/ha-smart-switches/commit/21b09225) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`864348c4`](https://github.com/lucaspopp0/ha-smart-switches/commit/864348c4) cleanup
+ * [`21b092252`](https://github.com/lucaspopp0/ha-smart-switches/commit/21b092252) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`864348c44`](https://github.com/lucaspopp0/ha-smart-switches/commit/864348c44) cleanup
 
 # v1.1.48.2
- * [`4a10defc`](https://github.com/lucaspopp0/ha-smart-switches/commit/4a10defc) dedicated layout editor component
- * [`465ad485`](https://github.com/lucaspopp0/ha-smart-switches/commit/465ad485) delete buttons
- * [`b3b55201`](https://github.com/lucaspopp0/ha-smart-switches/commit/b3b55201) helptexts
+ * [`4a10defcd`](https://github.com/lucaspopp0/ha-smart-switches/commit/4a10defcd) dedicated layout editor component
+ * [`465ad4852`](https://github.com/lucaspopp0/ha-smart-switches/commit/465ad4852) delete buttons
+ * [`b3b552012`](https://github.com/lucaspopp0/ha-smart-switches/commit/b3b552012) helptexts
 
 # v1.1.47.2
- * [`d0f38351`](https://github.com/lucaspopp0/ha-smart-switches/commit/d0f38351) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`f5b10bca`](https://github.com/lucaspopp0/ha-smart-switches/commit/f5b10bca) preview
- * [`62170ff7`](https://github.com/lucaspopp0/ha-smart-switches/commit/62170ff7) delete confirmations
+ * [`d0f383510`](https://github.com/lucaspopp0/ha-smart-switches/commit/d0f383510) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`f5b10bca6`](https://github.com/lucaspopp0/ha-smart-switches/commit/f5b10bca6) preview
+ * [`62170ff76`](https://github.com/lucaspopp0/ha-smart-switches/commit/62170ff76) delete confirmations
 
 # v1.1.46.0
- * [`92d151dc`](https://github.com/lucaspopp0/ha-smart-switches/commit/92d151dc) adjust rendering
+ * [`92d151dc4`](https://github.com/lucaspopp0/ha-smart-switches/commit/92d151dc4) adjust rendering
 
 # v1.1.45.0
- * [`548af74e`](https://github.com/lucaspopp0/ha-smart-switches/commit/548af74e) vertical
+ * [`548af74eb`](https://github.com/lucaspopp0/ha-smart-switches/commit/548af74eb) vertical
 
 # v1.1.44.2
- * [`9e934060`](https://github.com/lucaspopp0/ha-smart-switches/commit/9e934060) rebuild site
- * [`bfff169e`](https://github.com/lucaspopp0/ha-smart-switches/commit/bfff169e) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`138654cc`](https://github.com/lucaspopp0/ha-smart-switches/commit/138654cc) show entity IDs too
+ * [`9e934060d`](https://github.com/lucaspopp0/ha-smart-switches/commit/9e934060d) rebuild site
+ * [`bfff169e8`](https://github.com/lucaspopp0/ha-smart-switches/commit/bfff169e8) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`138654cc2`](https://github.com/lucaspopp0/ha-smart-switches/commit/138654cc2) show entity IDs too
 
 # v1.1.43.1
- * [`943b8e89`](https://github.com/lucaspopp0/ha-smart-switches/commit/943b8e89) use json
- * [`66f7f079`](https://github.com/lucaspopp0/ha-smart-switches/commit/66f7f079) button fixes
+ * [`943b8e898`](https://github.com/lucaspopp0/ha-smart-switches/commit/943b8e898) use json
+ * [`66f7f0793`](https://github.com/lucaspopp0/ha-smart-switches/commit/66f7f0793) button fixes
 
 # v1.1.42.0
- * [`28e29f68`](https://github.com/lucaspopp0/ha-smart-switches/commit/28e29f68) improve layout printing
+ * [`28e29f68f`](https://github.com/lucaspopp0/ha-smart-switches/commit/28e29f68f) improve layout printing
 
 # v1.1.41.0
- * [`b4652aee`](https://github.com/lucaspopp0/ha-smart-switches/commit/b4652aee) layout picker improvement
+ * [`b4652aee6`](https://github.com/lucaspopp0/ha-smart-switches/commit/b4652aee6) layout picker improvement
 
 # v1.1.40.0
- * [`aa644c22`](https://github.com/lucaspopp0/ha-smart-switches/commit/aa644c22) improve delete logic
+ * [`aa644c22b`](https://github.com/lucaspopp0/ha-smart-switches/commit/aa644c22b) improve delete logic
 
 # v1.1.39.0
- * [`6fcce12d`](https://github.com/lucaspopp0/ha-smart-switches/commit/6fcce12d) feat: Allow picking a new layout (#29)
+ * [`6fcce12df`](https://github.com/lucaspopp0/ha-smart-switches/commit/6fcce12df) feat: Allow picking a new layout (#29)
 
 # v1.1.38.0
- * [`4b39303d`](https://github.com/lucaspopp0/ha-smart-switches/commit/4b39303d) feat: Allow deletes (#28)
+ * [`4b39303de`](https://github.com/lucaspopp0/ha-smart-switches/commit/4b39303de) feat: Allow deletes (#28)
 
 # v1.1.37.0
- * [`4c5955c4`](https://github.com/lucaspopp0/ha-smart-switches/commit/4c5955c4) fix: Fix add layout issues (#27)
+ * [`4c5955c42`](https://github.com/lucaspopp0/ha-smart-switches/commit/4c5955c42) fix: Fix add layout issues (#27)
 
 # v1.1.36.0
- * [`16054a05`](https://github.com/lucaspopp0/ha-smart-switches/commit/16054a05) chore: Improvements to select (#26)
+ * [`16054a053`](https://github.com/lucaspopp0/ha-smart-switches/commit/16054a053) chore: Improvements to select (#26)
 
 # v1.1.35.0
- * [`4ae9a315`](https://github.com/lucaspopp0/ha-smart-switches/commit/4ae9a315) feat: Actually pick executables (#25)
+ * [`4ae9a3154`](https://github.com/lucaspopp0/ha-smart-switches/commit/4ae9a3154) feat: Actually pick executables (#25)
 
 # v1.1.34.0
- * [`f85169aa`](https://github.com/lucaspopp0/ha-smart-switches/commit/f85169aa) feat: antd menus and layout picker (#24)
+ * [`f85169aa5`](https://github.com/lucaspopp0/ha-smart-switches/commit/f85169aa5) feat: antd menus and layout picker (#24)
 
 # v1.1.33.0
- * [`bdd71221`](https://github.com/lucaspopp0/ha-smart-switches/commit/bdd71221) feat: antd executable picker (#23)
+ * [`bdd712212`](https://github.com/lucaspopp0/ha-smart-switches/commit/bdd712212) feat: antd executable picker (#23)
 
 # v1.1.32.0
- * [`f9474cb1`](https://github.com/lucaspopp0/ha-smart-switches/commit/f9474cb1) feat: Actually set values (#22)
+ * [`f9474cb1e`](https://github.com/lucaspopp0/ha-smart-switches/commit/f9474cb1e) feat: Actually set values (#22)
 
 # v1.1.31.0
- * [`7e76b201`](https://github.com/lucaspopp0/ha-smart-switches/commit/7e76b201) feat: Selected style (#21)
+ * [`7e76b2010`](https://github.com/lucaspopp0/ha-smart-switches/commit/7e76b2010) feat: Selected style (#21)
 
 # v1.1.30.0
- * [`71b96a28`](https://github.com/lucaspopp0/ha-smart-switches/commit/71b96a28) chore: Use select (#20)
+ * [`71b96a28a`](https://github.com/lucaspopp0/ha-smart-switches/commit/71b96a28a) chore: Use select (#20)
 
 # v1.1.29.0
- * [`c383ba7a`](https://github.com/lucaspopp0/ha-smart-switches/commit/c383ba7a) fix: Try to fix 500 on list-executables (#19)
+ * [`c383ba7ab`](https://github.com/lucaspopp0/ha-smart-switches/commit/c383ba7ab) fix: Try to fix 500 on list-executables (#19)
 
 # v1.1.28.0
- * [`c7200056`](https://github.com/lucaspopp0/ha-smart-switches/commit/c7200056) chore: Executable picker (#18)
+ * [`c7200056d`](https://github.com/lucaspopp0/ha-smart-switches/commit/c7200056d) chore: Executable picker (#18)
 
 # v1.1.27.0
- * [`b1ccb7e4`](https://github.com/lucaspopp0/ha-smart-switches/commit/b1ccb7e4) fix: Force refresh after adding layout (#17)
+ * [`b1ccb7e46`](https://github.com/lucaspopp0/ha-smart-switches/commit/b1ccb7e46) fix: Force refresh after adding layout (#17)
 
 # v1.1.26.0
- * [`d14c9ac1`](https://github.com/lucaspopp0/ha-smart-switches/commit/d14c9ac1) chore: Pick layout (#16)
+ * [`d14c9ac11`](https://github.com/lucaspopp0/ha-smart-switches/commit/d14c9ac11) chore: Pick layout (#16)
 
 # v1.1.25.0
- * [`a7fac512`](https://github.com/lucaspopp0/ha-smart-switches/commit/a7fac512) chore: Log on add layout (#15)
+ * [`a7fac512b`](https://github.com/lucaspopp0/ha-smart-switches/commit/a7fac512b) chore: Log on add layout (#15)
 
 # v1.1.24.0
- * [`4e050708`](https://github.com/lucaspopp0/ha-smart-switches/commit/4e050708) chore: Skip generation better (#14)
+ * [`4e050708b`](https://github.com/lucaspopp0/ha-smart-switches/commit/4e050708b) chore: Skip generation better (#14)
 
 # v1.1.23.0
- * [`fea67d37`](https://github.com/lucaspopp0/ha-smart-switches/commit/fea67d37) feat: List all buttons (#13)
+ * [`fea67d374`](https://github.com/lucaspopp0/ha-smart-switches/commit/fea67d374) feat: List all buttons (#13)
 
 # v1.1.22.0
- * [`d2041caf`](https://github.com/lucaspopp0/ha-smart-switches/commit/d2041caf) log on pick
+ * [`d2041caf3`](https://github.com/lucaspopp0/ha-smart-switches/commit/d2041caf3) log on pick
 
 # v1.1.21.0
- * [`0e19a371`](https://github.com/lucaspopp0/ha-smart-switches/commit/0e19a371) layouts
+ * [`0e19a3713`](https://github.com/lucaspopp0/ha-smart-switches/commit/0e19a3713) layouts
 
 # v1.1.20.0
- * [`08eb682c`](https://github.com/lucaspopp0/ha-smart-switches/commit/08eb682c) new layout picker
+ * [`08eb682c1`](https://github.com/lucaspopp0/ha-smart-switches/commit/08eb682c1) new layout picker
 
 # v1.1.19.1
- * [`9f198026`](https://github.com/lucaspopp0/ha-smart-switches/commit/9f198026) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`f683e0ca`](https://github.com/lucaspopp0/ha-smart-switches/commit/f683e0ca) new remote on enter
+ * [`9f1980261`](https://github.com/lucaspopp0/ha-smart-switches/commit/9f1980261) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`f683e0ca7`](https://github.com/lucaspopp0/ha-smart-switches/commit/f683e0ca7) new remote on enter
 
 # v1.1.18.1
- * [`2fa02d31`](https://github.com/lucaspopp0/ha-smart-switches/commit/2fa02d31) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`98794f36`](https://github.com/lucaspopp0/ha-smart-switches/commit/98794f36) re-generate site
+ * [`2fa02d317`](https://github.com/lucaspopp0/ha-smart-switches/commit/2fa02d317) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`98794f361`](https://github.com/lucaspopp0/ha-smart-switches/commit/98794f361) re-generate site
 
 # v1.1.17.0
- * [`f22b9e7c`](https://github.com/lucaspopp0/ha-smart-switches/commit/f22b9e7c) put
+ * [`f22b9e7c4`](https://github.com/lucaspopp0/ha-smart-switches/commit/f22b9e7c4) put
 
 # v1.1.16.0
- * [`bbf95b82`](https://github.com/lucaspopp0/ha-smart-switches/commit/bbf95b82) no local site
+ * [`bbf95b822`](https://github.com/lucaspopp0/ha-smart-switches/commit/bbf95b822) no local site
 
 # v1.1.15.0
- * [`177723f9`](https://github.com/lucaspopp0/ha-smart-switches/commit/177723f9) add docker login back
+ * [`177723f98`](https://github.com/lucaspopp0/ha-smart-switches/commit/177723f98) add docker login back
 
 # v1.1.14.0
- * [`b5ee9270`](https://github.com/lucaspopp0/ha-smart-switches/commit/b5ee9270) ci: Build site separately (#12)
+ * [`b5ee9270b`](https://github.com/lucaspopp0/ha-smart-switches/commit/b5ee9270b) ci: Build site separately (#12)
 
 # v1.1.13.0
- * [`b9ff15a7`](https://github.com/lucaspopp0/ha-smart-switches/commit/b9ff15a7) chore: Upgrade SDK (#5)
+ * [`b9ff15a7e`](https://github.com/lucaspopp0/ha-smart-switches/commit/b9ff15a7e) chore: Upgrade SDK (#5)
 
 # v1.1.12.0
- * [`603f4b3c`](https://github.com/lucaspopp0/ha-smart-switches/commit/603f4b3c) comment out image
+ * [`603f4b3ce`](https://github.com/lucaspopp0/ha-smart-switches/commit/603f4b3ce) comment out image
 
 # v1.1.11.0
- * [`ce319113`](https://github.com/lucaspopp0/ha-smart-switches/commit/ce319113) ci: Home assistant container images (#9)
+ * [`ce3191135`](https://github.com/lucaspopp0/ha-smart-switches/commit/ce3191135) ci: Home assistant container images (#9)
 
 # v1.1.10.0
- * [`710fd329`](https://github.com/lucaspopp0/ha-smart-switches/commit/710fd329) chore: No real changes, apparently (#10)
+ * [`710fd3296`](https://github.com/lucaspopp0/ha-smart-switches/commit/710fd3296) chore: No real changes, apparently (#10)
 
 # v1.1.9.0
- * [`4f3a067e`](https://github.com/lucaspopp0/ha-smart-switches/commit/4f3a067e) chore: Update panel icon (#8)
+ * [`4f3a067e2`](https://github.com/lucaspopp0/ha-smart-switches/commit/4f3a067e2) chore: Update panel icon (#8)
 
 # v1.1.8.0
- * [`98cb02f4`](https://github.com/lucaspopp0/ha-smart-switches/commit/98cb02f4) feat: Improve editing capabilities (#7)
+ * [`98cb02f44`](https://github.com/lucaspopp0/ha-smart-switches/commit/98cb02f44) feat: Improve editing capabilities (#7)
 
 # v1.1.7.0
- * [`5732d9f0`](https://github.com/lucaspopp0/ha-smart-switches/commit/5732d9f0) feat: Add a dashboard panel (#6)
+ * [`5732d9f0e`](https://github.com/lucaspopp0/ha-smart-switches/commit/5732d9f0e) feat: Add a dashboard panel (#6)
 
 # v1.1.6.0
- * [`e8ee0b87`](https://github.com/lucaspopp0/ha-smart-switches/commit/e8ee0b87) add url
+ * [`e8ee0b878`](https://github.com/lucaspopp0/ha-smart-switches/commit/e8ee0b878) add url
 
 # v1.1.5.2
- * [`30f442d8`](https://github.com/lucaspopp0/ha-smart-switches/commit/30f442d8) push tags
+ * [`30f442d83`](https://github.com/lucaspopp0/ha-smart-switches/commit/30f442d83) push tags
 
 # v1.1.5.0
- * [`c2c074b6`](https://github.com/lucaspopp0/ha-smart-switches/commit/c2c074b6) chore: Versioning improvements (#4)
+ * [`c2c074b64`](https://github.com/lucaspopp0/ha-smart-switches/commit/c2c074b64) chore: Versioning improvements (#4)
 
 # v1.1.4.0
- * [`11720ff8`](https://github.com/lucaspopp0/ha-smart-switches/commit/11720ff8) new remote modal
+ * [`11720ff85`](https://github.com/lucaspopp0/ha-smart-switches/commit/11720ff85) new remote modal
 
 # v1.1.3.1
- * [`1bb3ab17`](https://github.com/lucaspopp0/ha-smart-switches/commit/1bb3ab17) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`da9657a7`](https://github.com/lucaspopp0/ha-smart-switches/commit/da9657a7) give up on imagename
+ * [`1bb3ab171`](https://github.com/lucaspopp0/ha-smart-switches/commit/1bb3ab171) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`da9657a73`](https://github.com/lucaspopp0/ha-smart-switches/commit/da9657a73) give up on imagename
 
 # v1.1.2.1
- * [`d17ffe22`](https://github.com/lucaspopp0/ha-smart-switches/commit/d17ffe22) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`32c2a10d`](https://github.com/lucaspopp0/ha-smart-switches/commit/32c2a10d) fix version calculations
+ * [`d17ffe22c`](https://github.com/lucaspopp0/ha-smart-switches/commit/d17ffe22c) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`32c2a10d7`](https://github.com/lucaspopp0/ha-smart-switches/commit/32c2a10d7) fix version calculations
 
 # v1.1.1.1
- * [`b7f5920b`](https://github.com/lucaspopp0/ha-smart-switches/commit/b7f5920b) fix release notes start tag
- * [`708cc199`](https://github.com/lucaspopp0/ha-smart-switches/commit/708cc199) build image locally
+ * [`b7f5920bb`](https://github.com/lucaspopp0/ha-smart-switches/commit/b7f5920bb) fix release notes start tag
+ * [`708cc199b`](https://github.com/lucaspopp0/ha-smart-switches/commit/708cc199b) build image locally
 
 # v1.1.1.0
- * [`60ad5670`](https://github.com/lucaspopp0/ha-smart-switches/commit/60ad5670) empty
+ * [`60ad56702`](https://github.com/lucaspopp0/ha-smart-switches/commit/60ad56702) empty
 
 # v1.1.1.7
- * [`2efc4b20`](https://github.com/lucaspopp0/ha-smart-switches/commit/2efc4b20) image update
- * [`810017bc`](https://github.com/lucaspopp0/ha-smart-switches/commit/810017bc) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`830d3ed3`](https://github.com/lucaspopp0/ha-smart-switches/commit/830d3ed3) 1.1.2.0
- * [`ba79d6ce`](https://github.com/lucaspopp0/ha-smart-switches/commit/ba79d6ce) floating logic
+ * [`2efc4b20f`](https://github.com/lucaspopp0/ha-smart-switches/commit/2efc4b20f) image update
+ * [`810017bca`](https://github.com/lucaspopp0/ha-smart-switches/commit/810017bca) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`830d3ed34`](https://github.com/lucaspopp0/ha-smart-switches/commit/830d3ed34) 1.1.2.0
+ * [`ba79d6ce9`](https://github.com/lucaspopp0/ha-smart-switches/commit/ba79d6ce9) floating logic
 
 # v1.1.1.2
- * [`a4c4899f`](https://github.com/lucaspopp0/ha-smart-switches/commit/a4c4899f) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`7333aee7`](https://github.com/lucaspopp0/ha-smart-switches/commit/7333aee7) version updates
+ * [`a4c4899f8`](https://github.com/lucaspopp0/ha-smart-switches/commit/a4c4899f8) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`7333aee77`](https://github.com/lucaspopp0/ha-smart-switches/commit/7333aee77) version updates
 
 # v1.1.1.0
 
 # v1.1.1.39
- * [`dfdf7064`](https://github.com/lucaspopp0/ha-smart-switches/commit/dfdf7064) push commit and tags separately
+ * [`dfdf7064d`](https://github.com/lucaspopp0/ha-smart-switches/commit/dfdf7064d) push commit and tags separately
 
 # v1.1.1.37
 
@@ -26917,46 +26919,46 @@
 # v1.1.1.35
 
 # v1.1.1.34
- * [`38ae4968`](https://github.com/lucaspopp0/ha-smart-switches/commit/38ae4968) err cleanups
- * [`ca5e7a70`](https://github.com/lucaspopp0/ha-smart-switches/commit/ca5e7a70) checkout using token
- * [`e7cb123b`](https://github.com/lucaspopp0/ha-smart-switches/commit/e7cb123b) git url fix
- * [`f186afee`](https://github.com/lucaspopp0/ha-smart-switches/commit/f186afee) commit using token
- * [`d5839260`](https://github.com/lucaspopp0/ha-smart-switches/commit/d5839260) push as bot
- * [`95758aea`](https://github.com/lucaspopp0/ha-smart-switches/commit/95758aea) use new
- * [`ef988fb5`](https://github.com/lucaspopp0/ha-smart-switches/commit/ef988fb5) floating tags
- * [`2c236d7d`](https://github.com/lucaspopp0/ha-smart-switches/commit/2c236d7d) git push all
- * [`7e4e11eb`](https://github.com/lucaspopp0/ha-smart-switches/commit/7e4e11eb) skip commit and release
- * [`8bc05485`](https://github.com/lucaspopp0/ha-smart-switches/commit/8bc05485) fix(build): Compile while building image (#3)
+ * [`38ae49688`](https://github.com/lucaspopp0/ha-smart-switches/commit/38ae49688) err cleanups
+ * [`ca5e7a70f`](https://github.com/lucaspopp0/ha-smart-switches/commit/ca5e7a70f) checkout using token
+ * [`e7cb123b9`](https://github.com/lucaspopp0/ha-smart-switches/commit/e7cb123b9) git url fix
+ * [`f186afeef`](https://github.com/lucaspopp0/ha-smart-switches/commit/f186afeef) commit using token
+ * [`d5839260e`](https://github.com/lucaspopp0/ha-smart-switches/commit/d5839260e) push as bot
+ * [`95758aeaa`](https://github.com/lucaspopp0/ha-smart-switches/commit/95758aeaa) use new
+ * [`ef988fb5c`](https://github.com/lucaspopp0/ha-smart-switches/commit/ef988fb5c) floating tags
+ * [`2c236d7db`](https://github.com/lucaspopp0/ha-smart-switches/commit/2c236d7db) git push all
+ * [`7e4e11eb4`](https://github.com/lucaspopp0/ha-smart-switches/commit/7e4e11eb4) skip commit and release
+ * [`8bc054854`](https://github.com/lucaspopp0/ha-smart-switches/commit/8bc054854) fix(build): Compile while building image (#3)
 
 # v1.1.1.23
- * [`7efcac0a`](https://github.com/lucaspopp0/ha-smart-switches/commit/7efcac0a) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`0ce3b1e9`](https://github.com/lucaspopp0/ha-smart-switches/commit/0ce3b1e9) fix notes start tag
+ * [`7efcac0a4`](https://github.com/lucaspopp0/ha-smart-switches/commit/7efcac0a4) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`0ce3b1e93`](https://github.com/lucaspopp0/ha-smart-switches/commit/0ce3b1e93) fix notes start tag
 
 # v1.1.1.20
- * [`0ea9cb47`](https://github.com/lucaspopp0/ha-smart-switches/commit/0ea9cb47) fix release and commit msg
- * [`72ac991f`](https://github.com/lucaspopp0/ha-smart-switches/commit/72ac991f) [bot]
- * [`2d2fd145`](https://github.com/lucaspopp0/ha-smart-switches/commit/2d2fd145) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`a5186bd5`](https://github.com/lucaspopp0/ha-smart-switches/commit/a5186bd5) fix release condition
- * [`527dfdb1`](https://github.com/lucaspopp0/ha-smart-switches/commit/527dfdb1) [bot]
- * [`c0335adf`](https://github.com/lucaspopp0/ha-smart-switches/commit/c0335adf) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`7f7f073e`](https://github.com/lucaspopp0/ha-smart-switches/commit/7f7f073e) incrm tag
- * [`d8563fc2`](https://github.com/lucaspopp0/ha-smart-switches/commit/d8563fc2) [bot]
- * [`9021c022`](https://github.com/lucaspopp0/ha-smart-switches/commit/9021c022) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`00ed3101`](https://github.com/lucaspopp0/ha-smart-switches/commit/00ed3101) honor output
- * [`0f57d864`](https://github.com/lucaspopp0/ha-smart-switches/commit/0f57d864) [bot]
- * [`62835c40`](https://github.com/lucaspopp0/ha-smart-switches/commit/62835c40) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`ada0f551`](https://github.com/lucaspopp0/ha-smart-switches/commit/ada0f551) release
- * [`28b57258`](https://github.com/lucaspopp0/ha-smart-switches/commit/28b57258) [bot]
- * [`d0637ff1`](https://github.com/lucaspopp0/ha-smart-switches/commit/d0637ff1) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`0354d302`](https://github.com/lucaspopp0/ha-smart-switches/commit/0354d302) build on merge to main
- * [`a50cc566`](https://github.com/lucaspopp0/ha-smart-switches/commit/a50cc566) [bot]
- * [`a5d13051`](https://github.com/lucaspopp0/ha-smart-switches/commit/a5d13051) set github token
- * [`f6cbb3d7`](https://github.com/lucaspopp0/ha-smart-switches/commit/f6cbb3d7) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`3a73830c`](https://github.com/lucaspopp0/ha-smart-switches/commit/3a73830c) set output
- * [`2f721d68`](https://github.com/lucaspopp0/ha-smart-switches/commit/2f721d68) incr version
+ * [`0ea9cb475`](https://github.com/lucaspopp0/ha-smart-switches/commit/0ea9cb475) fix release and commit msg
+ * [`72ac991f0`](https://github.com/lucaspopp0/ha-smart-switches/commit/72ac991f0) [bot]
+ * [`2d2fd1451`](https://github.com/lucaspopp0/ha-smart-switches/commit/2d2fd1451) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`a5186bd5f`](https://github.com/lucaspopp0/ha-smart-switches/commit/a5186bd5f) fix release condition
+ * [`527dfdb13`](https://github.com/lucaspopp0/ha-smart-switches/commit/527dfdb13) [bot]
+ * [`c0335adf0`](https://github.com/lucaspopp0/ha-smart-switches/commit/c0335adf0) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`7f7f073ec`](https://github.com/lucaspopp0/ha-smart-switches/commit/7f7f073ec) incrm tag
+ * [`d8563fc24`](https://github.com/lucaspopp0/ha-smart-switches/commit/d8563fc24) [bot]
+ * [`9021c0222`](https://github.com/lucaspopp0/ha-smart-switches/commit/9021c0222) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`00ed3101a`](https://github.com/lucaspopp0/ha-smart-switches/commit/00ed3101a) honor output
+ * [`0f57d864a`](https://github.com/lucaspopp0/ha-smart-switches/commit/0f57d864a) [bot]
+ * [`62835c406`](https://github.com/lucaspopp0/ha-smart-switches/commit/62835c406) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`ada0f551a`](https://github.com/lucaspopp0/ha-smart-switches/commit/ada0f551a) release
+ * [`28b572587`](https://github.com/lucaspopp0/ha-smart-switches/commit/28b572587) [bot]
+ * [`d0637ff1b`](https://github.com/lucaspopp0/ha-smart-switches/commit/d0637ff1b) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`0354d302b`](https://github.com/lucaspopp0/ha-smart-switches/commit/0354d302b) build on merge to main
+ * [`a50cc566b`](https://github.com/lucaspopp0/ha-smart-switches/commit/a50cc566b) [bot]
+ * [`a5d130512`](https://github.com/lucaspopp0/ha-smart-switches/commit/a5d130512) set github token
+ * [`f6cbb3d70`](https://github.com/lucaspopp0/ha-smart-switches/commit/f6cbb3d70) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`3a73830cf`](https://github.com/lucaspopp0/ha-smart-switches/commit/3a73830cf) set output
+ * [`2f721d680`](https://github.com/lucaspopp0/ha-smart-switches/commit/2f721d680) incr version
 
 # v1.0.10
- * [`b74b3585`](https://github.com/lucaspopp0/ha-smart-switches/commit/b74b3585) try AGAIN
- * [`735c9717`](https://github.com/lucaspopp0/ha-smart-switches/commit/735c9717) reformat version
- * [`d19c174b`](https://github.com/lucaspopp0/ha-smart-switches/commit/d19c174b) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
- * [`b082c340`](https://github.com/lucaspopp0/ha-smart-switches/commit/b082c340) use v tag prefix
+ * [`b74b35858`](https://github.com/lucaspopp0/ha-smart-switches/commit/b74b35858) try AGAIN
+ * [`735c97171`](https://github.com/lucaspopp0/ha-smart-switches/commit/735c97171) reformat version
+ * [`d19c174b1`](https://github.com/lucaspopp0/ha-smart-switches/commit/d19c174b1) Merge branch 'main' of github.com-personal:lucaspopp0/ha-smart-switches
+ * [`b082c3403`](https://github.com/lucaspopp0/ha-smart-switches/commit/b082c3403) use v tag prefix
