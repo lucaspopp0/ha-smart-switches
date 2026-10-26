@@ -1,6 +1,8 @@
-# v1.4.7348
- * [`bbac22020`](https://github.com/lucaspopp0/ha-smart-switches/commit/bbac22020) [bot] v1.4.7348
+# v1.4.7349
+ * [`732257275`](https://github.com/lucaspopp0/ha-smart-switches/commit/732257275) [bot] v1.4.7348
 
+
+# v1.4.7348
 
 # v1.4.7347
 
