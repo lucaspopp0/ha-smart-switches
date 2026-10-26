@@ -1,6 +1,8 @@
 # v1.4.7370
- * [`fba200db9`](https://github.com/lucaspopp0/ha-smart-switches/commit/fba200db9) [bot] v1.4.7369
+ * [`560b3001c`](https://github.com/lucaspopp0/ha-smart-switches/commit/560b3001c) [bot] v1.4.7370
 
+
+# v1.4.7369
 
 # v1.4.7369
 
