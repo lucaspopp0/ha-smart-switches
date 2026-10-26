@@ -1,6 +1,8 @@
-# v1.4.7576
- * [`dafbbcddb`](https://github.com/lucaspopp0/ha-smart-switches/commit/dafbbcddb) [bot] v1.4.7576
+# v1.4.7577
+ * [`8a5089726`](https://github.com/lucaspopp0/ha-smart-switches/commit/8a5089726) [bot] v1.4.7576
 
+
+# v1.4.7576
 
 # v1.4.7575
 
