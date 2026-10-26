@@ -1,6 +1,8 @@
-# v1.4.7604
- * [`3384fade2`](https://github.com/lucaspopp0/ha-smart-switches/commit/3384fade2) [bot] v1.4.7604
+# v1.4.7605
+ * [`de489b223`](https://github.com/lucaspopp0/ha-smart-switches/commit/de489b223) [bot] v1.4.7604
 
+
+# v1.4.7604
 
 # v1.4.7603
 
