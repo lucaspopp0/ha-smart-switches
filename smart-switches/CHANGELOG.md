@@ -1,6 +1,8 @@
 # v1.4.8028
- * [`cad724ccb`](https://github.com/lucaspopp0/ha-smart-switches/commit/cad724ccb) [bot] v1.4.8027
+ * [`020dabbae`](https://github.com/lucaspopp0/ha-smart-switches/commit/020dabbae) [bot] v1.4.8028
 
+
+# v1.4.8027
 
 # v1.4.8027
 
