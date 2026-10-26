@@ -1,6 +1,8 @@
 # v1.4.7273
- * [`fda17c178`](https://github.com/lucaspopp0/ha-smart-switches/commit/fda17c178) [bot] v1.4.7272
+ * [`11a64c2de`](https://github.com/lucaspopp0/ha-smart-switches/commit/11a64c2de) [bot] v1.4.7273
 
+
+# v1.4.7272
 
 # v1.4.7272
 
