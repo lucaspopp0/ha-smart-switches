@@ -1,6 +1,10 @@
-# v1.4.7148
- * [`deaf1a9fc`](https://github.com/lucaspopp0/ha-smart-switches/commit/deaf1a9fc) [bot] v1.4.7148
+# v1.4.7150
+ * [`887037019`](https://github.com/lucaspopp0/ha-smart-switches/commit/887037019) Update module github.com/go-chi/chi/v5 to v5.5.0 (#126)
 
+
+# v1.4.7148
+
+# v1.4.7148
 
 # v1.4.7147
 
