@@ -1,6 +1,8 @@
-# v1.4.8711
- * [`dddb87420`](https://github.com/lucaspopp0/ha-smart-switches/commit/dddb87420) [bot] v1.4.8711
+# v1.4.8712
+ * [`ae202e0a2`](https://github.com/lucaspopp0/ha-smart-switches/commit/ae202e0a2) [bot] v1.4.8711
 
+
+# v1.4.8711
 
 # v1.4.8710
 
