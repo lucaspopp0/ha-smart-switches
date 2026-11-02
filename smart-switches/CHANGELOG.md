@@ -1,6 +1,10 @@
-# v1.4.8033
- * [`936524963`](https://github.com/lucaspopp0/ha-smart-switches/commit/936524963) [bot] v1.4.8033
+# v1.4.8035
+ * [`74dc13eb6`](https://github.com/lucaspopp0/ha-smart-switches/commit/74dc13eb6) Update module github.com/danielgtaylor/huma/v2 to v2.40.0 (#128)
 
+
+# v1.4.8033
+
+# v1.4.8033
 
 # v1.4.8032
 
