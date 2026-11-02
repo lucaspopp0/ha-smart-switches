@@ -1,6 +1,8 @@
-# v1.4.8600
- * [`fdd2eac04`](https://github.com/lucaspopp0/ha-smart-switches/commit/fdd2eac04) [bot] v1.4.8600
+# v1.4.8601
+ * [`f872e5064`](https://github.com/lucaspopp0/ha-smart-switches/commit/f872e5064) [bot] v1.4.8600
 
+
+# v1.4.8600
 
 # v1.4.8599
 
