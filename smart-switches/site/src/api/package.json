@@ -35,6 +35,6 @@
     "es6-promise": "^4.2.4"
   },
   "devDependencies": {
-    "typescript": "^4.0"
+    "typescript": "^7.0.0"
   }
 }
